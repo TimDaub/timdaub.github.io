@@ -3,6 +3,48 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/build-process/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/tools/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/emscripten/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/C/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/WebAssembly/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/WASM/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/usability/</loc>
         <lastmod>2021-02-22T09:29:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -354,27 +396,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/Synthesizer/</loc>
-        <lastmod>2020-02-19T12:18:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/C/</loc>
-        <lastmod>2020-02-19T12:18:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/WebAssembly/</loc>
-        <lastmod>2020-02-19T12:18:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/WASM/</loc>
         <lastmod>2020-02-19T12:18:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
