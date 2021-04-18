@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/covid-19/</loc>
+        <lastmod>2021-04-18T15:01:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/interview/</loc>
+        <lastmod>2021-04-18T15:01:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/privacy/</loc>
+        <lastmod>2021-04-18T15:01:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/open-source/</loc>
+        <lastmod>2021-04-18T15:01:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/build-process/</loc>
         <lastmod>2021-02-25T10:18:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -178,13 +206,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/blockchain/</loc>
-        <lastmod>2020-12-11T10:59:01.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/automated-market-makers/</loc>
         <lastmod>2020-12-11T10:59:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -207,6 +228,13 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/startup/</loc>
+        <lastmod>2020-12-11T10:59:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/blockchain/</loc>
         <lastmod>2020-12-11T10:59:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
