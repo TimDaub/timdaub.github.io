@@ -17,7 +17,7 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Saving Gas on Ethereum Mainnet</title>
+    <title>Saving Gas on the Ethereum Mainnet</title>
     <link href="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/"/>
     <id>https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/</id>
     <published>2021-04-19T12:06:40.000Z</published>
@@ -36,9 +36,9 @@
     
     <category term="economics" scheme="https://timdaub.github.io/tags/economics/"/>
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="gas cost" scheme="https://timdaub.github.io/tags/gas-cost/"/>
     
@@ -128,9 +128,9 @@
     
     
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
-    
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
     <category term="monero" scheme="https://timdaub.github.io/tags/monero/"/>
     
@@ -299,9 +299,9 @@
     
     
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
-    
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
     <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
     
