@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/guide/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/gas-cost/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/Ethereum/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/web3/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/economics/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/covid-19/</loc>
         <lastmod>2021-04-18T15:01:12.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -109,13 +144,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/monero/</loc>
-        <lastmod>2021-02-22T09:29:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/web3/</loc>
         <lastmod>2021-02-22T09:29:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -361,13 +389,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/consensus/</loc>
-        <lastmod>2020-05-02T07:11:33.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/economics/</loc>
         <lastmod>2020-05-02T07:11:33.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
