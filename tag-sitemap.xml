@@ -3,6 +3,48 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/project-management/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/software-engineering/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/Process/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/Principles/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/essay/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/engineering/</loc>
         <lastmod>2021-05-22T12:17:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -220,21 +262,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/Process/</loc>
-        <lastmod>2021-01-16T17:13:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/Software-Engineering/</loc>
-        <lastmod>2021-01-16T17:13:14.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/Principles/</loc>
         <lastmod>2021-01-16T17:13:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -459,13 +487,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/philosophy/</loc>
-        <lastmod>2020-04-18T21:40:06.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/essay/</loc>
         <lastmod>2020-04-18T21:40:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>

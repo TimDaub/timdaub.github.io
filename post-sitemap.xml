@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://timdaub.github.io/2021/06/18/when-scope-blows-up/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/</loc>
         <lastmod>2021-05-22T12:17:56.000Z</lastmod>
         <changefreq>weekly</changefreq>
