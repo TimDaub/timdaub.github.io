@@ -23,7 +23,7 @@
     <published>2022-03-11T09:39:35.000Z</published>
     <updated>2022-03-11T09:39:35.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Ethereum is a better publishing platform than any of its web2counterparts. Like Facebook or Twitter.</p><p>It&apos;s globally distributed, has no geographical headquarters, and hasnobody in charge. Ethereum won&apos;t delete, hide or algorithmicallyreshuffle posts. Its newsfeed is the block order, but it won&apos;t<em>block</em> certain politically-loaded topics. Its operators&apos;incentive is making money through transaction inclusion, not runningads. Ethereum rejects the concept of content curation andmoderation.</p><p>Publishing on Ethereum is as close as it gets to shouting your wordsin the air when surrounded by others. Ethereum is the publishingplatform we deserve.</p><h2 id="the-tale-of-three-webs">The Tale of Three Webs</h2><p>There&apos;s the tale of the web&apos;s evolution among people in the industry.You&apos;ve probably heard it a million times by now, but how it goes is thatweb1 was read-only, and web2 added publishing or &quot;write.&quot; With web3emerging through the advances of distributed systems, everyone has tohave their opinion about it - <a href="/2020/09/08/web3/">meincluded</a>.</p><p>But Moxie Marlinspike, the founder of Signal, published his &quot;<a href="https://moxie.org/2022/01/07/web3-first-impressions.html">(...)first impressions of web3</a>&quot; at the beginning of this year and caughtmy attention. A central thesis of his piece is that &quot;People don&apos;t wantto run their own servers, and never will.&quot; The story he relays is thatweb2&apos;s platforms emerged to fill the web1 users&apos; desire to stop runningtheir own infrastructure.</p><p>And to unpack that, I want to empathize with his viewpoint.</p><p>Running web servers in times of web1 was indeed truly cumbersome.There were no cloud providers; internet connections were shit, and webdevelopment tooling as we know it wasn&apos;t existent. Moxie makes thisargument as it fits his central thesis that the &quot;<a href="https://www.youtube.com/watch?v=Nj3YFprqAr8">ecosystem ismoving</a>.&quot; He&apos;s saying: We&apos;re already upgrading the web with protocolsthat omit to collect (meta)data to solve &quot;<a href="https://en.wikipedia.org/w/index.php?title=The_Social_Dilemma&amp;oldid=1076198943">TheSocial Dilemma</a>.&quot; The product they publish, the Signal messenger,e.g., <a href="https://signal.org/bigbrother/cd-california-grand-jury/">providedno meaningful data to the Central District of California</a>, statingthat &quot;Signal still knows nothing about you, but inexplicably thegovernment continues to ask [us].&quot;</p><p>So, by upgrading from web 2.0 to web 2.1, as Moxie suggests - can wepack up and move on from building cryptocurrencies? He solves the socialdilemma? Is that it?</p><h2 id="the-public-facing-web2">The Public-Facing Web2</h2><p>The problem with Moxie&apos;s behavior and article is that he didn&apos;t stayin his lane. Signal isn&apos;t truly a &quot;web2 platform&quot;, in the sense ofFacebook, Twitter, and Telegram.</p><p>Within a chat on Signal, Facebook Messenger, Whatsapp, Twitter, orany other instant messenger, for that sake, nobody gets centrallymoderated or shut down. I&apos;d assume you can speak freely in privateconversations. The problem being in that case, who else is reading theconversation? Talking to you, <a href="https://knowyourmeme.com/memes/government-agent-watching-me">Mr.FBI Agent</a>. Here, privacy is at risk, and Signal&apos;s protocol is abrilliant fix.</p><p>However, I&apos;d like to argue that instant messaging (except for howTelegram implements it) isn&apos;t really contested as a societal problem.The societal problem that leads people to give conference talks, go onpodcasts and write blog posts is big tech&apos;s active curation of publicdiscourse on newsfeeds. Case in point: &quot;<a href="https://www.reuters.com/world/europe/exclusive-facebook-instagram-temporarily-allow-calls-violence-against-russians-2022-03-10/">Facebookallows Ukraine war posts urging violence against invadingRussians</a>.&quot;</p><h2 id="taking-on-responsibility">Taking On Responsibility</h2><p>Hence, rhetorically scrutinizing once again Moxie&apos;s original thesisif &quot;People don&apos;t want to run their own servers, and never will,&quot; I&apos;dlike to assume that in the general case: <strong>It&apos;sincorrect</strong>.</p><p>Indeed, would I, as a nerd, be asked to administrate a server runningthe Signal protocol for friends and myself: I&apos;d say &quot;Yes&quot; immediately.It&apos;s because: &quot;Signal still knows nothing about [us],&quot; and so it&apos;d seemunlikely having to take on substantial responsibility. But Signal alsodoesn&apos;t host a publicly accessible digital room as, e.g., Telegram&apos;schannels or Facebook&apos;s newsfeed do.</p><p>Would I want to contribute to hosting the Facebook newsfeed, and forthat sake: Would I want to take on responsibility for shaping publicdiscourse?</p><p>Back in the old web1 days, people had guestbooks and comment sectionson their pages: Nowadays they don&apos;t - but it&apos;s not because nobody wantsto host their servers: It&apos;s because of the heavy responsibility of doingso. It must be the reason they say that &quot;<a href="https://mux.com/blog/you-either-die-an-mvp-or-live-long-enough-to-build-content-moderation/">youeither die an MVP or live long enough to build content moderation</a>,&quot;and I believe that&apos;s true.</p><h2 id="ethereum-is-the-newsfeed-we-deserve">Ethereum is the newsfeed wedeserve</h2><p>And so that&apos;s why web3 is taking off. That&apos;s why it has fans and nodeoperators. Sure, it isn&apos;t very pleasant running an Ethereum full nodeand currently costs me roughly 130 EUR/month. But it guarantees thatworldwide, whoever wants can publish whatever they want on-chain if theyjust pay the transaction costs.</p><p>&quot;<a href="/2022/02/28/smart-contracts-are-programmable-commons/">SmartContracts are the Programmable Commons</a>.&quot; While traditional web2platforms like Facebook are built on the assumptions of privately ownedproperty and require taking on responsibility, Ethereum is collectivelymaintained, hosted, administrated, and run by everyone.</p><p>There&apos;s no sorting for relevancy or increasing ad impression revenue.There&apos;s no moral or social dilemma stemming from having total controlover others&apos; communication. Node operators may be biased, but &quot;Ethereumis not.&quot;</p><div class="twitter-wrapper"><blockquote class="twitter-tweet"><a href="https://twitter.com/VitalikButerin/status/1496695587495981056"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>That&apos;s why Ethereum is the newsfeed we deserve.</p>]]></content>
+    <content type="html"><![CDATA[<p>Ethereum is a better publishing platform than any of its web2counterparts. Like Facebook or Twitter.</p><p>It&apos;s globally distributed, has no geographical headquarters, and hasnobody in charge. Ethereum won&apos;t delete, hide or algorithmicallyreshuffle posts. Its newsfeed is the block order, but it won&apos;t<em>block</em> certain politically-loaded topics. Its operators&apos;incentive is making money through transaction inclusion, not runningads. Ethereum rejects the concept of content curation andmoderation.</p><p>Publishing on Ethereum is as close as it gets to shouting your wordsin the air when surrounded by others. Ethereum is the publishingplatform we deserve.</p><h2 id="the-tale-of-three-webs">The Tale of Three Webs</h2><p>There&apos;s the tale of the web&apos;s evolution among people in the industry.You&apos;ve probably heard it a million times by now, but how it goes is thatweb1 was read-only, and web2 added publishing or &quot;write.&quot; With web3emerging through the advances of distributed systems, everyone has tohave their opinion about it - <a href="/2020/09/08/web3/">meincluded</a>.</p><p>But Moxie Marlinspike, the founder of Signal, published his &quot;<a href="https://moxie.org/2022/01/07/web3-first-impressions.html">(...)first impressions of web3</a>&quot; at the beginning of this year and caughtmy attention. A central thesis of his piece is that &quot;People don&apos;t wantto run their own servers, and never will.&quot; The story he relays is thatweb2&apos;s platforms emerged to fill the web1 users&apos; desire to stop runningtheir own infrastructure.</p><p>And to unpack that, I want to empathize with his viewpoint.</p><p>Running web servers in times of web1 was indeed truly cumbersome.There were no cloud providers; internet connections were shit, and webdevelopment tooling as we know it wasn&apos;t existent. Moxie makes thisargument as it fits his central thesis that the &quot;<a href="https://www.youtube.com/watch?v=Nj3YFprqAr8">ecosystem ismoving</a>.&quot; He&apos;s saying: We&apos;re already upgrading the web with protocolsthat omit to collect (meta)data to solve &quot;<a href="https://en.wikipedia.org/w/index.php?title=The_Social_Dilemma&amp;oldid=1076198943">TheSocial Dilemma</a>.&quot; The product they publish, the Signal messenger,e.g., <a href="https://signal.org/bigbrother/cd-california-grand-jury/">providedno meaningful data to the Central District of California</a>, statingthat &quot;Signal still knows nothing about you, but inexplicably thegovernment continues to ask [us].&quot;</p><p>So, by upgrading from web 2.0 to web 2.1, as Moxie suggests - can wepack up and move on from building cryptocurrencies? He solves the socialdilemma? Is that it?</p><h2 id="the-public-facing-web2">The Public-Facing Web2</h2><p>The problem with Moxie&apos;s behavior and article is that he didn&apos;t stayin his lane. Signal isn&apos;t truly a &quot;web2 platform&quot;, in the sense ofFacebook, Twitter, and Telegram.</p><p>Within a chat on Signal, Facebook Messenger, Whatsapp, Twitter, orany other instant messenger, for that sake, nobody gets centrallymoderated or shut down. I&apos;d assume you can speak freely in privateconversations. The problem being in that case, who else is reading theconversation? Talking to you, <a href="https://knowyourmeme.com/memes/government-agent-watching-me">Mr.FBI Agent</a>. Here, privacy is at risk, and Signal&apos;s protocol is abrilliant fix.</p><p>However, I&apos;d like to argue that instant messaging (except for howTelegram implements it) isn&apos;t really contested as a societal problem.The societal problem that leads people to give conference talks, go onpodcasts and write blog posts is big tech&apos;s active curation of publicdiscourse on newsfeeds. Case in point: &quot;<a href="https://www.reuters.com/world/europe/exclusive-facebook-instagram-temporarily-allow-calls-violence-against-russians-2022-03-10/">Facebookallows Ukraine war posts urging violence against invadingRussians</a>.&quot;</p><h2 id="taking-on-responsibility">Taking On Responsibility</h2><p>Hence, rhetorically scrutinizing once again Moxie&apos;s original thesisif &quot;People don&apos;t want to run their own servers, and never will,&quot; I&apos;dlike to assume that in the general case: <strong>It&apos;sincorrect</strong>.</p><p>Indeed, would I, as a nerd, be asked to administrate a server runningthe Signal protocol for friends and myself: I&apos;d say &quot;Yes&quot; immediately.It&apos;s because: &quot;Signal still knows nothing about [us],&quot; and so it&apos;d seemunlikely having to take on substantial responsibility. But Signal alsodoesn&apos;t host a publicly accessible digital room as, e.g., Telegram&apos;schannels or Facebook&apos;s newsfeed do.</p><p>Would I want to contribute to hosting the Facebook newsfeed, and forthat sake: Would I want to take on responsibility for shaping publicdiscourse?</p><p>Back in the old web1 days, people had guestbooks and comment sectionson their pages: Nowadays they don&apos;t - but it&apos;s not because nobody wantsto host their servers: It&apos;s because of the heavy responsibility of doingso. It must be the reason they say that &quot;<a href="https://mux.com/blog/you-either-die-an-mvp-or-live-long-enough-to-build-content-moderation/">youeither die an MVP or live long enough to build content moderation</a>,&quot;and I believe that&apos;s true.</p><h2 id="ethereum-is-the-newsfeed-we-deserve">Ethereum is the newsfeed wedeserve</h2><p>And so that&apos;s why web3 is taking off. That&apos;s why it has fans and nodeoperators. Sure, it isn&apos;t very pleasant running an Ethereum full nodeand currently costs me roughly 130 EUR/month. But it guarantees thatworldwide, whoever wants can publish whatever they want on-chain if theyjust pay the transaction costs.</p><p>&quot;<a href="/2022/02/28/smart-contracts-are-programmable-commons/">SmartContracts are the Programmable Commons</a>.&quot; While traditional web2platforms like Facebook are built on the assumptions of privately ownedproperty and require taking on responsibility, Ethereum is collectivelymaintained, hosted, administrated, and run by everyone.</p><p>There&apos;s no sorting for relevancy or increasing ad impression revenue.There&apos;s no moral or social dilemma stemming from having total controlover others&apos; communication. Node operators may be biased, but &quot;Ethereumis neutral.&quot;</p><div class="twitter-wrapper"><blockquote class="twitter-tweet"><a href="https://twitter.com/VitalikButerin/status/1496695587495981056"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>That&apos;s why Ethereum is the newsfeed we deserve.</p>]]></content>
     
     
       
@@ -342,6 +342,8 @@ So it&amp;apos;s roughly 24 months. I just counted; I managed to re</summary>
     
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
+    <category term="crypto" scheme="https://timdaub.github.io/tags/crypto/"/>
+    
     <category term="rug pull index" scheme="https://timdaub.github.io/tags/rug-pull-index/"/>
     
     <category term="dark forest" scheme="https://timdaub.github.io/tags/dark-forest/"/>
@@ -349,8 +351,6 @@ So it&amp;apos;s roughly 24 months. I just counted; I managed to re</summary>
     <category term="bull market" scheme="https://timdaub.github.io/tags/bull-market/"/>
     
     <category term="bear market" scheme="https://timdaub.github.io/tags/bear-market/"/>
-    
-    <category term="crypto" scheme="https://timdaub.github.io/tags/crypto/"/>
     
   </entry>
   
@@ -650,15 +650,15 @@ things improperly. I&amp;apos;d argue that for most code I&amp;apos;ve</summary>
     
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
-    <category term="digital art" scheme="https://timdaub.github.io/tags/digital-art/"/>
+    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
     
     <category term="ERC-721" scheme="https://timdaub.github.io/tags/ERC-721/"/>
     
-    <category term="social media" scheme="https://timdaub.github.io/tags/social-media/"/>
-    
-    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
-    
     <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
+    
+    <category term="digital art" scheme="https://timdaub.github.io/tags/digital-art/"/>
+    
+    <category term="social media" scheme="https://timdaub.github.io/tags/social-media/"/>
     
   </entry>
   
@@ -685,13 +685,13 @@ situation, I think is relatable for every developer and project manager</summary
     
     <category term="software engineering" scheme="https://timdaub.github.io/tags/software-engineering/"/>
     
-    <category term="Principles" scheme="https://timdaub.github.io/tags/Principles/"/>
-    
-    <category term="Process" scheme="https://timdaub.github.io/tags/Process/"/>
-    
     <category term="scope creep" scheme="https://timdaub.github.io/tags/scope-creep/"/>
     
     <category term="project management" scheme="https://timdaub.github.io/tags/project-management/"/>
+    
+    <category term="Process" scheme="https://timdaub.github.io/tags/Process/"/>
+    
+    <category term="Principles" scheme="https://timdaub.github.io/tags/Principles/"/>
     
   </entry>
   
@@ -751,13 +751,13 @@ attack using NFTs called &amp;quot;sleepminting.&amp;quot; I ended up taking </s
     
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
-    <category term="ERC-721" scheme="https://timdaub.github.io/tags/ERC-721/"/>
-    
     <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
     
-    <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
-    
     <category term="Vulnerability" scheme="https://timdaub.github.io/tags/Vulnerability/"/>
+    
+    <category term="ERC-721" scheme="https://timdaub.github.io/tags/ERC-721/"/>
+    
+    <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
     
     <category term="Digital Art" scheme="https://timdaub.github.io/tags/Digital-Art/"/>
     
@@ -782,9 +782,9 @@ Ethereum&amp;apos;s mainnet gas fees are insane. For months or weeks now,</summa
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="economics" scheme="https://timdaub.github.io/tags/economics/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
@@ -918,13 +918,13 @@ ends for the web. From &lt;a href=&quot;https://www.ascribe.io/&quot;&gt;</summa
     
     
     
-    <category term="JavaScript" scheme="https://timdaub.github.io/tags/JavaScript/"/>
+    <category term="Process" scheme="https://timdaub.github.io/tags/Process/"/>
     
     <category term="Principles" scheme="https://timdaub.github.io/tags/Principles/"/>
     
-    <category term="Software Engineering" scheme="https://timdaub.github.io/tags/Software-Engineering/"/>
+    <category term="JavaScript" scheme="https://timdaub.github.io/tags/JavaScript/"/>
     
-    <category term="Process" scheme="https://timdaub.github.io/tags/Process/"/>
+    <category term="Software Engineering" scheme="https://timdaub.github.io/tags/Software-Engineering/"/>
     
   </entry>
   
