@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="When Scope Blows Up">
+<meta property="og:url" content="https://timdaub.github.io/2021/06/18/when-scope-blows-up/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/shootingfromthehip.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/spongebobchaos.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/mindblown.gif">
+<meta property="article:published_time" content="2021-06-18T08:50:58.000Z">
+<meta property="article:modified_time" content="2021-06-18T08:50:58.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="essay">
+<meta property="article:tag" content="software engineering">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Process">
+<meta property="article:tag" content="scope creep">
+<meta property="article:tag" content="project management">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>When Scope Blows Up</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/07/21/nfts-are-coming-for-instagram/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/06/18/when-scope-blows-up/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&text=When Scope Blows Up"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&is_video=false&description=When Scope Blows Up"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=When Scope Blows Up&body=Check out this article: https://timdaub.github.io/2021/06/18/when-scope-blows-up/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&name=When Scope Blows Up&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&t=When Scope Blows Up"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        When Scope Blows Up
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-06-18T08:50:58.000Z" itemprop="datePublished">2021-06-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Principles/" rel="tag">Principles</a>, <a class="tag-link-link" href="/tags/Process/" rel="tag">Process</a>, <a class="tag-link-link" href="/tags/essay/" rel="tag">essay</a>, <a class="tag-link-link" href="/tags/project-management/" rel="tag">project management</a>, <a class="tag-link-link" href="/tags/scope-creep/" rel="tag">scope creep</a>, <a class="tag-link-link" href="/tags/software-engineering/" rel="tag">software engineering</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      5 minutes read
+      <meta name="description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
+<meta property="og:type" content="article">
+<meta property="og:title" content="When Scope Blows Up">
+<meta property="og:url" content="https://timdaub.github.io/2021/06/18/when-scope-blows-up/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/shootingfromthehip.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/spongebobchaos.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/mindblown.gif">
+<meta property="article:published_time" content="2021-06-18T08:50:58.000Z">
+<meta property="article:modified_time" content="2021-06-18T08:50:58.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="essay">
+<meta property="article:tag" content="software engineering">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Process">
+<meta property="article:tag" content="scope creep">
+<meta property="article:tag" content="project management">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In software engineering, there&apos;s an infamous but reoccurring
+situation, I think is relatable for every developer and project manager.
+You&apos;re never safe from it. It can assault you at any moment: During a
+peaceful standup, when reading issues on GitHub, or during lunch with
+co-workers. It&apos;s when <strong>the scope blows up</strong> having crept
+into your project&apos;s issues and code - mercilessly expanding and driving
+everyone nuts: <strong>&quot;OMG, WE HAVE SCOPE CREEP!&quot;</strong></p>
+<p><img src="/assets/images/shockedstoner.gif"></p>
+<p>First, let&apos;s take a step back and define what is meant by scope
+creep. Intentionally, I&apos;ll focus on defining it from a manager&apos;s
+perspective because that&apos;s where I suspect it originates. So what is
+scope? I&apos;d say that scope is the sum of all things needed to deliver a
+software product given a specific set of expectations and a date.</p>
+<p>If we want to build an instant messenger app, its scope would likely
+encompass a feature that allows sending messages to others. Maybe it&apos;d
+include sending smilies. Or photos. But what about voice calls? Well,
+that&apos;s where thinking in terms of scope becomes useful. If we deem that
+voice calls aren&apos;t part of our product offerings, we&apos;d consider it
+<strong>&quot;out of scope.&quot;</strong> That&apos;s when we&apos;d say that &quot;we&apos;ve
+discovered scope creep&quot; or that &quot;scope is blowing up.&quot;</p>
+<p>It&apos;s curious to see that the English Wikipedia article for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Scope_(project_management)&amp;oldid=1016322255">Scope
+(project management)</a> is tiny, considering how fundamental the
+concept seems to be in software engineering these days. Given this lack
+of rigid facts, however, I feel happy to just reason from my experience
+in the extension of this article. Continuing, I&apos;ll just shoot from the
+hip.</p>
+<p><img src="/assets/images/shootingfromthehip.png"></p>
+<p>Here&apos;s a non-verified claim: Scope creep is subject to Murphy&apos;s law.
+So if scope can increase, it will increase. I&apos;m not sure why that is,
+and indeed some behavioral psychologists have one day have an excellent
+explanation; but for now, you&apos;ll have to take it for what I&apos;ve observed.
+I&apos;ve said - when scope creeps, it&apos;s when everyone loses their minds.</p>
+<p>But why? What is so bad about scope creep that people blame it for
+their company&apos;s failure, for leaving a job, or for burning out? It sure
+sounds like it encompasses incredible risk. And I think it does.</p>
+<p>For a project manager and their team that&apos;s bound to deliver a
+roadmap, scope creep can make them look like failures and potentially
+lead to them missing out on future funding. Scope creep can mean the end
+of a project.</p>
+<p>It&apos;s because for outsiders, given a lack of equal distribution of
+information about the project&apos;s challenges, scope creep can look like a
+team is failing or having lost focus. &quot;Why are they not able to deliver
+their roadmap?&quot;, &quot;This one feature, what does it have to do with the
+product&apos;s main value proposition?&quot; &quot;It looks like they&apos;re failing.&quot;</p>
+<p><img src="/assets/images/spongebobchaos.gif"></p>
+<p>While, of course, from the inside, things can look dramatically
+different. Scope creep is seldom god&apos;s irrational punishment for the
+team&apos;s sins (<em>lol dunno why I wrote that</em>). Indeed, scope creep
+may just be the difference between expectations and reality. It may just
+be a specific lack of information. It may be a few thousand missing in
+the budget or the lack of a specific team mate.</p>
+<p>I don&apos;t think, however, that scope creep is ever unjustified. Every
+scope creeper has a reason for creeping. It may be that their proposal
+is flawed and unnecessarily blown up. But ultimately, assuming that all
+contributors are good-natured towards the project, I&apos;ve made the
+experience that a scope creeper (a person that blows up scope) is
+looking at the problem from a unique point of view and is seeing
+something others aren&apos;t.</p>
+<p>I&apos;d argue that as software engineers, we should embrace blowing up
+scope more. And we should learn to work with it. I know it sounds crazy,
+but your software management process can adapt to extracting immense
+value from knowledge processes by appropriately managing creeping
+scope.</p>
+<p>I encourage you to think about scope creep like this: It&apos;s when you
+found a problem so vast and sinister that none of your team dares to
+face and slay it. It may be so huge; other teams may not dare to
+confront it either. Hell, it may be so colossal NOBODY HAS EVER
+dared.</p>
+<p>But in turn, what does this mean economically? It means that you&apos;re
+leaving value behind. See, today&apos;s internet is oversaturated with life
+hacks, workarounds, and quick fixes. It&apos;s good because it lets you focus
+on the task at hand. It&apos;s bad because it makes us believe that focusing
+on the short-term is appropriate for solving problems. We&apos;re leaving
+value behind, an example:</p>
+<p>Maybe you&apos;ve used a tool like docker before, and given its
+complexity, at one point, you discovered this annoying bug. You could
+solve it yourself - but you fear it&apos;d blow up your project&apos;s scope.</p>
+<p>Upon searching the web, you find a GitHub issue created two years
+ago. It now has 1000 comments, and you scroll down to find the most
+appropriate workaround that fits your project&apos;s needs.</p>
+<p>Now, considering that 1000 people each wasted one hour of their work
+time looking at this issue, I think it&apos;s easy to estimate the problem&apos;s
+weight. Hypothetically, would you solve it: It&apos;d mean you could cash-in
+on saving a thousand well-paid developers one hour. Undoubtedly that&apos;s a
+massive amount of money.</p>
+<p>The problem is: You cannot because it&apos;d mean to blow up your job&apos;s
+scope ten or a thousandfold. <em>And that&apos;s where I see an
+issue.</em></p>
+<p>Assuming you&apos;d be able to solve the issue on a technical and economic
+level, you&apos;d progress in your career. But it&apos;s not possible - as there&apos;s
+neither unlimited budget on your project nor enough time or talent to
+subsidize you. So, inevitably, you&apos;ll hence go for the short-term
+workaround.</p>
+<p>With all that in mind, I still think there&apos;s the chance to discover a
+deliberate practice to face scope creep more adventurously. Some scope
+creeps will inevitably make the project fail - even if handled
+carefully. Others - when solved correctly - may enrich your product and
+give you the right edge over the competition. What I believe should be
+avoided, though, is a compulsion and unjustified caution towards scope&apos;s
+increase.</p>
+<p>You can think of solving a problem like traversing a tree or diving
+into a reef. You can go breadth-first or depth-first. Your mind is
+capable of back-tracking too. And even having traveled deeply, reality
+often offers the opportunity to resurface and take a breather before
+going down again.</p>
+<p>So go out there young padawan - blow up some scopes!</p>
+<p><img src="/assets/images/mindblown.gif"></p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/06/18/when-scope-blows-up/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&text=When Scope Blows Up"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&is_video=false&description=When Scope Blows Up"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=When Scope Blows Up&body=Check out this article: https://timdaub.github.io/2021/06/18/when-scope-blows-up/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&title=When Scope Blows Up"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&name=When Scope Blows Up&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/06/18/when-scope-blows-up/&t=When Scope Blows Up"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

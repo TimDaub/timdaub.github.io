@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How I Build JavaScript Apps In 2021">
+<meta property="og:url" content="https://timdaub.github.io/2021/01/16/web-principles/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-16T17:13:14.000Z">
+<meta property="article:modified_time" content="2021-01-16T17:13:14.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Software Engineering">
+<meta property="article:tag" content="Process">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>How I Build JavaScript Apps In 2021</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/02/22/ethereum-isnt-fun-anymore/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/12/27/wasm-stream/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/01/16/web-principles/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/01/16/web-principles/&text=How I Build JavaScript Apps In 2021"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/01/16/web-principles/&is_video=false&description=How I Build JavaScript Apps In 2021"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How I Build JavaScript Apps In 2021&body=Check out this article: https://timdaub.github.io/2021/01/16/web-principles/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/01/16/web-principles/&name=How I Build JavaScript Apps In 2021&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/01/16/web-principles/&t=How I Build JavaScript Apps In 2021"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-build-processes."><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-transpiling."><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-the-new-and-shiny."><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and
+shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-test-everything."><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-optimize-for-performance-and-quality."><span class="toc-number">5.</span> <span class="toc-text">I optimize for
+performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-open-source-to-my-advantage."><span class="toc-number">7.</span> <span class="toc-text">I use open source to my
+advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        How I Build JavaScript Apps In 2021
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-01-16T17:13:14.000Z" itemprop="datePublished">2021-01-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/JavaScript/" rel="tag">JavaScript</a>, <a class="tag-link-link" href="/tags/Principles/" rel="tag">Principles</a>, <a class="tag-link-link" href="/tags/Process/" rel="tag">Process</a>, <a class="tag-link-link" href="/tags/Software-Engineering/" rel="tag">Software Engineering</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      7 minutes read
+      <meta name="description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How I Build JavaScript Apps In 2021">
+<meta property="og:url" content="https://timdaub.github.io/2021/01/16/web-principles/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/web-principles-image.png">
+<meta property="article:published_time" content="2021-01-16T17:13:14.000Z">
+<meta property="article:modified_time" content="2021-01-16T17:13:14.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Software Engineering">
+<meta property="article:tag" content="Process">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/web-principles-image.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>It&apos;s now roughly seven or eight years that I&apos;m building dynamic front
+ends for the web. From <a target="_blank" rel="noopener" href="https://www.ascribe.io/">digital art
+wallets</a> to games (<a target="_blank" rel="noopener" href="https://ipfs.leapdao.org/blog/Planet-A-ccc-ethberlin-recap/">1</a>,
+<a href="https://timdaub.github.io/videogame">2</a>) and <a href="https://timdaub.github.io/wasm-synth">synthesizers</a>, I&apos;ve seen
+it all. And since my process of creation has dramatically changed over
+the years, today, I&apos;d like to share how I&apos;m developing web apps in
+2021.</p>
+<h2 id="i-avoid-build-processes.">I avoid build processes.</h2>
+<p>I still remember the debates with colleagues about using <a target="_blank" rel="noopener" href="https://babeljs.io/">babel</a> a few years ago. Within the front
+end development world, transpiling had just become a thing, so we ended
+up babelifying our builds to use ES6. Our argument back then was that
+one day, we would be able to push our application&apos;s directory structure
+on a web server and since all browsers would then support the augmented
+ES6 features, our app would just work! Without a build process. WOW!
+That must have been around 2015. When I look at the source code of these
+old applications now, our technical visions didn&apos;t end up becoming
+reality.</p>
+<p>Now, I try to keep my build process to a minimum. When I need to
+write a demo app, I particularly like using <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-standalone#script-tags"><code>&lt;script type=&quot;text/babel&quot;&gt;</code></a>.
+I love <a target="_blank" rel="noopener" href="https://preactjs.com/guide/v10/getting-started/#no-build-tools-route">preact&apos;s
+&quot;no build tools route.&quot;</a> too. When I have to set up an actual app, I
+avoid <a target="_blank" rel="noopener" href="https://webpack.js.org/">webpack</a> and <a target="_blank" rel="noopener" href="https://rollupjs.org/">rollup</a>. I mainly get frustrated about
+the myriad ways of configuring them. Some minor thing always ends up
+being broken, which leads to hours of debugging foreign code. And that&apos;s
+frustrating. Using preact&apos;s no build route, finally something like the
+above is possible:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;module&quot;</span>&gt;</span><br><span class="line">  <span class="comment">// <span class="doctag">NOTE:</span> You literally don&apos;t need a build process with preact.</span></span><br><span class="line">  <span class="keyword">import</span> { h, <span class="title class_">Component</span>, render } <span class="keyword">from</span> <span class="string">&apos;https://unpkg.com/preact?module&apos;</span>;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">h</span>(<span class="string">&apos;h1&apos;</span>, <span class="literal">null</span>, <span class="string">&apos;Hello World!&apos;</span>);</span><br><span class="line">  <span class="title function_">render</span>(app, <span class="variable language_">document</span>.<span class="property">body</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>When having to use a build tool, I gravitate towards <a target="_blank" rel="noopener" href="https://parceljs.org/">parcel</a> or <a target="_blank" rel="noopener" href="https://github.com/developit/microbundle">microbundle</a> as they
+come preconfigured. And in particular, parcel is excellent, as it&apos;s
+merely using an HTML file as its entry point. To me, that&apos;s promising as
+it assumes a proper directory structure and properly connected files
+such that maybe one day I can push my app to the web without that build
+step.</p>
+<h2 id="i-avoid-transpiling.">I avoid transpiling.</h2>
+<p>For the same reasons as pointed out above, I also try to avoid
+transpiling. It&apos;s not because I don&apos;t like ESNext features, but more
+because I want to minimize the risk of getting stuck with the
+transpiler. Hence, I try to avoid using babel. <a href="https://timdaub.github.io/2020/09/01/typescript/">I also don&apos;t use
+Typescript</a>. To me, JavaScript is productive enough. Additionally,
+for <a target="_blank" rel="noopener" href="https://reactjs.org/">react</a>-style projects, no
+transpilers mean I stopped using <a target="_blank" rel="noopener" href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>. Instead, I
+found an excellent library called <a target="_blank" rel="noopener" href="https://github.com/developit/htm">htm</a> that uses JavaScript&apos;s
+template strings. It has a similar syntax to JSX, but it&apos;s not breaking
+ECMAScript standards and hence needs no transpliation.</p>
+<h2 id="i-avoid-the-new-and-shiny.">I avoid the <em>new</em> and
+<em>shiny</em>.</h2>
+<p>I even avoid changing the way I work if I don&apos;t feel comfortable or
+inclined. For example, I never switched to <a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-intro.html">react hooks</a>. The <a target="_blank" rel="noopener" href="https://reactjs.org/docs/state-and-lifecycle.html">lifecycle
+methods</a> that I initially know from iOS Objective-C programming are -
+in my opinion - a beautiful metaphor for writing front end components.
+And neither did I have any issues with my sites&apos; performance. I would
+make the switch if I started to have problems. But I don&apos;t. The same
+goes for up and coming frameworks. Angular V2? <a target="_blank" rel="noopener" href="https://svelte.dev/">Svelte</a>? Cool, but why relearn a framework
+when I&apos;m already productive with the one I use?</p>
+<h2 id="i-test-everything.">I test EvErYtHiNg.</h2>
+<p>When I started front-end development, testing was complicated. Only a
+few front end developer colleagues tested their apps properly. I ended
+up doing a lot of testing by hand. It was frustrating and unproductive.
+But testing front ends has improved dramatically over the years. Not
+only have the tools been significantly enhanced.</p>
+<p>We, as front-end developers, have now also figured out how to
+correctly write front end tests. Finally, we&apos;re able to distinguish
+between functional code and presentational code. For functional code, we
+now write unit tests. For presentational code, we use snapshot-based
+testing and integration tests. I&apos;m pleased about tools like <a target="_blank" rel="noopener" href="https://www.cypress.io/">cypress</a> that is great for integration
+tests. I also like <a target="_blank" rel="noopener" href="https://github.com/avajs/ava/">ava</a> for
+unit tests.</p>
+<h2 id="i-optimize-for-performance-and-quality.">I optimize for
+performance and quality.</h2>
+<p>I used to be eager about building extensively functional software:
+the more features, the better. I&apos;m not anymore. Instead, I try to
+develop software that works well for my users. I strive for quality. So
+I try to measure my build&apos;s size. I take proper care about delivering my
+application, meaning I turn on compression and <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">caching</a>.
+I care about optimizing my static assets like pictures. And I like to
+check my apps by using tools like <a target="_blank" rel="noopener" href="https://developers.google.com/speed/pagespeed/insights/?hl=de">PageSpeed
+Insights</a> or <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse">lighthouse</a>.</p>
+<h2 id="i-use-my-own-work">I use my own work</h2>
+<p>From experience, I learned that I hardly ever get stuck on a
+algorithmic problem. On the contrary, I get motivated to learn something
+new and excel in the process. However, I caught my self often spending
+many hours on debugging other people&apos;s code. Mainly when it&apos;s
+third-party libraries that I included via npm. Once, I thought that
+using npm packages was a JavaScript developer&apos;s superpower. Now, I know
+that it can also be their curse.</p>
+<p>Instead of collecting heaps of third-party code, I now prefer
+following <a target="_blank" rel="noopener" href="http://hintjens.com/blog:96">Peter Hintjens&apos;
+principles for writing good code</a>. I &quot;use my own work.&quot; Meaning, I
+dare to write seemingly complex code myself. I still won&apos;t roll my own
+crypto or write a date library, but I dare to implement parts of a
+protocol or build an algorithm. It&apos;s not to say that I ditch every npm
+package and go npm-keto-diet. No, instead, I take a more mindful
+approach towards dependencies and only include them when I truly need
+them.</p>
+<p>I try to do that by leaving my technical vision at the doorstep of my
+office, so that I can now focus on solving the problems at hand. I try
+to stop worrying about eventualities far in the future as I view that as
+speculation. In cases I have past experiences, I use it to form my
+decision. For unchartered teritory, I move carefully, step by step.</p>
+<h2 id="i-use-open-source-to-my-advantage.">I use open source to my
+advantage.</h2>
+<p>I&apos;m building websites since I&apos;m a teenager. And had I open-sourced
+and maintained a few pieces of code that I need frequently, I&apos;d be more
+productive now. Unfortunately, I was short-sighted. Surprisingly, I
+didn&apos;t think about still using JavaScript at 29 years of age &#x1F602;</p>
+<p>I stopped framing open source mainly around certain virtues like free
+speech, fairness or certain politics. They&apos;re still important virtues
+for me, but I learned that I could use open source also for building a
+personal toolset.</p>
+<p>Extracting a library from a codebase allows me to think about it from
+a user&apos;s perspective. It means I&apos;m able to think about a piece of code&apos;s
+interfaces emphatically. Additionally, there&apos;s positive peer pressure.
+I&apos;m not going to release shit to the world. When my project is public,
+it&apos;s going to have a proper README and some docs. And it&apos;s going to be
+tested. Since everybody can see it, I might as well create something I
+can be proud of.</p>
+<p>Hence, contributing to open source, for me, is about building
+high-quality software. Being anxious about not being able to monetize
+this particular piece of code has become less of a concern. <a target="_blank" rel="noopener" href="https://github.com/sindresorhus">sindresohrus</a> inspired me to
+treat open source packages like my personal toolbox.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>And that&apos;s my incomplete list of principles. I&apos;m sure there&apos;s more
+than just these. Anyway, I still find some of these points quite
+controversial. I&apos;m sure they won&apos;t work for everyone as all our contexts
+differ. But working solo as a freelancer, I&apos;ve found that these
+principles contribute to me being content about what I&apos;m doing. Hence, I
+was eager to share them.</p>
+<p>I&apos;m curious to hear other&apos;s thoughts and see if they&apos;ve taken similar
+paths. Please reach out! Also, don&apos;t forget to subscribe to my
+newsletter!</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-build-processes."><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-transpiling."><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-the-new-and-shiny."><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and
+shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-test-everything."><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-optimize-for-performance-and-quality."><span class="toc-number">5.</span> <span class="toc-text">I optimize for
+performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-open-source-to-my-advantage."><span class="toc-number">7.</span> <span class="toc-text">I use open source to my
+advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/01/16/web-principles/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/01/16/web-principles/&text=How I Build JavaScript Apps In 2021"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/01/16/web-principles/&is_video=false&description=How I Build JavaScript Apps In 2021"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How I Build JavaScript Apps In 2021&body=Check out this article: https://timdaub.github.io/2021/01/16/web-principles/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/01/16/web-principles/&title=How I Build JavaScript Apps In 2021"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/01/16/web-principles/&name=How I Build JavaScript Apps In 2021&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/01/16/web-principles/&t=How I Build JavaScript Apps In 2021"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript is weakening the JavaScript ecosystem">
+<meta property="og:url" content="https://timdaub.github.io/2020/09/01/typescript/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-01T16:47:38.000Z">
+<meta property="article:modified_time" content="2020-09-01T16:47:38.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="engineering">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="ecosystem">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>TypeScript is weakening the JavaScript ecosystem</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/09/08/web3/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/05/02/jazz/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/09/01/typescript/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/09/01/typescript/&text=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/09/01/typescript/&is_video=false&description=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TypeScript is weakening the JavaScript ecosystem&body=Check out this article: https://timdaub.github.io/2020/09/01/typescript/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/09/01/typescript/&name=TypeScript is weakening the JavaScript ecosystem&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/09/01/typescript/&t=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        TypeScript is weakening the JavaScript ecosystem
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-09-01T16:47:38.000Z" itemprop="datePublished">2020-09-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ecosystem/" rel="tag">ecosystem</a>, <a class="tag-link-link" href="/tags/engineering/" rel="tag">engineering</a>, <a class="tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>, <a class="tag-link-link" href="/tags/nodejs/" rel="tag">nodejs</a>, <a class="tag-link-link" href="/tags/npm/" rel="tag">npm</a>, <a class="tag-link-link" href="/tags/typescript/" rel="tag">typescript</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      2 minutes read
+      <meta name="description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TypeScript is weakening the JavaScript ecosystem">
+<meta property="og:url" content="https://timdaub.github.io/2020/09/01/typescript/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-09-01T16:47:38.000Z">
+<meta property="article:modified_time" content="2020-09-01T16:47:38.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="engineering">
+<meta property="article:tag" content="typescript">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="ecosystem">
+<meta property="article:tag" content="npm">
+<meta property="article:tag" content="nodejs">
+<meta name="twitter:card" content="summary_large_image">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In recent months, I&apos;ve noticed a dramatic increase in TypeScript
+packages on GitHub. I usually come across them when checking
+repositories of the people I follow like. Or, when I&apos;m looking for
+dependencies to solve a problem in my projects. And the more TypeScript
+packages I&apos;m encountering, the more often I get reminded of this little
+annoyance towards the project.</p>
+<p>My context is that I&apos;ve not looked into TypeScript yet. That means I
+have no idea how it works. Unfortunately, this is now starting to become
+kind of a problem when searching for dependencies. It does, when I
+either willingly or accidentally include a TypeScript package into my
+projects. Mainly because my package-choosing criteria include:</p>
+<ul>
+<li>picking packages that I potentially can contribute to (e.g., a
+lesser-known package that contains well-written code); or</li>
+<li>picking packages that are well-maintained by a large community but
+may include code that I&apos;d not be able to easily contribute to (e.g., a
+popular package using a C library internally)</li>
+</ul>
+<p>I&apos;ve put these criteria in place willingly to achieve a certain
+quality standard when building applications. Either because I can fix
+bugs myself quickly, or because I&apos;m able to rely on a strong community
+to fix them. However, with TypeScript packages in npm, there&apos;s now this
+opaque problem of not knowing the language or quickly telling a
+package&apos;s language and its community size. Also, TypeScript could be
+just another CoffeeScript.</p>
+<p>So essentially, the problem is that TypeScript authors publish their
+packages on npm, the package manager for Node.js. And to me, that&apos;s what
+is weakening the JavaScript ecosystem. Since its inception, and
+throughout trends like Coffeescript, npm has mostly held the promise of
+only hosting JavaScript packages. However, this promise is
+<code>rejected()</code> (lol) by many authors publishing their
+TypeScript-to-JavaScript transpiled packages.</p>
+<p>Indeed, it makes sense considering that Microsoft markets TypeScript
+as a &quot;superset of JavaScript&quot; and since it &quot;compiles&quot; to JavaScript, why
+not publish packages to npm? But in terms of equality and identity,
+TypeScript is not JavaScript. After all, you&apos;d not consider C and
+Objective-C the same either, or would you? In both examples, the
+languages are subsets/supersets but were conceived with different goals
+in mind to solve other problems.</p>
+<p>Therefore, TypeScript authors should, in my opinion, do something
+along the following lines:</p>
+<ul>
+<li>namespacing their TypeScript packages; or</li>
+<li>build and publish their packages to their package manager.</li>
+</ul>
+<p>However, continuing to publish TypeScript packages to npm is, in my
+opinion weakening the JavaScript ecosystem as it&apos;s splitting its
+community and polluting the npm namespace.</p>
+<h2 id="controversy">Controversy</h2>
+<ul>
+<li>For a short time, there was an <a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=24344506">intense
+conversation</a> on Hacker News. But for unknown reasons, my post got
+marked as <code>[flagged]</code>. I&apos;ve written an email to the
+operators.</li>
+</ul>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/09/01/typescript/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/09/01/typescript/&text=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/09/01/typescript/&is_video=false&description=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TypeScript is weakening the JavaScript ecosystem&body=Check out this article: https://timdaub.github.io/2020/09/01/typescript/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/09/01/typescript/&title=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/09/01/typescript/&name=TypeScript is weakening the JavaScript ecosystem&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/09/01/typescript/&t=TypeScript is weakening the JavaScript ecosystem"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

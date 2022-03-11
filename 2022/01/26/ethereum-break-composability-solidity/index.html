@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="Written by: pinkiebell and TimDaub. Composability is a quality of EVM-based smart contract singletons to expose an immutable and openly-accessible API. The property of composability in Ethereum-based">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!">
+<meta property="og:url" content="https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Written by: pinkiebell and TimDaub. Composability is a quality of EVM-based smart contract singletons to expose an immutable and openly-accessible API. The property of composability in Ethereum-based">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-26T14:28:17.000Z">
+<meta property="article:modified_time" content="2022-01-26T14:28:17.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="smart contracts">
+<meta property="article:tag" content="blockchain">
+<meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="composability">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2022/01/31/against-toxic-optimism/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2022/01/02/multichain-future/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&text=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&is_video=false&description=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!&body=Check out this article: https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&name=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&t=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#composability-softwares-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability,
+software&#39;s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defi-ethereums-poster-child"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum&#39;s &quot;Poster
+Child&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#future-state-will-be-expensive-too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be
+Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-were-arguing-for-breaking-solidity-level-composability"><span class="toc-number">5.</span> <span class="toc-text">Why
+We&#39;re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-01-26T14:28:17.000Z" itemprop="datePublished">2022-01-26</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/blockchain/" rel="tag">blockchain</a>, <a class="tag-link-link" href="/tags/composability/" rel="tag">composability</a>, <a class="tag-link-link" href="/tags/decentralized-finance/" rel="tag">decentralized finance</a>, <a class="tag-link-link" href="/tags/ethereum/" rel="tag">ethereum</a>, <a class="tag-link-link" href="/tags/smart-contracts/" rel="tag">smart contracts</a>, <a class="tag-link-link" href="/tags/web3/" rel="tag">web3</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      7 minutes read
+      <meta name="description" content="Written by: pinkiebell and TimDaub. Composability is a quality of EVM-based smart contract singletons to expose an immutable and openly-accessible API. The property of composability in Ethereum-based">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!">
+<meta property="og:url" content="https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Written by: pinkiebell and TimDaub. Composability is a quality of EVM-based smart contract singletons to expose an immutable and openly-accessible API. The property of composability in Ethereum-based">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-26T14:28:17.000Z">
+<meta property="article:modified_time" content="2022-01-26T14:28:17.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="smart contracts">
+<meta property="article:tag" content="blockchain">
+<meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="composability">
+<meta name="twitter:card" content="summary_large_image">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and <a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
+<p>Composability is a quality of EVM-based smart contract singletons to
+expose an immutable and openly-accessible API. The property of
+composability in Ethereum-based smart contracts paired with the
+tokenization of assets made it possible to create Decentralized Finance
+(short: &quot;DeFi&quot;), crypto currencies&apos; greatest driver of innovation
+yet.</p>
+<p>If &quot;2022 is the year of the DAO&quot;, then all years prior were probably
+&quot;the years of financial composability&quot; as this unique property of smart
+contracts has given rise to the most innovative monetary applications
+developers have ever seen before.</p>
+<p>But <strong>is it time to move on from Solidity-level
+composability?</strong> Is it worth breaking it for the sake of
+scalability and utility of the overall Ethereum network? A
+discussion.</p>
+<h2 id="composability-softwares-greatest-property">Composability,
+software&apos;s greatest property?</h2>
+<p>First of all, the concept of composability isn&apos;t new, and EVM-based
+languages didn&apos;t invent it either.</p>
+<p>We argue that most readers will likely be intimately familiar with
+the last big composability paradigm shift in software engineering. It
+was all web developers agreeing on making their web APIs RESTful.</p>
+<p>By using JSON and being mindful of the shared state on the web, we
+managed to successfully scale the web into a broadly-useful network of
+services. It&apos;s why today, most programming languages ironically include
+the &quot;<strong>JavaScript</strong> Object Notation&quot; (short: &quot;JSON&quot;), as
+with the adoption of the REST composability paradigm, it has become the
+most popular serialization format.</p>
+<p>We, hence, define the term composability independently from EVM-based
+interfaces. We say that two distinct pieces of software are composable
+when their interfaces allow them to be used together.</p>
+<p>Given that definition, we argue that properly semantically-versioned
+open source software is &quot;composable,&quot; as are POSIX-compliant tools.</p>
+<p>Still, Solidity smart contract composability differs as it does not
+only allow programs to collaborate on managing information but money.
+Hence, Ethereum&apos;s composability property is innovative as it enables
+gluing together various financial applications.</p>
+<p>However, in the past month, we&apos;ve come to realize that today&apos;s
+composability of EVM-based contracts more of an obstacle than a
+beneficiary feature to all.</p>
+<h2 id="defi-ethereums-poster-child">DeFi, Ethereum&apos;s &quot;Poster
+Child&quot;</h2>
+<p>We probably don&apos;t have to convince anyone of the greatness of DeFi.
+But for any crypto hodlers awaking from cryostasis, YES, Ethereum&apos;s
+killer application has been found, and it&apos;s DeFi.</p>
+<p>DeFi is such a great killer application that it has started to impact
+the viability of other use cases on Ethereum. It&apos;s because it has made
+using Ethereum very expensive.</p>
+<p>See, the problem is in DeFi degen on-chain trading. Before the advent
+of automated market makers (short &quot;AMM&quot;), using Ethereum was fairly
+cheap, with transaction fees ranging from a few cents to maybe a dollar
+or two.</p>
+<p>Only with the &quot;recent&quot; influx of on-chain trading has it become
+widespread and rationally accepted that any transaction goes for as long
+as it&apos;s profitable. If you inspect the chain today, you&apos;ll find that
+some traders in the past took on massive costs to execute trades with
+only dubious profit. To draw an extreme picture, we argue that it may
+technically be rational to pay the equivalent of 999 ETH in transaction
+cost just to make back 999.000000000000000001 ETH (difference: 1 WEI) of
+profit in the process.</p>
+<p>It&apos;s because traders can control Ethereum&apos;s transaction atomicity and
+profitability to a fair degree until the very moment of execution. In
+contrast to an intransparent order book of a centralized Wall Street
+exchange, Ethereum&apos;s transaction pool is entirely inspectable by any
+participants, allowing them to &quot;guarantee&quot; certain results.</p>
+<p>And beyond just that, much more is possible through specifying
+conditions in Solidity (and recently MEV):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require(profit &gt; msg.value, &quot;non profitable trade&quot;)</span><br></pre></td></tr></table></figure>
+<h2 id="gas-change-is-real">Gas-change is real!</h2>
+<p>At this point, it should hence not surprise anyone when we claim that
+market-based pricing may not reflect the inclusion of external
+costs.</p>
+<p>On Ethereum, the egoistic behavior or running every DeFi trade
+possible as long as it&apos;s profitable comes with the external cost of
+forcing less viable projects to migrate to, e.g., other chains. Is that
+digital gentrification?</p>
+<p>For sure, though, it&apos;s a real problem that has led to shifting
+dynamics in the world of software development.</p>
+<p>While it may have formerly been acceptable to put the entirety of a
+dapp&apos;s transactions on-chain, today, it&apos;s a really bad idea.
+Heuristically, it has come to mean that if a decentralized application
+doesn&apos;t provide the equivalent value of, say, DeFi provides to traders,
+then this non-DeFi application is likely to have a hard time competing
+for viability - given its enormous gas costs.</p>
+<p>A striking example of this may have been the abandoning of Aragon and
+the simultaneous rise in popularity of snapshot.org voting. While Aragon
+used to put all transactions on-chain to implement a mixture of token
+voting and multi-signature wallet, today&apos;s snapshot.org off-chains the
+whole vote by default and leaves solving the multi-signature use case to
+others (e.g., Gnosis Safe).</p>
+<p>But by and large, the above-described dynamic visualizes the space&apos;s
+greatest problem well: It&apos;s that if your non-financial application isn&apos;t
+capable of providing similar viability to DeFi, then we&apos;re better off
+not building it on Ethereum.</p>
+<h2 id="future-state-will-be-expensive-too">Future State Will Be
+Expensive Too</h2>
+<p>Those who understand the dilemma of scaling blockchains, as, e.g.,
+Vitalik had laid it out in one of his blog posts [1], also must realize
+that state being competitively-priced isn&apos;t going to go away in the
+future.</p>
+<p>Not to say that it may eventually get cheap when we all start owning
+super-fancy quantum computers. But until those unlikely inventions
+become realities, we&apos;d argue that state will remain expensive. It&apos;ll
+stay expensive on Ethereum, and the market will take care of equating
+prices between peripheral chains like Polygon.</p>
+<p>For those that don&apos;t understand or value the original concept of
+storing state on blockchains, it may continue to be cheap. After all,
+there&apos;s always a database or less secure chain to store it on.</p>
+<p>But for those that value the guarantees that Ethereum and other
+projects were built upon, state will continue to be competitively
+priced.</p>
+<h2 id="why-were-arguing-for-breaking-solidity-level-composability">Why
+We&apos;re Arguing For Breaking Solidity-level Composability</h2>
+<p>In the end, breaking composability with Ethereum smart contracts can
+mean many different things in practice. Rollups and L2 contracts
+exemplify composability paradigms being actively broken and &quot;moved
+upwards.&quot; Yes, calling &quot;through to L2&quot; will one day be a possibility;
+but other roll-up architects may want to consider more extreme variants
+to increase scalability.</p>
+<p>We, the authors, have experimented with breaking composability for
+the sake of reducing gas costs by selectively applying some principles
+used in roll-ups too. While roll-ups have come to define themselves as a
+combination of trustless bridges and on-chain data validation, through
+experimentation, we found that breaking composability can significantly
+reduce contracts&apos; gas costs by deliberately applying L2-scaling
+strategies to regular L1 contracts.</p>
+<p>In this article, we call for breaking the Solidity-level
+composability as, e.g., adding gas-optimizations to the Solidity
+compiler or using, e.g., sparse Merkle trees as alternative state
+storage may indeed save significant levels of gas for the user but can
+lead to incompatibilities with traditional contracts that rely on the
+composable Ethereum message call interface [2].</p>
+<p>If e.g., we&apos;d break the composability of ERC20 tokens and allow those
+contracts to batch validate transfers, we&apos;d make everyone in DeFi
+unhappy as we&apos;d now require everyone to submit their transactions
+through an off-chain sequencer rather than the standard (&amp;
+composable) Solidity call interface.</p>
+<p>Suddenly, calling a third-party contract&apos;s <code>transferFrom</code>
+would stop being straightforward. As composability was broken on the
+Solidity level, it&apos;d likely require us to set up a sequencing server as
+well.</p>
+<p>We want to argue that we believe that making deliberate breaking
+changes to the ecosystem&apos;s architecture would benefit it over the long
+term. We think the current stateful composability paradigm for L1
+contracts blocks scaling, and new solutions will have to be
+discovered.</p>
+<p>Distributed systems have a high computational overhead in comparison
+to their centralized counterparts. Thus, using those systems only for
+the minimum viable enforcement is a requirement if we want them to be
+the &quot;World&apos;s Computer.&quot; As developers, we must agree and accept that
+on-chain state and its validation is a scarce resource and should be
+treated with economic care. Posting data to the blockchain is cheap;
+transforming and storing it is expensive.</p>
+<p>Hence, we propose to move the composability to another layer without
+sacrificing security to receive better scaling results.</p>
+<p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and <a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
+<h2 id="references">References</h2>
+<ul>
+<li>1: <a target="_blank" rel="noopener" href="https://vitalik.ca/general/2021/05/23/scaling.html">https://vitalik.ca/general/2021/05/23/scaling.html</a></li>
+<li>2: <a target="_blank" rel="noopener" href="https://github.com/rugpullindex/indexed-sparse-merkle-tree">https://github.com/rugpullindex/indexed-sparse-merkle-tree</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#composability-softwares-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability,
+software&#39;s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defi-ethereums-poster-child"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum&#39;s &quot;Poster
+Child&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#future-state-will-be-expensive-too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be
+Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-were-arguing-for-breaking-solidity-level-composability"><span class="toc-number">5.</span> <span class="toc-text">Why
+We&#39;re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&text=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&is_video=false&description=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!&body=Check out this article: https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&title=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&name=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/&t=Hey Ethereum, Let&#39;s Break Solidity&#39;s Composability!"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

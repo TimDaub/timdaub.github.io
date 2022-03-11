@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    <url>
+        <loc>https://timdaub.github.io</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/03/11/ethereum-is-the-newsfeed-we-deserve/</loc>
+        <lastmod>2022-03-11T09:39:35.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/02/28/smart-contracts-are-programmable-commons/</loc>
+        <lastmod>2022-02-28T21:32:00.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/02/19/non-skeuomorphic-harberger-properties-erc721-nfts/</loc>
+        <lastmod>2022-02-19T16:03:50.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/02/17/gitcoin-schelling-point-ethdenver/</loc>
+        <lastmod>2022-02-17T20:17:15.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/02/16/ethdenver-buidl-week-day-one/</loc>
+        <lastmod>2022-02-16T18:03:04.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/01/31/against-toxic-optimism/</loc>
+        <lastmod>2022-01-31T10:28:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/01/26/ethereum-break-composability-solidity/</loc>
+        <lastmod>2022-01-26T14:28:17.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2022/01/02/multichain-future/</loc>
+        <lastmod>2022-01-02T09:46:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/12/15/token-holders-arent-slaying-moloch/</loc>
+        <lastmod>2021-12-15T13:12:46.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/12/10/two-years-of-bloggin-a-reflection/</loc>
+        <lastmod>2021-12-10T14:49:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/12/08/illuminating-the-dark-forest/</loc>
+        <lastmod>2021-12-08T21:34:59.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/11/30/original-observations-about-todays-crypto-bull-market/</loc>
+        <lastmod>2021-11-30T17:53:27.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/11/16/the-urgency-of-building-web3/</loc>
+        <lastmod>2021-11-16T13:09:52.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/11/03/principles-for-the-metaverse/</loc>
+        <lastmod>2021-11-03T10:32:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/10/31/tokens-considered-harmful/</loc>
+        <lastmod>2021-10-31T22:55:25.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/10/21/on-chain-the-emperor-wears-no-clothes/</loc>
+        <lastmod>2021-10-21T20:09:07.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/10/08/detokenization-or-anonymization/</loc>
+        <lastmod>2021-10-08T08:45:59.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/09/06/technical-debt-and-yield/</loc>
+        <lastmod>2021-09-06T16:44:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/08/22/intellectual-property-will-become-irrelevant/</loc>
+        <lastmod>2021-08-22T11:54:24.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/07/21/nfts-are-coming-for-instagram/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/06/18/when-scope-blows-up/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/</loc>
+        <lastmod>2021-05-22T12:17:56.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/04/22/nft-sleepminting-beeple-provenance/</loc>
+        <lastmod>2021-04-22T13:54:25.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/</loc>
+        <lastmod>2021-04-19T12:06:40.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/</loc>
+        <lastmod>2021-04-18T15:01:12.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/02/25/emscripten-wasm/</loc>
+        <lastmod>2021-02-25T10:18:30.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/</loc>
+        <lastmod>2021-02-22T09:29:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2021/01/16/web-principles/</loc>
+        <lastmod>2021-01-16T17:13:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/12/27/wasm-stream/</loc>
+        <lastmod>2020-12-27T13:40:13.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/12/11/rugpullindex/</loc>
+        <lastmod>2020-12-11T10:59:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/12/03/samesite/</loc>
+        <lastmod>2020-12-03T14:19:24.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/09/08/web3/</loc>
+        <lastmod>2020-09-08T17:02:51.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/09/01/typescript/</loc>
+        <lastmod>2020-09-01T16:47:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/05/02/jazz/</loc>
+        <lastmod>2020-05-02T07:11:33.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/04/18/imaginary/</loc>
+        <lastmod>2020-04-18T21:40:06.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/04/15/butter/</loc>
+        <lastmod>2020-04-14T23:52:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/02/19/wasm-synth/</loc>
+        <lastmod>2020-02-19T12:18:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2020/01/11/sourdough/</loc>
+        <lastmod>2020-01-11T10:13:29.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/2019/02/28/poa/</loc>
+        <lastmod>2019-02-28T12:18:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

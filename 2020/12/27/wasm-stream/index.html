@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WASM-STREAM, a virtual stage for digital artists">
+<meta property="og:url" content="https://timdaub.github.io/2020/12/27/wasm-stream/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-stream.png">
+<meta property="article:published_time" content="2020-12-27T13:40:13.000Z">
+<meta property="article:modified_time" content="2020-12-27T13:40:13.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="music">
+<meta property="article:tag" content="web assembly">
+<meta property="article:tag" content="chaos communication congress">
+<meta property="article:tag" content="synthesizer">
+<meta property="article:tag" content="audio stream">
+<meta property="article:tag" content="concert venue">
+<meta property="article:tag" content="virtual">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>WASM-STREAM, a virtual stage for digital artists</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/01/16/web-principles/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/12/11/rugpullindex/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/12/27/wasm-stream/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/12/27/wasm-stream/&text=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/12/27/wasm-stream/&is_video=false&description=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WASM-STREAM, a virtual stage for digital artists&body=Check out this article: https://timdaub.github.io/2020/12/27/wasm-stream/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/12/27/wasm-stream/&name=WASM-STREAM, a virtual stage for digital artists&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/12/27/wasm-stream/&t=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-first-little-demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-wasm-stream-architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-use-wasm-stream"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        WASM-STREAM, a virtual stage for digital artists
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-12-27T13:40:13.000Z" itemprop="datePublished">2020-12-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/audio-stream/" rel="tag">audio stream</a>, <a class="tag-link-link" href="/tags/chaos-communication-congress/" rel="tag">chaos communication congress</a>, <a class="tag-link-link" href="/tags/concert-venue/" rel="tag">concert venue</a>, <a class="tag-link-link" href="/tags/music/" rel="tag">music</a>, <a class="tag-link-link" href="/tags/synthesizer/" rel="tag">synthesizer</a>, <a class="tag-link-link" href="/tags/virtual/" rel="tag">virtual</a>, <a class="tag-link-link" href="/tags/web-assembly/" rel="tag">web assembly</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      5 minutes read
+      <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WASM-STREAM, a virtual stage for digital artists">
+<meta property="og:url" content="https://timdaub.github.io/2020/12/27/wasm-stream/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
+<meta property="article:published_time" content="2020-12-27T13:40:13.000Z">
+<meta property="article:modified_time" content="2020-12-27T13:40:13.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="music">
+<meta property="article:tag" content="web assembly">
+<meta property="article:tag" content="chaos communication congress">
+<meta property="article:tag" content="synthesizer">
+<meta property="article:tag" content="audio stream">
+<meta property="article:tag" content="concert venue">
+<meta property="article:tag" content="virtual">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><strong>TL;DR:</strong> I built a synthesizer that allows streaming
+directly to an internet radio stream for rc3 2020.</p>
+<p><strong>UPDATE from April 1, 2021:</strong> I&apos;ve now taken WASM
+STREAM offline as its purpose was mainly to serve last year&apos;s rc3. The
+rc3 world has been taken offline too. This means that some links in this
+blog post are not available anymore. Probably all source code that was
+used in the project is available on GitHub.</p>
+<hr>
+<p>It&apos;s that time between Christmas and new year again, where you can
+usually find me at Leipzig&apos;s Congress Zentrum on my computer hacking
+away. It&apos;s chaos congress time. Given this year&apos;s pandemic, the &quot;37c3&quot;
+however, was moved to the internet and renamed to <a target="_blank" rel="noopener" href="https://rc3.world">&quot;rc3&quot;, the Remote Chaos Communication
+Congress</a>.</p>
+<p>Earlier this month, the iconic congress build-up started. This time
+around, building up didn&apos;t involve moving heavy crates of mate tea
+around. Instead, it meant that everyone started designing, drawing, and
+building their assembly maps for the &quot;rc3.world&quot;. A <a target="_blank" rel="noopener" href="https://events.ccc.de/2020/09/04/rc3-remote-chaos-experience/">2D
+virtual space</a> that&apos;s supposed to replace this year&apos;s lack of
+physical space.</p>
+<p>The rc3.world software is a fork of <a target="_blank" rel="noopener" href="https://workadventu.re/">workadventu.re</a>, a 2D game simulating
+a virtual work environment with avatars. Within this 2D map of the
+virtual congress, the organizers invited all assemblies to build their
+own spaces. And so, as the build-up for <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion Protocol</a>
+assembly began, I had an idea for a project.</p>
+<figure>
+<img src="/assets/images/wasm-synth-screenshot.png" alt="wasm-synth, the project I launched at last year&apos;s c3">
+<figcaption aria-hidden="true"><a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a>, the
+project I launched at last year&apos;s c3</figcaption>
+</figure>
+<p>At last year&apos;s congress in Leipzig, I had launched <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a>, a
+synthesizer built in WebAssembly. Naturally, this time I was eager to
+take the project to the next stage. Hence, roughly a week ago, I started
+to work on a new project called &quot;WASM-STREAM&quot; - an extension to
+wasm-synth.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/social-dist0rtion-protocol/wasm-stream">WASM-STREAM</a>
+is a virtual stage for digital artists. Using WASM-STREAM, an artist can
+broadcast their play with wasm-synth to an internet radio stream. More
+importantly, though, this means that they can take the stage on the <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion Protocol</a>&apos;s
+assembly and jam away to a virtually present audience.</p>
+<figure>
+<img src="/assets/images/wasm-stream.png" alt="Social Dist0rtion Protocol&apos;s dance floor in the rc3.world">
+<figcaption aria-hidden="true">Social Dist0rtion Protocol&apos;s dance floor
+in the rc3.world</figcaption>
+</figure>
+<p>So how did I build it?</p>
+<h2 id="a-first-little-demo">A First Little Demo</h2>
+<p><a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a> is a
+project that I built deliberately to showcase the power of the web. At
+the beginning of the year, I wrote <a href="https://timdaub.github.io/2020/02/19/wasm-synth/">a blog post</a>
+outlining its technical details. It&apos;s using the
+<code>AudioWorklet</code> and some WebAssembly-transpiled code to render
+audio in real-time in the user&apos;s browser.</p>
+<p>Now, workadventure, the software ccc uses to run their rc3.world, is
+also built on the web and allows embedding audio streams. So I thought,
+why not take the audio generated in wasm-synth and stream it to everyone
+in the rc3 world.</p>
+<p>In a way, it sounds like not that big of a deal to build an audio
+streaming client within a website. But remember that a browser&apos;s
+networking ability is limited. While we&apos;ve come a long way from the
+<code>XMLRequest</code> API to <code>fetch</code>,
+<code>WebSocket</code> and <code>WebRTC</code>, these concepts only
+allow talking upstream if their authors deliberately built their
+upstream application for supporting them.</p>
+<p>Naive as I Am, I started by deploying <a target="_blank" rel="noopener" href="https://icecast.org/">icecast2</a> to a small Hetzner instance. I
+configured an authorized mount point that allows a streamer to connect
+using client software. Then I looked for a way to stream audio directly
+to icecast from a browser. And found... nothing.</p>
+<p>Well, I did find something. It&apos;s called <a target="_blank" rel="noopener" href="https://webcast.github.io/">webcast</a>, and it&apos;s a <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">WebSocket-based
+subprotocol</a> that allows sending binary audio data between a client
+and a server. In their <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js#server">README.md</a>, the
+authors also mention webcast&apos;s compatibility with <a target="_blank" rel="noopener" href="https://www.liquidsoap.info/">liquidsoap</a>, a DSL for audio
+stream processing.</p>
+<p>So my first attempt at plugging these things together involved
+encoding the <code>Float32Array</code> data from the
+<code>AudioWorklet</code> into an mp3 stream using <a target="_blank" rel="noopener" href="https://github.com/toots/shine/">libshine</a> (that has a wasm
+JavaScript package) and then sending it to a <a target="_blank" rel="noopener" href="https://www.liquidsoap.info/doc-dev/harbor.html">liquidsoap
+&quot;harbor&quot;</a> via webcast. Liqidsoap would then convert the mp3 stream to
+ogg-vorbis, make it stereo, and forward it to the icecast server.</p>
+<p>And, to my surprise, it worked. When I hit some keys on the
+wasm-synth, they got encoded and sent to the audio stream. With a bit of
+delay, I heard what I had just played. Cool!</p>
+<p>Anyways, with my small little demo, I was galvanized and motivated
+enough to spend more time building something that would work for the
+congress.</p>
+<h2 id="the-wasm-stream-architecture">The WASM-STREAM Architecture</h2>
+<p>Ultimately, liquidsoap was not well-suited for my purpose. I also
+quickly realized that all I had to do was build a proxy between the <a target="_blank" rel="noopener" href="https://gist.github.com/ePirat/adc3b8ba00d85b7e3870">icecast
+protocol</a> and the <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">webcast
+protocol</a>. And that&apos;s what I ended up building. A small <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">JavaScript
+application</a> implementing two protocols. It listens for incoming
+WebSocket connections and calls icecast with a loooooonng PUT request to
+establish a stream.</p>
+<p>WASM-STREAM itself doesn&apos;t do any encoding. It can, however, route an
+<code>audio/ogg</code> or an <code>audio/mpeg</code> stream from webcast
+to icecast. The encoding from WAV to mp3 takes place on the user&apos;s
+device already when the play the synthesizer.</p>
+<h2 id="how-to-use-wasm-stream">How To Use WASM-STREAM</h2>
+<p>Whether you have a ticket to rc3 or not, you can tune into the stream
+at <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/stream">https://audio.daubenschuetz.de/stream</a>.
+It&apos;s an mp3-encoded stream, meaning it won&apos;t work in all browsers
+equally (Firefox works natively; Chrome et al. only support ogg/vorbis
+natively). If it doesn&apos;t, try a desktop application like iTunes or
+VLC.</p>
+<p>The stream is continuously online. But if you don&apos;t hear anything
+then that&apos;s because nobody is currently playing the <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">WASM-SYNTH</a>.</p>
+<p>Finally, you&apos;re able to &quot;dance&quot; on the Social Dist0rtion Protocol&apos;s
+assembly dance floor. The rc3 orga was nice enough to allow us streaming
+audio on our map. <a target="_blank" rel="noopener" href="https://rc3.world/rc3/room/93840a8f-88f7-4f11-bb61-68800c4d4962/">Click
+here</a> to visit us directly on the rc3.world map.</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-first-little-demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-wasm-stream-architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-use-wasm-stream"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/12/27/wasm-stream/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/12/27/wasm-stream/&text=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/12/27/wasm-stream/&is_video=false&description=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WASM-STREAM, a virtual stage for digital artists&body=Check out this article: https://timdaub.github.io/2020/12/27/wasm-stream/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/12/27/wasm-stream/&title=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/12/27/wasm-stream/&name=WASM-STREAM, a virtual stage for digital artists&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/12/27/wasm-stream/&t=WASM-STREAM, a virtual stage for digital artists"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

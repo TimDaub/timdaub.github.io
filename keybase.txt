@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/timdaub
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://timdaub.github.io
+  * I am timdaub (https://keybase.io/timdaub) on keybase.
+  * I have a public key ASBpo1GqSfo9dfcXjFm7MjzM9ZDYqn_9GLt3GoeWzuMe-Qo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "012069a351aa49fa3d75f7178c59bb323cccf590d8aa7ffd18bb771a8796cee31ef90a",
+      "host": "keybase.io",
+      "kid": "012069a351aa49fa3d75f7178c59bb323cccf590d8aa7ffd18bb771a8796cee31ef90a",
+      "uid": "49f3ce17a666fba52e5b15a32b2d6d19",
+      "username": "timdaub"
+    },
+    "merkle_root": {
+      "ctime": 1587194572,
+      "hash": "d6296a015b08db405eeaff517fcbbbaa45037518fbf7084e732539a09e690cbd463d4a1b2b1ec0d78fe43cdcda38956c6ee8f0188ee49d16f90568a28167b363",
+      "hash_meta": "856724fa97bb4e2b2ea2ce70449f23fb793ffc8d75d5118aebe3d3a64072fb3f",
+      "seqno": 15965587
+    },
+    "service": {
+      "entropy": "1EwgiDMlXlUT7R5UUQBx8rzG",
+      "hostname": "timdaub.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.4.0"
+  },
+  "ctime": 1587194581,
+  "expire_in": 504576000,
+  "prev": "dcc17112ababd14e71f81ad55037a5310950246d12d3d1e356cf75e7406e3baf",
+  "seqno": 15,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgaaNRqkn6PXX3F4xZuzI8zPWQ2Kp//Ri7dxqHls7jHvkKp3BheWxvYWTESpcCD8Qg3MFxEqur0U5x+BrVUDelMQlQJG0S09HjVs9150BuO6/EIIDCfq5MSJJrq3jrt8ULgsKJKXwF60j7lvmeBAFjI2gPAgHCo3NpZ8RA/4/92PenqsyN6xkjYkB+uvtYcPY5W/kXR2SlvefaFo9iuwCF/YWYVh4tE17cMFGqct4fB36WXqQkEAG8DKeLDahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIOdLhbvuCwL0LZgJgkIMnGuQzMO0eH1xAUWFOayRkFW8o3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/timdaub
+
+==================================================================

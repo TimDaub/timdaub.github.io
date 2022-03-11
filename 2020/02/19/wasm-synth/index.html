@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="TL;DR: I built a synthesizer using C++ and WebAssembly. Check out the finished product (browser compatibility table), the source, watch the talk or keep on reading the article!  The Presentation  Intr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WASM SYNTH, or, how music taught me the beauty of math">
+<meta property="og:url" content="https://timdaub.github.io/2020/02/19/wasm-synth/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR: I built a synthesizer using C++ and WebAssembly. Check out the finished product (browser compatibility table), the source, watch the talk or keep on reading the article!  The Presentation  Intr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/nyquist.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/frames.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ring-buffer.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/chunked-sinus-inverted.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/import-support.png">
+<meta property="article:published_time" content="2020-02-19T12:18:14.000Z">
+<meta property="article:modified_time" content="2020-02-19T12:18:14.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="WASM">
+<meta property="article:tag" content="WebAssembly">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Music">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Synthesizer">
+<meta property="article:tag" content="AudioWorklet">
+<meta property="article:tag" content="ESNext">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/nyquist.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>WASM SYNTH, or, how music taught me the beauty of math</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/04/15/butter/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/01/11/sourdough/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/02/19/wasm-synth/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/02/19/wasm-synth/&text=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/02/19/wasm-synth/&is_video=false&description=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WASM SYNTH, or, how music taught me the beauty of math&body=Check out this article: https://timdaub.github.io/2020/02/19/wasm-synth/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/02/19/wasm-synth/&name=WASM SYNTH, or, how music taught me the beauty of math&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/02/19/wasm-synth/&t=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-presentation"><span class="toc-number">1.</span> <span class="toc-text">The Presentation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#theory"><span class="toc-number">3.</span> <span class="toc-text">Theory</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-nyquist-shannon-sampling-theorem"><span class="toc-number">3.1.</span> <span class="toc-text">The Nyquist-Shannon
+Sampling Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#frames-and-ring-buffers"><span class="toc-number">3.2.</span> <span class="toc-text">Frames and Ring Buffers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#implementation"><span class="toc-number">4.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#using-the-audioworklet"><span class="toc-number">4.1.</span> <span class="toc-text">Using the AudioWorklet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-math-of-audio-generation"><span class="toc-number">4.2.</span> <span class="toc-text">The Math of Audio Generation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#working-with-webassembly-and-c"><span class="toc-number">4.3.</span> <span class="toc-text">Working with WebAssembly and
+C++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lessons-learned"><span class="toc-number">5.</span> <span class="toc-text">Lessons Learned</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resources"><span class="toc-number">6.</span> <span class="toc-text">Resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">7.</span> <span class="toc-text">Appendix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-emscripten-build-pipeline"><span class="toc-number">7.1.</span> <span class="toc-text">The emscripten Build
+Pipeline</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        WASM SYNTH, or, how music taught me the beauty of math
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim Daubenschütz</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-02-19T12:18:14.000Z" itemprop="datePublished">2020-02-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/AudioWorklet/" rel="tag">AudioWorklet</a>, <a class="tag-link-link" href="/tags/C/" rel="tag">C++</a>, <a class="tag-link-link" href="/tags/ESNext/" rel="tag">ESNext</a>, <a class="tag-link-link" href="/tags/Math/" rel="tag">Math</a>, <a class="tag-link-link" href="/tags/Music/" rel="tag">Music</a>, <a class="tag-link-link" href="/tags/Synthesizer/" rel="tag">Synthesizer</a>, <a class="tag-link-link" href="/tags/WASM/" rel="tag">WASM</a>, <a class="tag-link-link" href="/tags/Web/" rel="tag">Web</a>, <a class="tag-link-link" href="/tags/WebAssembly/" rel="tag">WebAssembly</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      1:54
+      <meta name="description" content="TL;DR: I built a synthesizer using C++ and WebAssembly. Check out the finished product (browser compatibility table), the source, watch the talk or keep on reading the article!  The Presentation  Intr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WASM SYNTH, or, how music taught me the beauty of math">
+<meta property="og:url" content="https://timdaub.github.io/2020/02/19/wasm-synth/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR: I built a synthesizer using C++ and WebAssembly. Check out the finished product (browser compatibility table), the source, watch the talk or keep on reading the article!  The Presentation  Intr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/nyquist.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/frames.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ring-buffer.gif">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/chunked-sinus-inverted.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/import-support.png">
+<meta property="article:published_time" content="2020-02-19T12:18:14.000Z">
+<meta property="article:modified_time" content="2020-02-19T12:18:14.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="WASM">
+<meta property="article:tag" content="WebAssembly">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Music">
+<meta property="article:tag" content="Web">
+<meta property="article:tag" content="Synthesizer">
+<meta property="article:tag" content="AudioWorklet">
+<meta property="article:tag" content="ESNext">
+<meta property="article:tag" content="Math">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/nyquist.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><p><strong>TL;DR:</strong> I built a synthesizer using C++ and
+WebAssembly. Check out the finished <a href="https://timdaub.github.io/wasm-synth/">product</a> (<a target="_blank" rel="noopener" href="https://github.com/TimDaub/wasm-synth#compatibility">browser
+compatibility table</a>), the <a target="_blank" rel="noopener" href="https://github.com/TimDaub/wasm-synth">source</a>, <a href="#the-presentation">watch the talk</a> or keep on reading the
+article!</p>
+<hr>
+<h2 id="the-presentation">The Presentation</h2>
+<div class="owl-media owl-video owl-youtube"><iframe src="//www.youtube.com/embed/QJ0k_Qa5VGI" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<h2 id="introduction">Introduction</h2>
+<p>Ever since I started taking piano lessons two years ago, I was
+curious to take a look into a vastly different field from
+cryptocurrencies and blockchain. That field being digital audio
+engineering. So when some of my freelance projects ended in November
+2019, I decided to allocate my next three months towards building an
+audio product.</p>
+<p>I quickly discovered what I wanted to build: A synthesizer. In C++! I
+had just watched some talks on WebAssembly, and was very curious to
+learn a new language too! In hindsight, the personal challenge, however,
+was to understand the data structures and math that go into generating
+audio.</p>
+<p>That&apos;s the story of how I rediscovered the beauty of mathematics
+through building a synthesizer with C++ and WebAssembly.</p>
+<h2 id="theory">Theory</h2>
+<p>I had never done anything in the field of music technology - I had to
+start at zero practically. It meant I had to look at the physical,
+mathematical, and musical fundamentals of audio generation.</p>
+<h3 id="the-nyquist-shannon-sampling-theorem">The Nyquist-Shannon
+Sampling Theorem</h3>
+<p>Sound is a time-dependent phenomenon. Regular instruments take
+advantage of this phenomenon by emitting sound waves over time through,
+e.g., a mechanical part oscillating. That produces a time-continuous
+analog signal, which means that for each point in time, the signal
+produces a unique value in amplitude. Computers can merely approximate
+analog values by sampling them into time-discrete values. They&apos;re so
+good at approximating that the digital representation of an analog
+signal virtually becomes indistinguishable to a human&apos;s ear. As long as
+the sampling complies with some basic rules of signal processing, at
+least.</p>
+<p>A pretty fundamental principle in this regard is the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Nyquist%E2%80%93Shannon_sampling_theorem">Nyquist&#x2013;Shannon
+sampling theorem</a>. It states that to capture all necessary
+information from a continuous-time signal, a function
+<em>&quot;sampling&quot;</em> the signal needs to record data at least at a rate
+twice as frequently as the highest frequency. If this requirement is
+unfulfilled, then the resulting digital signal contains an artifact
+called <em>&quot;Aliasing&quot;</em>, distorting the familiarity of the original
+signal (<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/File:Sawtooth-aliasingdemo.ogg">Listen
+to this sound bit of aliasing happening on a sawtooth wave</a>).</p>
+<p>Though we&apos;re not planning to record analog signal to digital, we&apos;ll
+still have to comply with this theorem, as synthesizing sound is nothing
+more than filling a list with time-discrete values too<sup id="a5"><a href="#f5">5</a></sup>. Practically, it may look something like
+this:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// Simple pseudo code noise generator</span><br><span class="line"></span><br><span class="line">context = new AudioContext()</span><br><span class="line">samples = []</span><br><span class="line"></span><br><span class="line">for (i = 0; i &lt; context.sampleRate; i++) {</span><br><span class="line">  // Generate noise</span><br><span class="line">  samples.append(random.choice([0, 1]))</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// We&apos;ve generated enough samples for exactly 1 second.</span><br><span class="line">// The output will hence be 1 second of noise.</span><br><span class="line">context.play(samples)</span><br></pre></td></tr></table></figure>
+<p>Here, we&apos;re initiating a new <code>AudioContext</code> object,
+getting its sample rate, and generating enough samples to have the noise
+last for at least one second. Admittedly, the Nyquist-Shannon theorem is
+less of a problem here, as the <code>sampleRate</code> is likely to be
+set to a reasonable value by our pseudo language&apos;s magical
+<code>AudioContext</code>. But assuming it was set to only 200 Hertz,
+outputting a piano&apos;s middle C (its frequency is <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Piano_key_frequencies">261.6256
+Hertz</a>) would already be corrupted, as the required 261 repetitions
+per second to output middle C wouldn&apos;t fit into the 200 repetitions per
+second of the sample rate. Practically, what would happen is that our
+sampling algorithm would be &quot;overtaken&quot; by middle C&apos;s frequency and
+hence output a shifted version. The figure below nicely visualizes the
+effect, showing what happens if we&apos;re gradually increasing the signal&apos;s
+frequency at a steady sampling rate.</p>
+<figure>
+<img src="/assets/images/nyquist.png" alt="Undersampling: The signal&apos;s frequency is increased while the sampling rate (dotted line) remains steady.">
+<figcaption aria-hidden="true"><em>Undersampling: The signal&apos;s frequency
+is increased while the sampling rate (dotted line) remains
+steady.</em></figcaption>
+</figure>
+<p>But assuming a sufficient sampling rate, there&apos;s another problem with
+the above code. Imagine, we substituted the noise-producing snippet with
+a nice-sounding sine wave and then integrated and sold it as a hardware
+synthesizer. When pressing a key, the player would hear the respective
+tone for a second. Pressing another key, they&apos;d hear another tone for
+another second and so on. But since we built our function only to
+generate static-length tones of a one-second length, it wouldn&apos;t be much
+fun making music, as playing rhythmic patterns would be impossible!</p>
+<figure>
+<img src="/assets/images/frames.png" alt="Large buffer sizes can introduce latency for the user6.">
+<figcaption aria-hidden="true"><em>Large buffer sizes can introduce
+latency for the user<sup id="a6"><a href="#f6">6</a></sup>.</em></figcaption>
+</figure>
+<p>That&apos;s because music doesn&apos;t work on an absolute time scale, but on a
+relative one. We wouldn&apos;t say that a note &quot;lasts for a second&quot;. Instead,
+we&apos;d say it &quot;lasts for a quarter bar&quot; and, hence, call it a &quot;quarter
+note&quot;. To build a software instrument, this means that we&apos;ll have to
+optimize for real-time responsiveness and maximum expressiveness. For
+this, we&apos;ll need specific data structures.</p>
+<h3 id="frames-and-ring-buffers">Frames and Ring Buffers</h3>
+<p>Generally, audio in programming languages is most commonly generated
+by continuously filling up buffers with data points and then sending
+them to the sound card. But as we&apos;ve just learned, that buffer&apos;s size
+determines the responsiveness of our instrument. An idea that nicely
+dissolves this problem is to chunk our buffer into <em>frames</em>.
+Instead of sending a fixed-length buffer of samples to the output
+device, we chunk it into small <em>frames</em> and continuously send
+these. In theory, we&apos;d limit the size of a frame to a single sample for
+maximum responsiveness, meaning we&apos;d now be <em>&quot;streaming&quot;</em> our
+data. But given that timing is crucial too, we&apos;ll have to come up with
+yet another strategy for sending just the right amount of data in a
+given time frame. For this, we can use a different concept called a
+<em>&quot;ring buffer&quot;</em>.</p>
+<figure>
+<img src="/assets/images/ring-buffer.gif" alt="A ring buffer processing a keyboard&apos;s inputs.">
+<figcaption aria-hidden="true"><em>A ring buffer processing a keyboard&apos;s
+inputs.</em></figcaption>
+</figure>
+<p>A ring buffer is a fixed-size list, managed by two distinct pointers,
+where one pointer is writing values, and the other one is &quot;chasing&quot; and
+consuming those values. It allows a program to continuously stream data,
+precisely at the speed of the chasing pointer. Additionally, it provides
+developers with a <em>&quot;pull&quot;</em> rather than a <em>&quot;push&quot;</em> API.
+Now, instead of having to optimize their program to push new frames to
+the output device periodically, a developer can use the callback
+function of a ring buffer&apos;s writing pointer to be notified about a
+shortage of fresh data.</p>
+<p>But so much for theory. Let&apos;s explore how we can implement these
+concepts in practice.</p>
+<h2 id="implementation">Implementation</h2>
+<p>As we&apos;ve discussed the most important theoretical concepts in the
+previous section, we can now move into the implementation phase.
+Specifically, we&apos;ll highlight three distinct issues that we had to
+overcome.</p>
+<h3 id="using-the-audioworklet">Using the <code>AudioWorklet</code></h3>
+<p>Today, there&apos;s sadly no cross-browser API fully implementing all the
+above concepts. That requires <em>some</em> improvisation when trying to
+build a synthesizer for the web. Naively, one might think that
+<code>setTimeout</code> and <code>setInterval</code> allow one to
+implement a ring buffer quickly. However, <a target="_blank" rel="noopener" href="https://stackoverflow.com/a/29972322/1263876">their accuracy can&apos;t
+be trusted</a><sup id="a1"><a href="#f1">1</a></sup>. Alternatively, there&apos;s the web audio
+API&apos;s <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/ScriptProcessorNode"><code>ScriptProcessorNode</code></a>.
+And while it allows hooking into the output device&apos;s streaming process,
+it still requires a <em>push</em> approach, as inserting just the right
+amount of samples per second into the output stream is kept to the
+developer. Additionally, <code>ScriptProcessorNode</code> has been
+deprecated without any reasonable cross-browser compatible alternative
+available since 2014. Yikes!</p>
+<p><a target="_blank" rel="noopener" href="https://blog.mecheye.net/2017/09/i-dont-know-who-the-web-audio-api-is-designed-for/">So
+what now?</a> Luckily, <code>ScriptProcessorNode</code>&apos;s deprecation
+happened years ago already. Since then, the browser vendors have worked
+on an alternative, called the <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/AudioWorklet"><code>AudioWorklet</code></a>.
+Encouragingly, it implements what we described above; a pull
+interface<sup id="a4"><a href="#f4">4</a></sup> spawned in a separate thread (hence
+<code>Worklet</code>) for lag-free audio processing.</p>
+<p>Let&apos;s convert our previous code snippet to an
+<code>AudioWorklet</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NoiseWorklet</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AudioWorkletProcessor</span> {</span><br><span class="line">  <span class="title function_">process</span>(<span class="params">inputs, outputs, parameters</span>) {</span><br><span class="line">    <span class="keyword">const</span> outputChannel = outputs[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; outputChannel.<span class="property">length</span>; i++) {</span><br><span class="line">      outputChannel[i] = <span class="title class_">Math</span>.<span class="title function_">round</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>());</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="title function_">registerProcessor</span>(<span class="string">&quot;NoiseWorklet&quot;</span>, <span class="title class_">SynthWorklet</span>);</span><br></pre></td></tr></table></figure>
+<p>And take a closer look! First, we extend our class with the
+<code>AudioWorkletProcessor</code> interface class and implement the
+mandatory <code>process(inputs, output, parameter)</code> function.
+<code>process</code> allows us to access all currently available audio
+<code>inputs</code> and <code>outputs</code> and <em>process</em> them.
+We won&apos;t have to add them to the function&apos;s <code>return</code>
+statement, as we&apos;re manipulating them by reference. Conveniently,
+<code>process</code> is called for us by the <code>AudioWorklet</code>
+every time the output device needs data.</p>
+<p>In terms of understanding, it really helped me think of the
+<code>AudioWorklet</code> as a ring buffer. It&apos;s implementation isn&apos;t a
+ring buffer. But that metaphor served me well for getting a better
+intuition.</p>
+
+        <iframe frameborder="0" sandbox="allow-top-navigation" seamless style="background-color:white;height:415px;transform:scale(0.5);width:200%;margin: -15% 0 -15% -50%;" srcdoc="
+			&lt;!doctype html&gt;
+				&lt;head&gt;
+          &lt;base href=&quot;https://developer.mozilla.org&quot;&gt;
+					&lt;style&gt;
+            .bc-browsers .bc-head-icon-chrome:before,.bc-browsers .bc-head-icon-chrome_android:before,.bc-browsers .bc-head-icon-edge:before,.bc-browsers .bc-head-icon-edge_mobile:before,.bc-browsers .bc-head-icon-firefox:before,.bc-browsers .bc-head-icon-firefox_android:before,.bc-browsers .bc-head-icon-ie:before,.bc-browsers .bc-head-icon-nodejs:before,.bc-browsers .bc-head-icon-opera:before,.bc-browsers .bc-head-icon-opera_android:before,.bc-browsers .bc-head-icon-safari:before,.bc-browsers .bc-head-icon-safari_ios:before,.bc-browsers .bc-head-icon-webview_android:before,.bc-browsers .bc-head-icon-samsunginternet_android:before,.bc-platforms .bc-platform-desktop:before,.bc-platforms .bc-platform-mobile:before,.bc-platforms .bc-platform-server:before,.ic-altname:before,.ic-footnote:before,.ic-disabled:before,.ic-non-standard:before,.ic-experimental:before,.ic-history:before,.ic-deprecated:before{display:inline-block;content:&apos;&apos;;background-repeat:no-repeat}.bc-browsers .bc-head-txt-label{display:inline-block;bottom:0;margin:0 0 0 10px;padding:0;width:20px;height:20px;font-size:20px;font-size:1.11111rem;text-align:left;white-space:nowrap}.bc-browsers .bc-head-txt-label{margin-bottom:20px}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label{margin-bottom:40px}.bc-browsers .bc-head-txt-label{transform:rotate(-90deg)}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label{transform:rotate(90deg)}.bc-browsers .bc-head-txt-label{transform-origin:left}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label{transform-origin:center}.bc-browsers .bc-head-txt-label:before{position:absolute;display:inline-block;content:&apos;&apos;;background-repeat:no-repeat}.bc-browsers .bc-head-txt-label:before{top:2px}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label:before{top:5px}.bc-browsers .bc-head-txt-label:before{left:-28px}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label:before{left:28px}.bc-browsers .bc-head-txt-label:before{transform:rotate(90deg)}html[dir=&apos;rtl&apos;] .bc-browsers .bc-head-txt-label:before{transform:rotate(-90deg)}.bc-browsers .bc-head-icon-chrome:before,.bc-browsers .bc-head-icon-chrome_android:before{background-image:url(&quot;../browsers/chrome.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-edge:before,.bc-browsers .bc-head-icon-edge_mobile:before{background-image:url(&quot;../browsers/edge.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-firefox:before,.bc-browsers .bc-head-icon-firefox_android:before{background-image:url(&quot;../browsers/firefox.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-ie:before{background-image:url(&quot;../browsers/internet-explorer.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-nodejs:before{background-image:url(&quot;../platforms/nodejs.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-opera:before,.bc-browsers .bc-head-icon-opera_android:before{background-image:url(&quot;../browsers/opera.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-safari:before,.bc-browsers .bc-head-icon-safari_ios:before{background-image:url(&quot;../browsers/safari.svg&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-webview_android:before{background-image:url(&quot;../platforms/android.svg&quot;);background-size:18px;width:18px;height:22px;left:-23px}.bc-browsers .bc-head-icon-samsunginternet_android:before{background-image:url(&quot;../browsers/samsung-internet.svg&quot;);background-size:20px;width:20px;height:24px}.bc-platforms span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute !important;width:1px}.bc-platforms th:before{display:inline-block;content:&apos;&apos;;background-repeat:no-repeat;background-size:24px;margin-top:10px;width:24px;height:24px}.bc-platforms .bc-platform-desktop:before{background-image:url(&quot;../platforms/desktop.svg&quot;);background-size:24px;width:24px;height:24px}.bc-platforms .bc-platform-mobile:before{background-image:url(&quot;../platforms/mobile.svg&quot;);background-size:16px;width:16px;height:32px;margin-top:0}.bc-platforms .bc-platform-server:before{background-image:url(&quot;../platforms/server.svg&quot;);background-size:24px;width:24px;height:24px}.ic-altname:before{background-image:url(&quot;../browser-compat-general/alternate.svg&quot;);background-size:12px;width:12px;height:22px}.ic-footnote:before{background-image:url(&quot;../browser-compat-general/asterisk.svg&quot;);background-size:10px;width:10px;height:10px}.ic-prefix:before{content:&apos;-x-&apos;;font-size:18px;font-size:1rem;line-height:1;font-family:sans-serif;font-style:normal}.ic-disabled:before{background-image:url(&quot;../general/flag.svg&quot;);background-size:24px;width:24px;height:24px}.ic-non-standard:before{background-image:url(&quot;../notifications/exclamation-triangle.svg&quot;);background-size:16px;width:16px;height:20px}.ic-experimental:before{background-image:url(&quot;../general/flask.svg&quot;);background-size:16px;width:16px;height:20px}.ic-history:before{background-image:url(&quot;../arrows/caret-down.svg&quot;);background-size:9px;width:9px;height:13px}.ic-deprecated:before{background-image:url(&quot;../emojis/thumbs-down.svg&quot;);background-size:16px;width:16px;height:20px}.bc-legend .bc-supports{margin-bottom:25px}.bc-legend .ic-altname,.bc-legend .ic-deprecated,.bc-legend .ic-disabled,.bc-legend .ic-experimental,.bc-legend .ic-footnote,.bc-legend .ic-non-standard,.bc-legend .ic-prefix{display:flex;justify-content:center}.bc-icons{position:relative;z-index:12;display:inline-block}.bc-icons abbr{margin:0 2px}.bc-icons a{text-decoration:none}@media all and (min-width: 63.9385em){.bc-icons{float:right}}.bc-browser-name{display:none}@media all and (max-width: 47.9375em){.bc-browser-name{display:block;position:absolute;top:8px;left:0;padding-left:6px;height:25px;width:220px;color:#333;white-space:nowrap}}table.bc-table{margin-bottom:0}.text-content table.bc-table{width:100%;table-layout:fixed;border:none;border-collapse:separate;border-spacing:0;background-color:#eaeef2;background-color:rgba(212,221,228,0.5)}.text-content table.bc-table thead th{text-align:center}.bc-table,.bc-table thead,.bc-table tbody,.bc-table tr,.bc-table th,.bc-table td{box-sizing:border-box}.bc-table tr{position:relative;border-bottom:0 solid transparent}.bc-table th,.bc-table td{position:relative;padding:5px 3px;border-color:#222;border-top:1px solid #222;border-right:0;border-bottom:0 solid transparent;border-left:1px solid #222;text-align:center}.bc-table thead td,.bc-table tbody th{overflow:hidden}.bc-table-web thead td,.bc-table-web tbody th{width:200px}.bc-table-web thead th,.bc-table-web tbody td{width:8.33333%}.bc-table-js thead td,.bc-table-js tbody th{width:200px}.bc-table-js thead th,.bc-table-js tbody td{width:7.69231%}.bc-table-ext thead td,.bc-table-ext tbody th{width:300px}.bc-table-ext thead th,.bc-table-ext tbody td{width:20%}.bc-table thead td+th,.bc-table tbody th+td{border-left:0}html[dir=&apos;rtl&apos;] .bc-table thead td+th,html[dir=&apos;rtl&apos;] .bc-table tbody th+td{border-left:1px solid}.bc-table-web th:nth-child(8),.bc-table-web td:nth-child(8){border-left:2px solid #222}.bc-table-js th:nth-child(8),.bc-table-js td:nth-child(8){border-left:2px solid #222}.bc-table-js th:nth-child(15),.bc-table-js td:nth-child(15){border-left:2px solid #222}.bc-table-ext th:nth-child(6),.bc-table-ext td:nth-child(6){border-left:2px solid #222}.text-content .bc-table th{background-color:transparent;overflow:hidden;padding:5px 3px 5px 6px}.bc-table .bc-platforms th{width:auto;padding:5px 0 2px;border-top:0;border-bottom:2px solid #222;border-left:2px solid #222;font-size:28px;font-size:1.55556rem}.bc-table .bc-platforms td+th{border-left:0}.bc-table .bc-browsers th{border-top:0;padding:3px 0;height:200px;vertical-align:bottom;font-size:22px;font-size:1.22222rem}.bc-table tbody th{border-width:2px;border-color:#222;border-style:none;border-top:1px solid #222;text-align:left;vertical-align:top}.bc-table tbody th{border-right:solid}html[dir=&apos;rtl&apos;] .bc-table tbody th{border-right:0}.bc-table tbody th{border-left:0}html[dir=&apos;rtl&apos;] .bc-table tbody th{border-left:solid}.bc-table thead td{border-width:2px;border-color:#222;border-style:none;border-top:0}.bc-table thead td{border-right:solid}html[dir=&apos;rtl&apos;] .bc-table thead td{border-right:0}.bc-table thead td{border-left:0}html[dir=&apos;rtl&apos;] .bc-table thead td{border-left:solid}.bc-table td:focus{z-index:1}.bc-table td[tabindex]{cursor:pointer}.no-js .bc-table tbody td,.bc-table tbody td[tabindex]{padding-top:6px;padding-bottom:12px}.bc-table abbr{text-decoration:none}@supports (display: grid){@media all and (min-width: 47.9385em) and (max-width: 63.9375em){.bc-table tr{display:grid}.bc-table-web tr{grid-template-columns:repeat(12, 1fr)}.bc-table-js tr{grid-template-columns:repeat(13, 1fr)}.bc-table-ext tr{grid-template-columns:repeat(5, 1fr)}.text-content .bc-table td,.text-content .bc-table th{width:auto}.bc-table thead td{display:none;z-index:1}th[class^=&apos;bc-platform&apos;][colspan=&apos;2&apos;]{grid-column-end:span 2}th[class^=&apos;bc-platform&apos;][colspan=&apos;3&apos;]{grid-column-end:span 3}th[class^=&apos;bc-platform&apos;][colspan=&apos;4&apos;]{grid-column-end:span 4}th[class^=&apos;bc-platform&apos;][colspan=&apos;5&apos;]{grid-column-end:span 5}th[class^=&apos;bc-platform&apos;][colspan=&apos;6&apos;]{grid-column-end:span 6}th[class^=&apos;bc-platform&apos;][colspan=&apos;7&apos;]{grid-column-end:span 7}.bc-table tbody th{grid-column-start:1;grid-column-end:last-line;border-right:none}.bc-history{padding-left:0}}@media all and (min-width: 47.9385em) and (max-width: 74.9375em){.bc-browsers .bc-head-txt-label{position:relative;bottom:-150px}}@media all and (min-width: 63.9385em) and (max-width: 74.9375em){.wiki-left-present .bc-table tr{display:grid}.wiki-left-present .bc-table-web tr{grid-template-columns:repeat(12, 1fr)}.wiki-left-present .bc-table-js tr{grid-template-columns:repeat(13, 1fr)}.wiki-left-present .bc-table-ext tr{grid-template-columns:repeat(5, 1fr)}.wiki-left-present .text-content .bc-table td,.wiki-left-present .text-content .bc-table th{width:auto}.wiki-left-present .bc-table thead td{display:none;z-index:1}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;2&apos;]{grid-column-end:span 2}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;3&apos;]{grid-column-end:span 3}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;4&apos;]{grid-column-end:span 4}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;5&apos;]{grid-column-end:span 5}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;6&apos;]{grid-column-end:span 6}.wiki-left-present th[class^=&apos;bc-platform&apos;][colspan=&apos;7&apos;]{grid-column-end:span 7}.wiki-left-present .bc-table tbody th{grid-column-start:1;grid-column-end:last-line;border-right:none}.wiki-left-present .bc-history{padding-left:0}}}@media all and (max-width: 47.9375em){.bc-table thead{display:none}.bc-table thead td{z-index:2}.text-content .bc-table tbody th{width:100%;max-width:100%;display:block;border-right:0;border-bottom:1px solid #222;padding-top:20px;padding-bottom:0}.bc-table tbody td{position:relative;min-width:100%;width:100%;max-width:100%;display:block;box-sizing:border-box;box-shadow:inset 220px 0 0 0 #eaeff2;border-top:1px solid #222;border-left:0;padding-left:250px;padding-right:10px;text-align:left}.bc-table tbody td[tabindex]{padding-bottom:20px}.bc-table-web th:nth-child(8),.bc-table-web td:nth-child(8){border-top:2px solid #222;border-left:none}.bc-table-js th:nth-child(8),.bc-table-js td:nth-child(8){border-top:2px solid #222;border-left:none}.bc-table-js th:nth-child(15),.bc-table-js td:nth-child(15){border-top:2px solid #222;border-left:none}.bc-table-ext th:nth-child(6),.bc-table-ext td:nth-child(6){border-top:2px solid #222;border-left:none}}.bc-supports-yes,.bc-supports-partial,.bc-supports-no,.bc-supports-unknown,.bc-table .bc-history{color:#222}.bc-supports-yes a,.bc-supports-partial a,.bc-supports-no a,.bc-supports-unknown a{color:#222;text-decoration:underline}.bc-supports-yes{background-color:#e4f8e1}.bc-supports-partial{background:#fff3d4;background-image:linear-gradient(to bottom right, rgba(246,183,60,0.3) 0, rgba(246,183,60,0.3) 1px, transparent 1px, transparent 67px, rgba(246,183,60,0.3) 67px, rgba(246,183,60,0.3) 73px, transparent 73px, transparent 138px, rgba(246,183,60,0.3) 138px, rgba(246,183,60,0.3) 144px, transparent 144px);background-size:100px 100px;background-position:50%  50%;background-repeat:no-repeat}.bc-supports-no{background-color:#f8e1e1;background-image:linear-gradient(to bottom right, rgba(230,100,101,0.2) 0, rgba(230,100,101,0.2) 1px, transparent 1px, transparent 67px, rgba(230,100,101,0.2) 67px, rgba(230,100,101,0.2) 73px, transparent 73px, transparent 138px, rgba(230,100,101,0.2) 138px, rgba(230,100,101,0.2) 144px, transparent 144px),linear-gradient(to bottom left, rgba(230,100,101,0.2) 0, rgba(230,100,101,0.2) 1px, transparent 1px, transparent 67px, rgba(230,100,101,0.2) 67px, rgba(230,100,101,0.2) 73px, transparent 73px, transparent 138px, rgba(230,100,101,0.2) 138px, rgba(230,100,101,0.2) 144px, transparent 144px);background-size:100px 100px, 100px 100px;background-position:50%  50%, 50%  50%;background-repeat:no-repeat}.bc-supports-unknown{background-color:#eee}@media all and (max-width: 47.9375em){td.bc-supports-partial{background-position:calc(50% + 110px) 50%}td.bc-supports-no{background-position:calc(50% + 110px) 50%,calc(50% + 110px) 50%}}.bc-history-link{background-color:transparent;border-radius:0;border:none;box-shadow:none;color:#333;padding:0;position:absolute;top:100%;right:0;z-index:11;display:block;width:100%;height:11px;margin-top:-10px;clear:both;text-align:center;font-size:12px;font-size:.66667rem;border-top:1px solid rgba(34,34,34,0.3)}.bc-history-link i{position:relative;top:-4px}.active .bc-history-link{z-index:21;transform:scaleY(-1)}.active .bc-history-link,td[tabindex]:hover .bc-history-link,td[tabindex]:focus .bc-history-link{background-color:#222;border-top:1px solid #222}.active.bc-supports-yes .ic-history:before,td[tabindex].bc-supports-yes:hover .ic-history:before,td[tabindex].bc-supports-yes:focus .ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI2U0ZjhlMTsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI4IiB2aWV3Qm94PSIwIDAgMTYgMjgiPjxwYXRoIGQ9Ik0xNiAxMWEuOTkuOTkgMCAwIDEtLjI5Ny43MDNsLTcgN0M4LjUxNiAxOC44OSA4LjI2NSAxOSA4IDE5cy0uNTE2LS4xMDktLjcwMy0uMjk3bC03LTdBLjk5Ni45OTYgMCAwIDEgMCAxMWMwLS41NDcuNDUzLTEgMS0xaDE0Yy41NDcgMCAxIC40NTMgMSAxeiIvPjwvc3ZnPg==&quot;)}.active.bc-supports-no .ic-history:before,td[tabindex].bc-supports-no:hover .ic-history:before,td[tabindex].bc-supports-no:focus .ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI2Y4ZTFlMTsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI4IiB2aWV3Qm94PSIwIDAgMTYgMjgiPjxwYXRoIGQ9Ik0xNiAxMWEuOTkuOTkgMCAwIDEtLjI5Ny43MDNsLTcgN0M4LjUxNiAxOC44OSA4LjI2NSAxOSA4IDE5cy0uNTE2LS4xMDktLjcwMy0uMjk3bC03LTdBLjk5Ni45OTYgMCAwIDEgMCAxMWMwLS41NDcuNDUzLTEgMS0xaDE0Yy41NDcgMCAxIC40NTMgMSAxeiIvPjwvc3ZnPg==&quot;)}.active.bc-supports-partial .ic-history:before,td[tabindex].bc-supports-partial:hover .ic-history:before,td[tabindex].bc-supports-partial:focus .ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI2ZmZjNkNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTYiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNiAyOCI+PHBhdGggZD0iTTE2IDExYS45OS45OSAwIDAgMS0uMjk3LjcwM2wtNyA3QzguNTE2IDE4Ljg5IDguMjY1IDE5IDggMTlzLS41MTYtLjEwOS0uNzAzLS4yOTdsLTctN0EuOTk2Ljk5NiAwIDAgMSAwIDExYzAtLjU0Ny40NTMtMSAxLTFoMTRjLjU0NyAwIDEgLjQ1MyAxIDF6Ii8+PC9zdmc+&quot;)}.active.bc-supports-unknown .ic-history:before,td[tabindex].bc-supports-unknown:hover .ic-history:before,td[tabindex].bc-supports-unknown:focus .ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI2VlZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTYiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAxNiAyOCI+PHBhdGggZD0iTTE2IDExYS45OS45OSAwIDAgMS0uMjk3LjcwM2wtNyA3QzguNTE2IDE4Ljg5IDguMjY1IDE5IDggMTlzLS41MTYtLjEwOS0uNzAzLS4yOTdsLTctN0EuOTk2Ljk5NiAwIDAgMSAwIDExYzAtLjU0Ny40NTMtMSAxLTFoMTRjLjU0NyAwIDEgLjQ1MyAxIDF6Ii8+PC9zdmc+&quot;)}@media all and (max-width: 47.9375em){.bc-history-link{width:calc( 100% - 219px);height:20px;margin-top:-20px;font-size:16px;font-size:.88889rem}.bc-history-link i{top:0;margin:0}}.bc-table .bc-history{position:absolute;top:100%;z-index:20;display:none;visibility:hidden;overflow:hidden;box-sizing:border-box;border-top:1px solid #222;border-bottom:2px solid #222;cursor:default;background-color:#eaeff2;background-image:none}.bc-table-web .bc-history{padding-left:320px}.bc-table-js .bc-history{padding-left:320px}.bc-table-ext .bc-history{padding-left:420px}.active .bc-history{display:block;visibility:visible;height:0}.bc-history:before{content:&apos;&apos;;display:block;height:45px;width:60px;float:right}.bc-history-head{padding-top:10px;padding-left:10px;margin-bottom:10px;font-size:19px;font-size:1.05556rem;text-align:left}.bc-history dl{text-align:left;margin:20px}.bc-history dt{float:left;clear:left;max-width:120px;margin-left:-140px}.bc-history dt,.bc-history dd{margin-top:30px}.bc-history dd{min-height:1.2em;margin-bottom:0;padding-top:4px;padding-left:0;padding-bottom:10px;font-weight:normal}.bc-history dl&gt;dt:first-child,.bc-history dl&gt;dt:first-child+dd,.bc-history dd+dd{margin-top:0}.bc-history-button{position:absolute;top:10px;right:10px}.bc-history-button svg{width:12px;height:18px}.bc-supports{display:inline-block;position:relative;border:1px solid #222;padding:3px;min-width:120px;text-align:center}.bc-legend .bc-supports{display:inline-block;min-width:30px}@media all and (min-width: 47.9385em) and (max-width: 63.9375em){.bc-table .bc-history{padding-left:140px}}@media all and (min-width: 63.9385em) and (max-width: 74.9375em){.wiki-left-present .bc-table .bc-history{padding-left:140px}}@media all and (max-width: 47.9375em){.bc-table .bc-history{padding-left:0}.bc-history dl{margin-left:10px}.bc-history dt{margin-top:10px;margin-left:0;margin-bottom:10px}.bc-history dd{clear:left;min-height:0}}.bc-footnotes dt{margin-top:10px;font-weight:bold}.bc-footnotes dl&gt;dt:first-child{margin-top:0}.bc-footnotes dd{margin-left:20px}.bc-legend{margin-bottom:20px;margin-top:20px}.bc-legend dl{display:grid;grid-template-columns:30px 1fr}.bc-legend dt{display:block;margin:0 0 5px 0}.bc-legend dd{display:block;margin:0 10px 5px 10px}@media all and (min-width: 47.9385em){.bc-legend dl{grid-template-columns:30px 1fr 30px 1fr}}.bc-github-link{display:inline-block}.bc-github-link{float:right}html[dir=&apos;rtl&apos;] .bc-github-link{float:left}div.signal-link-ext-container{overflow:hidden}div.signal-link-container{width:100%;cursor:pointer;transition:all 1s ease-out}div.signal-link-container&gt;hr{background-color:#3d7e9a;margin:0;max-width:100%;height:8px;cursor:default}div.signal-link-container&gt;a{float:right;background-color:#3d7e9a;color:#fff;padding-right:15px;padding-left:15px;border:0;border-bottom-left-radius:4px;border-bottom-right-radius:4px;font-weight:bold;height:35px;min-width:230px;text-align:center}div.signal-link-container.slideUp{overflow:hidden;transform:translateY(-100%)}@media all and (max-width: 63.9375em){div.signal-link-container+section{padding-top:30px}}.navigation-buttons{display:flex;justify-content:space-between;margin:30px 0}.navigation-buttons.reverse{flex-direction:row-reverse}@media all and (max-width: 63.9375em){.navigation-buttons{justify-content:center}.navigation-buttons&gt;.main-btn{width:200px}.navigation-buttons.mob-reduced-space{margin:10px 0}}.next-step-btn,.prev-step-btn{display:flex;align-items:center;font-weight:normal}.next-step-btn&gt;span,.prev-step-btn&gt;span{display:inline-block;width:16px;height:15px;margin-top:-1px}@media all and (max-width: 63.9375em){.next-step-btn,.prev-step-btn{display:none}}.prev-step-btn{border-color:#333;color:#333}.prev-step-btn&gt;span{background:url(&quot;/static/arrows/arrow.svg&quot;) center no-repeat;background-size:14px 15px;transform:rotate(180deg);margin-right:8px;margin-top:0}@media all and (max-width: 63.9375em){.prev-step-btn{display:none}}.next-step-btn&gt;span{background:url(&quot;/static/img/arrow-right-blue.svg&quot;) center no-repeat;background-size:14px 15px;margin-left:8px}@media all and (max-width: 63.9375em){.next-step-btn{display:none}}div.bc-signal-block{background-color:#e4f0f5;box-sizing:border-box;max-height:0;overflow:hidden;transition:max-height .3s ease-out, padding-top .1s ease .3s}div.bc-signal-block:not(.complete){padding-top:0}@media all and (max-width: 63.9375em){div.bc-signal-block.complete.open{transition:none}}div.bc-signal-block .left-block{box-sizing:border-box;padding:32px 0 32px 3%}@media all and (max-width: 63.9375em){div.bc-signal-block .left-block{padding:16px}}div.bc-signal-block .left-block .complete-left-block-image{display:block;width:209px;height:154px;background:url(&quot;/static/img/dino-happy.svg&quot;) center no-repeat;margin:0 auto}div.bc-signal-block .left-block .left-block-image{display:block;width:146px;height:133px;margin:0 auto;background-image:url(&quot;/static/img/dino-confuse.svg&quot;)}@media all and (max-width: 63.9375em){div.bc-signal-block .left-block .left-block-image{display:none}}div.bc-signal-block .left-block .left-block-header{font-family:x-locale-heading-primary, zillaslab, Palatino, &apos;Palatino Linotype&apos;, x-locale-heading-secondary, serif;margin-top:20px;font-size:25px;font-weight:bold;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#333333;background:none}div.bc-signal-block .left-block .complete-left-block-header{font-family:ZillaSlab;font-size:37px;font-weight:normal;color:#3d7e9a;text-align:center}div.bc-signal-block .close-button-wrapper{display:none;text-align:right}div.bc-signal-block .close-button-wrapper&gt;.close-btn{width:32px;height:32px;background:#fff url(&quot;/static/general/close-light.svg&quot;) no-repeat center;border-color:#000}@media all and (max-width: 63.9375em){div.bc-signal-block .close-button-wrapper{display:block}}.right-block{padding:0 16px;box-sizing:border-box}.right-block.form-control-block{box-sizing:border-box;background-color:#f5f9fa;padding:16px}.right-block&gt;.right-block-header{font-family:ZillaSlab;font-size:37px;display:block;background-color:transparent}.right-block&gt;.right-block-header&gt;span{background-color:#333333;color:#fff;padding:4px 8px}@media all and (max-width: 63.9375em){.right-block&gt;.right-block-header{text-align:center;font-size:27px;margin-top:0;margin-bottom:27px}}.right-block h3.highlight-spanned{margin:0;text-align:right}@media all and (max-width: 63.9375em){.right-block h3.highlight-spanned{display:none}}.right-block .right-block-main-text a&gt;span.icon-external-link{background-image:url(&quot;/static/general/external-link.svg&quot;) center no-repeat;background-size:12px;width:12px;height:20px;margin-top:3px;margin-right:3px;display:inline-block}.right-block .right-block-main-text h4{font-family:inherit;font-size:16px;margin:0}.inner-step{height:100%}.inner-step .step-num{background:#3d7e9a;box-sizing:border-box;align-items:center;justify-content:center;width:24px;height:24px;min-width:24px;min-height:24px;border-radius:50%;padding:2px 3px;font-size:14px;font-weight:bold;text-align:center;color:#ffffff;margin-right:8px;display:flex;float:left}.inner-step .step-num.inline{display:inline-flex;width:24px;height:24px;padding:0}@media all and (min-width: 63.9385em){.inner-step .step-num.inline{display:none}}@media all and (min-width: 63.9385em){.inner-step{display:none}.inner-step.active{display:flex;flex-direction:column;justify-content:space-between}}@media all and (max-width: 63.9375em){.inner-step{display:flex;flex-direction:column;justify-content:space-between}}.control{clear:both}.control:not(:first-child){margin-top:20px}.control .control-wrap{width:92%}@media all and (max-width: 47.9375em){.control .control-wrap{width:100%}}.control .control-header{width:100%;font-size:17.6px;font-weight:bold;font-style:normal;font-stretch:normal;letter-spacing:normal;color:#333333;margin-bottom:8px;line-height:1.31}.control .control-header.has-control{display:flex;align-items:center}@media all and (max-width: 63.9375em){.control .control-header.has-control{display:block}}.control .control-header.with-optional-label{display:flex}@media all and (max-width: 63.9375em){.control .control-header.with-optional-label{justify-content:space-between}}.control .control-description{margin:10px 0 16px 32px;font-size:14px;line-height:1.4;letter-spacing:normal;color:#333333}@media all and (max-width: 47.9375em){.control .control-description{margin-left:0}}.control .select-wrapper{position:relative;margin-left:32px}@media all and (max-width: 63.9375em){.control .select-wrapper{margin-left:32px;width:100%}}@media all and (max-width: 47.9375em){.control .select-wrapper{margin-left:0}}.control .select-wrapper:after{content:&apos; &apos;;position:absolute;z-index:2;right:8px;top:50%;margin-top:-3px;height:0;width:0;border-top:6px solid #3d7e9a;border-left:4px solid transparent;border-right:4px solid transparent;pointer-events:none}.control select#select-row{cursor:pointer;display:inline-block;line-height:1;font-weight:bold;letter-spacing:normal;border:2px solid #3d7e9a;background-color:#fff;padding:5px 11px;color:#285c76;text-decoration:none;height:32px;min-width:100px;border-radius:0;-webkit-appearance:none;-moz-appearance:none}.control textarea#brief-explanation,.control textarea#supporting-material{box-sizing:border-box;border-color:#3d7e9a;height:72px;margin-left:32px}@media all and (max-width: 47.9375em){.control textarea#brief-explanation,.control textarea#supporting-material{margin-left:0}}.control span.optional-text{font-size:17.6px;font-weight:normal;font-style:italic;line-height:normal;color:#9a3d3d;margin:2px 0 2px 15px;float:right}.error-message{background-color:#ffe7e8;padding:15px;font-size:17px;margin-top:30px;display:none}.error-message.visible{display:block}.error-message .error-label{font-weight:600;padding-right:8px;letter-spacing:.4px}.select-browser-block{display:flex;flex-wrap:wrap;margin-left:32px}@media all and (max-width: 47.9375em){.select-browser-block{margin-left:0}}.select-browser-block&gt;.browser{box-sizing:border-box;text-align:center;float:left;width:80px;height:120px;padding:5px;cursor:pointer}.select-browser-block&gt;.browser .browser-logo{position:relative;display:flex;justify-content:center;align-items:center;width:48px;height:48px;margin:0 auto;border:solid 2px #979797;transition:border-color .1s}.select-browser-block&gt;.browser:hover:not(.selected) .browser-logo{border-color:#3d7e9a;outline:3px #3d7e9a solid;outline-offset:-3px}.select-browser-block&gt;.browser&gt;.browser-logo&gt;img{width:29px;height:29px}.select-browser-block&gt;.browser&gt;.browser-logo&gt;.browser-selected-icon{position:absolute;display:none;bottom:-11.5px;right:-11.5px;width:23px;height:23px;background:#2bce1e url(&quot;/static/img/icn-check.svg&quot;) center no-repeat;border-radius:50%}.select-browser-block&gt;.browser&gt;.browser-logo&gt;.browser-selected-icon img{width:13px;height:13px}.select-browser-block&gt;.browser.selected .browser-logo{border:solid 2px #2bce1e}.select-browser-block&gt;.browser.selected .browser-logo .browser-selected-icon{display:inline}.select-browser-block&gt;.browser .browser-name{margin-top:8px;font-family:Arial;font-size:14px;font-weight:normal;font-style:normal;font-stretch:normal;line-height:1.29;letter-spacing:normal;text-align:center;color:#333333}@media all and (max-width: 63.9375em){div.bc-signal-block{transition:max-height .8s ease-out, padding-top .1s ease .7s}div.bc-signal-block.open{max-height:1800px;transition:max-height .8s ease-out, padding-top 0s ease-out 0s}textarea#brief-explanation,textarea#supporting-material,select#select-row{width:100%}select#select-row{margin-top:20px;width:100%}}@media all and (min-width: 63.9385em){div.bc-signal-block.open{padding-top:8px;max-height:700px;display:flex;align-items:stretch;transition:max-height .3s ease-out, padding-top 0s ease-out 0s}div.bc-signal-block.complete{padding:0 100px;transition:max-height .3s ease-out, padding .1s ease .18s;display:flex;align-items:center}div.bc-signal-block.complete.open{padding:53px 100px;box-sizing:border-box;display:flex;transition:max-height .3s ease-out, padding-top 0s ease-out 0s}.control{display:flex}.step-num.inline{padding:5px 9px;display:none}select#select-row{margin-left:20px}textarea#brief-explanation,textarea#supporting-material{width:500px;max-width:100%}}
+
+          &lt;/style&gt;
+					&lt;style&gt;
+            .bc-github-link{white-space:pre-line;float:right;display:inline-block}.bc-table{width:100%;table-layout:fixed;border:none;border-collapse:separate;border-spacing:0;background-color:#eaeef2;background-color:rgba(212,221,228,0.5)}.bc-table{margin-bottom:0}.bc-table th{background-color:transparent;overflow:hidden;padding:5px 3px 5px 6px}.bc-table tr{position:relative;border-bottom:0 solid transparent}.bc-table thead td{border-top:0;border-right:2px solid #222;border-left:0}.bc-table tbody th,.bc-table thead td{overflow:hidden}.bc-table td,.bc-table th{position:relative;padding:5px 3px;border-color:#222;border-top:1px solid #222;border-right:0;border-bottom:0 solid transparent;border-left:1px solid #222;text-align:center}.bc-table tbody th{border-right:2px solid #222;border-left:0;text-align:left}.bc-table,.bc-table tbody,.bc-table td,.bc-table th,.bc-table thead,.bc-table tr{box-sizing:border-box}.bc-table tbody th+td,.bc-table thead td+th{border-left:0}.bc-table-web td:nth-child(8),.bc-table-web th:nth-child(8){border-left:2px solid #222}.bc-table tbody th+td,.bc-table thead td+th{border-left:0}.bc-table-web tbody td,.bc-table-web thead th{width:7.69231%}.bc-table-web tbody th,.bc-table-web thead td{width:200px}.bc-table tbody td[tabindex],.no-js .bc-table tbody td{padding-top:6px;padding-bottom:12px}.bc-table td[tabindex]{cursor:pointer}.bc-table tbody tr:nth-child(even){background-color:#eaeef2}.bc-table tbody th a{color:#3d7e9a}.bc-table tbody th code{color:unset;word-wrap:break-word;width:100%;position:relative;font-weight:100;font-size:1.1em}.bc-table .bc-platforms th{width:auto;padding:5px 0 2px;border-top:0;border-bottom:2px solid #222;border-left:2px solid #222;font-size:28px;font-size:1.55556rem}.bc-table .bc-platforms span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute !important;width:1px;text-transform:capitalize}.bc-table .bc-platforms .bc-platform-desktop:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTI4IDE1LjV2LTEzYzAtLjI2Ni0uMjM0LS41LS41LS41aC0yNWMtLjI2NiAwLS41LjIzNC0uNS41djEzYzAgLjI2Ni4yMzQuNS41LjVoMjVjLjI2NiAwIC41LS4yMzQuNS0uNXptMi0xM3YxN2MwIDEuMzc1LTEuMTI1IDIuNS0yLjUgMi41SDE5YzAgMS4zMjggMSAyLjQ1MyAxIDNzLS40NTMgMS0xIDFoLThjLS41NDcgMC0xLS40NTMtMS0xIDAtLjU3OCAxLTEuNjQxIDEtM0gyLjVBMi41MDcgMi41MDcgMCAwIDEgMCAxOS41di0xN0MwIDEuMTI1IDEuMTI1IDAgMi41IDBoMjVDMjguODc1IDAgMzAgMS4xMjUgMzAgMi41eiIvPjwvc3ZnPgo=&quot;);background-size:24px;width:24px;height:24px}.bc-table .bc-platforms .bc-platform-mobile:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTcuMjUgMjJjMC0uNjg4LS41NjItMS4yNS0xLjI1LTEuMjVzLTEuMjUuNTYyLTEuMjUgMS4yNS41NjIgMS4yNSAxLjI1IDEuMjUgMS4yNS0uNTYyIDEuMjUtMS4yNXptMy4yNS0yLjV2LTExYzAtLjI2Ni0uMjM0LS41LS41LS41SDJjLS4yNjYgMC0uNS4yMzQtLjUuNXYxMWMwIC4yNjYuMjM0LjUuNS41aDhjLjI2NiAwIC41LS4yMzQuNS0uNXptLTMtMTMuMjVBLjI0Ni4yNDYgMCAwIDAgNy4yNSA2aC0yLjVjLS4xNDEgMC0uMjUuMTA5LS4yNS4yNXMuMTA5LjI1LjI1LjI1aDIuNWMuMTQxIDAgLjI1LS4xMDkuMjUtLjI1ek0xMiA2djE2YzAgMS4wOTQtLjkwNiAyLTIgMkgyYy0xLjA5NCAwLTItLjkwNi0yLTJWNmMwLTEuMDk0LjkwNi0yIDItMmg4YzEuMDk0IDAgMiAuOTA2IDIgMnoiLz48L3N2Zz4K&quot;);background-size:16px;width:16px;height:32px;margin-top:0}.bc-table .bc-platforms .bc-platform-server:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTIgMjJoMTZ2LTJIMnYyem0wLThoMTZ2LTJIMnYyem0yNC41IDdhMS41IDEuNSAwIDEgMC0zLjAwMS4wMDFBMS41IDEuNSAwIDAgMCAyNi41IDIxek0yIDZoMTZWNEgydjJ6bTI0LjUgN2ExLjUgMS41IDAgMSAwLTMuMDAxLjAwMUExLjUgMS41IDAgMCAwIDI2LjUgMTN6bTAtOGExLjUgMS41IDAgMSAwLTMuMDAxLjAwMUExLjUgMS41IDAgMCAwIDI2LjUgNXpNMjggMTh2Nkgwdi02aDI4em0wLTh2Nkgwdi02aDI4em0wLTh2NkgwVjJoMjh6Ii8+PC9zdmc+Cg==&quot;);background-size:24px;width:24px;height:24px;margin-top:5px}.bc-table .bc-platforms td+th{border-left:0}.bc-table .bc-platforms th:before{display:inline-block;content:&quot;&quot;;background-repeat:no-repeat;background-size:24px;margin-top:10px;width:24px;height:24px}.bc-browsers .bc-head-icon-chrome:before,.bc-browsers .bc-head-icon-chrome_android:before,.bc-browsers .bc-head-icon-edge:before,.bc-browsers .bc-head-icon-edge_mobile:before,.bc-browsers .bc-head-icon-firefox:before,.bc-browsers .bc-head-icon-firefox_android:before,.bc-browsers .bc-head-icon-ie:before,.bc-browsers .bc-head-icon-nodejs:before,.bc-browsers .bc-head-icon-opera:before,.bc-browsers .bc-head-icon-opera_android:before,.bc-browsers .bc-head-icon-safari:before,.bc-browsers .bc-head-icon-safari_ios:before,.bc-browsers .bc-head-icon-samsunginternet_android:before,.bc-browsers .bc-head-icon-webview_android:before,.bc-platforms .bc-platform-desktop:before,.bc-platforms .bc-platform-mobile:before,.bc-platforms .bc-platform-server:before,.ic-altname:before,.ic-deprecated:before,.ic-disabled:before,.ic-experimental:before,.ic-footnote:before,.ic-history:before,.ic-non-standard:before{display:inline-block;content:&quot;&quot;;background-repeat:no-repeat}.bc-table .bc-browsers th{border-top:0;padding:3px 0;height:200px;vertical-align:bottom;font-size:22px;font-size:1.22222rem}.bc-table .bc-browsers td+th{border-left:0}.bc-table .bc-browsers .bc-head-txt-label{display:inline-block;bottom:0;margin:0 0 20px 10px;padding:0;width:20px;height:20px;transform:rotate(-90deg);transform-origin:left;font-size:20px;font-size:1.11111rem;text-align:left;white-space:nowrap;font-weight:400}.bc-table .bc-browsers .bc-head-txt-label:before{position:absolute;left:-28px;display:inline-block;content:&quot;&quot;;background-repeat:no-repeat;transform:rotate(90deg)}.bc-browsers .bc-head-icon-chrome:before,.bc-browsers .bc-head-icon-chrome_android:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTEzLjk1MyAwQTEzLjkgMTMuOSAwIDAgMSAyMSAxLjg3NWExNC4wNCAxNC4wNCAwIDAgMSA1LjUgNS44MTJsLTExLjU5NC0uNjA5Yy0zLjI4MS0uMTg3LTYuNDA2IDEuNjU2LTcuNDg0IDQuNzVMMy4xMSA1LjIwM0M1Ljc5OCAxLjg1OSA5LjgyOS4wMTYgMTMuOTU0IDB6TTIuMjgxIDYuMzI4bDUuMjY2IDEwLjM1OWMxLjQ4NCAyLjkyMiA0LjYyNSA0LjcwMyA3Ljg3NSA0LjA5NGwtMy41OTQgNy4wNDdDNS4xMjUgMjYuNzk3IDAgMjEgMCAxNGMwLTIuODI4Ljg0NC01LjQ2OSAyLjI4MS03LjY3MnptMjQuNzgxIDIuNjQxYzIuNDUzIDYuMzEyIDAgMTMuNjU2LTYuMDYyIDE3LjE1NmExMy45NjIgMTMuOTYyIDAgMCAxLTcuNzgxIDEuODU5bDYuMzI4LTkuNzM0YzEuNzk3LTIuNzY2IDEuNzY2LTYuMzc1LS4zNzUtOC44NzV6TTE0IDkuMjgxYzIuNjA5IDAgNC43MTkgMi4xMDkgNC43MTkgNC43MTlTMTYuNjEgMTguNzE5IDE0IDE4LjcxOSA5LjI4MSAxNi42MSA5LjI4MSAxNCAxMS4zOSA5LjI4MSAxNCA5LjI4MXoiLz48L3N2Zz4K&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-edge:before,.bc-browsers .bc-head-icon-edge_mobile:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48Zz48cGF0aCBkPSJNMzA5LjQ4LDQ4Mi4zOUMyNTEsNDg1LjQ5LDE5Niw0NDMuNTksMTgxLjE2LDM4NXEtMTUuMDctNTkuNTMsMTcuODktMTExLjMxYzEuMjktMiwyLjE2LTUuNTYsNS41My00Ljc1LDIuMzQuNTcsMS44NCwzLjQ1LDIuMDksNS40MSw1Ljg2LDQ0LjU0LDMxLjI3LDc1LjU1LDY5Ljg1LDk1Ljc1LDU0LjgyLDI4LjcsMTEwLjU0LDI3LjI4LDE2NiwuNjksNS4zOC0yLjU4LDExLjI3LTguMDcsMTYuOTMtMiw1Ljk1LDYuMzUuMTcsMTIuMjYtMy4yMywxNy40OC0yOS42LDQ1LjM3LTY3LjYzLDc5Ljg4LTEyMi4xMyw5Mi43NC01LjE5LDEuMjMtMTAuNDcsMi4xMy0xNS43NCwyLjkyQTg3LjQ3LDg3LjQ3LDAsMCwxLDMwOS40OCw0ODIuMzlaIi8+PHBhdGggZD0iTTI2MS42MSwyMDcuODVjMTIuMTcsMi41OC01OS4zOC01Ni44Mi0xNDcuNDctNDMuNDQtMzAuNjMsNC42NS0xMDEuMTMsMzEuMjItOTUuMjEsMTI2LDEwLjYsMTcwLjA2LDE0OC41NywxOTQuOSwxOTQuNTUsMTk4LjQ1YTUuMzMsNS4zMywwLDAsMCw0LjEyLTkuMTZjLTI0LjQ5LTIzLjQ2LTkxLjM4LTY0Ljg2LTc2LjM2LTE1MC4zMUMxNTQuODEsMjUyLjI1LDIxMC4xNywxOTcsMjYxLjYxLDIwNy44NVoiLz48cGF0aCBkPSJNMzE2LjQsMzE0LjE5YzIwLDYuOSw1MiwxMC45MSw5OS44OC0xLjNhMS40LDEuNCwwLDAsMCwuMjktLjA5YzQxLjM2LTE2LjA2LDYyLjYyLTUxLjQ4LDY3LjEzLTgyLjI4QzQ5Ny4yNiwxMzguMDgsNDE5LjMyLDEzLjkzLDI4Mi45MSw5Ljg4LDkzLjc2LDQuMjUsNDEuODUsMTI3LjU3LDMxLjkzLDE1OGEyLjA4LDIuMDgsMCwwLDAsMy4yNywyLjI3YzIyLTE3LjYsMTExLjA2LTc4LjI0LDIyMS41OS04Ljc2LjA4LDAsLjE1LjEuMjMuMTUsNjIuNDEsNDkuNDksNTQuNTYsOTkuNjgsNDMuMywxMjYuNTVBMjYuODMsMjYuODMsMCwwLDAsMzE2LjQsMzE0LjE5WiIvPjwvZz48L3N2Zz4K&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-firefox:before,.bc-browsers .bc-head-icon-firefox_android:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNyIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTE0LjEwOSAyOGMtNi4wMzEgMC0xMC44MjgtMy41MzEtMTMuMDMxLTguNTc4Qy0xLjM5MSAxMy44MTMuNTc4IDQuODI4IDQuOTY5Ljg2bC0uMTcyIDQuMzkxYy4yMTktLjI4MSAxLjg5MS0uMzU5IDIuMTU2IDAgLjkwNi0xLjczNCAzLjgyOC0zLjAzMSA2LjE3Mi0zLjA3OC0uODkxLjc1LTIuOTUzIDMuNDg0LTIuNzgxIDQuODc1IDEuMTQxLjM1OSAyLjg5MS4zNzUgMy44MTMuNDM4LjI4MS4xNTYuMjM0IDEuMTA5LS4zMjggMS44OTEgMCAwLS43MzQgMS4wMTYtMi43MTkgMS4zNzVsLjIzNCAyLjk1My0yLjE3Mi0xLjA0N2MtLjcwMyAxLjc4MS45ODQgMy4zNTkgMi43MzQgMy4wNjMgMS45MzctLjMyOCAyLjYyNS0xLjU5NCAzLjk4NC0xLjUxNiAxLjM0NC4wNzggMS44NzUuODI4IDEuNzAzIDEuNTMxIDAgMC0uMjE5Ljg0NC0xLjY3Mi43MDMtMS4yMzQgMS45NTMtMi44NzUgMi44MTItNS41MzEgMi41NzggNC4wMzEgMy4zNDQgOS40NjkuMzEzIDEwLjg0NC0yLjQyMiAxLjM3NS0yLjcxOS4xNzItNi43NjYtMS4yMDMtNy45MDYgMS42MjUuNzAzIDIuNzUgMS40MjIgMy4zNDQgMyAuMzEzLTMuNS0xLjI5Ny03LjQ2OS00LjE3Mi05Ljc5N0MyNC42MDkgMy40NyAyNy45MDYgNy42NTggMjggMTQuMzQ1cy01LjkyMiAxMy42NTYtMTMuODkxIDEzLjY1NnoiLz48L3N2Zz4K&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-ie:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTI4IDE0LjY0MWMwIC41NDctLjAzMSAxLjA5NC0uMTA5IDEuNjI1SDkuOTA3YzAgMy4xMDkgMi43MzQgNS4zNTkgNS43MzQgNS4zNTkgMi4wMzEgMCAzLjk4NC0xIDUuMDMxLTIuNzY2aDYuNjA5YTEyLjYwNCAxMi42MDQgMCAwIDEtMTEuODU5IDguMzc1Yy0xLjkyMiAwLTMuODQ0LS40NTMtNS41NjMtMS4yOTctMS43NS44OTEtNC4yMDMgMS44MTMtNi4xNTYgMS44MTNDMS4wNzggMjcuNzUgMCAyNi4xNDEgMCAyMy42NDFjMC0xLjQ1My4zMTMtMi45MDYuNzAzLTQuMjk3LjI1LS45MDYgMS4yNS0yLjc1IDEuNzAzLTMuNTc4IDEuOTIyLTMuNDg0IDQuNDUzLTYuODI4IDcuNDIyLTkuNDY5LTIuMzkxIDEuMDMxLTQuOTg0IDMuNjI1LTYuNjcyIDUuNTMxYTEyLjU4NSAxMi41ODUgMCAwIDEgMTIuMjY2LTkuNzY2Yy4yMzQgMCAuNDY5IDAgLjcwMy4wMTZDMTguMDYyIDEuMTg3IDIwLjc2Ni4yNSAyMi44OTEuMjVjMi41MzEgMCA0LjcwMy45NjkgNC43MDMgMy44MjggMCAxLjUtLjU3OCAzLjEyNS0xLjE3MiA0LjQ2OUExMi42MDUgMTIuNjA1IDAgMCAxIDI4IDE0LjY0MXptLTEuMDk0LTEwYzAtMS43NS0xLjI1LTIuODI4LTIuOTY5LTIuODI4LTEuMzEzIDAtMi43OTcuNTMxLTMuOTY5IDEuMDk0YTEyLjY5IDEyLjY5IDAgMCAxIDYuMTQxIDUuMTA5Yy4zOTEtMS4wMzEuNzk3LTIuMjgxLjc5Ny0zLjM3NXpNMiAyMy45NjljMCAxLjgxMyAxLjA3OCAyLjc5NyAyLjg1OSAyLjc5NyAxLjM5MSAwIDIuOTM4LS42MjUgNC4xNTYtMS4yOTdhMTIuNTg3IDEyLjU4NyAwIDAgMS01LjQ4NC02LjY4N0MyLjgxMiAyMC4yODIgMiAyMi4yODIgMiAyMy45Njl6bTcuODc1LTExLjE0MUgyMS4yNWMtLjEwOS0zLjAxNi0yLjc2Ni01LjE4Ny01LjY4OC01LjE4Ny0yLjkzOCAwLTUuNTc4IDIuMTcyLTUuNjg4IDUuMTg3eiIvPjwvc3ZnPgo=&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-opera:before,.bc-browsers .bc-head-icon-opera_android:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTIzLjMyOCAzLjU2M2ExMC4wNjggMTAuMDY4IDAgMCAwLTUuNjA5LTEuNzE5Yy0zLjMyOCAwLTYuMjY2IDEuNzAzLTguMzI4IDQuMjY2LTEuNSAxLjg3NS0yLjU0NyA0LjUzMS0yLjYyNSA3LjU2MnYuNjU2Yy4wNzggMy4wMzEgMS4xMjUgNS42ODggMi42MjUgNy41NjIgMi4wNjMgMi41NjIgNSA0LjI2NiA4LjMyOCA0LjI2NiAyLjA0NyAwIDMuOTY5LS42MjUgNS42MDktMS43MTlBMTMuOTIyIDEzLjkyMiAwIDAgMSAxNCAyOGMtLjIxOSAwLS40NTMgMC0uNjcyLS4wMTZDNS45MDYgMjcuNjQgMCAyMS41MTUgMCAxNCAwIDYuMjY2IDYuMjY2IDAgMTQgMGguMDQ3YTEzLjk4MSAxMy45ODEgMCAwIDEgOS4yODEgMy41NjN6TTI4IDE0YzAgNC4wNzgtMS43NSA3LjczNC00LjUzMSAxMC4yOTdhNi42NTMgNi42NTMgMCAwIDEtMy40NjkuOTg0Yy0xLjQzNyAwLTIuNzk3LS40NjktMy45ODQtMS4zMTMgMy4xNzItMS4xNTYgNS41MTYtNS4xNzIgNS41MTYtOS45NjkgMC00Ljc4MS0yLjMyOC04Ljc5Ny01LjUtOS45NjkgMS4xODgtLjgyOCAyLjUzMS0xLjI5NyAzLjk2OS0xLjI5NyAxLjI2NiAwIDIuNDUzLjM1OSAzLjUzMSAxLjAxNmExMy45NjMgMTMuOTYzIDAgMCAxIDQuNDY5IDEwLjI1eiIvPjwvc3ZnPgo=&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-safari:before,.bc-browsers .bc-head-icon-safari_ios:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTE0LjgyOCAxMy45NTNjMCAuNTE2LS4zNTkgMS0uOTA2IDEtLjUxNiAwLTEtLjM3NS0xLS45MDYgMC0uNTE2LjM3NS0xIC45MjItMSAuNSAwIC45ODQuMzU5Ljk4NC45MDZ6bS4yMzQuOTA2bDUuNDY5LTkuMDc4Yy0uNzM0LjY4OC03LjU3OCA2Ljk4NC03Ljc2NiA3LjMxM2wtNS40NTMgOS4wNjNjLjcxOS0uNjcyIDcuNTc4LTcgNy43NS03LjI5N3pNMjUuMTcyIDE0YzAgMi4wNDctLjU2MiA0LjA2Mi0xLjYyNSA1Ljc5Ny0uMTU2LS4wNzgtLjgxMi0uNTQ3LS45MzgtLjU0N2EuMjA3LjIwNyAwIDAgMC0uMjAzLjIwM2MwIC4yMDMuNzM0LjU3OC45MjIuNjg4YTExLjIyOSAxMS4yMjkgMCAwIDEtNi42NTYgNC43MDNsLS4yNS0xLjA0N2MtLjAxNi0uMTQxLS4xMDktLjE1Ni0uMjM0LS4xNTYtLjEwOSAwLS4xNzIuMTU2LS4xNTYuMjM0bC4yNSAxLjA2MmMtLjc1LjE1Ni0xLjUxNi4yMzQtMi4yODEuMjM0LTIuMDQ3IDAtNC4wNjItLjU3OC01LjgxMi0xLjY0MS4wOTQtLjE1Ni42ODgtMS4wMTYuNjg4LTEuMTQxYS4yMDcuMjA3IDAgMCAwLS4yMDMtLjIwM2MtLjIxOSAwLS42ODguOTM4LS44MjggMS4xMjVhMTEuMjQgMTEuMjQgMCAwIDEtNC43MTktNi43NWwxLjA3OC0uMjM0Yy4xMjUtLjAzMS4xNTYtLjEyNS4xNTYtLjIzNHMtLjE1Ni0uMTcyLS4yNS0uMTU2bC0xLjA2Mi4yMzRhMTEuMjIyIDExLjIyMiAwIDAgMS0uMjE5LTIuMTcyYzAtMi4wOTQuNTk0LTQuMTU2IDEuNzAzLTUuOTIyLjE1Ni4wOTQuOTA2LjYwOSAxLjAzMS42MDkuMTA5IDAgLjIwMy0uMDc4LjIwMy0uMTg3IDAtLjIxOS0uODI4LS42NDEtMS4wMTYtLjc2NiAxLjU5NC0yLjMyOCA0LjAxNi00IDYuNzY2LTQuNjI1bC4yMzQgMS4wNDdjLjAzMS4xMjUuMTI1LjE1Ni4yMzQuMTU2cy4xNzItLjE1Ni4xNTYtLjI1bC0uMjM0LTEuMDMxYTExLjc0NSAxMS43NDUgMCAwIDEgMi4wOTQtLjIwMyAxMS4yIDExLjIgMCAwIDEgNS45MjIgMS43MDNjLS4xMDkuMTU2LS42MDkuODkxLS42MDkgMS4wMTYgMCAuMTA5LjA3OC4yMDMuMTg3LjIwMy4yMTkgMCAuNjQxLS44MTIuNzUtMWExMS4xNjUgMTEuMTY1IDAgMCAxIDQuNjA5IDYuNjcybC0uODc1LjE4N2MtLjE0MS4wMzEtLjE1Ni4xMjUtLjE1Ni4yNSAwIC4xMDkuMTU2LjE3Mi4yMzQuMTU2bC44OTEtLjIwM2MuMTQxLjcxOS4yMTkgMS40NTMuMjE5IDIuMTg3em0xLjMyOCAwYzAtNi45MDYtNS41OTQtMTIuNS0xMi41LTEyLjVTMS41IDcuMDk0IDEuNSAxNCA3LjA5NCAyNi41IDE0IDI2LjUgMjYuNSAyMC45MDYgMjYuNSAxNHptMS41IDBjMCA3LjczNC02LjI2NiAxNC0xNCAxNFMwIDIxLjczNCAwIDE0IDYuMjY2IDAgMTQgMHMxNCA2LjI2NiAxNCAxNHoiLz48L3N2Zz4K&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-webview_android:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMiIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTcuNzAzIDcuNTQ3YS42MS42MSAwIDAgMCAwLTEuMjE4Yy0uMzI4IDAtLjU5NC4yODEtLjU5NC42MDlzLjI2Ni42MDkuNTk0LjYwOXptNi41OTQgMGMuMzI4IDAgLjU5NC0uMjgxLjU5NC0uNjA5cy0uMjY2LS42MDktLjU5NC0uNjA5YS42MS42MSAwIDAgMCAwIDEuMjE4ek0xLjYwOSAxMC40MjJhMS42IDEuNiAwIDAgMSAxLjU5NCAxLjU5NHY2LjcxOWMwIC44OTEtLjcwMyAxLjYwOS0xLjU5NCAxLjYwOVMwIDE5LjYyNSAwIDE4LjczNXYtNi43MTljMC0uODc1LjcxOS0xLjU5NCAxLjYwOS0xLjU5NHptMTYuNTYzLjI5N3YxMC40MDZjMCAuOTUzLS43NjYgMS43MTktMS43MDMgMS43MTloLTEuMTcydjMuNTQ3YzAgLjg5MS0uNzE5IDEuNjA5LTEuNjA5IDEuNjA5cy0xLjYwOS0uNzE5LTEuNjA5LTEuNjA5di0zLjU0N0g5LjkyM3YzLjU0N2MwIC44OTEtLjcxOSAxLjYwOS0xLjYwOSAxLjYwOWExLjYwNCAxLjYwNCAwIDAgMS0xLjU5NC0xLjYwOWwtLjAxNi0zLjU0N0g1LjU0OGExLjcxNCAxLjcxNCAwIDAgMS0xLjcxOS0xLjcxOVYxMC43MTloMTQuMzQ0em0tMy42MjUtNi4zMjhjMi4xODggMS4xMjUgMy42NzIgMy4yODEgMy42NzIgNS43NjZIMy43NjZjMC0yLjQ4NCAxLjQ4NC00LjY0MSAzLjY4Ny01Ljc2Nkw2LjM0NCAyLjM0NGEuMjI4LjIyOCAwIDAgMSAuMDc4LS4zMTNjLjEwOS0uMDQ3LjI1LS4wMTYuMzEzLjA5NEw3Ljg2IDQuMTg4Yy45NTMtLjQyMiAyLjAxNi0uNjU2IDMuMTQxLS42NTZzMi4xODguMjM0IDMuMTQxLjY1NmwxLjEyNS0yLjA2M2MuMDYzLS4xMDkuMjAzLS4xNDEuMzEzLS4wOTRhLjIyOC4yMjggMCAwIDEgLjA3OC4zMTN6TTIyIDEyLjAxNnY2LjcxOWMwIC44OTEtLjcxOSAxLjYwOS0xLjYwOSAxLjYwOWExLjYwNCAxLjYwNCAwIDAgMS0xLjU5NC0xLjYwOXYtNi43MTlhMS41OSAxLjU5IDAgMCAxIDEuNTk0LTEuNTk0Yy44OTEgMCAxLjYwOS43MDMgMS42MDkgMS41OTR6Ii8+PC9zdmc+Cg==&quot;);background-size:18px;width:18px;height:22px;left:-23px}.bc-browsers .bc-head-icon-samsunginternet_android:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNTAiIGhlaWdodD0iMTUwIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0iaW1nIj48cGF0aCBkPSJNMTA0LjMgMTQ0LjFINDQuN2MtMjIuMSAwLTQwLjItMTguMS00MC4yLTQwLjJWNDQuNGMwLTIyLjEgMTguMS00MC4yIDQwLjItNDAuMmg1OS42YzIyLjEgMCA0MC4yIDE4LjEgNDAuMiA0MC4yVjEwNGMtLjEgMjIuMS0xOC4xIDQwLjEtNDAuMiA0MC4xeiIgZmlsbD0iIzMzMyIvPjxwYXRoIGQ9Ik05Ni44IDEwOC4xYy02LjUgNC4zLTE0LjEgNi42LTIxLjggNi42LTE1LjUgMC0yOS04LjktMzUuNS0yMi0zLjMtMS43LTYuMy0zLjUtOS01LjQgNS40IDE5LjUgMjMuMiAzMy44IDQ0LjUgMzMuOCAxMi42IDAgMjQtNS4xIDMyLjMtMTMuMy0zLjIuMy02LjguMy0xMC41LjN6TTM2LjIgODMuMmMtMi43LTEuNi01LjEtMy4zLTcuMi01LTgtNi4zLTEyLTEyLjktMTAuNS0xOC41czguNC05LjIgMTguMy0xMC42QzQ1LjEgMzYuOSA1OS4xIDI4LjkgNzUgMjguOWMyNC40IDAgNDQuNSAxOSA0NiA0My4xIDcuOSA2LjMgMTIgMTIuOSAxMC41IDE4LjVzLTguNCA5LjItMTguNSAxMC42Yy0yLjcuNC01LjYuNi04LjguN0M5NCAxMDIgODEuOCAxMDAuNCA2OSA5N2MtMTIuNy0zLjUtMjQuMS04LjQtMzIuOC0xMy44em03My4xIDExLjZjMy40LTUuOSA1LjMtMTIuNyA1LjMtMTkuNVY3NWMwLTIxLjktMTcuNy0zOS42LTM5LjYtMzkuNi0xNC41IDAtMjcuMyA3LjgtMzQuMiAxOS41LTMuNiA2LjEtNS41IDEzLTUuNSAyMC4xIDguMiA1LjUgMjAuNyAxMSAzNS4yIDE0LjkgMTQuOSA0IDI4LjggNS42IDM4LjggNC45em03LjktMS4zYzQtMS4yIDYuNS0zIDcuMi01LjUuNy0yLjYtLjYtNS41LTMuNi04LjZsLS4xLjZjLS40IDQuNy0xLjYgOS4zLTMuNSAxMy41ek0zMy4xIDU1LjdsLjMtLjdjLTQuNyAxLjEtNy43IDMuMS04LjQgNS44LS43IDIuNy44IDUuOSA0LjEgOS4yLjYtNSAxLjktOS44IDQtMTQuM3oiIGZpbGw9IiNmZmYiLz48L3N2Zz4K&quot;);background-size:20px;width:20px;height:24px}.bc-browsers .bc-head-icon-nodejs:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTAgMTUwIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0iaW1nIj48cGF0aCBkPSJNNzkuMiAxMmMtMi40LTEuNC02LjMtMS40LTguNyAwTDIxLjggMzkuNWMtMi40IDEuNC00LjQgNC43LTQuNCA3LjV2NTUuN2MwIDIuOCAxLjkgNi4xIDQuMyA3LjVsNDguOCAyOC42YzIuNCAxLjQgNi4zIDEuNCA4LjYgMGw0OC4xLTI4LjNjMi40LTEuNCA0LjMtNC44IDQuMy03LjVWNDcuMWMwLTIuOC0yLTYuMS00LjMtNy41TDc5LjIgMTJ6IiBmaWxsPSIjMzMzIi8+PC9zdmc+Cg==&quot;);background-size:20px;width:20px;height:24px}.bc-supports-yes{background-color:#e4f8e1}.bc-supports-no,.bc-supports-partial,.bc-supports-unknown,.bc-supports-yes,.bc-table .bc-history{color:#222}.bc-supports-no{background-color:#f8e1e1;background-image:linear-gradient(to bottom right, rgba(230,100,101,0.2) 0, rgba(230,100,101,0.2) 1px, transparent 1px, transparent 67px, rgba(230,100,101,0.2) 67px, rgba(230,100,101,0.2) 73px, transparent 73px, transparent 138px, rgba(230,100,101,0.2) 138px, rgba(230,100,101,0.2) 144px, transparent 144px),linear-gradient(to bottom left, rgba(230,100,101,0.2) 0, rgba(230,100,101,0.2) 1px, transparent 1px, transparent 67px, rgba(230,100,101,0.2) 67px, rgba(230,100,101,0.2) 73px, transparent 73px, transparent 138px, rgba(230,100,101,0.2) 138px, rgba(230,100,101,0.2) 144px, transparent 144px);background-size:100px 100px, 100px 100px;background-position:50% 50%, 50% 50%;background-repeat:no-repeat}.bc-supports-unknown{background-color:#eee}.bc-browser-name{display:none}.bc-table abbr{text-decoration:none}abbr[title]{cursor:help}.bc-table .bc-icons{position:relative;z-index:12;display:inline-block}.bc-table .bc-icons abbr{margin:0 2px}.bc-table button.bc-history-link{background-color:transparent;border-radius:0;border:none;box-shadow:none;color:#333;padding:0;position:absolute;bottom:0;right:-6px;z-index:11;display:block;margin-bottom:0;width:100%;height:11px;clear:both;text-align:center;font-size:12px;font-size:0.66667rem;border-top:1px solid rgba(34,34,34,0.3)}.bc-table button.bc-history-link i{position:relative;top:-4px}.bc-table button.bc-history-link:hover{background-color:#83d0f2 !important}.bc-table button.bc-history-link:focus{outline:#83d0f2 solid 3px;outline-offset:-3px}.active .bc-history-link{z-index:21}.active .bc-history-link,td[tabindex]:focus .bc-history-link,td[tabindex]:hover .bc-history-link{background-color:#222;border-top:1px solid #222}.bc-history-link-inverse{transform:scale(1, -1)}.bc-history dd,.bc-history dt{margin-top:30px}.bc-history dd+dd,.bc-history dl&gt;dt:first-child,.bc-history dl&gt;dt:first-child+dd{margin-top:0}.bc-history dt{float:left;clear:left;max-width:120px;margin-left:-140px;margin-right:10px}.bc-history dl{text-align:left;margin:20px;padding-left:350px;max-width:85%}.bc-history dd.padded-note{min-height:25px}.bc-history dd{min-height:1.2em;margin-bottom:0;padding-top:4px;padding-left:0;margin-left:10px;padding-bottom:10px;font-weight:400}.ic-footnote:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiBhcmlhLWhpZGRlbj0idHJ1ZSIgcm9sZT0iaW1nIj48cGF0aCBkPSJNMTYuMTggODguNjVsMjAuMDktMzIuNDJMMyA0My4wNWwzLjY0LTExIDM0LjkzIDkuNDkgMi41LTM3LjYxaDExLjg2bDIuNSAzNyAzNC45My04Ljg3IDMuNjQgMTEtMzMuMzEgMTMuMTcgMjAuMTMgMzIuNDJMNzQgOTUuODMgNTAuMzMgNjUuMzIgMjYgOTUuODN6Ii8+PC9zdmc+Cg==&quot;);background-size:10px;width:10px;height:10px}.ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiBpY29uLWNhcmV0LWRvd24iIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI4IiB2aWV3Qm94PSIwIDAgMTYgMjgiPjxwYXRoIGQ9Ik0xNiAxMWEuOTkuOTkgMCAwIDEtLjI5Ny43MDNsLTcgN0M4LjUxNiAxOC44OSA4LjI2NSAxOSA4IDE5cy0uNTE2LS4xMDktLjcwMy0uMjk3bC03LTdBLjk5Ni45OTYgMCAwIDEgMCAxMWMwLS41NDcuNDUzLTEgMS0xaDE0Yy41NDcgMCAxIC40NTMgMSAxeiIvPjwvc3ZnPgo=&quot;);background-size:9px;width:9px;height:13px}.active.bc-supports-no .ic-history:before,td[tabindex].bc-supports-no:focus .ic-history:before,td[tabindex].bc-supports-no:hover .ic-history:before,.active.bc-supports-yes .ic-history:before,td[tabindex].bc-supports-yes:focus .ic-history:before,td[tabindex].bc-supports-yes:hover .ic-history:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iZmlsbDogI2Y4ZTFlMTsiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjE2IiBoZWlnaHQ9IjI4IiB2aWV3Qm94PSIwIDAgMTYgMjgiPjxwYXRoIGQ9Ik0xNiAxMWEuOTkuOTkgMCAwIDEtLjI5Ny43MDNsLTcgN0M4LjUxNiAxOC44OSA4LjI2NSAxOSA4IDE5cy0uNTE2LS4xMDktLjcwMy0uMjk3bC03LTdBLjk5Ni45OTYgMCAwIDEgMCAxMWMwLS41NDcuNDUzLTEgMS0xaDE0Yy41NDcgMCAxIC40NTMgMSAxeiIvPjwvc3ZnPg==&quot;)}.ic-deprecated:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5MTQuMjg2IDEwMjQiIGNsYXNzPSJpY29uIGljb24tdGh1bWJzLWRvd24iIGFyaWEtaGlkZGVuPSJ0cnVlIj48cGF0aCBjbGFzcz0icGF0aDAiIHN0cm9rZT0iaW5oZXJpdCIgZD0iTTE0Ni4yODYgMzI5LjE0M2MwIDIwLTE2LjU3MSAzNi41NzEtMzYuNTcxIDM2LjU3MS0yMC41NzEgMC0zNi41NzEtMTYuNTcxLTM2LjU3MS0zNi41NzEgMC0yMC41NzEgMTYtMzYuNTcxIDM2LjU3MS0zNi41NzEgMjAgMCAzNi41NzEgMTYgMzYuNTcxIDM2LjU3MXptOTEuNDI4IDI5Mi41NzFWMjU2YzAtMjAtMTYuNTcxLTM2LjU3MS0zNi41NzEtMzYuNTcxSDM2LjU3MkMxNi41NzIgMjE5LjQyOS4wMDEgMjM2IC4wMDEgMjU2djM2NS43MTRjMCAyMCAxNi41NzEgMzYuNTcxIDM2LjU3MSAzNi41NzFoMTY0LjU3MWMyMCAwIDM2LjU3MS0xNi41NzEgMzYuNTcxLTM2LjU3MXptNjQ1LjE0My04NS4xNDNjMTkuNDI5IDIxLjcxNCAzMS40MjkgNTQuODU3IDMxLjQyOSA4NS4xNDMtLjU3MSA1OS40MjktNTAuMjg2IDEwOS43MTQtMTA5LjcxNCAxMDkuNzE0SDY0Ni4yODZjNC41NzEgMTguMjg2IDEwLjI4NiAyNCAxNi41NzEgMzYuNTcxIDE0Ljg1NyAyOS43MTQgMzIgNjIuODU3IDMyIDEwOS43MTQgMCA0NCAwIDE0Ni4yODYtMTI4IDE0Ni4yODYtOS43MTQgMC0xOC44NTctNC0yNS43MTQtMTAuODU3LTI0LjU3MS0yNC0zMS40MjktNTkuNDI5LTM3LjcxNC05My4xNDMtNi44NTctMzMuMTQzLTEzLjE0My02Ny40MjktMzUuNDI5LTg5LjcxNC0xNy43MTQtMTcuNzE0LTM3LjE0My00Mi4yODYtNTcuNzE0LTY4LjU3MS0yNS4xNDMtMzMuMTQzLTgwLTEwMS4xNDMtMTAxLjE0My0xMDIuODU3LTE4Ljg1Ny0xLjcxNC0zNC44NTctMTcuNzE0LTM0Ljg1Ny0zNi41NzFWMjU2YzAtMjAgMTcuMTQzLTM2IDM2LjU3MS0zNi41NzEgMjAtLjU3MSA1NC4yODYtMTIuNTcxIDkwLjI4Ni0yNS4xNDMgNjEuNzE0LTIxLjE0MyAxMzguODU3LTQ4IDIyMC41NzEtNDhoNzMuNzE0YzUwLjI4Ni41NzEgODggMTUuNDI5IDExMi41NzEgNDQuNTcxIDIxLjcxNCAyNS43MTQgMzEuNDI5IDYwLjU3MSAyOCAxMDMuNDI5Qzg1MC4yODUgMzA4IDg2MS4xNDIgMzI2Ljg1NyA4NjYuODU2IDM0OGM2LjI4NiAyMi44NTcgNi4yODYgNDUuNzE0IDAgNjYuODU3IDE3LjE0MyAyMi44NTcgMjUuNzE0IDQ5LjcxNCAyNC41NzEgNzguMjg2IDAgOC0yLjI4NiAyNS4xNDMtOC41NzEgNDMuNDI5eiIvPjwvc3ZnPgo=&quot;);background-size:16px;width:16px;height:20px}.ic-non-standard:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiBpY29uLWV4Y2xhbWF0aW9uLXRyaWFuZ2xlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOCIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0xNiAyMS40ODR2LTIuOTY5YS41MDguNTA4IDAgMCAwLS41LS41MTZoLTNjLS4yODEgMC0uNS4yMzQtLjUuNTE2djIuOTY5YzAgLjI4MS4yMTkuNTE2LjUuNTE2aDNjLjI4MSAwIC41LS4yMzQuNS0uNTE2em0tLjAzMS01Ljg0M2wuMjgxLTcuMTcyYS4zNzguMzc4IDAgMCAwLS4xNTYtLjI5N0MxNiA4LjA5NCAxNS44NiA4IDE1LjcxOSA4aC0zLjQzN2MtLjE0MSAwLS4yODEuMDk0LS4zNzUuMTcyLS4xMDkuMDc4LS4xNTYuMjM0LS4xNTYuMzI4bC4yNjYgNy4xNDFjMCAuMjAzLjIzNC4zNTkuNTMxLjM1OWgyLjg5MWMuMjgxIDAgLjUxNi0uMTU2LjUzMS0uMzU5ek0xNS43NSAxLjA0N2wxMiAyMmMuMzQ0LjYwOS4zMjggMS4zNTktLjAzMSAxLjk2OVMyNi43MDMgMjYgMjYgMjZIMmMtLjcwMyAwLTEuMzU5LS4zNzUtMS43MTktLjk4NHMtLjM3NS0xLjM1OS0uMDMxLTEuOTY5bDEyLTIyYTEuOTg4IDEuOTg4IDAgMCAxIDMuNSAweiIvPjwvc3ZnPgo=&quot;);background-size:17px;width:17px;height:20px}.ic-experimental:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyBjbGFzcz0iaWNvbiBpY29uLWZsYXNrIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiPjxwYXRoIGQ9Ik0yMy44NTkgMjIuNjI1QzI1LjAzMSAyNC40ODQgMjQuMjAzIDI2IDIyIDI2SDRjLTIuMjAzIDAtMy4wMzEtMS41MTYtMS44NTktMy4zNzVMMTAgMTAuMjM0VjRIOWMtLjU0NyAwLTEtLjQ1My0xLTFzLjQ1My0xIDEtMWg4Yy41NDcgMCAxIC40NTMgMSAxcy0uNDUzIDEtMSAxaC0xdjYuMjM0ek0xMS42ODggMTEuMjk3TDcuNDM4IDE4aDExLjEyNWwtNC4yNS02LjcwMy0uMzEzLS40ODRWNGgtMnY2LjgxM3oiLz48L3N2Zz4K&quot;);background-size:16px;width:16px;height:20px}.ic-prefix:before{content:&quot;-x-&quot;;text-decoration:none;font-size:18px;font-size:1rem;line-height:1;font-family:sans-serif;font-style:normal}.ic-disabled:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyOSIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbGU9ImltZyI+PHBhdGggZD0iTTUgNGMwIC43MTktLjM5MSAxLjM1OS0xIDEuNzE5VjI1LjVjMCAuMjY2LS4yMzQuNS0uNS41aC0xYS41MTQuNTE0IDAgMCAxLS41LS41VjUuNzE5Yy0uNjA5LS4zNTktMS0xLTEtMS43MTkgMC0xLjEwOS44OTEtMiAyLTJzMiAuODkxIDIgMnptMjMgMXYxMS45MjJjMCAuNTc4LS4zNTkuNzk3LS44MTIgMS4wMzEtMS43NjYuOTUzLTMuNzE5IDEuODEzLTUuNzY2IDEuODEzLTIuODc1IDAtNC4yNS0yLjE4OC03LjY1Ni0yLjE4OC0yLjQ4NCAwLTUuMDk0IDEuMTI1LTcuMjUgMi4yODFBMS4wMjMgMS4wMjMgMCAwIDEgNiAyMGMtLjU0NyAwLTEtLjQ1My0xLTFWNy40MDZjMC0uMzc1LjE4Ny0uNjQxLjQ4NC0uODU5LjM3NS0uMjUuODI4LS40NjkgMS4yMzQtLjY3MkM4LjY4NyA0Ljg3NSAxMS4wNzcgNCAxMy4yOTYgNGMyLjQ1MyAwIDQuMzc1LjgxMiA2LjU0NyAxLjgyOC40MzguMjE5Ljg5MS4yOTcgMS4zNzUuMjk3QzIzLjY3MSA2LjEyNSAyNi4zMTIgNCAyNi45OTkgNGMuNTQ3IDAgMSAuNDUzIDEgMXoiLz48L3N2Zz4K&quot;);background-size:24px;width:24px;height:24px}.ic-altname:before{background-image:url(&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIyOCIgYXJpYS1oaWRkZW49InRydWUiIHJvbD0iaW1nIj48cGF0aCBkPSJNNC41IDIzYTEuNSAxLjUgMCAxIDAtMy4wMDEuMDAxQTEuNSAxLjUgMCAwIDAgNC41IDIzem0wLTE4YTEuNSAxLjUgMCAxIDAtMy4wMDEuMDAxQTEuNSAxLjUgMCAwIDAgNC41IDV6bTEwIDJhMS41IDEuNSAwIDEgMC0zLjAwMS4wMDFBMS41IDEuNSAwIDAgMCAxNC41IDd6TTE2IDdhMy4wMDIgMy4wMDIgMCAwIDEtMS41IDIuNTk0Yy0uMDQ3IDUuNjQxLTQuMDQ3IDYuODkxLTYuNzAzIDcuNzM0QzUuMzEzIDE4LjEwOSA0LjUgMTguNDg0IDQuNSAyMHYuNDA2QTMgMyAwIDAgMSA2IDIzYTMuMDAxIDMuMDAxIDAgMCAxLTYgMGMwLTEuMTA5LjYwOS0yLjA3OCAxLjUtMi41OTRWNy41OTRBMyAzIDAgMCAxIDAgNWEzLjAwMSAzLjAwMSAwIDAgMSA2IDAgMy4wMDIgMy4wMDIgMCAwIDEtMS41IDIuNTk0djcuNzY2Yy43OTctLjM5MSAxLjY0MS0uNjU2IDIuNDA2LS44OTEgMi45MDYtLjkyMiA0LjU2Mi0xLjYwOSA0LjU5NC00Ljg3NUEzIDMgMCAwIDEgMTAgN2EzLjAwMSAzLjAwMSAwIDAgMSA2IDB6Ii8+PC9zdmc+Cg==&quot;);background-size:12px;width:12px;height:22px}.offscreen,.only-icon span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.bc-supports{display:inline-block;position:relative;border:1px solid #222;padding:3px;min-width:120px;text-align:center}.bc-notes{display:none}.bc-legend{margin-bottom:20px;margin-top:20px}.bc-legend dl{display:grid;grid-template-columns:30px 1fr}.bc-legend dt{display:block;margin:0 0 5px 0}.bc-legend .bc-supports{display:inline-block;min-width:30px;margin-bottom:25px}.bc-legend dd{display:block;margin:0 10px 5px 10px;padding-left:20px}.bc-legend .bc-supports abbr:after{content:&quot;\00a0&quot;}@media (min-width: 63.9385em){.bc-icons{float:right}}@media (max-width: 47.9375em){.bc-table thead{display:none}.bc-table tbody th{width:100%;max-width:100%;display:block;border-right:0;border-bottom:1px solid #222;padding-top:20px;padding-bottom:0}.bc-table tbody td{position:relative;min-width:100%;width:100%;max-width:100%;display:block;box-sizing:border-box;box-shadow:inset 220px 0 0 0 #eaeff2;border-top:1px solid #222;border-left:0;padding-left:250px;padding-right:10px;text-align:left}.bc-table-web td:nth-child(8),.bc-table-web th:nth-child(8){border-top:2px solid #222;border-left:none}.bc-table tbody th{width:100%;max-width:100%;display:block;border-right:0;border-bottom:1px solid #222;padding-top:20px;padding-bottom:0}.bc-table tbody td[tabindex]{padding-bottom:20px}.bc-browser-name{display:block;position:absolute;top:8px;left:0;padding-left:6px;height:25px;width:220px;color:#333;white-space:nowrap}.bc-history-link{width:calc(100% - 219px);height:20px;margin-top:-20px;font-size:16px;font-size:0.88889rem}.bc-history{display:none}.bc-table .bc-history{padding-left:0}.bc-history dt{margin-top:10px;margin-left:0;margin-bottom:10px}.bc-history dd{clear:left;min-height:0}td.bc-supports-no{background-position:calc(50% + 110px) 50%,calc(50% + 110px) 50%}.bc-notes{display:block;margin-top:10px}}@media (min-width: 47.9385em){.bc-legend dl{grid-template-columns:30px 1fr 30px 1fr}}
+
+          &lt;/style&gt;
+					&lt;style&gt;
+             body {
+               font-family: Arial;
+             }
+             .bc-table {
+               background-color: white;
+             }
+          &lt;/style&gt;
+				&lt;/head&gt;
+				&lt;body&gt;
+					&lt;div class=&quot;bc-data&quot; id=&quot;bcd:api.AudioWorklet&quot;&gt;&lt;a class=&quot;bc-github-link&quot; href=&quot;https://github.com/mdn/browser-compat-data&quot;&gt;Update compatibility data on GitHub&lt;/a&gt;&lt;table class=&quot;bc-table bc-table-web&quot;&gt;&lt;thead&gt;&lt;tr class=&quot;bc-platforms&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;th colspan=&quot;6&quot; class=&quot;bc-platform-desktop&quot;&gt;&lt;span&gt;Desktop&lt;/span&gt;&lt;/th&gt;&lt;th colspan=&quot;6&quot; class=&quot;bc-platform-mobile&quot;&gt;&lt;span&gt;Mobile&lt;/span&gt;&lt;/th&gt;&lt;/tr&gt;&lt;tr class=&quot;bc-browsers&quot;&gt;&lt;td&gt;&lt;/td&gt;&lt;th class=&quot;bc-browser-chrome&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-chrome&quot;&gt;Chrome&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-edge&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-edge&quot;&gt;Edge&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-firefox&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-firefox&quot;&gt;Firefox&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-ie&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-ie&quot;&gt;Internet Explorer&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-opera&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-opera&quot;&gt;Opera&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-safari&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-safari&quot;&gt;Safari&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-webview_android&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-webview_android&quot;&gt;Android webview&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-chrome_android&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-chrome_android&quot;&gt;Chrome for Android&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-firefox_android&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-firefox_android&quot;&gt;Firefox for Android&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-opera_android&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-opera_android&quot;&gt;Opera for Android&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-safari_ios&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-safari_ios&quot;&gt;Safari on iOS&lt;/span&gt;&lt;/th&gt;&lt;th class=&quot;bc-browser-samsunginternet_android&quot;&gt;&lt;span class=&quot;bc-head-txt-label bc-head-icon-samsunginternet_android&quot;&gt;Samsung Internet&lt;/span&gt;&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;th scope=&quot;row&quot;&gt;&lt;a href=&quot;/en-US/docs/Web/API/AudioWorklet&quot;&gt;&lt;code&gt;AudioWorklet&lt;/code&gt;&lt;/a&gt;&lt;/th&gt;&lt;td class=&quot;bc-supports-yes bc-browser-chrome&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Chrome&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              66&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-edge&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Edge&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              79&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-firefox&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Firefox&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              76&lt;/td&gt;&lt;td class=&quot;bc-supports-no bc-browser-ie&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;IE&lt;/span&gt;&lt;abbr title=&quot;No support&quot;
+                class=&quot;bc-level-no only-icon&quot;&gt;
+                &lt;span&gt;No support&lt;/span&gt;
+              &lt;/abbr&gt;
+              No&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-opera&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Opera&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              Yes&lt;/td&gt;&lt;td class=&quot;bc-supports-no bc-browser-safari&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Safari&lt;/span&gt;&lt;abbr title=&quot;No support&quot;
+                class=&quot;bc-level-no only-icon&quot;&gt;
+                &lt;span&gt;No support&lt;/span&gt;
+              &lt;/abbr&gt;
+              No&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-webview_android&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;WebView Android&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              66&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-chrome_android&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Chrome Android&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              66&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-firefox_android&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Firefox Android&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              79&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-opera_android&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Opera Android&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              Yes&lt;/td&gt;&lt;td class=&quot;bc-supports-no bc-browser-safari_ios&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Safari iOS&lt;/span&gt;&lt;abbr title=&quot;No support&quot;
+                class=&quot;bc-level-no only-icon&quot;&gt;
+                &lt;span&gt;No support&lt;/span&gt;
+              &lt;/abbr&gt;
+              No&lt;/td&gt;&lt;td class=&quot;bc-supports-yes bc-browser-samsunginternet_android&quot;&gt;&lt;span class=&quot;bc-browser-name&quot;&gt;Samsung Internet Android&lt;/span&gt;&lt;abbr title=&quot;Full support&quot;
+                class=&quot;bc-level-yes only-icon&quot;&gt;
+                &lt;span&gt;Full support&lt;/span&gt;
+              &lt;/abbr&gt;
+              9.0&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;section class=&quot;bc-legend&quot;&gt;&lt;h3 class=&quot;offscreen&quot;&gt;Legend&lt;/h3&gt;&lt;dl&gt;&lt;dt&gt;&lt;span class=&quot;bc-supports-yes bc-supports&quot;&gt;
+                &lt;abbr title=&quot;Full support&quot;
+                 class=&quot;bc-level bc-level-yes only-icon&quot;&gt;
+                 &lt;span&gt;Full support&lt;/span&gt;
+                 &amp;nbsp;
+                &lt;/abbr&gt;&lt;/span&gt;&lt;/dt&gt;&lt;dd&gt;Full support&lt;/dd&gt;&lt;dt&gt;&lt;span class=&quot;bc-supports-no bc-supports&quot;&gt;
+                &lt;abbr title=&quot;No support&quot;
+                 class=&quot;bc-level bc-level-no only-icon&quot;&gt;
+                 &lt;span&gt;No support&lt;/span&gt;
+                 &amp;nbsp;
+                &lt;/abbr&gt;&lt;/span&gt;&lt;/dt&gt;&lt;dd&gt;No support&lt;/dd&gt;&lt;/dl&gt;&lt;/section&gt;&lt;/div&gt;
+				&lt;/body&gt;
+			&lt;/html&gt;"></iframe>
+      
+    
+<p>An important detail to consider is that, at the time of writing, the
+<code>AudioWorklet</code> API is, sadly, only supported by a handful of
+browsers. A <a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/audioworklet-polyfill">polyfill</a>
+is available. As its master branch and npm release were buggy though, I
+had to submit a <a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/audioworklet-polyfill/pull/21">PR</a>
+first before being able to use it. Thanks, Google Chrome team.</p>
+<p>Eventually, I got everything working cross-browser and was able to
+move on to more exciting things!</p>
+<h3 id="the-math-of-audio-generation">The Math of Audio Generation</h3>
+<p>One of the most daunting tasks of the project was having to deal with
+the math to generate audio. After all, the last time I had worked with
+frequencies was back in high school physics class and, more recently, in
+some computer science lectures. In all honesty, though, I had to start
+from scratch as I had forgotten almost everything! So for this section,
+I&apos;ll establish a particular formula in great detail as creating it was
+necessary to come up with a functioning product.</p>
+<p>I began by <a target="_blank" rel="noopener" href="https://hackmd.io/fR86Sw1nSFGdeFmgirt7qw#Math">playing around</a>
+with sine waves in jsbin.com and quickly realized that I had to go back
+even further, by, for example, looking up the definition of a frequency
+and by researching the period length of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>. Spoiler: It&apos;s <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">2\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>.</p>
+<iframe src="https://www.desmos.com/calculator/pi8zdfqkbp?embed" style="border:
+1px solid #ccc" frameborder="0">
+</iframe>
+<p>The first <em>actual</em> mathematical problem I encountered was when
+I tried to render a tone for a given MIDI key dynamically. MIDI keys are
+tuned by assigning each note to an ascending integer. This integer can
+then be run through a formula to receive the respective frequency in
+Hertz. Notes exist as frequency values for waveforms. The MIDI formula I
+found defined:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mn>2</mn><mfrac><mrow><mi>n</mi><mo>&#x2212;</mo><mn>69</mn></mrow><mn>12</mn></mfrac></msup><mo>&#xD7;</mo><mn>440</mn><mtext>&#x2009;</mtext><mtext>Hz</mtext><mtext>&#x2009;</mtext></mrow><annotation encoding="application/x-tex">
+f(n) = 2^{\frac{n-69}{12}} \times 440 \,\text{Hz}\,
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.08735em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.0040200000000001em;"><span style="top:-3.4130000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8443142857142857em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">&#x2212;</span><span class="mord mtight">6</span><span class="mord mtight">9</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">4</span><span class="mord">0</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord">Hz</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span></span></span></span></span></p>
+<p>&quot;So can there be a formula to produce samples given a MIDI key
+number?&quot;, I asked myself. And even though I was a bit overwhelmed after
+my first mathematical research, I was able to come up with something
+useful. Given a sample rate <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span> and
+a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/A440_(pitch_standard)">440
+Hertz pitch</a>, there&apos;s a function <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>
+for approximating a sine wave for an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup></mrow><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">h</span></span></span></span></span></span></span></span></span></span></span></span> MIDI key at a time interval <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mi>n</mi></msub></mrow><annotation encoding="application/x-tex">t_n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo stretchy="false">(</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><msub><mi>t</mi><mi>n</mi></msub><mo>&#xD7;</mo><msup><mn>2</mn><mfrac><mrow><mi>n</mi><mo>&#x2212;</mo><mn>69</mn></mrow><mn>12</mn></mfrac></msup><mo>&#xD7;</mo><mn>440</mn></mrow><mi>&#x3C3;</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+s(t_n) = sin(\frac{2\pi t_n \times 2^{\frac{n - 69}{12}} \times
+440}{\sigma})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.31702em;vertical-align:-0.686em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.63102em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9540200000000001em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8443142857142857em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">&#x2212;</span><span class="mord mtight">6</span><span class="mord mtight">9</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span><span class="mord">4</span><span class="mord">0</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>&#x1F631; It looks complicated! But let&apos;s take a closer look to see whether
+we can simplify it. First off, I think it&apos;s important to know the
+intention behind designing this function. As I said, it&apos;s purpose is to
+generate sample values given a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/MIDI">MIDI</a> key number. We just
+learned that there&apos;s a formula to generate a frequency value from a MIDI
+key index. And in fact, we can see that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> is contained in the divisor of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>.</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo stretchy="false">(</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><msub><mi>t</mi><mi>n</mi></msub><mo>&#xD7;</mo><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><mi>&#x3C3;</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+s(t_n) = sin(\frac{2\pi t_n \times f(n)}{\sigma})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">n</span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>But how can we render a sine wave with a specific frequency? Well, we
+already know that the length of one <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> period is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">2\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>. From math class, we might also remember
+that we can stretch and compress the period of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> by multiplying <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> by a factor <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span></span></span></span>, so <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>&#x3B3;</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">g(x) =
+sin(\gamma x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>. Meaning, that we can define the period length
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span> of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span>
+by finding the relation between <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span></span></span></span>
+and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">2\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><mrow><mi mathvariant="normal">&#x2223;</mi><mi>&#x3B3;</mi><mi mathvariant="normal">&#x2223;</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+p = \frac{2\pi}{| \gamma |}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.25744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">&#x2223;</span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord">&#x2223;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>Knowing this relation already gives us some information on how to
+produce several samples for a sine wave with a given frequency. Let&apos;s
+say we wanted to produce a 1 Hertz sine wave at a sample rate of 48 kHz
+for 1 second<sup id="a2"><a href="#f2">2</a></sup>. Well, then now we&apos;ll somehow have to
+generate 48000 samples from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>&#x3B3;</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(\gamma
+x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>.</p>
+<figure>
+<img src="/assets/images/chunked-sinus-inverted.png" alt="A visual example of chunking a sinus function into tiny sampling-rate-sized bits.">
+<figcaption aria-hidden="true"><em>A visual example of chunking a sinus
+function into tiny sampling-rate-sized bits.</em></figcaption>
+</figure>
+<p>Two approaches come to mind: Either stretch the period length of
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span> so that we can simply input integers
+between <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>48000</mn></mrow><annotation encoding="application/x-tex">48000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span> <em>or</em> shrink <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span> relatively such that when we&apos;re closing in
+on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>48000</mn></mrow><annotation encoding="application/x-tex">48000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span> samples generated when we
+reach <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mn>2</mn><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">x = 2\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span> on the x-axis.</p>
+<p>As we&apos;ve already defined our period length formula <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span>, let&apos;s go for the former approach. Meaning
+that if we want our period length to be <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mn>48000</mn></mrow><annotation encoding="application/x-tex">p =
+48000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span></span> to use ascending integers as input for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span></span></span></span>, we can shuffle <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><mrow><mi mathvariant="normal">&#x2223;</mi><mi>&#x3B3;</mi><mi mathvariant="normal">&#x2223;</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">p
+= \frac{2\pi}{| \gamma |}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.365108em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2223;</span><span class="mord mathdefault mtight" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord mtight">&#x2223;</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> to solve for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span></span></span></span>:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><mi>p</mi></mfrac><mo>=</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi></mrow><mn>48000</mn></mfrac><mo>=</mo><mfrac><mi>&#x3C0;</mi><mn>24000</mn></mfrac></mrow><annotation encoding="application/x-tex">
+\gamma = \frac{2\pi}{p} = \frac{2\pi}{48000} = \frac{\pi}{24000}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.20188em;vertical-align:-0.8804400000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">p</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804400000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">4</span><span class="mord">8</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.7935600000000003em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.10756em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord">4</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>Great! Remember, we said earlier that the period of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span> could be scaled using the factor <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span></span></span></span>. That means we can now define a
+function <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span></span></span></span> to generate samples:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mi>g</mi><mo>:</mo><mspace width="1em"></mspace></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mi>&#x3C3;</mi><mo stretchy="false">]</mo><mo>&#x2192;</mo><mi mathvariant="double-struck">N</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mi>x</mi><mo>&#x21A6;</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>&#x3B3;</mi><mi>x</mi><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+g: \quad
+&amp; [0, \sigma] \to \N\\
+&amp; x \mapsto sin(\gamma x)
+\end{aligned}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0000000000000004em;vertical-align:-1.2500000000000002em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7500000000000002em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.2500000000000002em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7500000000000002em;"><span style="top:-3.91em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">N</span></span></span></span><span style="top:-2.41em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x21A6;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.2500000000000002em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>where we can replace <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mi>&#x3B3;</mi><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sin(\gamma x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>
+accordingly to introduce the sample rate <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span> (we just renamed <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span></span></span></span>) as a factor:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mtable rowspacing="0.24999999999999992em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mi>g</mi><mo mathvariant="normal">&#x2032;</mo></msup><mo>:</mo><mspace width="1em"></mspace></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mi>&#x3C3;</mi><mo stretchy="false">]</mo><mo>&#x2192;</mo><mi mathvariant="double-struck">N</mi></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mi>x</mi><mo>&#x21A6;</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><mi>x</mi></mrow><mi>&#x3C3;</mi></mfrac><mo stretchy="false">)</mo></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">
+\begin{aligned}
+g&apos;: \quad
+&amp; [0, \sigma] \to \N\\
+&amp; x \mapsto sin(\frac{2\pi x}{\sigma})
+\end{aligned}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.8074399999999997em;vertical-align:-1.6537199999999999em;"></span><span class="mord"><span class="mtable"><span class="col-align-r"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.15372em;"><span style="top:-4.63516em;"><span class="pstrut" style="height:3.32144em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:1em;"></span></span></span><span style="top:-2.6537200000000003em;"><span class="pstrut" style="height:3.32144em;"></span><span class="mord"></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.6537199999999999em;"><span></span></span></span></span></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:2.15372em;"><span style="top:-4.63516em;"><span class="pstrut" style="height:3.32144em;"></span><span class="mord"><span class="mord"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2192;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord"><span class="mord mathbb">N</span></span></span></span><span style="top:-2.6537200000000003em;"><span class="pstrut" style="height:3.32144em;"></span><span class="mord"><span class="mord"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x21A6;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord mathdefault">x</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.6537199999999999em;"><span></span></span></span></span></span></span></span></span></span></span></span></p>
+<p>Generating an arbitrary frequency is now possible too! Say we wanted
+our sine wave to cycle 10 times per second more, we&apos;d simply have to
+adjust our period length by a factor of ten <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3B3;</mi><mo>=</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><mo>&#xD7;</mo><mn>10</mn></mrow><mn>48000</mn></mfrac></mrow><annotation encoding="application/x-tex">\gamma = \frac{2\pi \times 10}{48000}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">&#x3B3;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span><span class="mord mtight">8</span><span class="mord mtight">0</span><span class="mord mtight">0</span><span class="mord mtight">0</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">&#x3C0;</span><span class="mbin mtight">&#xD7;</span><span class="mord mtight">1</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> to
+receive a frequency at 10 Hertz.</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>g</mi><mrow><mo mathvariant="normal">&#x2032;</mo><mo mathvariant="normal">&#x2032;</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><msub><mi>t</mi><mi>n</mi></msub><mo>&#xD7;</mo><mn>10</mn></mrow><mi>&#x3C3;</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+g&apos;&apos;(t_n) = sin(\frac{2\pi t_n \times 10}{\sigma})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>We can just replace this factor by our MIDI-key-to-frequency function
+<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span>:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>g</mi><mrow><mo mathvariant="normal">&#x2032;</mo><mo mathvariant="normal">&#x2032;</mo><mo mathvariant="normal">&#x2032;</mo></mrow></msup><mo stretchy="false">(</mo><msub><mi>t</mi><mi>n</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mfrac><mrow><mn>2</mn><mi>&#x3C0;</mi><msub><mi>t</mi><mi>n</mi></msub><mo>&#xD7;</mo><msup><mn>2</mn><mfrac><mrow><mi>n</mi><mo>&#x2212;</mo><mn>69</mn></mrow><mn>12</mn></mfrac></msup><mo>&#xD7;</mo><mn>440</mn></mrow><mi>&#x3C3;</mi></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">
+g&apos;&apos;&apos;(t_n) = sin(\frac{2\pi t_n \times 2^{\frac{n - 69}{12}}
+\times 440}{\sigma})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span><span class="mord mtight">&#x2032;</span><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.31702em;vertical-align:-0.686em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.63102em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9540200000000001em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8443142857142857em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">2</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.384em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">&#x2212;</span><span class="mord mtight">6</span><span class="mord mtight">9</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#xD7;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">4</span><span class="mord">4</span><span class="mord">0</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>Et voila, we just created a function that can produce samples at an
+arbitrary sample rate <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>&#x3C3;</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">&#x3C3;</span></span></span></span> from a
+MIDI key number <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>!</p>
+<p>After creating this first formula, I had passed the local
+mathematical-insecurity hump, and proudly ventured ahead, trying to
+solve more elaborate problems!</p>
+<h3 id="working-with-webassembly-and-c">Working with WebAssembly and
+C++</h3>
+<p>Finally, I feel like I need to say a few things in this post about
+WebAssembly and C++ too. It turns out, that was the most natural part!
+Yes, being a JavaScript developer, C++ looked foreign at first, and I
+was a bit scared of pointers, and the raw-ness C++ radiated. But,
+overall, it wasn&apos;t entirely new territory for me as I already understood
+many of its concepts from previous projects (e.g., working with the
+shell or Ethereum Solidity). To kickstart development, I bought
+&quot;Accelerated C++&quot; by Andrew Koenig and Barbara E. Moo. I read parts of
+it but then dove fully into coding. The book is excellent. I can
+recommend it!</p>
+<p>The same goes for emscripten and WebAssembly. There are a few
+gotchas, and I&apos;m writing about one particular in the Appendix of this
+post. Overall, WebAssembly&apos;s tooling is already surprisingly usable and
+easily integrated into a standard front end build pipeline.</p>
+<p>I had initially decided on C++ and WASM for the performance boost.
+Now, I take much more joy out being able to separate my code base by
+concerns nicely. Writing all audio code in C++ and all user interface
+code in JavaScript led to a loose coupling and nice modularization. I
+noticed that I not only wrote a fully-fledged audio library in C++
+through this but also that it&apos;s portable to anywhere WebAssembly runs!
+That&apos;s super cool!</p>
+<h2 id="lessons-learned">Lessons Learned</h2>
+<p>WASM Synth turned out to be a great learning experience. Working as a
+developer in the same field for many years, it&apos;s sometimes easy to
+forget how amazing the brain reacts to learning new things. In November,
+after having worked on smart contracts and decentralized apps for more
+than a year, I wasn&apos;t much confident anymore in cutting my teeth at
+math. I felt like I stood no chance in succeeding in writing a program
+outputting audio. But spending some time doing it, I noticed once again
+that, like most human-made things, they&apos;re limited in their complexity
+and that enough time-allocation and intrinsic motivation help immensely
+permeating them.</p>
+<p>The math involved, parts of which I outlined in this post, really put
+me out of my comfort zone. But finally, spending time working towards a
+practical solution helped me fill in the gaps in my knowledge. In the
+future, I&apos;d like to make an even more conscious effort involving more of
+it in my daily coding!</p>
+<p>Lastly, the thesis that many concepts can be mastered playfully by
+reverse engineering their core problems once again proved to be right,
+but probably not unchallenged for too long as I&apos;m looking for new
+projects putting me out of my comfort zone (hire me<sup id="a3"><a href="#f3">3</a></sup>).</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li>WebAssembly
+<ul>
+<li><a target="_blank" rel="noopener" href="https://emscripten.org">emscripten: A toolchain to compile
+C++ to WASM</a></li>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@tdeniffel/pragmatic-compiling-from-c-to-webassembly-a-guide-a496cc5954b8">Step
+by step guide on how to use emscripten</a></li>
+<li><a target="_blank" rel="noopener" href="https://marcoselvatici.github.io/WASM_tutorial/">Tutorial
+on how to manage memory in WebAssembly</a></li>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/automata/5832104">Example on
+passing a <code>Float32Array</code> back and forth between JS and
+C++</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.leaningtech.com/cheerp/">Emscripten
+alternative: cheerp</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/charto/nbind">Embind alternative:
+nbind</a></li>
+<li><a target="_blank" rel="noopener" href="https://emscripten.org/docs/compiling/Travis.html">Continuous
+Deployment with emscripten on Travis CI</a></li>
+</ul></li>
+<li>Human-Audio Interaction
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.audiocheck.net/soundtests_nonlinear.php">The
+non-linearities of the Human Ear</a></li>
+<li><a target="_blank" rel="noopener" href="https://alemangui.github.io/blog//2015/12/26/ramp-to-value.html">Explanation
+on why we hear a click when audio suddenly stops</a></li>
+</ul></li>
+<li>Audio Engineering:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Piano_key_frequencies">Piano
+Key Frequencies</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.logicprohelp.com/forum/viewtopic.php?t=79553">Nice
+forum post with links to audio engineering resources</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.dsprelated.com">Cool website for DSP
+nerds</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.reddit.com/r/synthesizers/comments/544gfd/lets_say_i_want_to_design_and_build_synths_as_a/">Career
+advice on how to become an audio engineer</a></li>
+<li><a target="_blank" rel="noopener" href="https://issuu.com/petergoldsborough/docs/thesis">Thesis of
+someone that also built a synth in C++</a></li>
+<li><a target="_blank" rel="noopener" href="https://web.eecs.umich.edu/~fessler/course/100/l/l10-synth.pdf">Advanced
+audio engineering theory slides</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.midi.org/specifications/item/table-1-summary-of-midi-message">MIDI
+protocol specification</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.personal.kent.edu/~sbirch/Music_Production/MP-II/MIDI/midi_protocol.htm">Another
+MIDI protocol specification</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43544357/how-to-connect-web-midi-api-to-native-application-like-ableton-live">Web
+MIDI and Ableton Live API interaction</a></li>
+<li><a target="_blank" rel="noopener" href="https://codepen.io/peteranglea/pen/KZrGxo?editors=1111">Demo of
+using the Web MIDI API in the browser</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.martin-finke.de/blog/">Most useful blog of all!
+Person that builds software synth in C++!</a></li>
+<li><a target="_blank" rel="noopener" href="http://teropa.info/blog/2016/08/04/sine-waves.html">Step by
+step tutorial on how to build an oscillator in C++</a></li>
+</ul></li>
+<li>Math
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.sparknotes.com/math/trigonometry/graphs/section4/">Simple
+trigonometry explanation</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1073606/is-there-a-one-line-function-that-generates-a-triangle-wave/1073634#1073634">Some
+waveform formulas</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.cycling74.com/max5/tutorials/msp-tut/mspdigitalaudio.html">Nice
+introduction resource on how audio works from a mathematical
+perspective</a></li>
+<li><a target="_blank" rel="noopener" href="http://www-math.bgsu.edu/~zirbel/sound/Trigonometric%20functions%20and%20sound.pdf">Really
+helpful resource on how to render chords properly</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Damped_sine_wave">Wikipedia
+article on how to dampen a sin wave (very useful!)</a></li>
+<li><a target="_blank" rel="noopener" href="https://dsp.stackexchange.com/questions/2555/help-with-equations-for-exponential-adsr-envelope">ADSR
+models</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.desmos.com/calculator/nduy9l2pez">ADSR model
+used by WASM Synth</a></li>
+</ul></li>
+<li>Music Theory:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://de.m.wikipedia.org/wiki/Gleichstufige_Stimmung">Wikipedia:
+Gleichstufige Stimmung</a></li>
+<li><a target="_blank" rel="noopener" href="https://electronics.stackexchange.com/questions/32310/what-exactly-are-harmonics-and-how-do-they-appear">What
+exactly are harmonics and where do they appear?</a></li>
+</ul></li>
+<li>Web Audio API:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/cwilso/midi-synth">MIDI synth
+project</a></li>
+<li><a target="_blank" rel="noopener" href="https://webaudiodemos.appspot.com/slides/index.html#/">Slides
+about the Web Audio API</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.webaudiomodules.org/">Collection of Web Audio
+Synths</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/audiojs/web-audio-api/blob/f80aaa6bfaaa41d418f3316d767ac0f88f6bc4e0/lib/AudioParam.js#L172">WebAudio
+API implementation for Node.js detailing gain up and down
+ramping</a></li>
+<li><a target="_blank" rel="noopener" href="http://teropa.info/blog/2016/08/30/amplitude-and-loudness.html">Explanation
+on the relationship of Gain and Decibels in the WebAudio API</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.mecheye.net/2017/09/i-dont-know-who-the-web-audio-api-is-designed-for/">Person
+complaining about the Web Audio API</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/chrisguttandin/standardized-audio-context">Super
+useful polyfill for the Web Audio API</a></li>
+</ul></li>
+<li>Misc:
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.szynalski.com/tone-generator/">An online sound
+generator</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/21238543/c-al-altypes-h-no-such-file-or-directory">Explanation
+on how to output a sin wave in OpenAL</a></li>
+</ul></li>
+</ul>
+<h2 id="appendix">Appendix</h2>
+<h3 id="the-emscripten-build-pipeline">The <code>emscripten</code> Build
+Pipeline</h3>
+<p>A question I had before working with emscripten was: &quot;How do I
+integrate WebAssembly into my regular web app build, without bloating it
+too much?&quot;. To put things into perspective: I had just recently switched
+from Webpack to rollup.js as I was sick of spending hours setting up
+Webpack with its ten thousand magic configuration options.</p>
+<p>To my surprise, however, neither framework has reasonable defaults
+for handling WebAssembly yet. Notably, when we generated the WebAssembly
+outputs using emscripten and they <a target="_blank" rel="noopener" href="https://developers.google.com/web/updates/2018/04/loading-wasm">grew
+bigger than 4KB</a>. But there were other problems too:</p>
+<ul>
+<li>rollup.js bundles all source file into a single JavaScript
+file.</li>
+<li>Booting the app, also means booting react.js, which itself starts a
+continuous process that we&apos;ll somehow have to take into account.</li>
+<li>emscripten generates a <code>.wasm</code> and a <code>.js</code>
+file. The <code>.wasm</code> file contains all C++ source code as well
+as WebAssembly instructions. The <code>.js</code> file acts as the glue
+between WebAssembly and JavaScript.
+<ul>
+<li>In some cases, there&apos;s this 4KB size limit on loading
+<code>.wasm</code> files</li>
+<li>The emscripten <code>.js</code> glue code is super useful. I can
+recommend including it into your code deliverable.</li>
+</ul></li>
+<li>The <code>AudioWorklet</code> is supposed to be included into the
+page by using <code>new AudioContext().addModule(&lt;path&gt;)</code>
+<ul>
+<li>It has a separate global scope. But emscripten&apos;s glue code relies on
+the global scope too (<code>Module</code> object)</li>
+</ul></li>
+<li>Rollup.js doesn&apos;t have good defaults or plugins for bundling
+emscripten-generated <code>.wasm</code> code.</li>
+</ul>
+<p>In the end, this led me to build a custom pipeline to bundle
+emscripten builds every time my source changed. But before I explain
+how, let&apos;s take a step back to understand how emscripten&apos;s compilation
+works.</p>
+<p>On installation, emscripten exports a command-line utility called
+<code>emcc</code> into the shell. To demonstrate its capabilities, let&apos;s
+try compiling the <code>Hello World</code> example from the beginning of
+the post:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;emscripten/bind.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> emscripten;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">hello</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">NOTE:</span> Using embind, we can define `hello`&apos;s external name</span></span><br><span class="line"><span class="built_in">EMSCRIPTEN_BINDINGS</span>(my_module) {</span><br><span class="line">  <span class="built_in">function</span>(<span class="string">&quot;hello&quot;</span>, &amp;hello);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+<p>To make it executable by a browser, we&apos;ll use <code>emcc</code> to
+compile it to a <code>.wasm</code> and a <code>.js</code> file.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emcc main.cc --<span class="built_in">bind</span> -WASM=1 -o main.js</span><br></pre></td></tr></table></figure>
+<p><code>emcc</code> here simply compiles all functions contained in
+<code>main.cc</code> into a <code>main.wasm</code> file. Besides, it
+also generates this glue code (<code>main.js</code>) using <a target="_blank" rel="noopener" href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/embind.html">Embind</a>.
+It allows us to invoke functions, initially written in C++, directly
+from within JavaScript as if they were just regular classes. So to make
+emscripten&apos;s outputs work correctly, we&apos;ll have to include the
+<code>.js</code> into the page. On the initialization of the page,
+emscripten&apos;s clue code is loading the <code>.wasm</code> file
+asynchronously. Through some trick, the browser skips the 4KB file size
+limit, and all our C++ classes are now available as native JS
+classes:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;wasm/main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="title class_">Module</span>.<span class="property">onRuntimeInitialized</span> = <span class="keyword">function</span>(<span class="params"></span>) {</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Module</span>.<span class="title function_">hello</span>());</span></span><br><span class="line"><span class="language-javascript">      }</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>So far, so good. But, as I&apos;ve mentioned previously, one of the
+problems now is that the <code>AudioWorklet</code>, being spawned in a
+separate thread with a separate global scope, won&apos;t be aware of
+emscripten&apos;s <code>window.Module</code>. So how do we export code from
+within a Worklet?</p>
+<p>After spending quite some time researching that question, I
+discovered that the Google Chrome Labs team <a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/web-audio-samples/blob/master/audio-worklet/design-pattern/wasm/index.html">recommends</a>
+transpiling all JavaScript source into <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">native
+modules</a> and then simply use ES6&apos;s <code>import from</code> syntax.
+Well, it turns out the JS modules syntax <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">isn&apos;t
+widely supported yet</a>, particularly not in <code>Workers</code>, let
+alone <code>Worklets</code>...</p>
+<p><img src="/assets/images/import-support.png"></p>
+<p>But luckily, after banging my head another few days against JS
+modules and other fancy new front end frameworks, I found a surprisingly
+simple trick.</p>
+<p>I reduce emscripten&apos;s outputs to a single <code>.js</code> file that
+contains the <code>.wasm</code> as base64 string using it&apos;s
+<code>-s SINGLE_FILE=1</code> option. As we need emscripten&apos;s
+<code>.js</code> file to define <code>window.Module</code> in the
+<code>AudioWorklet</code>&apos;s global scope, I then simply append the
+emscripten JavaScript file with the <code>AudioWorklet</code>&apos;
+JavaScript file to make them configure the same global scope. That
+allows me to execute WebAssembly from within a Worklet without using the
+poorly supported <code>import from</code> syntax. Ultimately, I ended up
+with the following bash script (or on <a target="_blank" rel="noopener" href="https://github.com/TimDaub/wasm-synth/blob/master/scripts/build.sh">GitHub</a>):</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">DIR=<span class="string">&quot;.wasm&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> Generates the .wasm directory if it doesn&apos;t exist yet.</span></span><br><span class="line"><span class="keyword">if</span> [ ! -d <span class="variable">$DIR</span> ]; <span class="keyword">then</span></span><br><span class="line">  <span class="built_in">mkdir</span> <span class="variable">$DIR</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># NOTE `-std`: To use modern c++11 features like std::tuple and std::vector,</span></span><br><span class="line"><span class="comment"># we need to enable C++ 11 by passing the parameter to clang through emcc.</span></span><br><span class="line">emcc src/cpp/*.cc \</span><br><span class="line">  -std=c++11 \</span><br><span class="line">  -O1 \</span><br><span class="line">  -s WASM=1 \</span><br><span class="line">  -s ALLOW_MEMORY_GROWTH=1 \</span><br><span class="line">  -s BINARYEN_ASYNC_COMPILATION=0 \</span><br><span class="line">  -s SINGLE_FILE=1 \</span><br><span class="line">  -s MODULARIZE=1 \</span><br><span class="line">  --<span class="built_in">bind</span> \</span><br><span class="line">  -o <span class="variable">$DIR</span>/main.js</span><br><span class="line"></span><br><span class="line"><span class="comment"># <span class="doctag">NOTE:</span> We concat the emscripten generated js and wasm file with the worklet</span></span><br><span class="line"><span class="comment"># such that we don&apos;t have to import it later as an es6 module. This</span></span><br><span class="line"><span class="comment"># achieves better cross-browser compatibility.</span></span><br><span class="line"><span class="built_in">cat</span> <span class="variable">$DIR</span>/main.js src/js/worklets/synth.js &gt; public/worklets/synth.js</span><br></pre></td></tr></table></figure>
+<p>To update the page every time the source changed, I additionally used
+<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/npm-watch"><code>npm-watch</code></a>
+to re-run the routine each time file changes occur.</p>
+<hr>
+<p><em>Footnotes:</em></p>
+<p><small><a name="f1">1</a>: I couldn&apos;t find a specific reason for why
+<code>setTimeout</code> and <code>setInterval</code> are inaccurate. I&apos;m
+suspecting it has to do with JavaScript&apos;s event loop. Please let me know
+if you have more details. <a href="#a1">&#x2191;</a></small></p>
+<p><small><a name="f2">2</a>: 48 kHz is the standard audio sampling rate
+used by professional digital video equipment <a href="#a2">&#x2191;</a></small></p>
+<p><small><a name="f3">3</a>: Yes, you can hire me! I&apos;ve written
+something about myself <a href="/about/">here</a>. Also, check out my <a href="/projects/">projects</a> page! TL;DR: I&apos;m a Senior JavaScript dev
+that is looking for remote or Berlin-based work in the fields of music,
+blockchain/cryptocurrencies or both! Please reach out via <a href="mailto:tim@daubenschuetz.de">email</a> <a href="#a3">&#x2191;</a></small></p>
+<p><small><a name="f4">4</a>: In a previous version of this post, I
+claimed that the AudioWorklet was essentially implemented as a fancy
+version of a ring buffer. Paul Adenot from Mozilla gladly made me aware
+that this is incorrect. He referred me to <a target="_blank" rel="noopener" href="https://webaudio.github.io/web-audio-api/#processing-model-background">this
+section</a> of the Web Audio API W3C Editor&apos;s Draft for more accurate
+information. <a href="#a4">&#x2191;</a></small></p>
+<p><small><a name="f5">5</a>: Or is it? I&apos;ve talked this through with a
+bunch of friends and colleagues of mine and so far I&apos;ve had trouble
+finding a good arguments for why that should or shouldn&apos;t be. <a href="#a5">&#x2191;</a></small></p>
+<p><small><a name="f6">6</a>: After writing this article, I had a very
+interesting conversation with a senior engineer at Ableton and he
+explained to me the difference between &quot;jitter&quot; and &quot;latency&quot;. The key
+difference being that one is deterministic and the other one isn&apos;t. But
+since we had this conversation at a very &quot;late&quot; point of the evening, I
+don&apos;t dare to recite everything he said here. <a href="#a6">&#x2191;</a></small></p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-presentation"><span class="toc-number">1.</span> <span class="toc-text">The Presentation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introduction"><span class="toc-number">2.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#theory"><span class="toc-number">3.</span> <span class="toc-text">Theory</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-nyquist-shannon-sampling-theorem"><span class="toc-number">3.1.</span> <span class="toc-text">The Nyquist-Shannon
+Sampling Theorem</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#frames-and-ring-buffers"><span class="toc-number">3.2.</span> <span class="toc-text">Frames and Ring Buffers</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#implementation"><span class="toc-number">4.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#using-the-audioworklet"><span class="toc-number">4.1.</span> <span class="toc-text">Using the AudioWorklet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-math-of-audio-generation"><span class="toc-number">4.2.</span> <span class="toc-text">The Math of Audio Generation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#working-with-webassembly-and-c"><span class="toc-number">4.3.</span> <span class="toc-text">Working with WebAssembly and
+C++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#lessons-learned"><span class="toc-number">5.</span> <span class="toc-text">Lessons Learned</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resources"><span class="toc-number">6.</span> <span class="toc-text">Resources</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#appendix"><span class="toc-number">7.</span> <span class="toc-text">Appendix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#the-emscripten-build-pipeline"><span class="toc-number">7.1.</span> <span class="toc-text">The emscripten Build
+Pipeline</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/02/19/wasm-synth/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/02/19/wasm-synth/&text=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/02/19/wasm-synth/&is_video=false&description=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=WASM SYNTH, or, how music taught me the beauty of math&body=Check out this article: https://timdaub.github.io/2020/02/19/wasm-synth/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/02/19/wasm-synth/&title=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/02/19/wasm-synth/&name=WASM SYNTH, or, how music taught me the beauty of math&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/02/19/wasm-synth/&t=WASM SYNTH, or, how music taught me the beauty of math"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

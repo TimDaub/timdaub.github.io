@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="My good friend and collaborator Alberto Granzotto recently started helping to get people vaccinated at home in the Italian Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sending COVID-19 Vaccination Appointments in Telegram">
+<meta property="og:url" content="https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="My good friend and collaborator Alberto Granzotto recently started helping to get people vaccinated at home in the Italian Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/regionevenetoit.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/codicefiscale.png">
+<meta property="article:published_time" content="2021-04-18T15:01:12.000Z">
+<meta property="article:modified_time" content="2021-04-18T15:01:12.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="open source">
+<meta property="article:tag" content="privacy">
+<meta property="article:tag" content="interview">
+<meta property="article:tag" content="covid-19">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/regionevenetoit.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Sending COVID-19 Vaccination Appointments in Telegram</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/04/19/ethereum-web3-saving-gas-mainnet/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/02/25/emscripten-wasm/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&text=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&is_video=false&description=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sending COVID-19 Vaccination Appointments in Telegram&body=Check out this article: https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&name=Sending COVID-19 Vaccination Appointments in Telegram&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&t=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Sending COVID-19 Vaccination Appointments in Telegram
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-04-18T15:01:12.000Z" itemprop="datePublished">2021-04-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/covid-19/" rel="tag">covid-19</a>, <a class="tag-link-link" href="/tags/interview/" rel="tag">interview</a>, <a class="tag-link-link" href="/tags/open-source/" rel="tag">open source</a>, <a class="tag-link-link" href="/tags/privacy/" rel="tag">privacy</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      4 minutes read
+      <meta name="description" content="My good friend and collaborator Alberto Granzotto recently started helping to get people vaccinated at home in the Italian Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sending COVID-19 Vaccination Appointments in Telegram">
+<meta property="og:url" content="https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="My good friend and collaborator Alberto Granzotto recently started helping to get people vaccinated at home in the Italian Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/serenissimo.jpeg">
+<meta property="article:published_time" content="2021-04-18T15:01:12.000Z">
+<meta property="article:modified_time" content="2021-04-18T15:01:12.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="open source">
+<meta property="article:tag" content="privacy">
+<meta property="article:tag" content="interview">
+<meta property="article:tag" content="covid-19">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/serenissimo.jpeg">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>My good friend and collaborator <a target="_blank" rel="noopener" href="https://www.granzotto.net/">Alberto Granzotto</a> recently started
+helping to get people vaccinated at home in the Italian Regione del
+Veneto. He has helped deliver 16 shots, with 173 sleeves already being
+rolled up and ready for vaccination.</p>
+<p>Since my move to Berlin in 2015, Alberto and I have been
+collaborating on projects. But with <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">Serenissimo</a>, a Telegram
+bot that books COVID-19 vaccine appointments automatically, Alberto is
+on a personal mission.</p>
+<p><strong>T: I&apos;ve heard you&apos;re helping get people vaccinated now. How
+come?</strong></p>
+<p>A: I wanted to get my mom vaccinated. She&apos;s 74 and had become
+frustrated with trying to book a vaccination appointment online. So I
+decided to help her.</p>
+<p><strong>T: What was the problem?</strong></p>
+<p>A: To get vaccinated against COVID-19, she had to visit a website
+provided by the Regione del Veneto and book an appointment first. The
+process is as follows:</p>
+<ol type="1">
+<li>She goes to the official website <a target="_blank" rel="noopener" href="https://vaccinicovid.regione.veneto.it">https://vaccinicovid.regione.veneto.it</a>
+to find the public health office where she&apos;s registered. Then;</li>
+<li>she enters her data.</li>
+<li>If there is an available spot, she can reserve it and get
+vaccinated.</li>
+<li>If there is none, she has to go back to step number one.</li>
+</ol>
+<p>To receive her vaccine, my mom started constantly checking the
+website but ended up getting frustrated by having to enter her
+information over and over again.</p>
+<p><img src="/assets/images/regionevenetoit.png" alt="A screenshot of Regione del Veneto&apos;s vaccination booking website."></p>
+<p><strong>T: So what did you do?</strong></p>
+<p>A: I asked myself how I could help to improve the situation. I
+thought: Why not reverse the communication structure? Instead of
+constantly having to check the website, why not have a computer do the
+laborious work?</p>
+<p><strong>T: Great idea. So instead of asking everybody to poll the
+website repeatedly, your bot inform subscribers when a spot is
+available?</strong></p>
+<p>A: Correct. But do note that the vaccine situation in Veneto is
+complex. It&apos;s not &quot;first come, first served&quot;. There are different
+cohorts and right now only people over 80 or with pre-existing health
+conditions are eligible.</p>
+<p><strong>T: Is that why you ended up building a Telegram
+bot?</strong></p>
+<p>A. When I heard from friends that their elderly parents were
+struggling too, I saw a way to help. My idea is to smooth the UX to make
+booking appointments more accessible. I also released the bot&apos;s source
+code on <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">GitHub</a> as a
+commitment towards transparency.</p>
+<p><strong>T: How&apos;s is going so far?</strong></p>
+<p>A: As of today, I&apos;ve managed to get 16 people vaccinated! Then there
+are 173 eligible people signed up with Serenissimo who are waiting for a
+vaccine and 1218 people who want a vaccination but are currently not
+eligible.</p>
+<p><strong>T: Wow! And is your bot handling personal data?</strong></p>
+<p>A: Yes. To get an appointment on the official website, users must
+provide their &quot;<a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Italian_fiscal_code&amp;oldid=1006804529">codice
+fiscale</a>,&quot; the Italian tax code. Anyone can calculate that code using
+their first and last name, date of birth, and city of birth. The code
+ends up being a sequence of letters and numbers. It&apos;s personally
+identifiable information (short: &quot;PII&quot;), but not personal health
+information (short: &quot;PHI&quot;). I&apos;d say it&apos;s your unique ID for the Italian
+government. It&apos;s private, but not a secret.</p>
+<p><em>Note from the editor: You can find websites that let you
+calculate it yourself. See below.</em></p>
+<p><img src="/assets/images/codicefiscale.png" alt="A screenshot of Tim&apos;s hypothetical codice fiscale."></p>
+<p><strong>T: Interesting. I think we have something similar in Germany.
+It&apos;s called a &quot;Sozialversicherungsnummer.&quot; And in the US, I guess it&apos;s
+called the &quot;Social Security Number.&quot; You built your bot in Telegram; how
+do you make sure your users&apos; PII is protected?</strong></p>
+<p>A: I have a privacy policy. If a user removes themselves from the
+service, I make sure to delete their data. I&apos;ve looked into <a target="_blank" rel="noopener" href="https://telegram.org/privacy#10-deleting-data">Telegram&apos;s Privacy
+Policy</a>, and they, too, are deleting all data.</p>
+<p><strong>T: Could your bot also work by sending SMS?</strong></p>
+<p>A: Yes, I&apos;m currently refactoring it such that it&apos;s an option in the
+future.</p>
+<p><strong>T: What do you think is more important, protecting personally
+identifiable information or protecting a person&apos;s health?</strong></p>
+<p>A: That&apos;s a good question; I think it&apos;s a gradient. For example, the
+&quot;codice fiscale&quot; is personal, but you cannot do much with it alone. The
+important thing is to have a policy to delete the data once you don&apos;t
+need it anymore.</p>
+<p><strong>T: Fair! Where&apos;s the source code?</strong></p>
+<p>A: It&apos;s open-source on GitHub at <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">vrde/serenissimo</a>.</p>
+<p><strong>T: Great! I&apos;ll take a look. Thanks for answering all my
+questions. I wish you the best of success in helping to get more people
+vaccinated!</strong></p>
+<p>A: You&apos;re welcome. If you&apos;re in Veneto and need an appointment for a
+COVID shot, check out <a target="_blank" rel="noopener" href="https://t.me/serenissimo_bot">t.me/serenissimo_bot</a>.</p>
+<hr>
+<p>If you liked this interview, please consider subscribing to my
+newsletter below. It helps me big time. Thanks!</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&text=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&is_video=false&description=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sending COVID-19 Vaccination Appointments in Telegram&body=Check out this article: https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&title=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&name=Sending COVID-19 Vaccination Appointments in Telegram&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/04/18/vaccination-bot-serenissimo/&t=Sending COVID-19 Vaccination Appointments in Telegram"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

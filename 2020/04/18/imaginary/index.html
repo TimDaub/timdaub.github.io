@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="Just yesterday, I got my hands on a really wonderful graphic novel called &quot;The Thrilling Adventures of Lovelace and Babbage&quot;. It&amp;apos;s about the invention of the first computer, the so call">
+<meta property="og:type" content="article">
+<meta property="og:title" content="On Imaginary Monies">
+<meta property="og:url" content="https://timdaub.github.io/2020/04/18/imaginary/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Just yesterday, I got my hands on a really wonderful graphic novel called &quot;The Thrilling Adventures of Lovelace and Babbage&quot;. It&amp;apos;s about the invention of the first computer, the so call">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ada.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/imaginary.png">
+<meta property="article:published_time" content="2020-04-18T21:40:06.000Z">
+<meta property="article:modified_time" content="2020-04-18T21:40:06.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="economics">
+<meta property="article:tag" content="essay">
+<meta property="article:tag" content="philosophy">
+<meta property="article:tag" content="crypto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/ada.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>On Imaginary Monies</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/05/02/jazz/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/04/15/butter/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/04/18/imaginary/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/04/18/imaginary/&text=On Imaginary Monies"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/04/18/imaginary/&is_video=false&description=On Imaginary Monies"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=On Imaginary Monies&body=Check out this article: https://timdaub.github.io/2020/04/18/imaginary/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/04/18/imaginary/&name=On Imaginary Monies&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/04/18/imaginary/&t=On Imaginary Monies"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        On Imaginary Monies
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-04-18T21:40:06.000Z" itemprop="datePublished">2020-04-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/crypto/" rel="tag">crypto</a>, <a class="tag-link-link" href="/tags/economics/" rel="tag">economics</a>, <a class="tag-link-link" href="/tags/essay/" rel="tag">essay</a>, <a class="tag-link-link" href="/tags/philosophy/" rel="tag">philosophy</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      7 minutes read
+      <meta name="description" content="Just yesterday, I got my hands on a really wonderful graphic novel called &quot;The Thrilling Adventures of Lovelace and Babbage&quot;. It&amp;apos;s about the invention of the first computer, the so call">
+<meta property="og:type" content="article">
+<meta property="og:title" content="On Imaginary Monies">
+<meta property="og:url" content="https://timdaub.github.io/2020/04/18/imaginary/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Just yesterday, I got my hands on a really wonderful graphic novel called &quot;The Thrilling Adventures of Lovelace and Babbage&quot;. It&amp;apos;s about the invention of the first computer, the so call">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ada.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/imaginary.png">
+<meta property="article:published_time" content="2020-04-18T21:40:06.000Z">
+<meta property="article:modified_time" content="2020-04-18T21:40:06.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="economics">
+<meta property="article:tag" content="essay">
+<meta property="article:tag" content="philosophy">
+<meta property="article:tag" content="crypto">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/ada.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><p>Just yesterday, I got my hands on a really wonderful graphic novel
+called <em>&quot;The Thrilling Adventures of Lovelace and Babbage&quot;</em>. It&apos;s
+about the invention of the first computer, the so called <em>analytical
+engine</em>. It starts by telling the story of Ada Lovelace&apos;s coming of
+age. And, in particular, about her being deliberately pushed into
+mathematics and kept away from fulfilling any kind of creative purpose.
+That, of course, doesn&apos;t go well for too long, before Ada starts
+learning about &quot;imaginary&quot; numbers. A concept, so seemingly close to
+poetry (and madness), her mother becoming worried that Ada could become
+like her father. A mad polyamorous poet?</p>
+<p>Anyways, apart from the stories about Ada and her companion Charles
+Babbage, there&apos;s lots of mathematical concepts being nicely animated in
+comic style. And so there&apos;s also this part where Ada&apos;s imagination quite
+literally starts blossoming when she realizes that numbers do not only
+exist on a single dimension. The book visualizes this really beautifully
+by Ada literally walking along the scale of real numbers, soon realizing
+that she can carefully climb up <em>imaginary</em> stairs. And so she
+climbs carefully, but misses a stair at one point and falls &quot;back into
+reality&quot;. Yup, I know, the book is pretty cool.</p>
+<p><img src="/assets/images/ada.png"></p>
+<p>Sometimes I just wish, I had the imagination of Ada, when back in
+college (or was it high school?), my teachers desperately tried to
+explain me the concept of imaginary numbers. I mean, it was not that I
+didn&apos;t want to understand, or that I was lazy or not interested. It was
+just that this whole topic didn&apos;t make much sense to me. Why have
+imaginary numbers when all you need in the world is real numbers. After
+all, there&apos;s no imaginary sheep you could count, and no imaginary apples
+you could add up. And so the concept of imaginary numbers actually never
+stuck with me. Funnily enough, when we learned about vectors later, I
+didn&apos;t have any troubles following along.</p>
+<p>Maybe, it&apos;s that concept of telling a story, of opening up someone&apos;s
+imagination that ultimately allows us to learn and be truly creative.
+And with that, I&apos;d like to talk about <em>imaginary monies</em>.</p>
+<p>See, in my view, the world today is quite behind its potential. When
+it comes to money, at least. It&apos;s now been, what?, 50 years since the
+advent of personal computers and 20 years since the mainstream adoption
+of the world wide web? And still, we seem to transact like hundreds of
+years ago.</p>
+<p>But the world has changed. In fact, it changed already in the 70ies,
+when we found ourselves at the advent of the <em>information age</em>
+and the founding of the information society. You don&apos;t believe me? Well,
+then get into this red-looking and playful-looking time machine below
+and see for yourself!</p>
+<div class="owl-media owl-video owl-youtube"><iframe src="//www.youtube.com/embed/UiMus1FJb9w" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+<p>Isn&apos;t it beautiful? To me, at least, it&apos;s almost like time-traveling
+and having a dialogue with the collective of humans that were
+responsible for creating what we now call the internet. It&apos;s inspiring,
+because these random strangers talk so clearly and freely about <em>our
+world</em>. It&apos;s so frightening, because today, at least, I&apos;d argue,
+we&apos;re often preceiving <em>their utopia</em> as <em>our
+dystopia</em>.</p>
+<p>That does tie nicely into the metaphor of Ada Lovelace climing
+imaginary stairs. What would happend if she fell from high up back to
+reality? How hard would the impact be? How long would she fall? Would
+she bounce back up? Or only leave a hole in the ground? Hard to say, but
+I&apos;d imagine the impact to be less severe than you&apos;d think. After all,
+why should gravity only act in one dimension &#x1F60F;. And so that&apos;s why I
+think we should start exploring radically new paths. Not paths,
+dimensions. Dimensions of money. Imaginary monies.</p>
+<p><em>Tim. Hold on. What the fuck are you talking about???</em> Okokok.
+Hear me out! Just one, one last story and then you&apos;ll understand!</p>
+<p>Sooo, in the early 2000s the www was really cool. And everybody
+bought stocks and all nerds got rich and it was great. It was so great
+that even traditional or established businesses wanted to go full
+<em>cyber</em> by hosting their own websites. One of them was the New
+York Times, an organization founded a staggering 150 years earlier.</p>
+<p>Now, back in the days, publishing websites was quite difficult. There
+were hardly any tools. I guess there weren&apos;t many developers neither.
+But most probably, the bigest problem was that people were stuck in a
+creative loop of <a target="_blank" rel="noopener" href="https://de.wikipedia.org/wiki/HyperNormalisation">HyperNormalization</a>.
+That is, they didn&apos;t know what to do with the internet. Maybe, they were
+scared? And so in 1996 it happened that the New York Times simply
+decided to scan their front page print and upload it daily as an image
+on their website. They were so proud, they even published <a target="_blank" rel="noopener" href="https://www.nytimes.com/1996/01/22/business/the-new-york-times-introduces-a-web-site.html">an
+article</a> about themselves, quoting a consultant saying: <em>&quot;The
+market is booming for newspapers on the World Wide Web.&quot;</em></p>
+<p>Little did they know... that you can&apos;t just scan your print edition
+newspaper and upload a picture to your website, because, as McLuhan had
+realized years before already: <em>&quot;The medium is the message.&quot;</em> And
+hence, the closest resemblence to a truly cyberspacial newspaper may be
+Twitter, Mastodon or Medium. Well, I guess that consultant was right
+after all.</p>
+<p>And that my friends, is the epic saga of Hypernormalizations being
+born and dying, as they too, can be overcome with a simple trick of the
+mind: Imagination.</p>
+<p>Today, there&apos;s a particular topic that needs more imagination and
+that is, as I&apos;ve already mentioned, the topic of money. Honestly, I
+think, we&apos;d be fine in climbing the invisible stairs. We&apos;re collectively
+and subliminally aware of transactional relationships and keeping
+ledgers in our brain. David Graeber&apos;s 5000 Years of debt certainly is
+proof enough of that. I don&apos;t think we&apos;d fall far, as in our deerest
+need, there&apos;s many tricks and protocols in our cultures already.</p>
+<p>So then, let&apos;s explore multi dimensional imaginary money and leave
+these real and boring concepts behind! ERC20 tokens as reputation on the
+the Ethereum mainnet. Naaaah, that&apos;s so 2019. What we build is a
+reputation token that, acts as a multiplier for our base supply of
+money!</p>
+<p>Quadratic voting and reputation schemes? Artificially limitted and
+carefully distributed token supplies? Naaahh, instead, why don&apos;t we make
+<em>political influence</em> quadratically proportional to your actual
+spending power? You know, making your reputation the base, and your
+money the exponent.</p>
+<p>Let&apos;s say we all agree to vote once in a big election. But then you
+vote twice. Well, now you better have some stash saved under your
+matress, because you&apos;ve significantly decreased your spending power but
+increased your political reach.</p>
+<p>I mean, just imagine the possibilities in cybespace, where the
+relationship of monetary supply and political influence couldn&apos;t
+possibly grow exponentially or lineraly. But instead, where we could
+limit them through governance by adjusting <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>, in:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>b</mi><mi>i</mi></mrow><annotation encoding="application/x-tex">
+z = a + bi
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mord mathdefault">i</span></span></span></span></span></p>
+<p>where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span></span></span></span> being the individual&apos;s
+spending power, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span> being the
+individual&apos;s money supply and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span> being,
+for example, the individual&apos;s political influence.</p>
+<figure>
+<img src="/assets/images/imaginary.png" alt="You guessed it right, I stole that picture from Wikipedia.">
+<figcaption aria-hidden="true">You guessed it right, I stole that
+picture from Wikipedia.</figcaption>
+</figure>
+<p>I know, it sounds like a long shot now. But I truly think we&apos;re not
+that far away from ideas like these being put into practical use. In
+many ways, stable coins are a first step. So let&apos;s take another one!</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/04/18/imaginary/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/04/18/imaginary/&text=On Imaginary Monies"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/04/18/imaginary/&is_video=false&description=On Imaginary Monies"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=On Imaginary Monies&body=Check out this article: https://timdaub.github.io/2020/04/18/imaginary/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/04/18/imaginary/&title=On Imaginary Monies"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/04/18/imaginary/&name=On Imaginary Monies&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/04/18/imaginary/&t=On Imaginary Monies"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

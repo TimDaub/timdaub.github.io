@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Existential Challenges of Dapp Builders">
+<meta property="og:url" content="https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rpiscreenshotmay.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rollupsresearch.png">
+<meta property="article:published_time" content="2021-05-22T12:17:56.000Z">
+<meta property="article:modified_time" content="2021-05-22T12:17:56.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="rollups">
+<meta property="article:tag" content="layer 2">
+<meta property="article:tag" content="side chains">
+<meta property="article:tag" content="engineering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Existential Challenges of Dapp Builders</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/06/18/when-scope-blows-up/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/04/22/nft-sleepminting-beeple-provenance/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&text=Existential Challenges of Dapp Builders"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&is_video=false&description=Existential Challenges of Dapp Builders"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Existential Challenges of Dapp Builders&body=Check out this article: https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&name=Existential Challenges of Dapp Builders&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&t=Existential Challenges of Dapp Builders"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Existential Challenges of Dapp Builders
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-05-22T12:17:56.000Z" itemprop="datePublished">2021-05-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Ethereum/" rel="tag">Ethereum</a>, <a class="tag-link-link" href="/tags/engineering/" rel="tag">engineering</a>, <a class="tag-link-link" href="/tags/layer-2/" rel="tag">layer 2</a>, <a class="tag-link-link" href="/tags/rollups/" rel="tag">rollups</a>, <a class="tag-link-link" href="/tags/side-chains/" rel="tag">side chains</a>, <a class="tag-link-link" href="/tags/web3/" rel="tag">web3</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      6 minutes read
+      <meta name="description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Existential Challenges of Dapp Builders">
+<meta property="og:url" content="https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rpiscreenshotmay.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rollupsresearch.png">
+<meta property="article:published_time" content="2021-05-22T12:17:56.000Z">
+<meta property="article:modified_time" content="2021-05-22T12:17:56.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="rollups">
+<meta property="article:tag" content="layer 2">
+<meta property="article:tag" content="side chains">
+<meta property="article:tag" content="engineering">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>If you read my blog regularly, you&apos;ve probably noticed that I like to
+complain about the state of my favorite cryptocurrency: Ethereum. It
+started years ago when I claimed that &quot;<a href="https://timdaub.github.io/2019/02/28/poa/">shipping to a Proof of
+Authority network is a bad idea.</a>&quot; I followed it up with two posts
+rambling about <a href="https://timdaub.github.io/2020/09/08/web3/">how
+Ethereum&apos;s design makes it challenging to build excellent web
+applications</a> and how its <a href="https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/">finance-oriented
+market politics ruin dapps for most users as gas prices keep
+rising</a>.</p>
+<p>The context is that I&apos;m trying to build a decentralized app (short:
+dapp) myself (<a target="_blank" rel="noopener" href="https://rugpullindex.com/">rugpullindex.com</a>).
+In that process, I face challenges that I journal here. Today - big
+surprise - I&apos;m back with another one of these! With one that&apos;s focused
+on a pet peeve of mine: Trying to scale with insufficient technological
+sophistication.</p>
+<p>Here&apos;s what&apos;s happening right now in the Ethereum ecosystem: Though
+the Berlin hard fork and its subsequent block gas limit increase was a
+success, gas fees have continued to be insane. Tangible Layer 2 (short:
+L2) scaling solutions are <a target="_blank" rel="noopener" href="https://optimistic.etherscan.io/">visible on the horizon</a>, but
+my vision is blurred - there&apos;s lots of new information to take in and
+process. Having dedicated significant parts of my career towards finding
+scaling solutions for blockchains: I&apos;m trying to reassess where we are.
+I can&apos;t say for now. I&apos;ll need more time and dedicate more research.</p>
+<figure>
+<img src="/assets/images/ethgasfees.png" alt="Ethereum gas fees of 1000 gwei per gas from May 21, 2021">
+<figcaption aria-hidden="true">Ethereum gas fees of 1000 gwei per gas
+from May 21, 2021</figcaption>
+</figure>
+<p>But here&apos;s the more significant problem: Not being able to
+strategically assess what to build and where is a problem in execution.
+See, in November, <a href="https://timdaub.github.io/2020/12/11/rugpullindex/">I started a
+project that rates data sets by their market&apos;s quality</a>. I&apos;d say it&apos;s
+been going well so far for anything but the blockchain-related technical
+components. The project&apos;s eventual idea is to create an ERC20 token akin
+to an index fund&apos;s ETF that holds multiple assets in a specific
+quantity. Think of <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> like an S&amp;P500
+but for data sets instead of American companies.</p>
+<figure>
+<img src="/assets/images/rpiscreenshotmay.png" alt="A screenshot of my project&apos;s website in May 2021">
+<figcaption aria-hidden="true">A screenshot of my project&apos;s website in
+May 2021</figcaption>
+</figure>
+<p>I&apos;m burning to make it happen, but I&apos;m struggling to move forward on
+a technical level. There are no &quot;technical challenges&quot;, as I could build
+on the Ethereum mainnet. After all, I&apos;m familiar with the tech, and I&apos;d
+be able to code that.</p>
+<p><strong>However, the blocker at this point is of an existential
+matter: How&apos;s Ethereum going to look like in, e.g., three months, one
+year, five years?</strong> How am I supposed to make an informed
+decision about building on mainnet when I don&apos;t know where it&apos;s going to
+go?</p>
+<p>For now, the facts are these: Executing a single on-chain asset swap
+is in the range of 100k gas. At times, that can be 500 to 1000 USD in
+transaction fees. Multiply that by 10x, and you have the transaction fee
+for a single rebalancing of rugpullindex&apos;s fund assuming ten assets.
+Don&apos;t get me wrong, for sure, is there a way to rationalize that action
+by only executing it when it&apos;s economically sound for its users - e.g.,
+when enough capital uses the index.</p>
+<p>However, the problem is that having my product directly dependent on
+the Ethereum mainnet&apos;s performance may impact its safety and
+quality.</p>
+<p>What if we need to rebalance the index, but the network&apos;s congestion
+continues to increase, making the product&apos;s position permanently
+economically unsound? An example: Assume we&apos;ve distributed the index
+token to, say, 20 users. It&apos;s financially sound for them to pay a
+transaction fee of 5$ / month to rebalance. But then gas prices
+increase, and now suddenly it costs them 50$ / month for the same
+service. Now, for many, it may not be a sound investment anymore. What
+about the index&apos;s functionality - does it still make sense in that
+environment?</p>
+<p>Of course, I thought deeply about solutions for this. But there
+weren&apos;t a lot of options that came to mind. Here are two tangible things
+that developers are doing these days to avoid the problem:</p>
+<ol type="1">
+<li>Ship to a side chain.</li>
+<li>Ship to a rollup.</li>
+</ol>
+<p><strong>About (2) shipping to a rollup</strong>: The problem is that
+they don&apos;t exist yet on the mainnet. I mean, they do exist, but
+primarily specialized to a use case.</p>
+<p>I could be building on the beta version of, e.g., Optimism&apos;s L2
+rollup. That to me, however, is the equivalent of gambling with my time
+and focus on the hypothesis that Optimism will indeed ship a
+conceptually ideal platform for my decentralized app. Don&apos;t get me
+wrong; I don&apos;t doubt that their product will be great eventually. But
+there&apos;s an undeniable chance that they won&apos;t ship what I need. And
+there&apos;s even a chance that they won&apos;t ship at all. Also, I don&apos;t want to
+make bets when building software. I want to base decisions on facts.</p>
+<p><strong>Then, the answer must be in (1)</strong>, shipping to a side
+chain-like, e.g., Polygon. But there are even more significant problems.
+In fact, I find it incredibly short-sighted and inconsiderate of many
+projects in the space to &quot;just&quot; ship to side chains. It&apos;s like taking
+the easy way out when uploading your contracts to side chains like xDAI,
+Polygon, etc..</p>
+<p><a href="https://timdaub.github.io/2019/02/28/poa/">In 2019, I argued
+that the context you in ship matters as it determines your assumptions
+when engineering the product</a>. I want to double down on that
+statement today: When you ship on a side chain, you get a side chain
+product and vice versa. That&apos;s not a new insight but just another facet
+of <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Conway%27s_law&amp;oldid=1024184133">Conway&apos;s
+law</a>.</p>
+<p><strong>I think most of us agree that the primary value of the
+Ethereum mainnet, so far, has come from the composability of its smart
+contracts, the possibility of projects to cross-pollinate, and its
+liquidity</strong>.</p>
+<p>And now I&apos;m supposed to solve high gas fees by shipping on a side
+chain? I think we&apos;re deliberately ruining all of the above positives to
+serve our user&apos;s apparent lust for convenience by shipping on
+sidechains. I consider such a problem-solving strategy a &quot;don&apos;t.&quot; That&apos;s
+development driven by instant gratification and short-term gain. Nothing
+more.</p>
+<p>So then, finally, given this existential execution crisis: how am I
+supposed to address the issue? My idea: with direct control and a
+principled approach.</p>
+<p>I know that value is concentrating on the most technically
+sophisticated network - that being Ethereum L1 mainnet right now. I know
+that L2 is superior from a safety perspective compared to side chains.
+Transitively, this means that more value will accrue on L2 than on side
+chains eventually. I also know that by either building on L1 or L2, I&apos;ll
+build my dapp &quot;the right way&quot; (from an assumptions perspective) - but
+also: that I&apos;ll remain in control over my application&apos;s execution
+environment when shipping towards the mainnet (either on L1 or L2).</p>
+<p><strong>Finally, it&apos;s essential to realize that I won&apos;t have to ship
+towards either option</strong>. I can invent a third option too. And in
+fact, that&apos;s what I&apos;ve started to do.</p>
+<p>If my problem is Ethereum mainnet&apos;s gas prices, then what can I do to
+decrease them? Recently, I gave suggestions that could cut transaction
+fees in half for automated market maker apps <a href="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/">by
+avoiding sending an on-chain <code>approve</code> transaction</a>. I
+started reaching out to L2 builders to learn more about rollups, too.
+And <a target="_blank" rel="noopener" href="https://github.com/rugpullindex/documents/tree/master/research">I
+spent a considerable amount of my time recently trying to learn more
+about rollups and layer 2</a>.</p>
+<figure>
+<img src="/assets/images/rollupsresearch.png" alt="A drawing from my research on rollups">
+<figcaption aria-hidden="true">A drawing from my research on
+rollups</figcaption>
+</figure>
+<p>It&apos;s been an empowering journey of learning so far. I even have an
+idea of building a rollup-inspired dapp myself now. One that may not
+need complicated off-chain consensus. But generally, the idea has been
+trying to understand the technology better to improve my
+decision-making. I want to optimize the outcomes of my engineering by
+knowing and understanding the situation as best as I can.</p>
+<p><strong>I want to base decisions on facts, not bets, And that&apos;s where
+I am today. Fingers crossed!</strong></p>
+<hr>
+<p>If you enjoyed reading this post and are interested in my Ethereum
+project called rugpullindex.com, check out our website and feel free to
+sign up with the newsletter below.</p>
+<p>Best, Tim</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&text=Existential Challenges of Dapp Builders"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&is_video=false&description=Existential Challenges of Dapp Builders"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Existential Challenges of Dapp Builders&body=Check out this article: https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&title=Existential Challenges of Dapp Builders"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&name=Existential Challenges of Dapp Builders&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/&t=Existential Challenges of Dapp Builders"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

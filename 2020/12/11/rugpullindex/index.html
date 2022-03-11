@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Meet rugpullindex.com, an index fund for data sets">
+<meta property="og:url" content="https://timdaub.github.io/2020/12/11/rugpullindex/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/marketmakers.png">
+<meta property="article:published_time" content="2020-12-11T10:59:01.000Z">
+<meta property="article:modified_time" content="2020-12-11T10:59:01.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="smart contracts">
+<meta property="article:tag" content="blockchain">
+<meta property="article:tag" content="startup">
+<meta property="article:tag" content="index">
+<meta property="article:tag" content="markets">
+<meta property="article:tag" content="automated market makers">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Meet rugpullindex.com, an index fund for data sets</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/12/27/wasm-stream/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/12/03/samesite/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/12/11/rugpullindex/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/12/11/rugpullindex/&text=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/12/11/rugpullindex/&is_video=false&description=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Meet rugpullindex.com, an index fund for data sets&body=Check out this article: https://timdaub.github.io/2020/12/11/rugpullindex/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/12/11/rugpullindex/&name=Meet rugpullindex.com, an index fund for data sets&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/12/11/rugpullindex/&t=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tldr"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-building-a-data-set-index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set
+Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rating-a-data-set-by-its-markets-performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set
+by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introducing-rugpullindex.com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-does-the-future-hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Meet rugpullindex.com, an index fund for data sets
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-12-11T10:59:01.000Z" itemprop="datePublished">2020-12-11</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/automated-market-makers/" rel="tag">automated market makers</a>, <a class="tag-link-link" href="/tags/blockchain/" rel="tag">blockchain</a>, <a class="tag-link-link" href="/tags/ethereum/" rel="tag">ethereum</a>, <a class="tag-link-link" href="/tags/index/" rel="tag">index</a>, <a class="tag-link-link" href="/tags/markets/" rel="tag">markets</a>, <a class="tag-link-link" href="/tags/smart-contracts/" rel="tag">smart contracts</a>, <a class="tag-link-link" href="/tags/startup/" rel="tag">startup</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      6 minutes read
+      <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Meet rugpullindex.com, an index fund for data sets">
+<meta property="og:url" content="https://timdaub.github.io/2020/12/11/rugpullindex/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
+<meta property="article:published_time" content="2020-12-11T10:59:01.000Z">
+<meta property="article:modified_time" content="2020-12-11T10:59:01.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="smart contracts">
+<meta property="article:tag" content="blockchain">
+<meta property="article:tag" content="startup">
+<meta property="article:tag" content="index">
+<meta property="article:tag" content="markets">
+<meta property="article:tag" content="automated market makers">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><h2 id="tldr">TL;DR</h2>
+<p><strong>TL;DR:</strong> I built a financial index that <strong>rates
+data sets</strong> by their markets&apos; performance
+(<strong>liquidity</strong> and <strong>equality of liquidity
+shares</strong>). <strong>Check out the <a target="_blank" rel="noopener" href="https://rugpullindex.com">website</a></strong> and the
+minimalistic <a target="_blank" rel="noopener" href="https://rugpullindex.com/changelog.txt">blog</a>,
+or keep on reading the article.</p>
+<p><img src="/assets/images/rugpullindex.png" alt="A screenshot of the
+rugpullindex.com website" style="border: 5px solid #2bbc8a; border-radius: 5px;"></p>
+<h2 id="why-building-a-data-set-index">Why Building a Data Set
+Index?</h2>
+<p><strong>Would you pay a stranger on the internet</strong> to buy a
+data set they&apos;re offering without knowing them or ever having seen the
+data? Tough decision! But that&apos;s precisely the type of situation <a target="_blank" rel="noopener" href="https://oceanprotocol.com">Ocean Protocol</a> users face in its
+newly-launched decentralized <a target="_blank" rel="noopener" href="https://market.oceanprotocol.com">data set market</a> [3].</p>
+<p>I&apos;ll spare you most of the details of how it all works and say this:
+2020&apos;s most transforming technology has been <strong>on-chain
+markets</strong>. In particular, the implementation that <a target="_blank" rel="noopener" href="https://uniswap.org/">uniswap.org</a> is using called
+<strong>automated market makers</strong>.</p>
+<p>Simply put, they work by incentivizing users to <em>pool</em> a pair
+of assets at a ratio they deem as the assets&apos; current prices. These
+users, I herein call them <strong>liquidity providers</strong>, e.g.,
+pool 1 ETH and 540 USDC, so that when a buyer of either asset comes
+along, they can immediately trade 1 ETH for 540 USDC or 540 USDC for 1
+ETH. This principle works fantastically at scale, as the pool
+incentivizes liquidity-providing by charging buyers and sellers a small
+fee, which is distributed by the pool to each liquidity provider,
+respectively [1].</p>
+<p><img src="/assets/images/marketmakers.png" style="background-color: white;
+border: 5px solid black; border-radius: 5px;"></p>
+<p>This model has been so successful that there&apos;ve been days where
+decentralized trading on Uniswap outperformed volumes on Coinbase!
+Which, of course, has lots of implications on the cryptocurrency space.
+I think it&apos;s no overstatement to say that automated market makers may be
+<strong>the killer app for crypto</strong>.</p>
+<div class="twitter-wrapper"><blockquote class="twitter-tweet"><a target="_blank" rel="noopener" href="https://twitter.com/haydenzadams/status/1300034164830408704"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>But there&apos;s one implication I&apos;ve been particularly keen on exploring:
+all <strong>the openly-accessible data produced by on-chain
+markets</strong>. See, if you ever tried building a trading bot, you&apos;ll
+have noticed the terrible resolution publicly-available market data has.
+You might have also noticed that it&apos;s quite difficult even to find data
+at all. It&apos;s not by accident. <strong>Trading data is
+valuable</strong>.</p>
+<h2 id="rating-a-data-set-by-its-markets-performance">Rating a Data Set
+by its Market&apos;s Performance</h2>
+<p>Remember when I asked you at the beginning of this article about
+<strong>buying a data set from a random stranger on the
+internet?</strong> Well, it turns out that Ocean Protocol is now betting
+on the same technology that made Uniswap successful. They allow users to
+publish a data set, along with a fungible <strong>data token</strong>
+and an integrated <strong>automated market maker</strong>. Meaning, you
+can now buy access to a data set by purchasing tokens. These tokens get
+priced by liquidity providers providing a ratio of OCEAN Tokens to
+<em>data tokens</em>.</p>
+<p>However, just because data sets are now available for sale on the
+market, doesn&apos;t mean you know they&apos;re valuable! After all, if ebay.com
+didn&apos;t have a rating system for sellers, how would you know which seller
+to trust?</p>
+<p>On ebay.com, you know which seller to trust because you can see how
+many articles they&apos;ve sold and what each buyer&apos;s experience was. It&apos;s a
+simple identity-based rating system.</p>
+<p>But within the anarchistic world of cryptocurrencies, there are no
+working identity-based rating systems! Instead, the space is filled with
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sock_puppet_account">sock
+puppets</a> and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sybil_attack">sybils</a>.
+<strong>Then, without buying a data set first, how are we supposed to
+know if a data set is valuable or an outright scam?</strong></p>
+<h2 id="introducing-rugpullindex.com">Introducing rugpullindex.com</h2>
+<p>That&apos;s where <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>
+comes into play. <strong>We crawl all of Ocean Protocol&apos;s data token
+pools daily</strong> and rate each market&apos;s liquidity provider
+distribution by its equality using the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini
+coefficient</a>. While ranking markets based on their liquidity is
+common industry-practice, calculating a Gini score for each market&apos;s
+liquidity provider shares isn&apos;t. The idea behind this is that the more
+liquidity providers with an equal share back an asset in the market, the
+less likely it is for a &quot;rug pull&quot; attack to happen (details <a target="_blank" rel="noopener" href="https://github.com/oceanprotocol/multi-repo-issue/issues/30#issuecomment-726132174">here</a>).
+By factoring in a pool&apos;s relative liquidity, it allows us to derive a
+score <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> that is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>s</mi><mo>&lt;</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">0 &lt; s &lt; 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span></span></span></span>.</p>
+<p>For users of <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>,
+this <strong>yields a few attractive benefits</strong>:</p>
+<ol type="1">
+<li>They can now choose to adjust their data set investments based on
+market data.</li>
+<li>They can decide to invest in data sets relative to their performance
+on to <em>increase their diversivication and hence lower their exposure
+risk</em>. And finally;</li>
+<li>If they&apos;re unsure about <strong>sending a random stranger on the
+internet money for a data set</strong>, they can check out the data
+set&apos;s market performance to make an informed decision.</li>
+</ol>
+<p>It&apos;s a widely-known fact that index-based investment yields superior
+results compared to stock picking [2]. The same is true when
+<em>investing</em> in data, which makes me excited about working on this
+project.</p>
+<h2 id="what-does-the-future-hold">What Does The Future Hold?</h2>
+<p>I have many ideas for <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> and not as much
+time as I&apos;d like to have. However, my overarching goal is to make the
+ranking so reliable that I can build a smart contract-based index fund
+on top of it.</p>
+<p>I think that rating assets based on their markets&apos; performance is
+valuable occupation in itself. Not only within the data set market but
+beyond. I&apos;m particularly interested in rating a wide range of on-chain
+asset markets, but I&apos;m also thinking about rating more on-chain
+intellectual property markets. I&apos;m eager to crawl more data and explore.
+Until then, I hope you&apos;re having fun using <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>.</p>
+<p><em><strong>If you have questions, feedback, or business inquiries,
+please contact me: tim@daubenschuetz.de</strong>. If you want to follow
+along by building journey, <strong>please subscribe to my newsletter at
+the end of the page!</strong></em></p>
+<h2 id="references">References</h2>
+<ul>
+<li>1: <a target="_blank" rel="noopener" href="https://ethresear.ch/t/improving-front-running-resistance-of-x-y-k-market-makers/1281">Ethresearch:
+Improving front running resistance of x*y=k market makers</a></li>
+<li>2: KAHNEMAN, Daniel. Thinking, fast and slow. Macmillan, 2011.</li>
+<li>3: <a target="_blank" rel="noopener" href="https://blog.oceanprotocol.com/oceans-on-ethereum-mainnet-ba9be1aee0ce">Ocean&#x2019;s
+on Ethereum Mainnet</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tldr"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-building-a-data-set-index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set
+Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rating-a-data-set-by-its-markets-performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set
+by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introducing-rugpullindex.com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-does-the-future-hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2020/12/11/rugpullindex/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2020/12/11/rugpullindex/&text=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2020/12/11/rugpullindex/&is_video=false&description=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Meet rugpullindex.com, an index fund for data sets&body=Check out this article: https://timdaub.github.io/2020/12/11/rugpullindex/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2020/12/11/rugpullindex/&title=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2020/12/11/rugpullindex/&name=Meet rugpullindex.com, an index fund for data sets&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2020/12/11/rugpullindex/&t=Meet rugpullindex.com, an index fund for data sets"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

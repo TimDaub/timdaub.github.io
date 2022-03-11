@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tokens considered harmful">
+<meta property="og:url" content="https://timdaub.github.io/2021/10/31/tokens-considered-harmful/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
+<meta property="article:published_time" content="2021-10-31T22:55:25.000Z">
+<meta property="article:modified_time" content="2021-10-31T22:55:25.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="tokens">
+<meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="consensus">
+<meta property="article:tag" content="ERC20">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Tokens considered harmful</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2021/11/03/principles-for-the-metaverse/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2021/10/21/on-chain-the-emperor-wears-no-clothes/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&text=Tokens considered harmful"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&is_video=false&description=Tokens considered harmful"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tokens considered harmful&body=Check out this article: https://timdaub.github.io/2021/10/31/tokens-considered-harmful/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&name=Tokens considered harmful&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&t=Tokens considered harmful"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Tokens considered harmful
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-10-31T22:55:25.000Z" itemprop="datePublished">2021-10-31</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ERC20/" rel="tag">ERC20</a>, <a class="tag-link-link" href="/tags/Ethereum/" rel="tag">Ethereum</a>, <a class="tag-link-link" href="/tags/consensus/" rel="tag">consensus</a>, <a class="tag-link-link" href="/tags/decentralized-finance/" rel="tag">decentralized finance</a>, <a class="tag-link-link" href="/tags/tokens/" rel="tag">tokens</a>, <a class="tag-link-link" href="/tags/web3/" rel="tag">web3</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      4 minutes read
+      <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tokens considered harmful">
+<meta property="og:url" content="https://timdaub.github.io/2021/10/31/tokens-considered-harmful/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
+<meta property="article:published_time" content="2021-10-31T22:55:25.000Z">
+<meta property="article:modified_time" content="2021-10-31T22:55:25.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="web3">
+<meta property="article:tag" content="tokens">
+<meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="consensus">
+<meta property="article:tag" content="ERC20">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In 2017 I boarded a special plane. My second flight to New York City
+with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark
+Airport. It was just hours before that year&apos;s Consensus conference in
+Time Square&apos;s Marriott Marquis would take place and as the product
+manager of BigchainDB, I had no idea what I had gotten myself into.</p>
+<p>I landed real &quot;poor but sexy&quot; by boarding a direct bus shuttle to
+Manhattan from Newark. And then what followed were a few days of total
+craziness.</p>
+<p>Already at seven in the morning of the show&apos;s first day, our booth
+got drowned in visitors. &quot;They&apos;re crazy!&quot; was all my colleague had to
+contribute to the crowd&apos;s engagement.</p>
+<p>And soon a personal problem I couldn&apos;t have anticipated was the
+fragility of my voice becoming softer as it started fading from the
+constant screaming-level I had to retain by communicating on the
+Marriott&apos;s trade floor.</p>
+<figure>
+<img src="/assets/images/uasf.jpeg" alt="UASF (long: &quot;user activated soft fork&quot;)">
+<figcaption aria-hidden="true">UASF (long: &quot;user activated soft
+fork&quot;)</figcaption>
+</figure>
+<p>I remember these days as specially weird. Particularly, finding
+myself in an elevator full of UASF-wearing Bitcoin maxis, or to be
+entangled in rather casual conversations with Bushwick&apos;s nouveau
+rich.</p>
+<p>Also, there&apos;s this party night on a skyscraper&apos;s rooftop. And some
+dialogues:</p>
+<p><strong>I asked him</strong> what he does for a living, and he
+answered that he worked for the people throwing the party.</p>
+<p>&quot;Ah, really? And what do you do?&quot;; I followed up.</p>
+<p>&quot;I work for EOS!&quot; he claimed.</p>
+<p>&quot;EOS?&quot;</p>
+<p>&quot;Yeah, EOS, the Ethereum killer.&quot;</p>
+<p>Another memory is later, when she pointed to a guy and said: &quot;That&apos;s
+him, that&apos;s the DAO hacker!&quot;</p>
+<p>Most of it, just blurry memories today.</p>
+<p>But what truly happened during those days was the discovery of the
+cryptosphere new favorite toy: <em>tokens</em>. All the summer, they had
+been the rage. They were confirmed through Bitcoin&apos;s steady climb and
+cemented in to history those days Ethereum&apos;s price simply started
+exploding.</p>
+<p>Tokens, they called them, and suddenly everything looked like a nail.
+It did to me too. And it was hard to get at first.</p>
+<p>&quot;What to make of them?&quot; I thought. &quot;Tokens? Coins? And for what?&quot;
+Those days, my mind got stuck finding parallels to Bitcoin. Those days
+it started wandering. &quot;So, if we want to have tokens for another project
+but Bitcoin: Wouldn&apos;t it mean that we&apos;d either have to repurpose the
+Proof of Work algorithm or invent another utility delivering
+algorithm?&quot;</p>
+<p>Months later, I found myself trying to model a utility token. It just
+seemed logical: I was an engineer, and here was a tool that could help
+me to engineer more.</p>
+<p>But it came different than I expected.</p>
+<p>Given how galvanized we were, we pivoted the company. But contrary to
+my expectations, we didn&apos;t start designing our software to encompass
+tokens. In fact, noone else did either.</p>
+<p>I started looking around, and all I saw were tokens. Tokens tokens
+tokens. Every investor wanted them; many tech people seemed cool with
+them too. So what could be wrong?</p>
+<p>But nobody really got what we were supposed to do with them. Sure,
+there were occasionally brilliant moments that led to interesting
+designs. Case in point, TCRs (long: &quot;token curated registries&quot;). But
+even after months, everything had remained how I had initially observed
+it.</p>
+<p>A token&apos;s first principle existence wasn&apos;t meant to exponentiate
+engineering. Instead, I and others found myself observing waves of VCs
+pushing for tokenization with seemingly no reason but to collect funds.
+Suddenly, what I thought of as an engineer&apos;s tool became a framework for
+flipping wealth from poor to rich overnight.</p>
+<p>&quot;Just launch a token; use our SAFT. 10 easy steps to ICO.&quot;</p>
+<p>I tried going along with it. After all, what could be so bad? But the
+dust stirred up those days didn&apos;t settle, and tokens didn&apos;t end up
+making sense. I mean, they did: But only in a very narrow engineering
+sense. Super tough engineering, designing utility machines. A concept
+business-types weren&apos;t interested in or capable of seeing at the time.
+Maybe not capable of seeing today.</p>
+<p>And so, when I saw that we put the token before the product: I
+quit.</p>
+<hr>
+<p>In 2021, most tokens are still speculative nonsense. Most companies
+launch a token and then try to build a product - many fail to build a
+product. Many fail to incorporate their token in a meaningful way. Don&apos;t
+be those companies.</p>
+<p>Think rationally and resist forced tokenization. Take a critical
+stance.</p>
+<p>Think logically, remove your ego and most importantly: don&apos;t let your
+capital (desires) influence your engineering decisions. Code is speech
+and you are capable of more than just increasing your personal
+wealth.</p>
+<p>Also: Your token doesn&apos;t have utility just because you say so.</p>
+<p>You can be braver. Just build what needs building and ignore the
+bs.</p>
+<p>Do what&apos;s good and reasonable - for everyone. And not only for those
+that hold the token.</p>
+<p>Because tokens in software design considered harmful.</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&text=Tokens considered harmful"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&is_video=false&description=Tokens considered harmful"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Tokens considered harmful&body=Check out this article: https://timdaub.github.io/2021/10/31/tokens-considered-harmful/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&title=Tokens considered harmful"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&name=Tokens considered harmful&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2021/10/31/tokens-considered-harmful/&t=Tokens considered harmful"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>
