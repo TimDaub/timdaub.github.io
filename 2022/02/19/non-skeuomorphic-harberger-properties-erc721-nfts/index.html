@@ -117,12 +117,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-problem-of-private-property"><span class="toc-number">1.</span> <span class="toc-text">The Problem of Private
-Property</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#understanding-harberger-properties"><span class="toc-number">2.</span> <span class="toc-text">Understanding Harberger
-Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#harberger-property-forks-private-property."><span class="toc-number">3.</span> <span class="toc-text">Harberger Property
-forks Private Property.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#harberger-escapes"><span class="toc-number">4.</span> <span class="toc-text">&quot;Harberger Escapes&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#is-erc721-compatible-with-harberger-properties"><span class="toc-number">5.</span> <span class="toc-text">Is ERC721
-compatible with Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do-we-need-an-erc721-2.0-for-harberger-properties"><span class="toc-number">6.</span> <span class="toc-text">Do we need an
-ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#see-also"><span class="toc-number">7.</span> <span class="toc-text">See also:</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Problem-of-Private-Property"><span class="toc-number">1.</span> <span class="toc-text">The Problem of Private Property</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Understanding-Harberger-Properties"><span class="toc-number">2.</span> <span class="toc-text">Understanding Harberger Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Harberger-Property-forks-Private-Property"><span class="toc-number">3.</span> <span class="toc-text">Harberger Property forks Private Property.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9CHarberger-Escapes%E2%80%9D"><span class="toc-number">4.</span> <span class="toc-text">“Harberger Escapes”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Is-ERC721-compatible-with-Harberger-Properties"><span class="toc-number">5.</span> <span class="toc-text">Is ERC721 compatible with Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-we-need-an-ERC721-2-0-for-Harberger-Properties"><span class="toc-number">6.</span> <span class="toc-text">Do we need an ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#See-also"><span class="toc-number">7.</span> <span class="toc-text">See also:</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -164,7 +159,7 @@ ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-leve
 
       |
       <i class="fas fa-stopwatch"></i>
-      7 minutes read
+      6 minutes read
       <meta name="description" content="This post is part of my series, which covers ETHDenver. Today, I had the honor of meeting with members of the RadxChange Harberger tax working group. In the following sections, I want to iterate on a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Non-Skeuomorphic Harberger Properties may not be implementable as ERC721 NFTs">
@@ -188,147 +183,130 @@ ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-leve
   
 
   <div class="content" itemprop="articleBody">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><p>This post is part of my series, which covers ETHDenver. Today, I had
-the honor of meeting with members of the <a target="_blank" rel="noopener" href="https://www.radicalxchange.org/concepts/partial-common-ownership/">RadxChange
-Harberger tax working group</a>. In the following sections, I want to
-iterate on a topic that I deemed relevant and important in today&apos;s
-conversation that nicely ties into my previous post on creating
-non-skeuomorphic ownership experiences.</p>
-<h2 id="the-problem-of-private-property">The Problem of Private
-Property</h2>
-<p>Harberger taxes, a topic extensively discussed in &quot;Radical Markets&quot;
-and the Radical Exchange movement, is a mechanism for more fairly
-pricing a particular scarce property. The book features an example of
-the government in California trying to build a high-speed rail from Los
-Angeles to San Francisco. And facing the problem of real estate owners
-taking advantage of their monopolistic property possession when asked by
-the railway constructor to sell their homes.</p>
-<p>Weyl and Posner argue that the last remaining property owner along
-that high-speed railroad positions themselves monopolistic as, assuming
-the necessity for a straight rail, they can leverage their property&apos;s
-geography to ask for a price almost as high as it&apos;d take to plan and
-execute an alternative route or whatever would be the total cost of the
-entire high-speed rail project failing.</p>
-<p>Within a private property owner&apos;s mind, the case is clear: Sell or as
-high as possible or drag the whole process out to increase leverage.</p>
-<h2 id="understanding-harberger-properties">Understanding Harberger
-Properties</h2>
-<p>To address this problem, Weyl and Posner argue that a different way
-of pricing real-estate in California could help build the high-speed
-rail project more efficiently. Their suggestion is based on the idea
-that each real estate is continuously available for sale and where the
-owner is voluntarily setting a self-assessed price on which they have to
-additionally pay a reoccurring percentual fee: The &quot;Harberger tax.&quot;</p>
-<p><img src="https://github.com/rugpullindex/libharberger/raw/master/assets/harbergerschema.jpg"></p>
-<p>If, e.g., there was a 0.2% Harberger tax on California homes and an
-owner would self-assess their property to be $100k, they&apos;d be required
-to pay <span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>100000</mn><mo>&#x2217;</mo><mn>0.02</mn><mo>=</mo><mn>200</mn></mrow><annotation encoding="application/x-tex">100000 *
-0.02 = 200</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2217;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">0</span><span class="mord">0</span></span></span></span></span> USD worth of Harberger taxes. Interestingly, both the
-property being continuously on sale and the tax needing to be paid
-incentivizes the owner to evaluate their property at the possibly most
-accurate price.</p>
-<p>If they&apos;d assess it too low, since it&apos;s always on sale, it could be
-easily picked up by a property flipper while it&apos;d incur unsustainable
-reoccurring Harberger taxes if it were priced too high.</p>
-<h2 id="harberger-property-forks-private-property.">Harberger Property
-forks Private Property.</h2>
-<p>What I deemed to be an interesting talking point in today&apos;s meeting
-on Harberger taxes at ETHDenver, however, started as a discussion around
-measuring a property&apos;s turnover rate. Given that setting a property
-class&apos;s tax rate well may have to be adjusted dynamically; one argument
-was that naturally, a property owner always has the lowest possible tax
-rate at interest.</p>
-<p>It makes sense intuitively too. While arguably living in a &quot;Harberger
-universe,&quot; so a place where all property is priced using Harberger taxes
-creates meaningful collective outcomes, a rational individual
-understanding the monopolistic qualities of private property must want
-to either lower or abolish their Harberger tax as it&apos;d mean being able
-to increase their property&apos;s value (without incurring higher total tax
-costs) or improving their uncertainty of continued ownership.</p>
-<h2 id="harberger-escapes">&quot;Harberger Escapes&quot;</h2>
-<p>So in that case, and since we&apos;re heavily hypernormalized in a private
-property society, a fenced-off Harberger Property system that, e.g., can
-be created with smart contracts on Ethereum would always end up having
-to make sure that property owners don&apos;t &quot;escape&quot; from the &quot;Harberger
-universe&quot; into the realm of &quot;private property.&quot;</p>
-<p>The California railway example goes like this: Assume you&apos;re the last
-Californian property owner, but the state had prior agreed-upon
-Harberger pricing. However, through a loophole in the law, you&apos;re able
-to change the property owner&apos;s name on the deed of ownership. You
-understand the private property principles, and you&apos;re a degen, so you
-give Wall Street a call and explain to them your situation: You tell
-them that you&apos;re the last person on the high-speed rail needing to sell
-the property: But you don&apos;t have enough capital to sustain pricing it
-high until the railway construction company gives in to your
-demands.</p>
-<p>In that case, Wall Street might give you a loan, or since your
-property is &quot;alwaysonsale&quot;, they might buy it from you right away for a
-higher than usual rate, assuming they can further increase pressure on
-the railroad constructor.</p>
-<p>Now, in the constructed case of a wet-code law that allows for
-appropriate recourse, that may mean that indeed the property will end up
-being priced better under Harberger law than as private property.</p>
-<p>However, e.g., Harberger properties implemented on Ethereum, that may
-not be the case. And that&apos;s where the group today had, I think, a slight
-disagreement.</p>
-<h2 id="is-erc721-compatible-with-harberger-properties">Is ERC721
-compatible with Harberger Properties?</h2>
-<p>Consider the case where we create an ERC721 NFT that is continuously
-on sale using Harberger tax mechanics but still is entirely compliant
-with ERC721. In that case, e.g., that <code>transferFrom</code> method
-might allow sending the deed of ownership from one account to another.
-But, it also allows an owner to make an internal accounting transfer
-where they sent their property from one of their accounts to
-another.</p>
-<p>We want to allow an owner to send their deed of ownership from one
-address to another as, e.g., their keys get compromised. Although, this
-&quot;maintenance functionality&quot; may then easily be abused by owners wanting
-to &quot;Harberger escape&quot; into private property: By selling their property
-over the counter for more than what it is worth to a buyer, the seller
-profits from the premium while the buyer profits from lower taxes.</p>
-<p>While it is true that this deal may be fragile as the information the
-private agreement was based on could easily leak, and hence the property
-picked up by a sneaky arbitrageur, I still believe &quot;Harberger escapes&quot;
-into private properties could become a reality.</p>
-<p>I understand my attempt at playing devil&apos;s advocate is not ideal yet.
-However, I feel that it&apos;s rather just a challenge of finding a
-well-enough positioned new owner with just enough opposed interest in
-Harberger-taxed property. E.g., if it wasn&apos;t enough to keep the deal&apos;s
-basis a secret, then, e.g., a malicious buyer&apos;s hedge could be some bet
-directly opposed to the railroad company&apos;s success: e.g., shorting its
-stock.</p>
-<h2 id="do-we-need-an-erc721-2.0-for-harberger-properties">Do we need an
-ERC721 2.0 for Harberger Properties?</h2>
-<p>Despite all this skepticism, I&apos;m still a firm believer in the idea,
-while I believe it&apos;ll have to carefully be implemented as a fenced-off
-system for it to work. An elegant solution I have not explored further
-came from the <a target="_blank" rel="noopener" href="https://www.geoweb.network/">Geoweb Network</a>
-team that suggested only ever allowing a smart contract to truly
-&quot;privately possess&quot; the property.</p>
-<p>It&apos;s because what this would allow is anyone being always able to
-&quot;pick up&quot; the property, particularly in the case of leaked alpha.
-However, it&apos;d mean restricting the ERC721 token&apos;s
-<code>transferFrom</code> function only to be called by the Harberger
-tax management contract. Assuming marketplaces like Opensea would
-recognize this limitation in the collection, it wouldn&apos;t pose a problem,
+    <p>This post is part of my series, which covers ETHDenver. Today, I had the honor
+of meeting with members of the <a target="_blank" rel="noopener" href="https://www.radicalxchange.org/concepts/partial-common-ownership/">RadxChange Harberger tax working
+group</a>. In
+the following sections, I want to iterate on a topic that I deemed relevant and
+important in today&#x2019;s conversation that nicely ties into my previous post on
+creating non-skeuomorphic ownership experiences.</p>
+<h2 id="The-Problem-of-Private-Property">The Problem of Private Property</h2>
+<p>Harberger taxes, a topic extensively discussed in &#x201C;Radical Markets&#x201D; and the
+Radical Exchange movement, is a mechanism for more fairly pricing a particular
+scarce property. The book features an example of the government in California
+trying to build a high-speed rail from Los Angeles to San Francisco. And facing
+the problem of real estate owners taking advantage of their monopolistic
+property possession when asked by the railway constructor to sell their homes.</p>
+<p>Weyl and Posner argue that the last remaining property owner along that
+high-speed railroad positions themselves monopolistic as, assuming the
+necessity for a straight rail, they can leverage their property&#x2019;s geography to
+ask for a price almost as high as it&#x2019;d take to plan and execute an alternative
+route or whatever would be the total cost of the entire high-speed rail project
+failing.</p>
+<p>Within a private property owner&#x2019;s mind, the case is clear: Sell or as high as
+possible or drag the whole process out to increase leverage.</p>
+<h2 id="Understanding-Harberger-Properties">Understanding Harberger Properties</h2>
+<p>To address this problem, Weyl and Posner argue that a different way of pricing
+real-estate in California could help build the high-speed rail project more
+efficiently. Their suggestion is based on the idea that each real estate is
+continuously available for sale and where the owner is voluntarily setting a
+self-assessed price on which they have to additionally pay a reoccurring
+percentual fee: The &#x201C;Harberger tax.&#x201D;</p>
+<p><img src="https://github.com/rugpullindex/libharberger/raw/master/assets/harbergerschema.jpg" alt></p>
+<p>If, e.g., there was a 0.2% Harberger tax on California homes and an owner would
+self-assess their property to be $100k, they&#x2019;d be required to pay $$100000 *
+0.02 = 200$$ USD worth of Harberger taxes. Interestingly, both the property
+being continuously on sale and the tax needing to be paid incentivizes the
+owner to evaluate their property at the possibly most accurate price.</p>
+<p>If they&#x2019;d assess it too low, since it&#x2019;s always on sale, it could be easily
+picked up by a property flipper while it&#x2019;d incur unsustainable reoccurring
+Harberger taxes if it were priced too high.</p>
+<h2 id="Harberger-Property-forks-Private-Property">Harberger Property forks Private Property.</h2>
+<p>What I deemed to be an interesting talking point in today&#x2019;s meeting on
+Harberger taxes at ETHDenver, however, started as a discussion around measuring
+a property&#x2019;s turnover rate. Given that setting a property class&#x2019;s tax rate well
+may have to be adjusted dynamically; one argument was that naturally, a
+property owner always has the lowest possible tax rate at interest.</p>
+<p>It makes sense intuitively too. While arguably living in a &#x201C;Harberger
+universe,&#x201D; so a place where all property is priced using Harberger taxes
+creates meaningful collective outcomes, a rational individual understanding the
+monopolistic qualities of private property must want to either lower or abolish
+their Harberger tax as it&#x2019;d mean being able to increase their property&#x2019;s value
+(without incurring higher total tax costs) or improving their uncertainty of
+continued ownership.</p>
+<h2 id="&#x201C;Harberger-Escapes&#x201D;">&#x201C;Harberger Escapes&#x201D;</h2>
+<p>So in that case, and since we&#x2019;re heavily hypernormalized in a private property
+society, a fenced-off Harberger Property system that, e.g., can be created with
+smart contracts on Ethereum would always end up having to make sure that
+property owners don&#x2019;t &#x201C;escape&#x201D; from the &#x201C;Harberger universe&#x201D; into the realm of
+&#x201C;private property.&#x201D;</p>
+<p>The California railway example goes like this: Assume you&#x2019;re the last
+Californian property owner, but the state had prior agreed-upon Harberger
+pricing. However, through a loophole in the law, you&#x2019;re able to change the
+property owner&#x2019;s name on the deed of ownership. You understand the private
+property principles, and you&#x2019;re a degen, so you give Wall Street a call and
+explain to them your situation: You tell them that you&#x2019;re the last person on
+the high-speed rail needing to sell the property: But you don&#x2019;t have enough
+capital to sustain pricing it high until the railway construction company gives
+in to your demands.</p>
+<p>In that case, Wall Street might give you a loan, or since your property is
+&#x201C;alwaysonsale&#x201D;, they might buy it from you right away for a higher than usual
+rate, assuming they can further increase pressure on the railroad constructor.</p>
+<p>Now, in the constructed case of a wet-code law that allows for appropriate
+recourse, that may mean that indeed the property will end up being priced
+better under Harberger law than as private property.</p>
+<p>However, e.g., Harberger properties implemented on Ethereum, that may not be
+the case. And that&#x2019;s where the group today had, I think, a slight disagreement.</p>
+<h2 id="Is-ERC721-compatible-with-Harberger-Properties">Is ERC721 compatible with Harberger Properties?</h2>
+<p>Consider the case where we create an ERC721 NFT that is continuously on sale
+using Harberger tax mechanics but still is entirely compliant with ERC721. In
+that case, e.g., that <code>transferFrom</code> method might allow sending the deed of
+ownership from one account to another. But, it also allows an owner to make an
+internal accounting transfer where they sent their property from one of their
+accounts to another.</p>
+<p>We want to allow an owner to send their deed of ownership from one address to
+another as, e.g., their keys get compromised. Although, this &#x201C;maintenance
+functionality&#x201D; may then easily be abused by owners wanting to &#x201C;Harberger
+escape&#x201D; into private property: By selling their property over the counter for
+more than what it is worth to a buyer, the seller profits from the premium
+while the buyer profits from lower taxes.</p>
+<p>While it is true that this deal may be fragile as the information the private
+agreement was based on could easily leak, and hence the property picked up by a
+sneaky arbitrageur, I still believe &#x201C;Harberger escapes&#x201D; into private properties
+could become a reality.</p>
+<p>I understand my attempt at playing devil&#x2019;s advocate is not ideal yet. However,
+I feel that it&#x2019;s rather just a challenge of finding a well-enough positioned
+new owner with just enough opposed interest in Harberger-taxed property. E.g.,
+if it wasn&#x2019;t enough to keep the deal&#x2019;s basis a secret, then, e.g., a malicious
+buyer&#x2019;s hedge could be some bet directly opposed to the railroad company&#x2019;s
+success: e.g., shorting its stock.</p>
+<h2 id="Do-we-need-an-ERC721-2-0-for-Harberger-Properties">Do we need an ERC721 2.0 for Harberger Properties?</h2>
+<p>Despite all this skepticism, I&#x2019;m still a firm believer in the idea, while I
+believe it&#x2019;ll have to carefully be implemented as a fenced-off system for it to
+work. An elegant solution I have not explored further came from the <a target="_blank" rel="noopener" href="https://www.geoweb.network/">Geoweb
+Network</a> team that suggested only ever allowing a
+smart contract to truly &#x201C;privately possess&#x201D; the property.</p>
+<p>It&#x2019;s because what this would allow is anyone being always able to &#x201C;pick up&#x201D; the
+property, particularly in the case of leaked alpha. However, it&#x2019;d mean
+restricting the ERC721 token&#x2019;s <code>transferFrom</code> function only to be called by the
+Harberger tax management contract. Assuming marketplaces like Opensea would
+recognize this limitation in the collection, it wouldn&#x2019;t pose a problem,
 whereas I still see the issue of not complying with ERC721.</p>
-<p>There&apos;s an implicit private property assumption in ERC721&apos;s
-<code>transferFrom</code> function that&apos;d always allow the current owner
-to send the token to another address. Interfaces like Metamask and
-Opensea are built with those assumptions in mind. While technically
-approving the transfer with the managing Harberger contract may be a
-possibility, I still believe that to cause trouble and confusion.</p>
+<p>There&#x2019;s an implicit private property assumption in ERC721&#x2019;s <code>transferFrom</code>
+function that&#x2019;d always allow the current owner to send the token to another
+address. Interfaces like Metamask and Opensea are built with those assumptions
+in mind. While technically approving the transfer with the managing Harberger
+contract may be a possibility, I still believe that to cause trouble and
+confusion.</p>
 <p>Given our hypernormalized suffering and our need to further build
-non-skeuomorphic ownership models, I&apos;d like to argue herein that we
-should look beyond ERC721 and ERC1155 and do everything necessary to
-abandon the assumptions of private property in all Ethereum
-infrastructure. Ethereum (and its standards) should &quot;get weird,&quot; and it
-shouldn&apos;t be opinionated about property laws: Those should be
-programmable or configurable.</p>
-<p>Today, I feel grateful for having been given a chance to participate
-in this mind-opening meeting and work on such awesome
-intellectually-challenging work. It&apos;s great to be here, Denver!</p>
-<h2 id="see-also">See also:</h2>
+non-skeuomorphic ownership models, I&#x2019;d like to argue herein that we should look
+beyond ERC721 and ERC1155 and do everything necessary to abandon the
+assumptions of private property in all Ethereum infrastructure. Ethereum (and
+its standards) should &#x201C;get weird,&#x201D; and it shouldn&#x2019;t be opinionated about
+property laws: Those should be programmable or configurable.</p>
+<p>Today, I feel grateful for having been given a chance to participate in this
+mind-opening meeting and work on such awesome intellectually-challenging work.
+It&#x2019;s great to be here, Denver!</p>
+<h2 id="See-also">See also:</h2>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/rugpullindex/libharberger">github.com/rugpullindex/libharberger</a></li>
 </ul>
@@ -375,12 +353,7 @@ intellectually-challenging work. It&apos;s great to be here, Denver!</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-problem-of-private-property"><span class="toc-number">1.</span> <span class="toc-text">The Problem of Private
-Property</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#understanding-harberger-properties"><span class="toc-number">2.</span> <span class="toc-text">Understanding Harberger
-Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#harberger-property-forks-private-property."><span class="toc-number">3.</span> <span class="toc-text">Harberger Property
-forks Private Property.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#harberger-escapes"><span class="toc-number">4.</span> <span class="toc-text">&quot;Harberger Escapes&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#is-erc721-compatible-with-harberger-properties"><span class="toc-number">5.</span> <span class="toc-text">Is ERC721
-compatible with Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#do-we-need-an-erc721-2.0-for-harberger-properties"><span class="toc-number">6.</span> <span class="toc-text">Do we need an
-ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#see-also"><span class="toc-number">7.</span> <span class="toc-text">See also:</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Problem-of-Private-Property"><span class="toc-number">1.</span> <span class="toc-text">The Problem of Private Property</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Understanding-Harberger-Properties"><span class="toc-number">2.</span> <span class="toc-text">Understanding Harberger Properties</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Harberger-Property-forks-Private-Property"><span class="toc-number">3.</span> <span class="toc-text">Harberger Property forks Private Property.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E2%80%9CHarberger-Escapes%E2%80%9D"><span class="toc-number">4.</span> <span class="toc-text">“Harberger Escapes”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Is-ERC721-compatible-with-Harberger-Properties"><span class="toc-number">5.</span> <span class="toc-text">Is ERC721 compatible with Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Do-we-need-an-ERC721-2-0-for-Harberger-Properties"><span class="toc-number">6.</span> <span class="toc-text">Do we need an ERC721 2.0 for Harberger Properties?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#See-also"><span class="toc-number">7.</span> <span class="toc-text">See also:</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

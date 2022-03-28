@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/entrepreneur/</loc>
+        <lastmod>2022-03-28T15:15:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/partial-common-ownership/</loc>
+        <lastmod>2022-03-28T15:15:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/radical-exchange/</loc>
+        <lastmod>2022-03-28T15:15:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/radical-markets/</loc>
+        <lastmod>2022-03-28T15:15:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/governance/</loc>
         <lastmod>2022-03-27T16:36:48.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,20 +39,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/quadratic-voting/</loc>
-        <lastmod>2022-03-27T16:36:48.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/radical-exchange/</loc>
-        <lastmod>2022-03-27T16:36:48.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/radical-markets/</loc>
         <lastmod>2022-03-27T16:36:48.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -67,13 +81,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/harberger-taxes/</loc>
-        <lastmod>2022-02-28T21:32:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/partial-common-ownership/</loc>
         <lastmod>2022-02-28T21:32:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
