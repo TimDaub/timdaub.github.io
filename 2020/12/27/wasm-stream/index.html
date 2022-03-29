@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;#x2019;ve now taken WASM STREAM offline as its purpose was mainly to">
+    <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WASM-STREAM, a virtual stage for digital artists">
 <meta property="og:url" content="https://timdaub.github.io/2020/12/27/wasm-stream/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;#x2019;ve now taken WASM STREAM offline as its purpose was mainly to">
+<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-stream.png">
@@ -120,7 +120,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-First-Little-Demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-WASM-STREAM-Architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-To-Use-WASM-STREAM"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-first-little-demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-wasm-stream-architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-use-wasm-stream"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -163,12 +163,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       5 minutes read
-      <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;#x2019;ve now taken WASM STREAM offline as its purpose was mainly to">
+      <meta name="description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WASM-STREAM, a virtual stage for digital artists">
 <meta property="og:url" content="https://timdaub.github.io/2020/12/27/wasm-stream/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;#x2019;ve now taken WASM STREAM offline as its purpose was mainly to">
+<meta property="og:description" content="TL;DR: I built a synthesizer that allows streaming directly to an internet radio stream for rc3 2020. UPDATE from April 1, 2021: I&amp;apos;ve now taken WASM STREAM offline as its purpose was mainly to se">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/wasm-synth-screenshot.png">
 <meta property="article:published_time" content="2020-12-27T13:40:13.000Z">
@@ -188,109 +188,115 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><strong>TL;DR:</strong> I built a synthesizer that allows streaming directly to an internet
-radio stream for rc3 2020.</p>
-<p><strong>UPDATE from April 1, 2021:</strong> I&#x2019;ve now taken WASM STREAM offline as its
-purpose was mainly to serve last year&#x2019;s rc3. The rc3 world has been taken
-offline too.  This means that some links in this blog post are not available
-anymore. Probably all source code that was used in the project is available on
-GitHub.</p>
+    <p><strong>TL;DR:</strong> I built a synthesizer that allows streaming
+directly to an internet radio stream for rc3 2020.</p>
+<p><strong>UPDATE from April 1, 2021:</strong> I&apos;ve now taken WASM
+STREAM offline as its purpose was mainly to serve last year&apos;s rc3. The
+rc3 world has been taken offline too. This means that some links in this
+blog post are not available anymore. Probably all source code that was
+used in the project is available on GitHub.</p>
 <hr>
-<p>It&#x2019;s that time between Christmas and new year again, where you can usually find
-me at Leipzig&#x2019;s Congress Zentrum on my computer hacking away. It&#x2019;s chaos
-congress time. Given this year&#x2019;s pandemic, the &#x201C;37c3&#x201D; however, was moved to the
-internet and renamed to <a target="_blank" rel="noopener" href="https://rc3.world">&#x201C;rc3&#x201D;, the Remote Chaos Communication
+<p>It&apos;s that time between Christmas and new year again, where you can
+usually find me at Leipzig&apos;s Congress Zentrum on my computer hacking
+away. It&apos;s chaos congress time. Given this year&apos;s pandemic, the &quot;37c3&quot;
+however, was moved to the internet and renamed to <a target="_blank" rel="noopener" href="https://rc3.world">&quot;rc3&quot;, the Remote Chaos Communication
 Congress</a>.</p>
-<p>Earlier this month, the iconic congress build-up started. This time around,
-building up didn&#x2019;t involve moving heavy crates of mate tea around. Instead, it
-meant that everyone started designing, drawing, and building their assembly
-maps for the &#x201C;rc3.world&#x201D;. A <a target="_blank" rel="noopener" href="https://events.ccc.de/2020/09/04/rc3-remote-chaos-experience/">2D virtual
-space</a> that&#x2019;s
-supposed to replace this year&#x2019;s lack of physical space.</p>
-<p>The rc3.world software is a fork of <a target="_blank" rel="noopener" href="https://workadventu.re/">workadventu.re</a>,
-a 2D game simulating a virtual work environment with avatars. Within this 2D
-map of the virtual congress, the organizers invited all assemblies to build
-their own spaces. And so, as the build-up for <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion
-Protocol</a> assembly began, I had an idea for a
-project.</p>
-<p><img src="/assets/images/wasm-synth-screenshot.png" alt="wasm-synth, the project Ilaunched at last year&apos;s c3"></p>
-<p>At last year&#x2019;s congress in Leipzig, I had launched
-<a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a>,
-a synthesizer built in WebAssembly. Naturally, this time I was eager to take
-the project to the next stage. Hence, roughly a week ago, I started to work on
-a new project called &#x201C;WASM-STREAM&#x201D; - an extension to wasm-synth.</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/social-dist0rtion-protocol/wasm-stream">WASM-STREAM</a> is a
-virtual stage for digital artists. Using WASM-STREAM, an artist can broadcast
-their play with wasm-synth to an internet radio stream.  More importantly,
-though, this means that they can take the stage on the <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion
-Protocol</a>&#x2019;s assembly and jam away to a virtually
-present audience.</p>
-<p><img src="/assets/images/wasm-stream.png" alt="Social Dist0rtion Protocol&apos;s dance floor in the rc3.world"></p>
+<p>Earlier this month, the iconic congress build-up started. This time
+around, building up didn&apos;t involve moving heavy crates of mate tea
+around. Instead, it meant that everyone started designing, drawing, and
+building their assembly maps for the &quot;rc3.world&quot;. A <a target="_blank" rel="noopener" href="https://events.ccc.de/2020/09/04/rc3-remote-chaos-experience/">2D
+virtual space</a> that&apos;s supposed to replace this year&apos;s lack of
+physical space.</p>
+<p>The rc3.world software is a fork of <a target="_blank" rel="noopener" href="https://workadventu.re/">workadventu.re</a>, a 2D game simulating
+a virtual work environment with avatars. Within this 2D map of the
+virtual congress, the organizers invited all assemblies to build their
+own spaces. And so, as the build-up for <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion Protocol</a>
+assembly began, I had an idea for a project.</p>
+<figure>
+<img src="/assets/images/wasm-synth-screenshot.png" alt="wasm-synth, the project I launched at last year&apos;s c3">
+<figcaption aria-hidden="true"><a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a>, the
+project I launched at last year&apos;s c3</figcaption>
+</figure>
+<p>At last year&apos;s congress in Leipzig, I had launched <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a>, a
+synthesizer built in WebAssembly. Naturally, this time I was eager to
+take the project to the next stage. Hence, roughly a week ago, I started
+to work on a new project called &quot;WASM-STREAM&quot; - an extension to
+wasm-synth.</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/social-dist0rtion-protocol/wasm-stream">WASM-STREAM</a>
+is a virtual stage for digital artists. Using WASM-STREAM, an artist can
+broadcast their play with wasm-synth to an internet radio stream. More
+importantly, though, this means that they can take the stage on the <a target="_blank" rel="noopener" href="https://www.dist0rtion.com/">Social Dist0rtion Protocol</a>&apos;s
+assembly and jam away to a virtually present audience.</p>
+<figure>
+<img src="/assets/images/wasm-stream.png" alt="Social Dist0rtion Protocol&apos;s dance floor in the rc3.world">
+<figcaption aria-hidden="true">Social Dist0rtion Protocol&apos;s dance floor
+in the rc3.world</figcaption>
+</figure>
 <p>So how did I build it?</p>
-<h2 id="A-First-Little-Demo">A First Little Demo</h2>
-<p><a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a> is a project that I built
-deliberately to showcase the power of the web. At the beginning of the year, I
-wrote <a href="https://timdaub.github.io/2020/02/19/wasm-synth/">a blog post</a> outlining
-its technical details. It&#x2019;s using the <code>AudioWorklet</code> and some
-WebAssembly-transpiled code to render audio in real-time in the user&#x2019;s browser.</p>
-<p>Now, workadventure, the software ccc uses to run their rc3.world, is also built
-on the web and allows embedding audio streams. So I thought, why not take the
-audio generated in wasm-synth and stream it to everyone in the rc3 world.</p>
-<p>In a way, it sounds like not that big of a deal to build an audio streaming
-client within a website. But remember that a browser&#x2019;s networking ability is
-limited. While we&#x2019;ve come a long way from the <code>XMLRequest</code> API to <code>fetch</code>,
-<code>WebSocket</code> and <code>WebRTC</code>, these concepts only allow talking upstream if their
-authors deliberately built their upstream application for supporting them.</p>
-<p>Naive as I Am, I started by deploying <a target="_blank" rel="noopener" href="https://icecast.org/">icecast2</a> to a
-small Hetzner instance. I configured an authorized mount point that allows a
-streamer to connect using client software.  Then I looked for a way to stream
-audio directly to icecast from a browser. And found&#x2026; nothing.</p>
-<p>Well, I did find something. It&#x2019;s called <a target="_blank" rel="noopener" href="https://webcast.github.io/">webcast</a>,
-and it&#x2019;s a <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">WebSocket-based
-subprotocol</a> that
-allows sending binary audio data between a client and a server. In their
-<a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js#server">README.md</a>, the authors also
-mention webcast&#x2019;s compatibility with
-<a target="_blank" rel="noopener" href="https://www.liquidsoap.info/">liquidsoap</a>, a DSL for audio stream processing.</p>
-<p>So my first attempt at plugging these things together involved encoding the
-<code>Float32Array</code> data from the <code>AudioWorklet</code> into an mp3 stream using
-<a target="_blank" rel="noopener" href="https://github.com/toots/shine/">libshine</a> (that has a wasm JavaScript
-package) and then sending it to a <a target="_blank" rel="noopener" href="https://www.liquidsoap.info/doc-dev/harbor.html">liquidsoap
-&#x201C;harbor&#x201D;</a> via webcast.
-Liqidsoap would then convert the mp3 stream to ogg-vorbis, make it stereo, and
-forward it to the icecast server.</p>
-<p>And, to my surprise, it worked. When I hit some keys on the wasm-synth, they
-got encoded and sent to the audio stream. With a bit of delay, I heard what I
-had just played. Cool!</p>
-<p>Anyways, with my small little demo, I was galvanized and motivated enough to
-spend more time building something that would work for the congress.</p>
-<h2 id="The-WASM-STREAM-Architecture">The WASM-STREAM Architecture</h2>
-<p>Ultimately, liquidsoap was not well-suited for my purpose. I also quickly
-realized that all I had to do was build a proxy between the <a target="_blank" rel="noopener" href="https://gist.github.com/ePirat/adc3b8ba00d85b7e3870">icecast
+<h2 id="a-first-little-demo">A First Little Demo</h2>
+<p><a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">wasm-synth</a> is a
+project that I built deliberately to showcase the power of the web. At
+the beginning of the year, I wrote <a href="https://timdaub.github.io/2020/02/19/wasm-synth/">a blog post</a>
+outlining its technical details. It&apos;s using the
+<code>AudioWorklet</code> and some WebAssembly-transpiled code to render
+audio in real-time in the user&apos;s browser.</p>
+<p>Now, workadventure, the software ccc uses to run their rc3.world, is
+also built on the web and allows embedding audio streams. So I thought,
+why not take the audio generated in wasm-synth and stream it to everyone
+in the rc3 world.</p>
+<p>In a way, it sounds like not that big of a deal to build an audio
+streaming client within a website. But remember that a browser&apos;s
+networking ability is limited. While we&apos;ve come a long way from the
+<code>XMLRequest</code> API to <code>fetch</code>,
+<code>WebSocket</code> and <code>WebRTC</code>, these concepts only
+allow talking upstream if their authors deliberately built their
+upstream application for supporting them.</p>
+<p>Naive as I Am, I started by deploying <a target="_blank" rel="noopener" href="https://icecast.org/">icecast2</a> to a small Hetzner instance. I
+configured an authorized mount point that allows a streamer to connect
+using client software. Then I looked for a way to stream audio directly
+to icecast from a browser. And found... nothing.</p>
+<p>Well, I did find something. It&apos;s called <a target="_blank" rel="noopener" href="https://webcast.github.io/">webcast</a>, and it&apos;s a <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">WebSocket-based
+subprotocol</a> that allows sending binary audio data between a client
+and a server. In their <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js#server">README.md</a>, the
+authors also mention webcast&apos;s compatibility with <a target="_blank" rel="noopener" href="https://www.liquidsoap.info/">liquidsoap</a>, a DSL for audio
+stream processing.</p>
+<p>So my first attempt at plugging these things together involved
+encoding the <code>Float32Array</code> data from the
+<code>AudioWorklet</code> into an mp3 stream using <a target="_blank" rel="noopener" href="https://github.com/toots/shine/">libshine</a> (that has a wasm
+JavaScript package) and then sending it to a <a target="_blank" rel="noopener" href="https://www.liquidsoap.info/doc-dev/harbor.html">liquidsoap
+&quot;harbor&quot;</a> via webcast. Liqidsoap would then convert the mp3 stream to
+ogg-vorbis, make it stereo, and forward it to the icecast server.</p>
+<p>And, to my surprise, it worked. When I hit some keys on the
+wasm-synth, they got encoded and sent to the audio stream. With a bit of
+delay, I heard what I had just played. Cool!</p>
+<p>Anyways, with my small little demo, I was galvanized and motivated
+enough to spend more time building something that would work for the
+congress.</p>
+<h2 id="the-wasm-stream-architecture">The WASM-STREAM Architecture</h2>
+<p>Ultimately, liquidsoap was not well-suited for my purpose. I also
+quickly realized that all I had to do was build a proxy between the <a target="_blank" rel="noopener" href="https://gist.github.com/ePirat/adc3b8ba00d85b7e3870">icecast
 protocol</a> and the <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">webcast
-protocol</a>. And
-that&#x2019;s what I ended up building. A small <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">JavaScript
-application</a>
-implementing two protocols.  It listens for incoming WebSocket connections
-and calls icecast with a loooooonng PUT request to establish a stream.</p>
-<p>WASM-STREAM itself doesn&#x2019;t do any encoding. It can, however, route an
-<code>audio/ogg</code> or an <code>audio/mpeg</code> stream from webcast to icecast. The encoding
-from WAV to mp3 takes place on the user&#x2019;s device already when the play the
-synthesizer.</p>
-<h2 id="How-To-Use-WASM-STREAM">How To Use WASM-STREAM</h2>
-<p>Whether you have a ticket to rc3 or not, you can tune into the stream at
-<a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/stream">https://audio.daubenschuetz.de/stream</a>.
-It&#x2019;s an mp3-encoded stream, meaning it won&#x2019;t work in all browsers equally
-(Firefox works natively; Chrome et al. only support ogg/vorbis natively). If it
-doesn&#x2019;t, try a desktop application like iTunes or VLC.</p>
-<p>The stream is continuously online. But if you don&#x2019;t hear anything then that&#x2019;s
-because nobody is currently playing the
-<a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">WASM-SYNTH</a>.</p>
-<p>Finally, you&#x2019;re able to &#x201C;dance&#x201D; on the Social Dist0rtion Protocol&#x2019;s assembly
-dance floor. The rc3 orga was nice enough to allow us streaming audio on our
-map. <a target="_blank" rel="noopener" href="https://rc3.world/rc3/room/93840a8f-88f7-4f11-bb61-68800c4d4962/">Click
-here</a> to
-visit us directly on the rc3.world map.</p>
+protocol</a>. And that&apos;s what I ended up building. A small <a target="_blank" rel="noopener" href="https://github.com/webcast/webcast.js/blob/master/SPECS.md">JavaScript
+application</a> implementing two protocols. It listens for incoming
+WebSocket connections and calls icecast with a loooooonng PUT request to
+establish a stream.</p>
+<p>WASM-STREAM itself doesn&apos;t do any encoding. It can, however, route an
+<code>audio/ogg</code> or an <code>audio/mpeg</code> stream from webcast
+to icecast. The encoding from WAV to mp3 takes place on the user&apos;s
+device already when the play the synthesizer.</p>
+<h2 id="how-to-use-wasm-stream">How To Use WASM-STREAM</h2>
+<p>Whether you have a ticket to rc3 or not, you can tune into the stream
+at <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/stream">https://audio.daubenschuetz.de/stream</a>.
+It&apos;s an mp3-encoded stream, meaning it won&apos;t work in all browsers
+equally (Firefox works natively; Chrome et al. only support ogg/vorbis
+natively). If it doesn&apos;t, try a desktop application like iTunes or
+VLC.</p>
+<p>The stream is continuously online. But if you don&apos;t hear anything
+then that&apos;s because nobody is currently playing the <a target="_blank" rel="noopener" href="https://audio.daubenschuetz.de/assets/">WASM-SYNTH</a>.</p>
+<p>Finally, you&apos;re able to &quot;dance&quot; on the Social Dist0rtion Protocol&apos;s
+assembly dance floor. The rc3 orga was nice enough to allow us streaming
+audio on our map. <a target="_blank" rel="noopener" href="https://rc3.world/rc3/room/93840a8f-88f7-4f11-bb61-68800c4d4962/">Click
+here</a> to visit us directly on the rc3.world map.</p>
 
   </div>
 </article>
@@ -334,7 +340,7 @@ visit us directly on the rc3.world map.</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#A-First-Little-Demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-WASM-STREAM-Architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-To-Use-WASM-STREAM"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#a-first-little-demo"><span class="toc-number">1.</span> <span class="toc-text">A First Little Demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-wasm-stream-architecture"><span class="toc-number">2.</span> <span class="toc-text">The WASM-STREAM Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#how-to-use-wasm-stream"><span class="toc-number">3.</span> <span class="toc-text">How To Use WASM-STREAM</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
