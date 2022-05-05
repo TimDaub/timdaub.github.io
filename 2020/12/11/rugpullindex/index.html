@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+    <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;#x2019; performance (liquidity and equality of liquidity shares).  Check out the website and the minimalistic blog, or keep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Meet rugpullindex.com, an index fund for data sets">
 <meta property="og:url" content="https://timdaub.github.io/2020/12/11/rugpullindex/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;#x2019; performance (liquidity and equality of liquidity shares).  Check out the website and the minimalistic blog, or keep">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/marketmakers.png">
@@ -120,9 +120,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tldr"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-building-a-data-set-index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set
-Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rating-a-data-set-by-its-markets-performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set
-by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introducing-rugpullindex.com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-does-the-future-hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TL-DR"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Building-a-Data-Set-Index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rating-a-Data-Set-by-its-Market%E2%80%99s-Performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set by its Market’s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introducing-rugpullindex-com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Does-The-Future-Hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -164,13 +162,13 @@ by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2">
 
       |
       <i class="fas fa-stopwatch"></i>
-      6 minutes read
-      <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+      5 minutes read
+      <meta name="description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;#x2019; performance (liquidity and equality of liquidity shares).  Check out the website and the minimalistic blog, or keep">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Meet rugpullindex.com, an index fund for data sets">
 <meta property="og:url" content="https://timdaub.github.io/2020/12/11/rugpullindex/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;apos; performance (liquidity and equality of liquidity shares). Check out the website and the minimalistic blog, or keep on">
+<meta property="og:description" content="TL;DR TL;DR: I built a financial index that rates data sets by their markets&amp;#x2019; performance (liquidity and equality of liquidity shares).  Check out the website and the minimalistic blog, or keep">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rugpullindex.png">
 <meta property="article:published_time" content="2020-12-11T10:59:01.000Z">
@@ -190,123 +188,111 @@ by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2">
   
 
   <div class="content" itemprop="articleBody">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" crossorigin="anonymous"><h2 id="tldr">TL;DR</h2>
-<p><strong>TL;DR:</strong> I built a financial index that <strong>rates
-data sets</strong> by their markets&apos; performance
-(<strong>liquidity</strong> and <strong>equality of liquidity
-shares</strong>). <strong>Check out the <a target="_blank" rel="noopener" href="https://rugpullindex.com">website</a></strong> and the
-minimalistic <a target="_blank" rel="noopener" href="https://rugpullindex.com/changelog.txt">blog</a>,
-or keep on reading the article.</p>
+    <h2 id="TL-DR">TL;DR</h2>
+<p><strong>TL;DR:</strong> I built a financial index that <strong>rates data sets</strong> by their markets&#x2019;
+performance (<strong>liquidity</strong> and <strong>equality of liquidity shares</strong>).  <strong>Check out
+the <a target="_blank" rel="noopener" href="https://rugpullindex.com">website</a></strong> and the minimalistic
+<a target="_blank" rel="noopener" href="https://rugpullindex.com/changelog.txt">blog</a>, or keep on reading the article.</p>
 <p><img src="/assets/images/rugpullindex.png" alt="A screenshot of the
 rugpullindex.com website" style="border: 5px solid #2bbc8a; border-radius: 5px;"></p>
-<h2 id="why-building-a-data-set-index">Why Building a Data Set
-Index?</h2>
-<p><strong>Would you pay a stranger on the internet</strong> to buy a
-data set they&apos;re offering without knowing them or ever having seen the
-data? Tough decision! But that&apos;s precisely the type of situation <a target="_blank" rel="noopener" href="https://oceanprotocol.com">Ocean Protocol</a> users face in its
-newly-launched decentralized <a target="_blank" rel="noopener" href="https://market.oceanprotocol.com">data set market</a> [3].</p>
-<p>I&apos;ll spare you most of the details of how it all works and say this:
-2020&apos;s most transforming technology has been <strong>on-chain
-markets</strong>. In particular, the implementation that <a target="_blank" rel="noopener" href="https://uniswap.org/">uniswap.org</a> is using called
-<strong>automated market makers</strong>.</p>
-<p>Simply put, they work by incentivizing users to <em>pool</em> a pair
-of assets at a ratio they deem as the assets&apos; current prices. These
-users, I herein call them <strong>liquidity providers</strong>, e.g.,
-pool 1 ETH and 540 USDC, so that when a buyer of either asset comes
-along, they can immediately trade 1 ETH for 540 USDC or 540 USDC for 1
-ETH. This principle works fantastically at scale, as the pool
-incentivizes liquidity-providing by charging buyers and sellers a small
-fee, which is distributed by the pool to each liquidity provider,
-respectively [1].</p>
+<h2 id="Why-Building-a-Data-Set-Index">Why Building a Data Set Index?</h2>
+<p><strong>Would you pay a stranger on the internet</strong> to buy a data set they&#x2019;re offering
+without knowing them or ever having seen the data? Tough decision! But that&#x2019;s
+precisely the type of situation <a target="_blank" rel="noopener" href="https://oceanprotocol.com">Ocean Protocol</a>
+users face in its newly-launched decentralized <a target="_blank" rel="noopener" href="https://market.oceanprotocol.com">data set
+market</a> [3].</p>
+<p>I&#x2019;ll spare you most of the details of how it all works and say this:
+2020&#x2019;s most transforming technology has been <strong>on-chain markets</strong>. In
+particular, the implementation that <a target="_blank" rel="noopener" href="https://uniswap.org/">uniswap.org</a> is using
+called <strong>automated market makers</strong>.</p>
+<p>Simply put, they work by incentivizing users to <em>pool</em> a pair of assets at a
+ratio they deem as the assets&#x2019; current prices. These users, I herein call them
+<strong>liquidity providers</strong>, e.g., pool 1 ETH and 540 USDC, so that when a buyer of
+either asset comes along, they can immediately trade 1 ETH for 540 USDC or 540
+USDC for 1 ETH. This principle works fantastically at scale, as the pool
+incentivizes liquidity-providing by charging buyers and sellers a small fee,
+which is distributed by the pool to each liquidity provider, respectively [1].</p>
 <p><img src="/assets/images/marketmakers.png" style="background-color: white;
 border: 5px solid black; border-radius: 5px;"></p>
-<p>This model has been so successful that there&apos;ve been days where
-decentralized trading on Uniswap outperformed volumes on Coinbase!
-Which, of course, has lots of implications on the cryptocurrency space.
-I think it&apos;s no overstatement to say that automated market makers may be
-<strong>the killer app for crypto</strong>.</p>
+<p>This model has been so successful that there&#x2019;ve been days where
+decentralized trading on Uniswap outperformed volumes on Coinbase! Which, of
+course, has lots of implications on the cryptocurrency space. I think it&#x2019;s no
+overstatement to say that automated market makers may be <strong>the killer app for
+crypto</strong>.</p>
 <div class="twitter-wrapper"><blockquote class="twitter-tweet"><a target="_blank" rel="noopener" href="https://twitter.com/haydenzadams/status/1300034164830408704"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<p>But there&apos;s one implication I&apos;ve been particularly keen on exploring:
-all <strong>the openly-accessible data produced by on-chain
-markets</strong>. See, if you ever tried building a trading bot, you&apos;ll
-have noticed the terrible resolution publicly-available market data has.
-You might have also noticed that it&apos;s quite difficult even to find data
-at all. It&apos;s not by accident. <strong>Trading data is
+<p>But there&#x2019;s one implication I&#x2019;ve been particularly keen on exploring: all <strong>the
+openly-accessible data produced by on-chain markets</strong>. See, if you ever tried
+building a trading bot, you&#x2019;ll have noticed the terrible resolution
+publicly-available market data has. You might have also noticed that it&#x2019;s quite
+difficult even to find data at all. It&#x2019;s not by accident. <strong>Trading data is
 valuable</strong>.</p>
-<h2 id="rating-a-data-set-by-its-markets-performance">Rating a Data Set
-by its Market&apos;s Performance</h2>
-<p>Remember when I asked you at the beginning of this article about
-<strong>buying a data set from a random stranger on the
-internet?</strong> Well, it turns out that Ocean Protocol is now betting
-on the same technology that made Uniswap successful. They allow users to
-publish a data set, along with a fungible <strong>data token</strong>
-and an integrated <strong>automated market maker</strong>. Meaning, you
-can now buy access to a data set by purchasing tokens. These tokens get
-priced by liquidity providers providing a ratio of OCEAN Tokens to
-<em>data tokens</em>.</p>
-<p>However, just because data sets are now available for sale on the
-market, doesn&apos;t mean you know they&apos;re valuable! After all, if ebay.com
-didn&apos;t have a rating system for sellers, how would you know which seller
-to trust?</p>
-<p>On ebay.com, you know which seller to trust because you can see how
-many articles they&apos;ve sold and what each buyer&apos;s experience was. It&apos;s a
-simple identity-based rating system.</p>
-<p>But within the anarchistic world of cryptocurrencies, there are no
-working identity-based rating systems! Instead, the space is filled with
-<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sock_puppet_account">sock
-puppets</a> and <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sybil_attack">sybils</a>.
-<strong>Then, without buying a data set first, how are we supposed to
-know if a data set is valuable or an outright scam?</strong></p>
-<h2 id="introducing-rugpullindex.com">Introducing rugpullindex.com</h2>
-<p>That&apos;s where <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>
-comes into play. <strong>We crawl all of Ocean Protocol&apos;s data token
-pools daily</strong> and rate each market&apos;s liquidity provider
-distribution by its equality using the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini
-coefficient</a>. While ranking markets based on their liquidity is
-common industry-practice, calculating a Gini score for each market&apos;s
-liquidity provider shares isn&apos;t. The idea behind this is that the more
-liquidity providers with an equal share back an asset in the market, the
-less likely it is for a &quot;rug pull&quot; attack to happen (details <a target="_blank" rel="noopener" href="https://github.com/oceanprotocol/multi-repo-issue/issues/30#issuecomment-726132174">here</a>).
-By factoring in a pool&apos;s relative liquidity, it allows us to derive a
-score <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span> that is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>s</mi><mo>&lt;</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">0 &lt; s &lt; 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68354em;vertical-align:-0.0391em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">s</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">0</span></span></span></span>.</p>
-<p>For users of <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>,
-this <strong>yields a few attractive benefits</strong>:</p>
-<ol type="1">
-<li>They can now choose to adjust their data set investments based on
-market data.</li>
-<li>They can decide to invest in data sets relative to their performance
-on to <em>increase their diversivication and hence lower their exposure
-risk</em>. And finally;</li>
-<li>If they&apos;re unsure about <strong>sending a random stranger on the
-internet money for a data set</strong>, they can check out the data
-set&apos;s market performance to make an informed decision.</li>
+<h2 id="Rating-a-Data-Set-by-its-Market&#x2019;s-Performance">Rating a Data Set by its Market&#x2019;s Performance</h2>
+<p>Remember when I asked you at the beginning of this article about <strong>buying a data
+set from a random stranger on the internet?</strong> Well, it turns out that Ocean
+Protocol is now betting on the same technology that made Uniswap
+successful. They allow users to publish a data set, along with a fungible
+<strong>data token</strong> and an integrated <strong>automated market maker</strong>. Meaning, you can
+now buy access to a data set by purchasing tokens. These tokens get priced by
+liquidity providers providing a ratio of OCEAN Tokens to <em>data tokens</em>.</p>
+<p>However, just because data sets are now available for sale on the market, doesn&#x2019;t
+mean you know they&#x2019;re valuable! After all, if <a target="_blank" rel="noopener" href="http://ebay.com">ebay.com</a> didn&#x2019;t have a rating
+system for sellers, how would you know which seller to trust?</p>
+<p>On <a target="_blank" rel="noopener" href="http://ebay.com">ebay.com</a>, you know which seller to trust because you can see how many
+articles they&#x2019;ve sold and what each buyer&#x2019;s experience was. It&#x2019;s a simple
+identity-based rating system.</p>
+<p>But within the anarchistic world of cryptocurrencies, there are no working
+identity-based rating systems! Instead, the space is filled with <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sock_puppet_account">sock
+puppets</a> and
+<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sybil_attack">sybils</a>. <strong>Then, without buying a
+data set first, how are we supposed to know if a data set is valuable or an
+outright scam?</strong></p>
+<h2 id="Introducing-rugpullindex-com">Introducing <a target="_blank" rel="noopener" href="http://rugpullindex.com">rugpullindex.com</a></h2>
+<p>That&#x2019;s where <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> comes into play. <strong>We
+crawl all of Ocean Protocol&#x2019;s data token pools daily</strong> and rate each market&#x2019;s
+liquidity provider distribution by its equality using the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Gini_coefficient">Gini
+coefficient</a>. While ranking
+markets based on their liquidity is common industry-practice, calculating a
+Gini score for each market&#x2019;s liquidity provider shares isn&#x2019;t. The idea behind
+this is that the more liquidity providers with an equal share back an asset in
+the market, the less likely it is for a &#x201C;rug pull&#x201D; attack to happen (details
+<a target="_blank" rel="noopener" href="https://github.com/oceanprotocol/multi-repo-issue/issues/30#issuecomment-726132174">here</a>).
+By factoring in a pool&#x2019;s relative liquidity, it allows us to derive a score $s$
+that is $0 &lt; s &lt; 100$.</p>
+<p>For users of <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>, this <strong>yields a
+few attractive benefits</strong>:</p>
+<ol>
+<li>They can now choose to adjust their data set investments based on market
+data.</li>
+<li>They can decide to invest in data sets relative to their performance on
+to <em>increase their diversivication and hence lower their exposure risk</em>.
+And finally;</li>
+<li>If they&#x2019;re unsure about <strong>sending a random stranger on the internet money
+for a data set</strong>, they can check out the data set&#x2019;s market performance to
+make an informed decision.</li>
 </ol>
-<p>It&apos;s a widely-known fact that index-based investment yields superior
-results compared to stock picking [2]. The same is true when
-<em>investing</em> in data, which makes me excited about working on this
-project.</p>
-<h2 id="what-does-the-future-hold">What Does The Future Hold?</h2>
-<p>I have many ideas for <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> and not as much
-time as I&apos;d like to have. However, my overarching goal is to make the
-ranking so reliable that I can build a smart contract-based index fund
-on top of it.</p>
-<p>I think that rating assets based on their markets&apos; performance is
-valuable occupation in itself. Not only within the data set market but
-beyond. I&apos;m particularly interested in rating a wide range of on-chain
-asset markets, but I&apos;m also thinking about rating more on-chain
-intellectual property markets. I&apos;m eager to crawl more data and explore.
-Until then, I hope you&apos;re having fun using <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>.</p>
-<p><em><strong>If you have questions, feedback, or business inquiries,
-please contact me: tim@daubenschuetz.de</strong>. If you want to follow
-along by building journey, <strong>please subscribe to my newsletter at
-the end of the page!</strong></em></p>
-<h2 id="references">References</h2>
+<p>It&#x2019;s a widely-known fact that index-based investment yields superior results
+compared to stock picking [2]. The same is true when <em>investing</em> in data, which
+makes me excited about working on this project.</p>
+<h2 id="What-Does-The-Future-Hold">What Does The Future Hold?</h2>
+<p>I have many ideas for <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> and not as
+much time as I&#x2019;d like to have.  However, my overarching goal is to make the
+ranking so reliable that I can build a smart contract-based index fund on top
+of it.</p>
+<p>I think that rating assets based on their markets&#x2019; performance is valuable
+occupation in itself. Not only within the data set market but beyond. I&#x2019;m
+particularly interested in rating a wide range of on-chain asset markets, but
+I&#x2019;m also thinking about rating more on-chain intellectual property markets. I&#x2019;m
+eager to crawl more data and explore. Until then, I hope you&#x2019;re having fun
+using <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a>.</p>
+<p><em><strong>If you have questions, feedback, or business inquiries, please contact me:
+<a href="mailto:tim@daubenschuetz.de">tim@daubenschuetz.de</a></strong>. If you want to follow along by building journey,
+<strong>please subscribe to my newsletter at the end of the page!</strong></em></p>
+<h2 id="References">References</h2>
 <ul>
-<li>1: <a target="_blank" rel="noopener" href="https://ethresear.ch/t/improving-front-running-resistance-of-x-y-k-market-makers/1281">Ethresearch:
-Improving front running resistance of x*y=k market makers</a></li>
+<li>1: <a target="_blank" rel="noopener" href="https://ethresear.ch/t/improving-front-running-resistance-of-x-y-k-market-makers/1281">Ethresearch: Improving front running resistance of x*y=k market
+makers</a></li>
 <li>2: KAHNEMAN, Daniel. Thinking, fast and slow. Macmillan, 2011.</li>
-<li>3: <a target="_blank" rel="noopener" href="https://blog.oceanprotocol.com/oceans-on-ethereum-mainnet-ba9be1aee0ce">Ocean&#x2019;s
-on Ethereum Mainnet</a></li>
+<li>3: <a target="_blank" rel="noopener" href="https://blog.oceanprotocol.com/oceans-on-ethereum-mainnet-ba9be1aee0ce">Ocean&#x2019;s on Ethereum Mainnet</a></li>
 </ul>
 
   </div>
@@ -351,9 +337,7 @@ on Ethereum Mainnet</a></li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tldr"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-building-a-data-set-index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set
-Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rating-a-data-set-by-its-markets-performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set
-by its Market&#39;s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#introducing-rugpullindex.com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#what-does-the-future-hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TL-DR"><span class="toc-number">1.</span> <span class="toc-text">TL;DR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-Building-a-Data-Set-Index"><span class="toc-number">2.</span> <span class="toc-text">Why Building a Data Set Index?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rating-a-Data-Set-by-its-Market%E2%80%99s-Performance"><span class="toc-number">3.</span> <span class="toc-text">Rating a Data Set by its Market’s Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Introducing-rugpullindex-com"><span class="toc-number">4.</span> <span class="toc-text">Introducing rugpullindex.com</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Does-The-Future-Hold"><span class="toc-number">5.</span> <span class="toc-text">What Does The Future Hold?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/principles/</loc>
+        <lastmod>2022-05-05T08:27:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/copyright/</loc>
+        <lastmod>2022-05-05T08:27:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/copyleft/</loc>
+        <lastmod>2022-05-05T08:27:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/music-industry/</loc>
+        <lastmod>2022-05-05T08:27:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/open-source/</loc>
+        <lastmod>2022-05-05T08:27:54.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/risk-taking/</loc>
         <lastmod>2022-04-15T14:59:39.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -311,6 +346,13 @@
     </url>
 
     <url>
+        <loc>https://timdaub.github.io/tags/crypto/</loc>
+        <lastmod>2021-12-08T21:34:59.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/bear-market/</loc>
         <lastmod>2021-12-08T21:34:59.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -333,13 +375,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/rug-pull-index/</loc>
-        <lastmod>2021-12-08T21:34:59.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/crypto/</loc>
         <lastmod>2021-12-08T21:34:59.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -375,20 +410,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/freedom/</loc>
-        <lastmod>2021-11-03T10:32:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/open-source/</loc>
-        <lastmod>2021-11-03T10:32:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/principles/</loc>
         <lastmod>2021-11-03T10:32:30.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -542,21 +563,21 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/social-media/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/digital-art/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/Provenance/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/NFTs/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/social-media/</loc>
         <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -570,7 +591,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/NFTs/</loc>
+        <loc>https://timdaub.github.io/tags/digital-art/</loc>
         <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
