@@ -118,7 +118,9 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Problem"><span class="toc-number">1.</span> <span class="toc-text">The Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disabling-sameSite-policy-in-Google-Chrome"><span class="toc-number">2.</span> <span class="toc-text">Disabling sameSite policy in Google Chrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disabling-sameSite-policy-in-Mozilla-Firefox-Developer-Edition"><span class="toc-number">3.</span> <span class="toc-text">Disabling sameSite policy in Mozilla Firefox Developer Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">5.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-problem"><span class="toc-number">1.</span> <span class="toc-text">The Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#disabling-samesite-policy-in-google-chrome"><span class="toc-number">2.</span> <span class="toc-text">Disabling sameSite
+policy in Google Chrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#disabling-samesite-policy-in-mozilla-firefox-developer-edition"><span class="toc-number">3.</span> <span class="toc-text">Disabling
+sameSite policy in Mozilla Firefox Developer Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">5.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -185,58 +187,65 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Browser vendors like Mozilla or Google have introduced new default values for
-the <code>sameSite</code> attribute when setting browser cookies [1]. While this change is
-great for preventing third-party tracking through cookies, it can make a
-developer&#x2019;s life quite frustrating when wanting to debug a local front end
-pointing to a remote server.</p>
-<p>Especially, when Chrome and Firefox give confusing or no warnings at all. Here&#x2019;s
-an example of Chrome complaining:</p>
-<p><img src="/assets/images/chrome_samesite.png" alt></p>
-<p>In Firefox, there&#x2019;ll likely be a small warning in the console:</p>
+    <p>Browser vendors like Mozilla or Google have introduced new default
+values for the <code>sameSite</code> attribute when setting browser
+cookies [1]. While this change is great for preventing third-party
+tracking through cookies, it can make a developer&apos;s life quite
+frustrating when wanting to debug a local front end pointing to a remote
+server.</p>
+<p>Especially, when Chrome and Firefox give confusing or no warnings at
+all. Here&apos;s an example of Chrome complaining:</p>
+<p><img src="/assets/images/chrome_samesite.png"></p>
+<p>In Firefox, there&apos;ll likely be a small warning in the console:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Some cookies are misusing the &#x201C;SameSite&#x201C; attribute, so it won&#x2019;t work as expected </span><br></pre></td></tr></table></figure>
-<h2 id="The-Problem">The Problem</h2>
-<p>For me the problem was the following: I had a staging server running online. It
-contained sample data that I preferred using to test my front end over a local
-backend server.</p>
-<p>There&#x2019;s a similar problem that developers run into with this type of setup:
-CORS. I usually encounter it either when:</p>
+<h2 id="the-problem">The Problem</h2>
+<p>For me the problem was the following: I had a staging server running
+online. It contained sample data that I preferred using to test my front
+end over a local backend server.</p>
+<p>There&apos;s a similar problem that developers run into with this type of
+setup: CORS. I usually encounter it either when:</p>
 <ul>
 <li>I host front end and back end on different domains</li>
-<li>I spin up a local front end development server and connect it to a backend
-running online.</li>
+<li>I spin up a local front end development server and connect it to a
+backend running online.</li>
 </ul>
-<p>That problem, I tend to prefer solving it by downloading a browser plugin that
-temporarily disabled CORS. The recent <code>sameSite</code> cookie attribute change,
-however, is different in that it&#x2019;s recent. I only found limited information
-about bypassing it online. There are no browser plugins yet either. Still, it
-can be easily fixed by modifying some settings in your browser.</p>
-<h2 id="Disabling-sameSite-policy-in-Google-Chrome">Disabling sameSite policy in Google Chrome</h2>
-<ol>
-<li>Navigate to <code>chrome://flags/#same-site-by-default-cookies</code>.</li>
-<li>Set <em>&#x201C;SameSite by default cookies&#x201D;</em>, <em>&#x201C;Enable removing SameSite=None
-cookies&#x201D;</em>, <em>&#x201C;Cookies without SameSite must be secure&#x201D;</em> to <code>Disabled</code>.</li>
+<p>That problem, I tend to prefer solving it by downloading a browser
+plugin that temporarily disabled CORS. The recent <code>sameSite</code>
+cookie attribute change, however, is different in that it&apos;s recent. I
+only found limited information about bypassing it online. There are no
+browser plugins yet either. Still, it can be easily fixed by modifying
+some settings in your browser.</p>
+<h2 id="disabling-samesite-policy-in-google-chrome">Disabling sameSite
+policy in Google Chrome</h2>
+<ol type="1">
+<li>Navigate to
+<code>chrome://flags/#same-site-by-default-cookies</code>.</li>
+<li>Set <em>&quot;SameSite by default cookies&quot;</em>, <em>&quot;Enable removing
+SameSite=None cookies&quot;</em>, <em>&quot;Cookies without SameSite must be
+secure&quot;</em> to <code>Disabled</code>.</li>
 <li><strong>Make sure to restart Chrome.</strong></li>
 </ol>
-<p>When trying your <code>Set-Cookie</code> request, the yellow overlay in the
-request inspection tab should now be gone and your cookies should show up in
-the &#x201C;Application&#x201D; tab.</p>
-<h2 id="Disabling-sameSite-policy-in-Mozilla-Firefox-Developer-Edition">Disabling sameSite policy in Mozilla Firefox Developer Edition</h2>
-<p>Go to <code>about:config</code> and make sure you have the following settings
-[2]:</p>
+<p>When trying your <code>Set-Cookie</code> request, the yellow overlay
+in the request inspection tab should now be gone and your cookies should
+show up in the &quot;Application&quot; tab.</p>
+<h2 id="disabling-samesite-policy-in-mozilla-firefox-developer-edition">Disabling
+sameSite policy in Mozilla Firefox Developer Edition</h2>
+<p>Go to <code>about:config</code> and make sure you have the following
+settings [2]:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">network.cookie.sameSite.laxByDefault: false</span><br><span class="line">network.cookie.sameSite.noneRequiresSecure: false</span><br></pre></td></tr></table></figure>
-<h2 id="Conclusion">Conclusion</h2>
-<p>Issues with blocked <code>SameSite</code> cookies in local development environments can be
-fixed by temporarily disabling sameSite policies in Firefox and Chrome. To
-learn more about the <code>sameSite</code> cookie attribute, check <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite"><code>sameSite</code> cookies on
-MDN</a>.</p>
-<h2 id="References">References</h2>
+<h2 id="conclusion">Conclusion</h2>
+<p>Issues with blocked <code>SameSite</code> cookies in local
+development environments can be fixed by temporarily disabling sameSite
+policies in Firefox and Chrome. To learn more about the
+<code>sameSite</code> cookie attribute, check <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite"><code>sameSite</code>
+cookies on MDN</a>.</p>
+<h2 id="references">References</h2>
 <ul>
-<li>1: <a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2020/08/changes-to-samesite-cookie-behavior/">Mozilla Hacks: Changes to SameSite Cookie Behavior &#x2013; A Call to Action for
-Web
+<li>1: <a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2020/08/changes-to-samesite-cookie-behavior/">Mozilla
+Hacks: Changes to SameSite Cookie Behavior &#x2013; A Call to Action for Web
 Developers</a></li>
-<li>2: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65130753/disable-samesite-cookie-policy-in-firefox-developer-edition/65130891#65130891">Answering my own question on StackOverflow about disabling SameSite
-cookies in
+<li>2: <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/65130753/disable-samesite-cookie-policy-in-firefox-developer-edition/65130891#65130891">Answering
+my own question on StackOverflow about disabling SameSite cookies in
 Firefox</a></li>
 </ul>
 
@@ -282,7 +291,9 @@ Firefox</a></li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Problem"><span class="toc-number">1.</span> <span class="toc-text">The Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disabling-sameSite-policy-in-Google-Chrome"><span class="toc-number">2.</span> <span class="toc-text">Disabling sameSite policy in Google Chrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Disabling-sameSite-policy-in-Mozilla-Firefox-Developer-Edition"><span class="toc-number">3.</span> <span class="toc-text">Disabling sameSite policy in Mozilla Firefox Developer Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">5.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-problem"><span class="toc-number">1.</span> <span class="toc-text">The Problem</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#disabling-samesite-policy-in-google-chrome"><span class="toc-number">2.</span> <span class="toc-text">Disabling sameSite
+policy in Google Chrome</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#disabling-samesite-policy-in-mozilla-firefox-developer-edition"><span class="toc-number">3.</span> <span class="toc-text">Disabling
+sameSite policy in Mozilla Firefox Developer Edition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">5.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">

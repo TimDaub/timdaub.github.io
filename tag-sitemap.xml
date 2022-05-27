@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/art/</loc>
+        <lastmod>2022-05-27T15:53:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/finance/</loc>
+        <lastmod>2022-05-27T15:53:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/symbolism/</loc>
+        <lastmod>2022-05-27T15:53:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/non-fungible-token/</loc>
+        <lastmod>2022-05-27T15:53:01.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/principles/</loc>
         <lastmod>2022-05-05T08:27:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -157,14 +185,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/ethereum/</loc>
+        <loc>https://timdaub.github.io/tags/smart-contracts/</loc>
         <lastmod>2022-02-28T21:32:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/smart-contracts/</loc>
+        <loc>https://timdaub.github.io/tags/ethereum/</loc>
         <lastmod>2022-02-28T21:32:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -346,13 +374,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/crypto/</loc>
-        <lastmod>2021-12-08T21:34:59.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/bear-market/</loc>
         <lastmod>2021-12-08T21:34:59.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -375,6 +396,13 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/rug-pull-index/</loc>
+        <lastmod>2021-12-08T21:34:59.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/crypto/</loc>
         <lastmod>2021-12-08T21:34:59.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -521,13 +549,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/finance/</loc>
-        <lastmod>2021-09-06T16:44:54.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/software-engineering/</loc>
         <lastmod>2021-09-06T16:44:54.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -536,13 +557,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/coala-ip/</loc>
-        <lastmod>2021-08-22T11:54:24.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/non-fungible-token/</loc>
         <lastmod>2021-08-22T11:54:24.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -563,28 +577,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/Provenance/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/NFTs/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/social-media/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/ERC-721/</loc>
         <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -598,14 +591,28 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/project-management/</loc>
-        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <loc>https://timdaub.github.io/tags/Provenance/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
+        <loc>https://timdaub.github.io/tags/ERC-721/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/NFTs/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/Principles/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -619,7 +626,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/Principles/</loc>
+        <loc>https://timdaub.github.io/tags/project-management/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
