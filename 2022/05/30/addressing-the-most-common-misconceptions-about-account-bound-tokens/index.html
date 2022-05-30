@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
+    <meta name="google-site-verification" content="UNYt0mwCryY0AxQmScjINFHeN-6DM9BpsNSRyHNojaY" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
+    <meta name="description" content="Authors: Tim Daubensch&amp;#xFC;tz (OP EIP-4973), Raphael Roullet (Violet), Rahul Rumalla (Otterspace)  Ever since Vitalik&amp;apos;s first post on Soulbound tokens, Weyl and Ohlhaver and they then followed u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Addressing the most common misconceptions about Account-bound tokens">
+<meta property="og:url" content="https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Authors: Tim Daubensch&amp;#xFC;tz (OP EIP-4973), Raphael Roullet (Violet), Rahul Rumalla (Otterspace)  Ever since Vitalik&amp;apos;s first post on Soulbound tokens, Weyl and Ohlhaver and they then followed u">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-30T14:12:36.000Z">
+<meta property="article:modified_time" content="2022-05-30T14:12:36.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="account-bound tokens">
+<meta property="article:tag" content="harberger property">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="soulbound tokens">
+<meta property="article:tag" content="web3">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Addressing the most common misconceptions about Account-bound tokens</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Tim's website" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2022/05/27/Ceci-n-est-pas-une-non-fungible-token/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&text=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&is_video=false&description=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Addressing the most common misconceptions about Account-bound tokens&body=Check out this article: https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&name=Addressing the most common misconceptions about Account-bound tokens&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&t=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-1-eip-4973-abts-do-discourage-key-rotation"><span class="toc-number">1.</span> <span class="toc-text">Misconception
+#1: EIP-4973 ABTs do discourage key rotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#false-expectation-2-eip-4973-abts-cannot-be-misused"><span class="toc-number">2.</span> <span class="toc-text">False
+expectation #2: EIP-4973 ABTs cannot be misused</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-3-eip-4973-abts-are-censorship-vulnerable"><span class="toc-number">3.</span> <span class="toc-text">Misconception
+#3: EIP-4973 ABTs are censorship-vulnerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-4-eip-4973-abts-are-an-example-of-a-not-invented-here-syndrome-lets-please-use-verified-credentials-vcs"><span class="toc-number">4.</span> <span class="toc-text">Misconception
+#4: EIP-4973 ABTs are an example of a Not-invented-here Syndrome: Let&#39;s
+please use Verified Credentials (VCs)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-5-eip-4973-abts-is-the-best-standard-and-no-others-should-exist"><span class="toc-number">5.</span> <span class="toc-text">Misconception
+#5: EIP-4973 ABTs is the best standard, and no others should exist</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Addressing the most common misconceptions about Account-bound tokens
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Tim's website</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-05-30T14:12:36.000Z" itemprop="datePublished">2022-05-30</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/account-bound-tokens/" rel="tag">account-bound tokens</a>, <a class="tag-link-link" href="/tags/ethereum/" rel="tag">ethereum</a>, <a class="tag-link-link" href="/tags/harberger-property/" rel="tag">harberger property</a>, <a class="tag-link-link" href="/tags/soulbound-tokens/" rel="tag">soulbound tokens</a>, <a class="tag-link-link" href="/tags/web3/" rel="tag">web3</a>
+    </div>
+
+
+      |
+      <i class="fas fa-stopwatch"></i>
+      11 minutes read
+      <meta name="description" content="Authors: Tim Daubensch&amp;#xFC;tz (OP EIP-4973), Raphael Roullet (Violet), Rahul Rumalla (Otterspace)  Ever since Vitalik&amp;apos;s first post on Soulbound tokens, Weyl and Ohlhaver and they then followed u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Addressing the most common misconceptions about Account-bound tokens">
+<meta property="og:url" content="https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/index.html">
+<meta property="og:site_name" content="Tim&#39;s website">
+<meta property="og:description" content="Authors: Tim Daubensch&amp;#xFC;tz (OP EIP-4973), Raphael Roullet (Violet), Rahul Rumalla (Otterspace)  Ever since Vitalik&amp;apos;s first post on Soulbound tokens, Weyl and Ohlhaver and they then followed u">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-30T14:12:36.000Z">
+<meta property="article:modified_time" content="2022-05-30T14:12:36.000Z">
+<meta property="article:author" content="Tim Daubenschütz">
+<meta property="article:tag" content="account-bound tokens">
+<meta property="article:tag" content="harberger property">
+<meta property="article:tag" content="ethereum">
+<meta property="article:tag" content="soulbound tokens">
+<meta property="article:tag" content="web3">
+<meta name="twitter:card" content="summary_large_image">
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Authors: <a target="_blank" rel="noopener" href="https://twitter.com/timdaub">Tim Daubensch&#xFC;tz</a>
+(OP <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>), <a target="_blank" rel="noopener" href="https://mobile.twitter.com/RaphaelRoullet">Raphael Roullet</a> (<a target="_blank" rel="noopener" href="https://violet.co/">Violet</a>), <a target="_blank" rel="noopener" href="https://twitter.com/rahulrumalla">Rahul Rumalla</a> (<a target="_blank" rel="noopener" href="https://www.otterspace.xyz/">Otterspace</a>)</p>
+<hr>
+<p>Ever since <a target="_blank" rel="noopener" href="https://vitalik.ca/general/2022/01/26/soulbound.html">Vitalik&apos;s
+first post on Soulbound tokens</a>, Weyl and Ohlhaver and they then
+followed up with a paper titled &quot;<a target="_blank" rel="noopener" href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4105763">Decentralized
+Society: Finding Web3&apos;s Soul</a>&quot;, <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">&quot;Account-bound&quot;
+(ABTs)</a>, <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5114">&quot;Soulbound&quot;
+(SBTs)</a>, <a target="_blank" rel="noopener" href="https://erc1238.notion.site/">&quot;non-transferrable&quot;
+(NTTs)</a>, <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5107">&quot;name-bound&quot;
+(NBTs)</a>, &quot;non-tradable&quot; tokens (NTTs) have been the focal point for
+discussion in the Ethereum community.</p>
+<p>As the topic is rather fresh off the press and since not many people
+have had time to thoroughly think through some of the concepts proposed
+in Weyl et al.&apos;s paper, we, the authors of the Account-bound tokens
+specification <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>, have had to
+see several uninformed takes we&apos;d like to address with this post
+conclusively.</p>
+<p>Below, segmented in sections, are the most common misconceptions
+about Account-bound tokens and how we think about them. And before we
+get into the meat, please let us prefix the article by stating that we,
+too, are &quot;beginners&quot; in this recently emergent field. But we&apos;re narrowly
+focused on delivering a standard, so we believe we have a position and
+voice worth hearing in the discussion.</p>
+<p>We think a good primitive design intends to do one specific task in a
+precisely defined and highly reliable fashion - this is one of the first
+principle approaches we took with ABTs, i.e., how do we best bind tokens
+to accounts with consideration of consent and recoverability in
+mind.</p>
+<h2 id="misconception-1-eip-4973-abts-do-discourage-key-rotation">Misconception
+#1: EIP-4973 ABTs do discourage key rotation</h2>
+<div class="twitter-wrapper"><blockquote class="twitter-tweet"><a target="_blank" rel="noopener" href="https://twitter.com/LefterisJP/status/1530845615030251520"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>The most common concern we&apos;ve heard when introducing the concept of
+binding tokens to an account is that it discourages users from
+frequently rotating keys. However, given the standard&apos;s current state
+and that revocation or revocation and re-assignment are a possibility,
+the standard itself makes no normative statements about an ABT being
+permanently bound to an account - even in case of key loss.</p>
+<p>Quite the opposite, while <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> ABTs do
+indeed not implement <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a>&apos;s
+<code>transfer</code> and <code>transferFrom</code> functions, it&apos;s
+intentionally designed to leave the responsibility of re-assignment and
+revocation up to the implementer, i.e., a community, a protocol, a dApp,
+and not impose this as part of the primitive itself.</p>
+<p>If you want, <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> introduces a
+non-normative transfer functionality using attestations and revocations
+freely implementable by anyone using the standard.</p>
+<p>And while account recovery on blockchains is still an unsolved topic,
+it&apos;s important to distinguish between (1) preventative, frequent key
+rotation and (2) switching keys upon compromise.</p>
+<p>For example, in the case of a university binding a credential to a
+student&apos;s account, we&apos;d assume the university would give the student the
+ability to revoke and re-assign their credentials to a new account at
+any time. It would include occasions where a user wants to (1)
+preventatively rotate their keys and when they want to (urgently) (2)
+switch keys upon compromise.</p>
+<p>In fact, (2) upon key compromise, Account-bound tokens, as we define
+them in <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>,
+without making normative statements on when revocations and re-issuance
+should occur, would allow an issuer to revoke and re-attest, or:
+&quot;recover,&quot; from a compromised account to a newly instituted account.</p>
+<p>Similarly, we&apos;re not making any normative statements about who should
+be able to revoke ABTs either, which brings us to the second most common
+misconception, namely that ABTs <strong>cannot</strong> be misused to
+dox someone permanently on-chain.</p>
+<h2 id="false-expectation-2-eip-4973-abts-cannot-be-misused">False
+expectation #2: EIP-4973 ABTs cannot be misused</h2>
+<p>Yes, you&apos;re reading this correctly. We&apos;re not going to claim anything
+utopic here. While the scope of an <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-1">Ethereum Improvement
+Proposal</a> is far-reaching and powerful, it&apos;s not magic, and it cannot
+prevent the myriad possibilities of misuse. Similarly, e.g., IEEE RFC
+authors can hardly prevent others from being mean using email or
+HTTPS.</p>
+<p>But let us be clear: None of Ethereum&apos;s infrastructure or standards
+currently prevent misuse. If you want to dox someone&apos;s Ethereum account,
+there are already many ways to do so. And controversially, there is not
+a single way to delete that data. But, this is a discussion entirely out
+of scope for defining a token standard interface for wallet implementers
+within the EIP process.</p>
+<p>And there have been numerous amazing philosophical takes on the
+subject matter too. The best, in our opinion, is Ribbonfarm&apos;s &quot;<a target="_blank" rel="noopener" href="https://www.ribbonfarm.com/2017/05/25/blockchains-never-forget/">Blockchain&apos;s
+never forget</a>&quot; article, which accepts blockchain&apos;s &quot;dystopian&quot;
+property of immutable, permanent data availability as a chance to
+rethink inter-human interaction.</p>
+<p>Blockchains like Ethereum currently violate the EU&apos;s right to be
+forgotten. If user data is stored on Ethereum by dapps, it may also
+violate the GDPR laws in many cases. There is <a target="_blank" rel="noopener" href="https://hal.archives-ouvertes.fr/hal-03513113/document">a debate
+about the alegality</a> of blockchains. And similarly, we think that
+there&apos;s acceptance needed towards understanding blockchain as <a href="https://timdaub.github.io/2022/02/28/smart-contracts-are-programmable-commons/">so
+culturally diverse and international/global</a> that, e.g., the EU or
+US&apos;s local laws won&apos;t &quot;just&quot; cut it.</p>
+<p>It is not to say that we shouldn&apos;t use those laws as guiding
+principles for implementing technology. But, clearly, in the case of
+bringing up the abuse potential of ABTs, the community doesn&apos;t
+understand that any other token standard or any other Ethereum
+transaction can also contain abusing information linking to accounts.
+It&apos;s a problem with Ethereum, not within specific standards.</p>
+<p>So generally, we want to encourage more discussion around the topic:
+But we also want to be clear: This isn&apos;t a problem limited to ABTs. It
+is a problem of blockchains and should hence also be discussed on that
+level.</p>
+<p>ABTs can be misused, and we must work on heuristics to maximally
+prevent misuse. Within blockchains and generally for any modern and
+inter(net)-national peer2peer protocol.</p>
+<h2 id="misconception-3-eip-4973-abts-are-censorship-vulnerable">Misconception
+#3: EIP-4973 ABTs are censorship-vulnerable</h2>
+<p>Then, once someone understands that ABTs can be re-issued using a
+sequential revocation and re-attestation, an accusation that has been
+brought up is that ABTs are vulnerable to censorship, namely because the
+implementer is in the position to control the re-issuance.</p>
+<p>And while, of course, this argument can be easily made, e.g., in the
+above case of a university issuing credentials to students, what is
+vital to understand is that the <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>
+account-bound token standard makes no normative statement about the
+conceptual structure of an ABT issuer or how they should do their
+job.</p>
+<p>Yes, a naive implementation of a university using <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> tokens may
+indeed be vulnerable to &quot;censorship.&quot; But that&apos;s because it&apos;s
+implemented fragilely and would require alleging bad intent. It also
+touches upon the question: What equates to &quot;censorship&quot; and what equates
+to &quot;moderation&quot;?</p>
+<p>In contrast, and since the standard makes no normative statements,
+there&apos;s now also a chance to implement entirely decentralized credential
+issuance schemes we&apos;re probably not even able to imagine today.</p>
+<p>But for making a visual example, let&apos;s imagine that a future
+decentralized university degree may not come from the centralized
+credential emitting unit - but rather that it could be a collection of
+professors&apos; badges that the student earns through attending classes and
+being a bright apprentice.</p>
+<p>ABTs do not mandate a token issuer to be a centrally controlled and
+censorship-vulnerable entity, and so the argument that ABTs are
+censorship-vulnerable likely stems from being misinformed.</p>
+<p>We should implement ABTs issuers in a decentralized fashion. We
+should properly rethink how our trust-crediting institutions work. We
+should fit them into the mold of the interfaces we have available. And
+if they don&apos;t fit: Let&apos;s change or add new interfaces.</p>
+<h2 id="misconception-4-eip-4973-abts-are-an-example-of-a-not-invented-here-syndrome-lets-please-use-verified-credentials-vcs">Misconception
+#4: EIP-4973 ABTs are an example of a Not-invented-here Syndrome: Let&apos;s
+please use Verified Credentials (VCs)</h2>
+<p><a target="_blank" rel="noopener" href="https://www.w3.org/TR/vc-data-model/">Verified
+credentials</a> are a good standard, and we believe there to be an
+intersection of utility between &quot;Soulbound tokens&quot; and VCs. But, we
+should acknowledge that both credentials existing off-chain and on-chain
+can be used by implementers.</p>
+<p>However, claiming that something should generally be off-chain or
+on-chain without hearing the use case first is likely going to lead to
+an uninformed take. Instead, we want to make clear that putting
+credentials on-chain is useful too and that, additionally, it is not
+entirely correct to conflate ABTs with verified credentials.</p>
+<p>While, yes, ABTs look like badges or credentials, and since today
+they&apos;ve been framed as such many times, the <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>&apos;s author Tim
+Daubensch&#xFC;tz came up with the standard <a href="https://timdaub.github.io/2022/02/19/non-skeuomorphic-harberger-properties-erc721-nfts/">mainly
+to implement Harberger property</a>.</p>
+<p>The problem is that <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a> and other
+token standards implicitly assume the ownership structures adhering to
+normative private property laws. He&apos;s been blogging on the problems of
+normalizing those ownership properties before Weyl et al.&apos;s article -
+and how Harberger properties are inherently incompatible. The work on <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> goes beyond
+issuing badges on Ethereum, and <a target="_blank" rel="noopener" href="https://partialcommonownership.com/">Partial Common Ownership
+working group</a> has been discussing these issues since ETHDenver at
+the beginning of the year.</p>
+<p>So a direct motivating factor for publishing <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> for Tim was
+that it would allow users to display an NFT-ish token in their wallet
+while giving wallet implementers the possibility to call <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-165">EIP-165</a>&apos;s
+<code>supportsInterface</code> method for feature detection. In that
+sense, Account-bound tokens were meant as a simple
+backward-compatibility hack &quot;free-riding&quot; on any wallet implementing <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a>.</p>
+<p>So, strictly speaking, although we acknowledge the <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> standard to
+be useful for issuing credentials, it didn&apos;t even originate as a
+credential standard.</p>
+<p>Then secondly, we think it&apos;s important to highlight why it may be
+useful to put badges/credentials on-chain. See, someone issuing a token
+is required to send a signed message to Ethereum, and its consensus
+mechanism ensures the signature and message&apos;s validity and
+integrity.</p>
+<p>Additionally, messages sent to Ethereum are stored permanently for a
+rather &quot;negligible&quot; cost. Permanently. It can have benefits over storing
+credentials off-chain in case, e.g., someone is making a statement that
+they may want to redact later. Still, the application would require it
+to be immutable and always available (When it shouldn&apos;t be
+redactable/deletable/censorable.)</p>
+<p>Also, by defining a standard interface for Solidity - which
+essentially <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> does, it
+allows ABTs to show up in a wallet next to other tokens. So we&apos;re
+tapping into existing and powerful infrastructure. Infrastructure that
+we&apos;ve collectively built with users over the years to, e.g., back up
+their secret words.</p>
+<p>Lastly, through using oracles, we could do smart contract evaluation
+with verified credentials, too; but having badge-ish tokens on-chain
+allows them to be used by smart contracts today - while oracle
+infrastructure is nowhere to be ready.</p>
+<p>Finally, a word on how we see Soulbound tokens being
+standardized.</p>
+<h2 id="misconception-5-eip-4973-abts-is-the-best-standard-and-no-others-should-exist">Misconception
+#5: EIP-4973 ABTs is the best standard, and no others should exist</h2>
+<p>Already within the working groups for <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>, we&apos;ve
+branched off and listened to the community&apos;s feedback that is interested
+in, e.g., binding credentials to ENS names. As a result, we&apos;ve &quot;forked&quot;
+<a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> to a new
+standard called <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5107">&quot;name-bound&quot;
+tokens</a> and submitted it as a draft PR to the ethereum/EIP
+repository.</p>
+<p>Additionally, by intentionally binding tokens to accounts, we&apos;ve
+furthered the discussion around whether that&apos;s a good idea. As a
+response, more generalized approaches like Micah Zoltu&apos;s <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5114">EIP-5114</a> are now
+being submitted too. It allows to bind ERC721s to ERC721s and hence
+doesn&apos;t have the supposed key rotation issue.</p>
+<p>We hope <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5107">EIP-5107</a>, <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/pull/5114">EIP-5114</a> and <a target="_blank" rel="noopener" href="https://erc1238.notion.site/">EIP-1238</a> aren&apos;t the last
+attempts at defining Soulbound tokens for Ethereum. Rather, we think
+that for collective intelligence to emerge, although it often feels
+personal, many new ways of expressing credentials on-chain will be
+discovered to understand what users truly want.</p>
+<p>We must encourage other standards. Let&apos;s learn from each other to
+create a decentralized society and find web3&apos;s soul.</p>
+
+  </div>
+</article>
+
+
+<hr>
+<p style="font-size: 1.2em;font-weight: bold;text-align: center;padding: 0 15% 1em 15%;">
+  To get all my future posts delivered to your inbox for <em>free</em>,
+  subscribe to my <a target="_blank" rel="noopener" href="https://timdaubenschuetz.substack.com">newsletter on
+  Substack</a> below.
+</p>
+<div style="display: flex;align-items: center;justify-content: center;">
+  <iframe
+    onLoad="javascript:console.log('Dear reader of my blog,\nIt has recently come to my attention that Substack has started posting advertisements on my blog\'s dev console\nwithout asking for my permission. Upon noticing, I\'ve contacted Substack and asked them to remove the\n\'SUBSTACK IS HIRING\' ad (Screenshot: https://imgur.com/a/ZEaGFeI). Sadly, the company\'s representative recommended I remove the embed altogether.\nHowever, since I was too lazy to find a new email syndication service quickly, I\'ve now left the Substack newsletter embed and added this message.\n\nBest,\nTim')"
+    src="https://timdaubenschuetz.substack.com/embed"
+    height="200"
+    style="width: 100vw; border-radius: 5px; border:none; background:#22966D;"
+    frameborder="0"
+    scrolling="no">
+  </iframe>
+</div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-1-eip-4973-abts-do-discourage-key-rotation"><span class="toc-number">1.</span> <span class="toc-text">Misconception
+#1: EIP-4973 ABTs do discourage key rotation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#false-expectation-2-eip-4973-abts-cannot-be-misused"><span class="toc-number">2.</span> <span class="toc-text">False
+expectation #2: EIP-4973 ABTs cannot be misused</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-3-eip-4973-abts-are-censorship-vulnerable"><span class="toc-number">3.</span> <span class="toc-text">Misconception
+#3: EIP-4973 ABTs are censorship-vulnerable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-4-eip-4973-abts-are-an-example-of-a-not-invented-here-syndrome-lets-please-use-verified-credentials-vcs"><span class="toc-number">4.</span> <span class="toc-text">Misconception
+#4: EIP-4973 ABTs are an example of a Not-invented-here Syndrome: Let&#39;s
+please use Verified Credentials (VCs)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#misconception-5-eip-4973-abts-is-the-best-standard-and-no-others-should-exist"><span class="toc-number">5.</span> <span class="toc-text">Misconception
+#5: EIP-4973 ABTs is the best standard, and no others should exist</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&text=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&is_video=false&description=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Addressing the most common misconceptions about Account-bound tokens&body=Check out this article: https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&title=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&name=Addressing the most common misconceptions about Account-bound tokens&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/&t=Addressing the most common misconceptions about Account-bound tokens"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Tim Daubenschütz
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/projects/">Projects</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://plausible.io/timdaub.github.io">Stats</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments --><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+</body>
+</html>

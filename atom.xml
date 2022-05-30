@@ -6,7 +6,7 @@
   <link href="https://timdaub.github.io/atom.xml" rel="self"/>
   
   <link href="https://timdaub.github.io/"/>
-  <updated>2022-05-27T15:53:01.000Z</updated>
+  <updated>2022-05-30T14:12:36.000Z</updated>
   <id>https://timdaub.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Addressing the most common misconceptions about Account-bound tokens</title>
+    <link href="https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"/>
+    <id>https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/</id>
+    <published>2022-05-30T14:12:36.000Z</published>
+    <updated>2022-05-30T14:12:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Authors: <a href="https://twitter.com/timdaub">Tim Daubensch&#xFC;tz</a>(OP <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>), <a href="https://mobile.twitter.com/RaphaelRoullet">Raphael Roullet</a> (<a href="https://violet.co/">Violet</a>), <a href="https://twitter.com/rahulrumalla">Rahul Rumalla</a> (<a href="https://www.otterspace.xyz/">Otterspace</a>)</p><hr><p>Ever since <a href="https://vitalik.ca/general/2022/01/26/soulbound.html">Vitalik&apos;sfirst post on Soulbound tokens</a>, Weyl and Ohlhaver and they thenfollowed up with a paper titled &quot;<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4105763">DecentralizedSociety: Finding Web3&apos;s Soul</a>&quot;, <a href="https://eips.ethereum.org/EIPS/eip-4973">&quot;Account-bound&quot;(ABTs)</a>, <a href="https://github.com/ethereum/EIPs/pull/5114">&quot;Soulbound&quot;(SBTs)</a>, <a href="https://erc1238.notion.site/">&quot;non-transferrable&quot;(NTTs)</a>, <a href="https://github.com/ethereum/EIPs/pull/5107">&quot;name-bound&quot;(NBTs)</a>, &quot;non-tradable&quot; tokens (NTTs) have been the focal point fordiscussion in the Ethereum community.</p><p>As the topic is rather fresh off the press and since not many peoplehave had time to thoroughly think through some of the concepts proposedin Weyl et al.&apos;s paper, we, the authors of the Account-bound tokensspecification <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>, have had tosee several uninformed takes we&apos;d like to address with this postconclusively.</p><p>Below, segmented in sections, are the most common misconceptionsabout Account-bound tokens and how we think about them. And before weget into the meat, please let us prefix the article by stating that we,too, are &quot;beginners&quot; in this recently emergent field. But we&apos;re narrowlyfocused on delivering a standard, so we believe we have a position andvoice worth hearing in the discussion.</p><p>We think a good primitive design intends to do one specific task in aprecisely defined and highly reliable fashion - this is one of the firstprinciple approaches we took with ABTs, i.e., how do we best bind tokensto accounts with consideration of consent and recoverability inmind.</p><h2 id="misconception-1-eip-4973-abts-do-discourage-key-rotation">Misconception#1: EIP-4973 ABTs do discourage key rotation</h2><div class="twitter-wrapper"><blockquote class="twitter-tweet"><a href="https://twitter.com/LefterisJP/status/1530845615030251520"></a></blockquote></div><script async defer src="//platform.twitter.com/widgets.js" charset="utf-8"></script><p>The most common concern we&apos;ve heard when introducing the concept ofbinding tokens to an account is that it discourages users fromfrequently rotating keys. However, given the standard&apos;s current stateand that revocation or revocation and re-assignment are a possibility,the standard itself makes no normative statements about an ABT beingpermanently bound to an account - even in case of key loss.</p><p>Quite the opposite, while <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> ABTs doindeed not implement <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a>&apos;s<code>transfer</code> and <code>transferFrom</code> functions, it&apos;sintentionally designed to leave the responsibility of re-assignment andrevocation up to the implementer, i.e., a community, a protocol, a dApp,and not impose this as part of the primitive itself.</p><p>If you want, <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> introduces anon-normative transfer functionality using attestations and revocationsfreely implementable by anyone using the standard.</p><p>And while account recovery on blockchains is still an unsolved topic,it&apos;s important to distinguish between (1) preventative, frequent keyrotation and (2) switching keys upon compromise.</p><p>For example, in the case of a university binding a credential to astudent&apos;s account, we&apos;d assume the university would give the student theability to revoke and re-assign their credentials to a new account atany time. It would include occasions where a user wants to (1)preventatively rotate their keys and when they want to (urgently) (2)switch keys upon compromise.</p><p>In fact, (2) upon key compromise, Account-bound tokens, as we definethem in <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>,without making normative statements on when revocations and re-issuanceshould occur, would allow an issuer to revoke and re-attest, or:&quot;recover,&quot; from a compromised account to a newly instituted account.</p><p>Similarly, we&apos;re not making any normative statements about who shouldbe able to revoke ABTs either, which brings us to the second most commonmisconception, namely that ABTs <strong>cannot</strong> be misused todox someone permanently on-chain.</p><h2 id="false-expectation-2-eip-4973-abts-cannot-be-misused">Falseexpectation #2: EIP-4973 ABTs cannot be misused</h2><p>Yes, you&apos;re reading this correctly. We&apos;re not going to claim anythingutopic here. While the scope of an <a href="https://eips.ethereum.org/EIPS/eip-1">Ethereum ImprovementProposal</a> is far-reaching and powerful, it&apos;s not magic, and it cannotprevent the myriad possibilities of misuse. Similarly, e.g., IEEE RFCauthors can hardly prevent others from being mean using email orHTTPS.</p><p>But let us be clear: None of Ethereum&apos;s infrastructure or standardscurrently prevent misuse. If you want to dox someone&apos;s Ethereum account,there are already many ways to do so. And controversially, there is nota single way to delete that data. But, this is a discussion entirely outof scope for defining a token standard interface for wallet implementerswithin the EIP process.</p><p>And there have been numerous amazing philosophical takes on thesubject matter too. The best, in our opinion, is Ribbonfarm&apos;s &quot;<a href="https://www.ribbonfarm.com/2017/05/25/blockchains-never-forget/">Blockchain&apos;snever forget</a>&quot; article, which accepts blockchain&apos;s &quot;dystopian&quot;property of immutable, permanent data availability as a chance torethink inter-human interaction.</p><p>Blockchains like Ethereum currently violate the EU&apos;s right to beforgotten. If user data is stored on Ethereum by dapps, it may alsoviolate the GDPR laws in many cases. There is <a href="https://hal.archives-ouvertes.fr/hal-03513113/document">a debateabout the alegality</a> of blockchains. And similarly, we think thatthere&apos;s acceptance needed towards understanding blockchain as <a href="https://timdaub.github.io/2022/02/28/smart-contracts-are-programmable-commons/">soculturally diverse and international/global</a> that, e.g., the EU orUS&apos;s local laws won&apos;t &quot;just&quot; cut it.</p><p>It is not to say that we shouldn&apos;t use those laws as guidingprinciples for implementing technology. But, clearly, in the case ofbringing up the abuse potential of ABTs, the community doesn&apos;tunderstand that any other token standard or any other Ethereumtransaction can also contain abusing information linking to accounts.It&apos;s a problem with Ethereum, not within specific standards.</p><p>So generally, we want to encourage more discussion around the topic:But we also want to be clear: This isn&apos;t a problem limited to ABTs. Itis a problem of blockchains and should hence also be discussed on thatlevel.</p><p>ABTs can be misused, and we must work on heuristics to maximallyprevent misuse. Within blockchains and generally for any modern andinter(net)-national peer2peer protocol.</p><h2 id="misconception-3-eip-4973-abts-are-censorship-vulnerable">Misconception#3: EIP-4973 ABTs are censorship-vulnerable</h2><p>Then, once someone understands that ABTs can be re-issued using asequential revocation and re-attestation, an accusation that has beenbrought up is that ABTs are vulnerable to censorship, namely because theimplementer is in the position to control the re-issuance.</p><p>And while, of course, this argument can be easily made, e.g., in theabove case of a university issuing credentials to students, what isvital to understand is that the <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>account-bound token standard makes no normative statement about theconceptual structure of an ABT issuer or how they should do theirjob.</p><p>Yes, a naive implementation of a university using <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> tokens mayindeed be vulnerable to &quot;censorship.&quot; But that&apos;s because it&apos;simplemented fragilely and would require alleging bad intent. It alsotouches upon the question: What equates to &quot;censorship&quot; and what equatesto &quot;moderation&quot;?</p><p>In contrast, and since the standard makes no normative statements,there&apos;s now also a chance to implement entirely decentralized credentialissuance schemes we&apos;re probably not even able to imagine today.</p><p>But for making a visual example, let&apos;s imagine that a futuredecentralized university degree may not come from the centralizedcredential emitting unit - but rather that it could be a collection ofprofessors&apos; badges that the student earns through attending classes andbeing a bright apprentice.</p><p>ABTs do not mandate a token issuer to be a centrally controlled andcensorship-vulnerable entity, and so the argument that ABTs arecensorship-vulnerable likely stems from being misinformed.</p><p>We should implement ABTs issuers in a decentralized fashion. Weshould properly rethink how our trust-crediting institutions work. Weshould fit them into the mold of the interfaces we have available. Andif they don&apos;t fit: Let&apos;s change or add new interfaces.</p><h2 id="misconception-4-eip-4973-abts-are-an-example-of-a-not-invented-here-syndrome-lets-please-use-verified-credentials-vcs">Misconception#4: EIP-4973 ABTs are an example of a Not-invented-here Syndrome: Let&apos;splease use Verified Credentials (VCs)</h2><p><a href="https://www.w3.org/TR/vc-data-model/">Verifiedcredentials</a> are a good standard, and we believe there to be anintersection of utility between &quot;Soulbound tokens&quot; and VCs. But, weshould acknowledge that both credentials existing off-chain and on-chaincan be used by implementers.</p><p>However, claiming that something should generally be off-chain oron-chain without hearing the use case first is likely going to lead toan uninformed take. Instead, we want to make clear that puttingcredentials on-chain is useful too and that, additionally, it is notentirely correct to conflate ABTs with verified credentials.</p><p>While, yes, ABTs look like badges or credentials, and since todaythey&apos;ve been framed as such many times, the <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>&apos;s author TimDaubensch&#xFC;tz came up with the standard <a href="https://timdaub.github.io/2022/02/19/non-skeuomorphic-harberger-properties-erc721-nfts/">mainlyto implement Harberger property</a>.</p><p>The problem is that <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a> and othertoken standards implicitly assume the ownership structures adhering tonormative private property laws. He&apos;s been blogging on the problems ofnormalizing those ownership properties before Weyl et al.&apos;s article -and how Harberger properties are inherently incompatible. The work on <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> goes beyondissuing badges on Ethereum, and <a href="https://partialcommonownership.com/">Partial Common Ownershipworking group</a> has been discussing these issues since ETHDenver atthe beginning of the year.</p><p>So a direct motivating factor for publishing <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> for Tim wasthat it would allow users to display an NFT-ish token in their walletwhile giving wallet implementers the possibility to call <a href="https://eips.ethereum.org/EIPS/eip-165">EIP-165</a>&apos;s<code>supportsInterface</code> method for feature detection. In thatsense, Account-bound tokens were meant as a simplebackward-compatibility hack &quot;free-riding&quot; on any wallet implementing <a href="https://eips.ethereum.org/EIPS/eip-721">EIP-721</a>.</p><p>So, strictly speaking, although we acknowledge the <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> standard tobe useful for issuing credentials, it didn&apos;t even originate as acredential standard.</p><p>Then secondly, we think it&apos;s important to highlight why it may beuseful to put badges/credentials on-chain. See, someone issuing a tokenis required to send a signed message to Ethereum, and its consensusmechanism ensures the signature and message&apos;s validity andintegrity.</p><p>Additionally, messages sent to Ethereum are stored permanently for arather &quot;negligible&quot; cost. Permanently. It can have benefits over storingcredentials off-chain in case, e.g., someone is making a statement thatthey may want to redact later. Still, the application would require itto be immutable and always available (When it shouldn&apos;t beredactable/deletable/censorable.)</p><p>Also, by defining a standard interface for Solidity - whichessentially <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> does, itallows ABTs to show up in a wallet next to other tokens. So we&apos;retapping into existing and powerful infrastructure. Infrastructure thatwe&apos;ve collectively built with users over the years to, e.g., back uptheir secret words.</p><p>Lastly, through using oracles, we could do smart contract evaluationwith verified credentials, too; but having badge-ish tokens on-chainallows them to be used by smart contracts today - while oracleinfrastructure is nowhere to be ready.</p><p>Finally, a word on how we see Soulbound tokens beingstandardized.</p><h2 id="misconception-5-eip-4973-abts-is-the-best-standard-and-no-others-should-exist">Misconception#5: EIP-4973 ABTs is the best standard, and no others should exist</h2><p>Already within the working groups for <a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a>, we&apos;vebranched off and listened to the community&apos;s feedback that is interestedin, e.g., binding credentials to ENS names. As a result, we&apos;ve &quot;forked&quot;<a href="https://eips.ethereum.org/EIPS/eip-4973">EIP-4973</a> to a newstandard called <a href="https://github.com/ethereum/EIPs/pull/5107">&quot;name-bound&quot;tokens</a> and submitted it as a draft PR to the ethereum/EIPrepository.</p><p>Additionally, by intentionally binding tokens to accounts, we&apos;vefurthered the discussion around whether that&apos;s a good idea. As aresponse, more generalized approaches like Micah Zoltu&apos;s <a href="https://github.com/ethereum/EIPs/pull/5114">EIP-5114</a> are nowbeing submitted too. It allows to bind ERC721s to ERC721s and hencedoesn&apos;t have the supposed key rotation issue.</p><p>We hope <a href="https://github.com/ethereum/EIPs/pull/5107">EIP-5107</a>, <a href="https://github.com/ethereum/EIPs/pull/5114">EIP-5114</a> and <a href="https://erc1238.notion.site/">EIP-1238</a> aren&apos;t the lastattempts at defining Soulbound tokens for Ethereum. Rather, we thinkthat for collective intelligence to emerge, although it often feelspersonal, many new ways of expressing credentials on-chain will bediscovered to understand what users truly want.</p><p>We must encourage other standards. Let&apos;s learn from each other tocreate a decentralized society and find web3&apos;s soul.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Authors: &lt;a href=&quot;https://twitter.com/timdaub&quot;&gt;Tim Daubensch&amp;#xFC;tz&lt;/a&gt;
+(OP &lt;a href=&quot;https://eips.ethereum.org/EIPS/eip-4973&quot;&gt;EIP-4973&lt;/</summary>
+      
+    
+    
+    
+    
+    <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
+    
+    <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
+    
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
+  </entry>
   
   <entry>
     <title>Ceci n&#39;est pas une non fungible token</title>
@@ -218,9 +249,9 @@ history, to build ownership experiences residing in the commons.
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
@@ -302,9 +333,9 @@ attend ETHDenver and all its satellite events. Today was my first day a</summary
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="traveling" scheme="https://timdaub.github.io/tags/traveling/"/>
     
@@ -329,6 +360,8 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     
     
     
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
     <category term="optimism" scheme="https://timdaub.github.io/tags/optimism/"/>
     
     <category term="toxicity" scheme="https://timdaub.github.io/tags/toxicity/"/>
@@ -336,8 +369,6 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     <category term="critique" scheme="https://timdaub.github.io/tags/critique/"/>
     
     <category term="crypto currencies" scheme="https://timdaub.github.io/tags/crypto-currencies/"/>
-    
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
   </entry>
   
@@ -359,15 +390,15 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
-    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
-    
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    
+    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="composability" scheme="https://timdaub.github.io/tags/composability/"/>
     
@@ -394,9 +425,9 @@ social media than in 2021. As my diet now excludes Reddit and </summary>
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="layer 2" scheme="https://timdaub.github.io/tags/layer-2/"/>
-    
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    
+    <category term="layer 2" scheme="https://timdaub.github.io/tags/layer-2/"/>
     
     <category term="multi chain" scheme="https://timdaub.github.io/tags/multi-chain/"/>
     
@@ -488,9 +519,9 @@ So it&amp;apos;s roughly 24 months. I just counted; I managed to re</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="rug pull index" scheme="https://timdaub.github.io/tags/rug-pull-index/"/>
     
@@ -563,9 +594,9 @@ speak for all of us and say: &amp;quot;We&amp;apos;re exhausted!&amp;quot;&lt;/p
     
     <category term="bull market" scheme="https://timdaub.github.io/tags/bull-market/"/>
     
-    <category term="venture capital" scheme="https://timdaub.github.io/tags/venture-capital/"/>
-    
     <category term="startups" scheme="https://timdaub.github.io/tags/startups/"/>
+    
+    <category term="venture capital" scheme="https://timdaub.github.io/tags/venture-capital/"/>
     
   </entry>
   
@@ -762,11 +793,11 @@ things improperly. I&amp;apos;d argue that for most code I&amp;apos;ve</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="non-fungible token" scheme="https://timdaub.github.io/tags/non-fungible-token/"/>
     
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
@@ -1029,19 +1060,19 @@ although, the last time I developed an app using it has been more </summary>
     
     
     
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
+    
+    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="monero" scheme="https://timdaub.github.io/tags/monero/"/>
     
     <category term="developer experience" scheme="https://timdaub.github.io/tags/developer-experience/"/>
     
-    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
-    
     <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
-    
-    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
     
@@ -1204,13 +1235,13 @@ co</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
-    <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    
+    <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
     
     <category term="web standards" scheme="https://timdaub.github.io/tags/web-standards/"/>
     
@@ -1433,11 +1464,11 @@ am perfekten Sauerteigbrot. Die Angaben auf dieser Seite </summary>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
-    <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
+    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
     <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
-    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
     
     <category term="crypto currency" scheme="https://timdaub.github.io/tags/crypto-currency/"/>
     

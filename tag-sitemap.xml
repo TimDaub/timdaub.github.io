@@ -3,6 +3,41 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/web3/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/soulbound-tokens/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/ethereum/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/harberger-property/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/account-bound-tokens/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/art/</loc>
         <lastmod>2022-05-27T15:53:01.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -171,13 +206,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/web3/</loc>
-        <lastmod>2022-03-11T09:39:35.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/harberger-taxes/</loc>
         <lastmod>2022-02-28T21:32:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -186,13 +214,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/smart-contracts/</loc>
-        <lastmod>2022-02-28T21:32:00.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/ethereum/</loc>
         <lastmod>2022-02-28T21:32:00.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -276,14 +297,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/blockchain/</loc>
+        <loc>https://timdaub.github.io/tags/decentralized-finance/</loc>
         <lastmod>2022-01-26T14:28:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/decentralized-finance/</loc>
+        <loc>https://timdaub.github.io/tags/blockchain/</loc>
         <lastmod>2022-01-26T14:28:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
