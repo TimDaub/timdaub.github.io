@@ -10,13 +10,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/ethereum/</loc>
-        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/harberger-property/</loc>
         <lastmod>2022-05-30T14:12:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -25,6 +18,13 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/account-bound-tokens/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/ethereum/</loc>
         <lastmod>2022-05-30T14:12:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
