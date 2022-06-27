@@ -49,6 +49,37 @@ for </summary>
   </entry>
   
   <entry>
+    <title>Addressing the most common misconceptions about Account-bound tokens</title>
+    <link href="https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/"/>
+    <id>https://timdaub.github.io/2022/05/30/addressing-the-most-common-misconceptions-about-account-bound-tokens/</id>
+    <published>2022-05-30T14:12:36.000Z</published>
+    <updated>2022-05-30T14:12:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Post was renamed to &quot;<a href="/2022/05/30/what-are-account-bound-tokens/">What are Account-boundtokens</a>?&quot;</strong> &lt;== click here</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;&lt;strong&gt;Post was renamed to &amp;quot;&lt;a href=&quot;/2022/05/30/what-are-account-bound-tokens/&quot;&gt;What are Account-bound
+tokens&lt;/a&gt;?&amp;quot;&lt;/strong&gt; </summary>
+      
+    
+    
+    
+    
+    <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
+    
+    <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
+    
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
+  </entry>
+  
+  <entry>
     <title>What are Account-bound tokens?</title>
     <link href="https://timdaub.github.io/2022/05/30/what-are-account-bound-tokens/"/>
     <id>https://timdaub.github.io/2022/05/30/what-are-account-bound-tokens/</id>
@@ -67,21 +98,21 @@ for </summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
+    
+    <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
     
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
-    <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
+    <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="verifiable credentials" scheme="https://timdaub.github.io/tags/verifiable-credentials/"/>
     
     <category term="badges" scheme="https://timdaub.github.io/tags/badges/"/>
     
     <category term="signed claims" scheme="https://timdaub.github.io/tags/signed-claims/"/>
-    
-    <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
-    
-    <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
     
   </entry>
   
@@ -287,9 +318,9 @@ history, to build ownership experiences residing in the commons.
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
@@ -371,9 +402,9 @@ attend ETHDenver and all its satellite events. Today was my first day a</summary
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="traveling" scheme="https://timdaub.github.io/tags/traveling/"/>
     
@@ -398,6 +429,8 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     
     
     
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
     <category term="optimism" scheme="https://timdaub.github.io/tags/optimism/"/>
     
     <category term="toxicity" scheme="https://timdaub.github.io/tags/toxicity/"/>
@@ -405,8 +438,6 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     <category term="critique" scheme="https://timdaub.github.io/tags/critique/"/>
     
     <category term="crypto currencies" scheme="https://timdaub.github.io/tags/crypto-currencies/"/>
-    
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
   </entry>
   
@@ -428,15 +459,15 @@ tend to favor evaluating a subject&amp;apos;s positive sides rather than s</summ
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
-    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
-    
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    
+    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="composability" scheme="https://timdaub.github.io/tags/composability/"/>
     
@@ -557,9 +588,11 @@ So it&amp;apos;s roughly 24 months. I just counted; I managed to re</summary>
     
     
     
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    <category term="crypto" scheme="https://timdaub.github.io/tags/crypto/"/>
     
     <category term="rug pull index" scheme="https://timdaub.github.io/tags/rug-pull-index/"/>
     
@@ -568,8 +601,6 @@ So it&amp;apos;s roughly 24 months. I just counted; I managed to re</summary>
     <category term="bull market" scheme="https://timdaub.github.io/tags/bull-market/"/>
     
     <category term="bear market" scheme="https://timdaub.github.io/tags/bear-market/"/>
-    
-    <category term="crypto" scheme="https://timdaub.github.io/tags/crypto/"/>
     
   </entry>
   
@@ -624,11 +655,11 @@ speak for all of us and say: &amp;quot;We&amp;apos;re exhausted!&amp;quot;&lt;/p
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
-    
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
     <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
+    
+    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
     <category term="bull market" scheme="https://timdaub.github.io/tags/bull-market/"/>
     
@@ -695,9 +726,9 @@ Air</summary>
     
     <category term="tokens" scheme="https://timdaub.github.io/tags/tokens/"/>
     
-    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
-    
     <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
+    
+    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
     <category term="consensus" scheme="https://timdaub.github.io/tags/consensus/"/>
     
@@ -831,11 +862,11 @@ things improperly. I&amp;apos;d argue that for most code I&amp;apos;ve</summary>
     
     
     
-    <category term="non-fungible token" scheme="https://timdaub.github.io/tags/non-fungible-token/"/>
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    <category term="non-fungible token" scheme="https://timdaub.github.io/tags/non-fungible-token/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
@@ -869,15 +900,15 @@ things improperly. I&amp;apos;d argue that for most code I&amp;apos;ve</summary>
     
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
-    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
+    <category term="digital art" scheme="https://timdaub.github.io/tags/digital-art/"/>
     
     <category term="ERC-721" scheme="https://timdaub.github.io/tags/ERC-721/"/>
     
-    <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
-    
-    <category term="digital art" scheme="https://timdaub.github.io/tags/digital-art/"/>
-    
     <category term="social media" scheme="https://timdaub.github.io/tags/social-media/"/>
+    
+    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
+    
+    <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
     
   </entry>
   
@@ -970,13 +1001,13 @@ attack using NFTs called &amp;quot;sleepminting.&amp;quot; I ended up taking </s
     
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
-    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
-    
-    <category term="Vulnerability" scheme="https://timdaub.github.io/tags/Vulnerability/"/>
-    
     <category term="ERC-721" scheme="https://timdaub.github.io/tags/ERC-721/"/>
     
+    <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
+    
     <category term="Provenance" scheme="https://timdaub.github.io/tags/Provenance/"/>
+    
+    <category term="Vulnerability" scheme="https://timdaub.github.io/tags/Vulnerability/"/>
     
     <category term="Digital Art" scheme="https://timdaub.github.io/tags/Digital-Art/"/>
     
@@ -1098,19 +1129,19 @@ although, the last time I developed an app using it has been more </summary>
     
     
     
+    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
+    
+    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="monero" scheme="https://timdaub.github.io/tags/monero/"/>
     
     <category term="developer experience" scheme="https://timdaub.github.io/tags/developer-experience/"/>
     
-    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
-    
     <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
-    
-    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
     
@@ -1273,13 +1304,13 @@ co</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
-    <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    
+    <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
     
     <category term="web standards" scheme="https://timdaub.github.io/tags/web-standards/"/>
     
@@ -1502,11 +1533,11 @@ am perfekten Sauerteigbrot. Die Angaben auf dieser Seite </summary>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
-    <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
+    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
     <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
-    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
+    <category term="defi" scheme="https://timdaub.github.io/tags/defi/"/>
     
     <category term="crypto currency" scheme="https://timdaub.github.io/tags/crypto-currency/"/>
     
