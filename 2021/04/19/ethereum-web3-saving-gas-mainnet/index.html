@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="To an Ethereum developer, it shouldn&amp;#x2019;t come as a surprise that Ethereum&amp;#x2019;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &amp;#x201">
+    <meta name="description" content="To an Ethereum developer, it shouldn&amp;apos;t come as a surprise that Ethereum&amp;apos;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &quot;DEX&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Saving Gas on the Ethereum Mainnet">
 <meta property="og:url" content="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="To an Ethereum developer, it shouldn&amp;#x2019;t come as a surprise that Ethereum&amp;#x2019;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &amp;#x201">
+<meta property="og:description" content="To an Ethereum developer, it shouldn&amp;apos;t come as a surprise that Ethereum&amp;apos;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &quot;DEX&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/unwantedadvice.png">
 <meta property="article:published_time" content="2021-04-19T12:06:40.000Z">
@@ -117,7 +117,9 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Following-Pieter%E2%80%99s-advice"><span class="toc-number">1.</span> <span class="toc-text">Following Pieter’s advice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Problem-Wasteful-approve-Transactions"><span class="toc-number">2.</span> <span class="toc-text">A Problem: Wasteful approve Transactions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quantifying-%E2%80%9Cwasteful%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">Quantifying “wasteful”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gas-Saving-Improvement-Proposals"><span class="toc-number">4.</span> <span class="toc-text">Gas-Saving Improvement Proposals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Call-for-Further-Work"><span class="toc-number">5.</span> <span class="toc-text">A Call for Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-reading"><span class="toc-number">7.</span> <span class="toc-text">Further reading</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#following-pieters-advice"><span class="toc-number">1.</span> <span class="toc-text">Following Pieter&#39;s advice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-problem-wasteful-approve-transactions"><span class="toc-number">2.</span> <span class="toc-text">A Problem: Wasteful
+approve Transactions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#quantifying-wasteful"><span class="toc-number">3.</span> <span class="toc-text">Quantifying &quot;wasteful&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-saving-improvement-proposals"><span class="toc-number">4.</span> <span class="toc-text">Gas-Saving Improvement
+Proposals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-call-for-further-work"><span class="toc-number">5.</span> <span class="toc-text">A Call for Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#further-reading"><span class="toc-number">7.</span> <span class="toc-text">Further reading</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -159,13 +161,13 @@
 
       |
       <i class="fas fa-stopwatch"></i>
-      9 minutes read
-      <meta name="description" content="To an Ethereum developer, it shouldn&amp;#x2019;t come as a surprise that Ethereum&amp;#x2019;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &amp;#x201">
+      8 minutes read
+      <meta name="description" content="To an Ethereum developer, it shouldn&amp;apos;t come as a surprise that Ethereum&amp;apos;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &quot;DEX&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Saving Gas on the Ethereum Mainnet">
 <meta property="og:url" content="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="To an Ethereum developer, it shouldn&amp;#x2019;t come as a surprise that Ethereum&amp;#x2019;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &amp;#x201">
+<meta property="og:description" content="To an Ethereum developer, it shouldn&amp;apos;t come as a surprise that Ethereum&amp;apos;s mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and decentralized exchange (short: &quot;DEX&amp;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/unwantedadvice.png">
 <meta property="article:published_time" content="2021-04-19T12:06:40.000Z">
@@ -183,145 +185,159 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>To an Ethereum developer, it shouldn&#x2019;t come as a surprise that Ethereum&#x2019;s
-mainnet gas fees are insane. For months or weeks now, ERC-20 transfers and
-decentralized exchange (short: &#x201C;DEX&#x201D;) swaps have come in at roughly $50 in
-transaction fees.  Suddenly finding myself affected by the situation, too, I
-took to the pen to publicly claim that &#x201C;<a href="https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/">Ethereum isn&#x2019;t fun
-anymore</a>.&#x201D; And
-while some say that <a target="_blank" rel="noopener" href="https://github.com/flashbots">flashbots</a> and the rollup
-rollout may make matters more bearable, it&#x2019;s my opinion that it&#x2019;ll be another
+    <p>To an Ethereum developer, it shouldn&apos;t come as a surprise that
+Ethereum&apos;s mainnet gas fees are insane. For months or weeks now, ERC-20
+transfers and decentralized exchange (short: &quot;DEX&quot;) swaps have come in
+at roughly $50 in transaction fees. Suddenly finding myself affected by
+the situation, too, I took to the pen to publicly claim that &quot;<a href="https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/">Ethereum
+isn&apos;t fun anymore</a>.&quot; And while some say that <a target="_blank" rel="noopener" href="https://github.com/flashbots">flashbots</a> and the rollup rollout
+may make matters more bearable, it&apos;s my opinion that it&apos;ll be another
 while.</p>
-<p>But then how&#x2019;s a practical software engineer supposed to solve the solution?
-Indeed, my inner VC would blab something like &#x201C;<a target="_blank" rel="noopener" href="https://www.usv.com/writing/2018/10/the-myth-of-the-infrastructure-phase/">Apps =&gt; Infrastructure =&gt; Apps
-=&gt;
-Infrastructure</a>,&#x201D;
-but is that genuinely actionable advice for builders?</p>
-<p>I&#x2019;ve tried convincing others that Ethereum&#x2019;s infrastructure could be better. My
-take: <a target="_blank" rel="noopener" href="https://rugpullindex.com/blog#ScalingEthereumOneTxAtATime">Light clients could help to save
-gas</a>. However, I&#x2019;m
-neither too influential in the space nor can I have canons full of VC fiat to
-further my ideas. So then what&#x2019;s left?</p>
-<h2 id="Following-Pieter&#x2019;s-advice">Following Pieter&#x2019;s advice</h2>
-<p>It&#x2019;s always a good idea to trust the legacy knowledge of a dead person, right?
-Well, let&#x2019;s say, at least they won&#x2019;t have much of a chance of turning out to be
-an idiot on Twitter later simply because, you know, they&#x2019;re dead and hence
-can&#x2019;t tweet.</p>
-<p>But putting that tangentant/weird thought aside for a second, here&#x2019;s one of
-Pieter Hintjens&#x2019; great ideas: &#x201C;<strong>Don&#x2019;t have a technical vision. Solve
-problems!</strong>&#x201D; [3]. OK, so gas prices are too damn high.  What can we do about
-it?</p>
-<p>Well, hear me out, <strong>how about&#x2026; we make transactions use less gas!</strong></p>
-<p><img src="/assets/images/unwantedadvice.png" alt></p>
-<p>And how do we make transactions use less gas? We do so by reducing the usage of
-expensive <a target="_blank" rel="noopener" href="https://ethervm.io/">EVM opcodes</a> in our blockchain scripts. Or by
-sending less transactions. Hence, the rest of this post summarizes my research
-into how to use less gas.</p>
-<h2 id="A-Problem-Wasteful-approve-Transactions">A Problem: Wasteful <code>approve</code> Transactions</h2>
-<p>On April 18, 2021, Ethereum processed 1,396,766 transactions, of which 915,104
-(65,5%) were ERC-20 token transfers [1, 2]. Having an ERC-20 contract interact
-with another contract (e.g., a DEX) means that there will be an
-<a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-allowance-address-address-"><code>allowance(address owner, address spender)</code></a>
-transaction first <em>before</em> transferring any value from A to B.</p>
-<p>But why is that? See, conceptually, an ERC-20 token is a script that runs as a
-singleton on Ethereum. It&#x2019;s akin to an ordinary object (as in &#x201C;Object-oriented
-programming,&#x201D; short &#x201C;OOP&#x201D;) but technically called a &#x201C;contract&#x201D; (as in &#x201C;smart
-contract&#x201D;). A developer constructs it upon deployment to chain. Other contracts
-like automated market makers are, too, built like singletons.</p>
-<p>Further, this means that a contract can own state and make it selectively
-accessible. It&#x2019;s similar to how classes work in, e.g., JavaScript. There&#x2019;s a
-state variable, and we must access it through getters and setters.</p>
+<p>But then how&apos;s a practical software engineer supposed to solve the
+solution? Indeed, my inner VC would blab something like &quot;<a target="_blank" rel="noopener" href="https://www.usv.com/writing/2018/10/the-myth-of-the-infrastructure-phase/">Apps
+=&gt; Infrastructure =&gt; Apps =&gt; Infrastructure</a>,&quot; but is that
+genuinely actionable advice for builders?</p>
+<p>I&apos;ve tried convincing others that Ethereum&apos;s infrastructure could be
+better. My take: <a target="_blank" rel="noopener" href="https://rugpullindex.com/blog#ScalingEthereumOneTxAtATime">Light
+clients could help to save gas</a>. However, I&apos;m neither too influential
+in the space nor can I have canons full of VC fiat to further my ideas.
+So then what&apos;s left?</p>
+<h2 id="following-pieters-advice">Following Pieter&apos;s advice</h2>
+<p>It&apos;s always a good idea to trust the legacy knowledge of a dead
+person, right? Well, let&apos;s say, at least they won&apos;t have much of a
+chance of turning out to be an idiot on Twitter later simply because,
+you know, they&apos;re dead and hence can&apos;t tweet.</p>
+<p>But putting that tangentant/weird thought aside for a second, here&apos;s
+one of Pieter Hintjens&apos; great ideas: &quot;<strong>Don&apos;t have a technical
+vision. Solve problems!</strong>&quot; [3]. OK, so gas prices are too damn
+high. What can we do about it?</p>
+<p>Well, hear me out, <strong>how about... we make transactions use less
+gas!</strong></p>
+<p><img src="/assets/images/unwantedadvice.png"></p>
+<p>And how do we make transactions use less gas? We do so by reducing
+the usage of expensive <a target="_blank" rel="noopener" href="https://ethervm.io/">EVM opcodes</a> in
+our blockchain scripts. Or by sending less transactions. Hence, the rest
+of this post summarizes my research into how to use less gas.</p>
+<h2 id="a-problem-wasteful-approve-transactions">A Problem: Wasteful
+<code>approve</code> Transactions</h2>
+<p>On April 18, 2021, Ethereum processed 1,396,766 transactions, of
+which 915,104 (65,5%) were ERC-20 token transfers [1, 2]. Having an
+ERC-20 contract interact with another contract (e.g., a DEX) means that
+there will be an <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-allowance-address-address-"><code>allowance(address owner, address spender)</code></a>
+transaction first <em>before</em> transferring any value from A to
+B.</p>
+<p>But why is that? See, conceptually, an ERC-20 token is a script that
+runs as a singleton on Ethereum. It&apos;s akin to an ordinary object (as in
+&quot;Object-oriented programming,&quot; short &quot;OOP&quot;) but technically called a
+&quot;contract&quot; (as in &quot;smart contract&quot;). A developer constructs it upon
+deployment to chain. Other contracts like automated market makers are,
+too, built like singletons.</p>
+<p>Further, this means that a contract can own state and make it
+selectively accessible. It&apos;s similar to how classes work in, e.g.,
+JavaScript. There&apos;s a state variable, and we must access it through
+getters and setters.</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Store</span> {</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">a</span>) {</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">a</span> = a;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">a</span>(<span class="params">value</span>) {</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">a</span> = value;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">a</span>() {</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">a</span>;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
-<p>Hence, for an object <code>store,</code> that is an instance of the class <code>Store</code>, we
-wouldn&#x2019;t be able to directly access <code>this.a</code>. Instead, we can only set it using
-its setter method. Hence, we have no control over <code>this.a</code> from the outside.</p>
-<p>EVM languages like Solidity and their token contracts (e.g. ERC-20) use this
-exact logic to transfer tokens between parties.  Do you want to send one from A
-to B? Sure, then to move your token, call the contract&#x2019;s setter function
-<a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Transfer-address-address-uint256-"><code>transfer(address recipient, uint256 amount)</code></a>
-to edit the underlying mapping between addresses the number of tokens they own.</p>
-<p>Now, the problem of having to call the <code>allowance</code> function before making a
-<code>transfer</code> arises when interacting with a token through a third-party contract.</p>
-<p>A typical use case is to swap two tokens on a decentralized exchange. As it has
-to send back the counter pair of your swap (e.g., you trade WETH for USDC),
-it&#x2019;ll have to guarantee to receive your WETH when its sending out USDC in
-return.</p>
-<p>Hence, when a user calls a DEX&#x2019;s swap function, the DEX will contact the user&#x2019;s
-token contract to <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-transferFrom-address-address-uint256-"><code>transferFrom(address user, address DEX, uint256 amount)</code></a>
-to ingest the user&#x2019;s WETH and then transfer its USDC to the user.</p>
-<p>As all of this happens in a single and atomic transaction, that will fail if
-any of its sub-operations fail, a DEX contract can ensure the safety of
-swapping of two tokens. However, since the swap contract has no authority over
-setting another user&#x2019;s token balance by, e.g., calling <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-transferFrom-address-address-uint256-"><code>transferFrom(address user, address DEX, uint256 amount)</code></a>,
+<p>Hence, for an object <code>store,</code> that is an instance of the
+class <code>Store</code>, we wouldn&apos;t be able to directly access
+<code>this.a</code>. Instead, we can only set it using its setter
+method. Hence, we have no control over <code>this.a</code> from the
+outside.</p>
+<p>EVM languages like Solidity and their token contracts (e.g. ERC-20)
+use this exact logic to transfer tokens between parties. Do you want to
+send one from A to B? Sure, then to move your token, call the contract&apos;s
+setter function <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Transfer-address-address-uint256-"><code>transfer(address recipient, uint256 amount)</code></a>
+to edit the underlying mapping between addresses the number of tokens
+they own.</p>
+<p>Now, the problem of having to call the <code>allowance</code>
+function before making a <code>transfer</code> arises when interacting
+with a token through a third-party contract.</p>
+<p>A typical use case is to swap two tokens on a decentralized exchange.
+As it has to send back the counter pair of your swap (e.g., you trade
+WETH for USDC), it&apos;ll have to guarantee to receive your WETH when its
+sending out USDC in return.</p>
+<p>Hence, when a user calls a DEX&apos;s swap function, the DEX will contact
+the user&apos;s token contract to <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-transferFrom-address-address-uint256-"><code>transferFrom(address user, address DEX, uint256 amount)</code></a>
+to ingest the user&apos;s WETH and then transfer its USDC to the user.</p>
+<p>As all of this happens in a single and atomic transaction, that will
+fail if any of its sub-operations fail, a DEX contract can ensure the
+safety of swapping of two tokens. However, since the swap contract has
+no authority over setting another user&apos;s token balance by, e.g., calling
+<a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-transferFrom-address-address-uint256-"><code>transferFrom(address user, address DEX, uint256 amount)</code></a>,
 an upfront <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-approve-address-uint256-"><code>approve(address DEX, uint256 amount)</code></a>
 transaction is required.</p>
-<p>That&#x2019;s why you have to do two transactions when you&#x2019;re starting out trading on,
-e.g. Uniswap.</p>
-<h2 id="Quantifying-&#x201C;wasteful&#x201D;">Quantifying &#x201C;wasteful&#x201D;</h2>
-<p>Still, you may say that an <code>approve</code> transaction may only have to be sent once
-for a given token and a third-party contract. And that&#x2019;s an acceptable
-hypothesis. But let&#x2019;s look into how wasteful that is.</p>
-<p>We can do so using the logs of Ethereum called &#x201C;events.&#x201D; To query for them, we
-take an event&#x2019;s function signature and hash it using
-<a target="_blank" rel="noopener" href="https://emn178.github.io/online-tools/keccak_256.html">Keccak-256</a>.</p>
+<p>That&apos;s why you have to do two transactions when you&apos;re starting out
+trading on, e.g. Uniswap.</p>
+<h2 id="quantifying-wasteful">Quantifying &quot;wasteful&quot;</h2>
+<p>Still, you may say that an <code>approve</code> transaction may only
+have to be sent once for a given token and a third-party contract. And
+that&apos;s an acceptable hypothesis. But let&apos;s look into how wasteful that
+is.</p>
+<p>We can do so using the logs of Ethereum called &quot;events.&quot; To query for
+them, we take an event&apos;s function signature and hash it using <a target="_blank" rel="noopener" href="https://emn178.github.io/online-tools/keccak_256.html">Keccak-256</a>.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">keccak256(&quot;Approval(address,address,uint256)&quot;)</span><br><span class="line">&gt; 8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925</span><br><span class="line">keccak256(&quot;Transfer(address,address,uint256)&quot;)</span><br><span class="line">&gt; ddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef</span><br></pre></td></tr></table></figure>
-<p>Using <a target="_blank" rel="noopener" href="https://duneanalytics.com/queries/35211">Dune Analytics&#x2019; brilliant API</a>,
-we can then query all of last week&#x2019;s logs in Ethereum (from block
-<a target="_blank" rel="noopener" href="https://etherscan.io/block/12230342">12230342</a>) to find how many <code>Approval</code>
-and <code>Transfer</code> events there are. Comparing
-<a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Approval-address-address-uint256-"><code>Approval(address,address,uint256)</code></a>
-and
-<a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Transfer-address-address-uint256-"><code>Transfer(address,address,uint256)</code></a>
-events there were. It&#x2019;s</p>
+<p>Using <a target="_blank" rel="noopener" href="https://duneanalytics.com/queries/35211">Dune
+Analytics&apos; brilliant API</a>, we can then query all of last week&apos;s logs
+in Ethereum (from block <a target="_blank" rel="noopener" href="https://etherscan.io/block/12230342">12230342</a>) to find how
+many <code>Approval</code> and <code>Transfer</code> events there are.
+Comparing <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Approval-address-address-uint256-"><code>Approval(address,address,uint256)</code></a>
+and <a target="_blank" rel="noopener" href="https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-Transfer-address-address-uint256-"><code>Transfer(address,address,uint256)</code></a>
+events there were. It&apos;s</p>
 <ul>
 <li>41759397 <code>Approval</code> events; and</li>
 <li>445308438 <code>Transfer</code> events.</li>
 </ul>
-<p>Of all Ethereum <code>transfer</code> transactions last week, it means that 9,4% signaled
-an <code>Approval</code> event. Assuming that the goal of every <code>Approval</code> event is a
-future <code>transfer</code> transaction, then 9,4% of <code>transfer</code>s still require an
-upfront on-chain <code>approve</code> transaction today. Put differently: Approving
-transactions before a transfer is a potentially wasteful practice that we can
-optimize to save the Ethereum network roughly 10% of transaction fees.</p>
-<h2 id="Gas-Saving-Improvement-Proposals">Gas-Saving Improvement Proposals</h2>
-<p>Indeed there are a few canonicalized ways to avoid upfront <code>approve</code>
-transactions. Using <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-2612">ERC-2612</a>, an
-additional <code>permit</code> function allows a user to sign and relay an approval
-message offline. In turn, that allows skipping the need for an on-chain
-<code>approve</code> transaction. A battle-tested implementation is available in <a target="_blank" rel="noopener" href="https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2ERC20.sol">Uniswap
-V2&#x2019;s ERC20 token
-script</a>.</p>
-<p>Another way of forgoing an additional <code>Approval</code> is by implementing either
-<a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/issues/677">ERC-677</a> or
-<a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-777">ERC-777</a>. Both of these proposals
-detail an extended <code>transfer</code> function that, upon calling, would reach out to
-the receiving third-party contract to update its state too solving the problem
-of having to send two on-chain transactions.</p>
-<h2 id="A-Call-for-Further-Work">A Call for Further Work</h2>
-<p>Shaving of gas from transactions or shrinking transaction processes seems like
-a helpful method for significantly improving a dapp&#x2019;s user experience and for
-unclogging the Ethereum mainnet.</p>
-<p>The above-quoted Ethereum Improvement Proposals look useful to generate gas
-savings today. They should be implemented by contract owners ASAP.</p>
-<p>However, I feel there&#x2019;s a need for further work in this direction. Using
-compression and indexing techniques, I&#x2019;m sure there are additional economically
-sound gas-saving opportunities.</p>
-<p>In case you are the author of an approach or the finder of one, please make
-sure to forward them to me via email (tim (at) daubenschuetz (dot) de). Please
-consider subscribing to my newsletter too. Thanks!</p>
-<h2 id="References">References</h2>
+<p>Of all Ethereum <code>transfer</code> transactions last week, it
+means that 9,4% signaled an <code>Approval</code> event. Assuming that
+the goal of every <code>Approval</code> event is a future
+<code>transfer</code> transaction, then 9,4% of <code>transfer</code>s
+still require an upfront on-chain <code>approve</code> transaction
+today. Put differently: Approving transactions before a transfer is a
+potentially wasteful practice that we can optimize to save the Ethereum
+network roughly 10% of transaction fees.</p>
+<h2 id="gas-saving-improvement-proposals">Gas-Saving Improvement
+Proposals</h2>
+<p>Indeed there are a few canonicalized ways to avoid upfront
+<code>approve</code> transactions. Using <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-2612">ERC-2612</a>, an
+additional <code>permit</code> function allows a user to sign and relay
+an approval message offline. In turn, that allows skipping the need for
+an on-chain <code>approve</code> transaction. A battle-tested
+implementation is available in <a target="_blank" rel="noopener" href="https://github.com/Uniswap/uniswap-v2-core/blob/master/contracts/UniswapV2ERC20.sol">Uniswap
+V2&apos;s ERC20 token script</a>.</p>
+<p>Another way of forgoing an additional <code>Approval</code> is by
+implementing either <a target="_blank" rel="noopener" href="https://github.com/ethereum/EIPs/issues/677">ERC-677</a> or <a target="_blank" rel="noopener" href="https://eips.ethereum.org/EIPS/eip-777">ERC-777</a>. Both of these
+proposals detail an extended <code>transfer</code> function that, upon
+calling, would reach out to the receiving third-party contract to update
+its state too solving the problem of having to send two on-chain
+transactions.</p>
+<h2 id="a-call-for-further-work">A Call for Further Work</h2>
+<p>Shaving of gas from transactions or shrinking transaction processes
+seems like a helpful method for significantly improving a dapp&apos;s user
+experience and for unclogging the Ethereum mainnet.</p>
+<p>The above-quoted Ethereum Improvement Proposals look useful to
+generate gas savings today. They should be implemented by contract
+owners ASAP.</p>
+<p>However, I feel there&apos;s a need for further work in this direction.
+Using compression and indexing techniques, I&apos;m sure there are additional
+economically sound gas-saving opportunities.</p>
+<p>In case you are the author of an approach or the finder of one,
+please make sure to forward them to me via email (tim (at) daubenschuetz
+(dot) de). Please consider subscribing to my newsletter too. Thanks!</p>
+<h2 id="references">References</h2>
 <ul>
-<li>1: <a target="_blank" rel="noopener" href="https://etherscan.io/chart/tx">https://etherscan.io/chart/tx</a></li>
-<li>2: <a target="_blank" rel="noopener" href="https://etherscan.io/chart/tokenerc-20txns">https://etherscan.io/chart/tokenerc-20txns</a></li>
+<li>1: https://etherscan.io/chart/tx</li>
+<li>2: https://etherscan.io/chart/tokenerc-20txns</li>
 <li>3: HINTJENS, P. Social architecture. Peter Hintjens, 2016.</li>
 </ul>
 <hr>
-<h2 id="Further-reading">Further reading</h2>
+<h2 id="further-reading">Further reading</h2>
 <ul>
 <li><a href="/#writing">All posts</a></li>
-<li>2021-12-08: <a href="/2021/12/08/illuminating-the-dark-forest/">Illuminating the Dark Forest</a></li>
-<li>2021-05-22: <a href="/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/">Existential Challenges of Dapp Builders</a></li>
-<li>2021-11-16: <a href="/2021/11/16/the-urgency-of-building-web3/">About the Urgency of building Web3</a></li>
+<li>2021-12-08: <a href="/2021/12/08/illuminating-the-dark-forest/">Illuminating the Dark
+Forest</a></li>
+<li>2021-05-22: <a href="/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/">Existential
+Challenges of Dapp Builders</a></li>
+<li>2021-11-16: <a href="/2021/11/16/the-urgency-of-building-web3/">About the Urgency of
+building Web3</a></li>
 </ul>
 
   </div>
@@ -366,7 +382,9 @@ consider subscribing to my newsletter too. Thanks!</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Following-Pieter%E2%80%99s-advice"><span class="toc-number">1.</span> <span class="toc-text">Following Pieter’s advice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Problem-Wasteful-approve-Transactions"><span class="toc-number">2.</span> <span class="toc-text">A Problem: Wasteful approve Transactions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quantifying-%E2%80%9Cwasteful%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">Quantifying “wasteful”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gas-Saving-Improvement-Proposals"><span class="toc-number">4.</span> <span class="toc-text">Gas-Saving Improvement Proposals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Call-for-Further-Work"><span class="toc-number">5.</span> <span class="toc-text">A Call for Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-reading"><span class="toc-number">7.</span> <span class="toc-text">Further reading</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#following-pieters-advice"><span class="toc-number">1.</span> <span class="toc-text">Following Pieter&#39;s advice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-problem-wasteful-approve-transactions"><span class="toc-number">2.</span> <span class="toc-text">A Problem: Wasteful
+approve Transactions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#quantifying-wasteful"><span class="toc-number">3.</span> <span class="toc-text">Quantifying &quot;wasteful&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-saving-improvement-proposals"><span class="toc-number">4.</span> <span class="toc-text">Gas-Saving Improvement
+Proposals</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-call-for-further-work"><span class="toc-number">5.</span> <span class="toc-text">A Call for Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#further-reading"><span class="toc-number">7.</span> <span class="toc-text">Further reading</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
