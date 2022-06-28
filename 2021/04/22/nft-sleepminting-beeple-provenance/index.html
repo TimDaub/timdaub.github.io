@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &quot;sleepminting.&quot; I ended up taking a closer look as I wanted to understand the idea of the attack.">
+    <meta name="description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &amp;#x201C;sleepminting.&amp;#x201D; I ended up taking a closer look as I wanted to understand the idea of the att">
 <meta property="og:type" content="article">
 <meta property="og:title" content="What Is Sleepminting And Will It Ruin NFT Provenance?">
 <meta property="og:url" content="https://timdaub.github.io/2021/04/22/nft-sleepminting-beeple-provenance/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &quot;sleepminting.&quot; I ended up taking a closer look as I wanted to understand the idea of the attack.">
+<meta property="og:description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &amp;#x201C;sleepminting.&amp;#x201D; I ended up taking a closer look as I wanted to understand the idea of the att">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
@@ -23,10 +23,10 @@
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="web3">
 <meta property="article:tag" content="Ethereum">
-<meta property="article:tag" content="ERC-721">
 <meta property="article:tag" content="NFTs">
-<meta property="article:tag" content="Provenance">
 <meta property="article:tag" content="Vulnerability">
+<meta property="article:tag" content="ERC-721">
+<meta property="article:tag" content="Provenance">
 <meta property="article:tag" content="Digital Art">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
@@ -121,7 +121,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-bait"><span class="toc-number">1.</span> <span class="toc-text">The Bait</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-basics"><span class="toc-number">2.</span> <span class="toc-text">The Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-attack"><span class="toc-number">3.</span> <span class="toc-text">The Attack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-specifics"><span class="toc-number">4.</span> <span class="toc-text">The Specifics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#further-reading"><span class="toc-number">6.</span> <span class="toc-text">Further reading</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Bait"><span class="toc-number">1.</span> <span class="toc-text">The Bait</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Basics"><span class="toc-number">2.</span> <span class="toc-text">The Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Attack"><span class="toc-number">3.</span> <span class="toc-text">The Attack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Specifics"><span class="toc-number">4.</span> <span class="toc-text">The Specifics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-reading"><span class="toc-number">6.</span> <span class="toc-text">Further reading</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -164,12 +164,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       5 minutes read
-      <meta name="description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &quot;sleepminting.&quot; I ended up taking a closer look as I wanted to understand the idea of the attack.">
+      <meta name="description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &amp;#x201C;sleepminting.&amp;#x201D; I ended up taking a closer look as I wanted to understand the idea of the att">
 <meta property="og:type" content="article">
 <meta property="og:title" content="What Is Sleepminting And Will It Ruin NFT Provenance?">
 <meta property="og:url" content="https://timdaub.github.io/2021/04/22/nft-sleepminting-beeple-provenance/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &quot;sleepminting.&quot; I ended up taking a closer look as I wanted to understand the idea of the attack.">
+<meta property="og:description" content="Today, while browsing &#x2F;r&#x2F;ethereum, I stumbled upon an impersonation attack using NFTs called &amp;#x201C;sleepminting.&amp;#x201D; I ended up taking a closer look as I wanted to understand the idea of the att">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
@@ -179,10 +179,10 @@
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="web3">
 <meta property="article:tag" content="Ethereum">
-<meta property="article:tag" content="ERC-721">
 <meta property="article:tag" content="NFTs">
-<meta property="article:tag" content="Provenance">
 <meta property="article:tag" content="Vulnerability">
+<meta property="article:tag" content="ERC-721">
+<meta property="article:tag" content="Provenance">
 <meta property="article:tag" content="Digital Art">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://timdaub.github.io/assets/images/rariblesleepminting.png">
@@ -191,27 +191,28 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>Today, while browsing /r/ethereum, I stumbled upon an impersonation
-attack using NFTs called &quot;sleepminting.&quot; I ended up taking a closer look
-as I wanted to understand the idea of the attack. Here&apos;s how it
-works.</p>
-<h2 id="the-bait">The Bait</h2>
-<p>Oh, look, it&apos;s beeple&apos;s multi-million dollar piece &quot;<a target="_blank" rel="noopener" href="https://rarible.com/token/0x5fbbacf00ef20193a301a5ba20acf04765fb6dac:40914:0xc6b0562605d35ee710138402b878ffe6f2e23807">the
-first 5000 days</a>&quot; for sale on rarible. Check the screenshot, It
-clearly says &quot;Creator: beeple.&quot; Wow, <a target="_blank" rel="noopener" href="https://www.reuters.com/article/uk-auction-christies-nft-buyer-idUKKBN2B42MM">Metakovan</a>
+    <p>Today, while browsing /r/ethereum, I stumbled upon an impersonation attack
+using NFTs called &#x201C;sleepminting.&#x201D; I ended up taking a closer look as I wanted
+to understand the idea of the attack. Here&#x2019;s how it works.</p>
+<h2 id="The-Bait">The Bait</h2>
+<p>Oh, look, it&#x2019;s beeple&#x2019;s multi-million dollar piece &#x201C;<a target="_blank" rel="noopener" href="https://rarible.com/token/0x5fbbacf00ef20193a301a5ba20acf04765fb6dac:40914:0xc6b0562605d35ee710138402b878ffe6f2e23807">the first 5000
+days</a>&#x201D;
+for sale on rarible. Check the screenshot, It clearly says &#x201C;Creator: beeple.&#x201D;
+Wow,
+<a target="_blank" rel="noopener" href="https://www.reuters.com/article/uk-auction-christies-nft-buyer-idUKKBN2B42MM">Metakovan</a>
 must have gotten badly rekt having to sell that $69M combo-breaker for a
 handful of <a target="_blank" rel="noopener" href="https://eth-converter.com/">WEIs</a>.</p>
-<p><img src="/assets/images/rariblesleepminting.png"></p>
-<p>Please don&apos;t fall for it! It&apos;s a scam. Or shall I saw an <a target="_blank" rel="noopener" href="https://nftheft.com">art piece</a>? That&apos;s right! Its creator,
-<strong>Monsieur Personne</strong>, that also goes by the
-self-proclaimed alter ego <em>The Banksy of NFTs</em>, deliberately
-minted the piece under beeple&apos;s name using a technique he calls
-<strong>sleepminting</strong>. Why? Because Monsieur is disappointed in
-NFTs. So how did he do it?</p>
-<h2 id="the-basics">The Basics</h2>
-<p>NFTs are created using ERC-721 smart contracts. They the ownership
-record of NFTs as a list of pairs. One address and a piece&apos;s serial
-number make up a pair. Like this (I replaced &quot;Bob&quot; with &quot;Booble&quot;):</p>
+<p><img src="/assets/images/rariblesleepminting.png" alt></p>
+<p>Please don&#x2019;t fall for it! It&#x2019;s a scam. Or shall I saw an <a target="_blank" rel="noopener" href="https://nftheft.com">art
+piece</a>? That&#x2019;s right! Its creator, <strong>Monsieur Personne</strong>,
+that also goes by the self-proclaimed alter ego <em>The Banksy of NFTs</em>,
+deliberately minted the piece under beeple&#x2019;s name using a technique he calls
+<strong>sleepminting</strong>. Why? Because Monsieur is disappointed in NFTs.  So how did he
+do it?</p>
+<h2 id="The-Basics">The Basics</h2>
+<p>NFTs are created using ERC-721 smart contracts. They the ownership record of
+NFTs as a list of pairs.  One address and a piece&#x2019;s serial number make up a
+pair. Like this (I replaced &#x201C;Bob&#x201D; with &#x201C;Booble&#x201D;):</p>
 <ul>
 <li>Alice: 1</li>
 <li>Booble: 2</li>
@@ -227,30 +228,28 @@ number make up a pair. Like this (I replaced &quot;Bob&quot; with &quot;Booble&q
 <li>Booble: 2, 1</li>
 <li>Malory: 3</li>
 </ul>
-<p>In Ethereum, we don&apos;t use clear names for identification but
-addresses. And we need to sign transfers to authorize them. But in the
-examples provided in this post I&apos;ll use clear names to simplify
-explaining.</p>
-<p>Now, usually developers implement ERC-721 contracts in a reasonable
-way. As we expect Alice can then only transfer a piece if she owns it
-and can deliver a valid signature. But what happens if a developer
-doesn&apos;t respect this convention?</p>
-<p>See, the ERC-721 standard is just a social contract that defines a
-interface to allow art platforms to interoperate. There&apos;s no criteria
-for what&apos;s a good and what&apos;s a bad implementation. As long as a
-contract&apos;s interface matches that of an ERC-721 contract, any machine is
-considering it as valid.</p>
-<p>But, as we&apos;ve now seen, that can lead to safety issues with NFTs&apos;
-provenance on Ethereum. It can be tampered with!</p>
-<h2 id="the-attack">The Attack</h2>
-<p>As I said, any reasonable ERC-721 contract would allow a minter only
-to mint to themselves and to only transfer the pieces they own.</p>
-<p>But say we customize our ERC-721 contract such that we can mint to
-other accounts. And say that we adjust the transfer function so that our
-account can, in a minor exception, also transfer another person&apos;s
-pieces. <strong>Well then, we can build a contract that allows us to
-sleepmint pieces</strong>. So as the attacker Malory, we&apos;d do the
-following: We&apos;d mint a piece with the serial number 1 to Booble:</p>
+<p>In Ethereum, we don&#x2019;t use clear names for identification but addresses. And we
+need to sign transfers to authorize them. But in the examples provided in this
+post I&#x2019;ll use clear names to simplify explaining.</p>
+<p>Now, usually developers implement ERC-721 contracts in a reasonable way. As we
+expect Alice can then only transfer a piece if she owns it and can deliver a
+valid signature. But what happens if a developer doesn&#x2019;t respect this
+convention?</p>
+<p>See, the ERC-721 standard is just a social contract that defines a interface to
+allow art platforms to interoperate. There&#x2019;s no criteria for what&#x2019;s a good and
+what&#x2019;s a bad implementation. As long as a contract&#x2019;s interface matches that of
+an ERC-721 contract, any machine is considering it as valid.</p>
+<p>But, as we&#x2019;ve now seen, that can lead to safety issues with NFTs&#x2019; provenance on
+Ethereum. It can be tampered with!</p>
+<h2 id="The-Attack">The Attack</h2>
+<p>As I said, any reasonable ERC-721 contract would allow a minter only to mint to
+themselves and to only transfer the pieces they own.</p>
+<p>But say we customize our ERC-721 contract such that we can mint to other
+accounts. And say that we adjust the transfer function so that our account can,
+in a minor exception, also transfer another person&#x2019;s pieces. <strong>Well then, we
+can build a contract that allows us to sleepmint pieces</strong>. So as the attacker
+Malory, we&#x2019;d do the following: We&#x2019;d mint a piece with the serial number 1 to
+Booble:</p>
 <ul>
 <li>mint 1: address(0) =&gt; Booble (executed by Malory)</li>
 </ul>
@@ -260,14 +259,13 @@ following: We&apos;d mint a piece with the serial number 1 to Booble:</p>
 <li>Booble: 1</li>
 <li>Malory:</li>
 </ul>
-<p>Then, since Malory has adjusted the contract to transfer the piece
-with serial number 1 from Booble&apos;s account to any other account, she can
-offer it for sale on an NFT platform like rarible.</p>
-<p>As she minted from <code>address(0)</code> to Booble as &quot;Creator:
-Booble&quot; is displayed.</p>
-<p><img src="/assets/images/rariblesleepminting.png"></p>
-<p>Once Malory successfully deceived a buyer, she receives her Ethers
-and transfers the piece to the buyer:</p>
+<p>Then, since Malory has adjusted the contract to transfer the piece with serial
+number 1 from Booble&#x2019;s account to any other account, she can offer it for sale
+on an NFT platform like rarible.</p>
+<p>As she minted from <code>address(0)</code> to Booble as &#x201C;Creator: Booble&#x201D; is displayed.</p>
+<p><img src="/assets/images/rariblesleepminting.png" alt></p>
+<p>Once Malory successfully deceived a buyer, she receives her Ethers and
+transfers the piece to the buyer:</p>
 <ul>
 <li>transfer 1: Booble =&gt; Buyer (executed by Malory)</li>
 </ul>
@@ -278,60 +276,53 @@ and transfers the piece to the buyer:</p>
 <li>Malory:</li>
 <li>Buyer: 1</li>
 </ul>
-<p>And with that, Malory has successfully tampered with the NFT&apos;s
-provenance record to sell her piece for more than it&apos;s worth.</p>
-<h2 id="the-specifics">The Specifics</h2>
-<p>So is this attack breaking NFTs? Should you panic sell your
-collection of crypto punks? What about poor Metakovan. He rekt now?</p>
-<p>I&apos;d say no. Sure, rarible and Etherscan state wrongly that beeple has
-minted a piece that genuinely he didn&apos;t. However, that&apos;s more of an
-interface issue than it is a security vulnerability. Nobody ever had
-access to beeple&apos;s account.</p>
-<p>Also, the impersonater can be spotted when taking a closer look at
-the origin transactions:</p>
+<p>And with that, Malory has successfully tampered with the NFT&#x2019;s provenance
+record to sell her piece for more than it&#x2019;s worth.</p>
+<h2 id="The-Specifics">The Specifics</h2>
+<p>So is this attack breaking NFTs? Should you panic sell your collection of
+crypto punks? What about poor Metakovan. He rekt now?</p>
+<p>I&#x2019;d say no. Sure, rarible and Etherscan state wrongly that beeple has minted a
+piece that genuinely he didn&#x2019;t. However, that&#x2019;s more of an interface issue than
+it is a security vulnerability. Nobody ever had access to beeple&#x2019;s account.</p>
+<p>Also, the impersonater can be spotted when taking a closer look at the origin
+transactions:</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://etherscan.io/tx/0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e">Fake
-mint transaction</a></li>
-<li><a target="_blank" rel="noopener" href="https://etherscan.io/tx/0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e">Fake
-transfer transaction</a></li>
+<li><a target="_blank" rel="noopener" href="https://etherscan.io/tx/0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e">Fake mint transaction</a></li>
+<li><a target="_blank" rel="noopener" href="https://etherscan.io/tx/0x57f23fde8e4221174cfb1baf68a87858167fec228d9b32952532e40c367ef04e">Fake transfer transaction</a></li>
 </ul>
-<p>Let&apos;s take a closer look at these transactions.</p>
-<p><img src="/assets/images/etherscansleepminting.png"></p>
-<p>For the mint transaction, we can see that Etherscan displays two
-&quot;From&quot; fields: One for which <code>msg.sender</code> sent the
-transaction and another one to state the NFT&apos;s sender.</p>
-<p>For the transaction&apos;s from field, the <code>msg.sender</code>, it
-<em>cannot be manipulated</em> as it requires a valid signature from the
-sender&apos;s private key. The authorization of the &quot;From&quot; field for the
-NFT&apos;s sender is, however, subject to the smart contract&apos;s implementation
-and, hence, may not display authenticated information.</p>
-<p>Simply put, the NFT&apos;s sender field could display any data an attacker
-picks.</p>
-<p>Hence, to spot a sleepminted piece from an original, one has to check
-if both the mint transaction&apos;s sender and the NFT&apos;s sender match
-beeple&apos;s correct address. If not, it&apos;s a fake.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>I love this attack. It&apos;s similar to <a target="_blank" rel="noopener" href="https://rugpullindex.com">rug pulling</a> in that it also plays
-with the user&apos;s trust towards an online identity. We think, now that we
-use blockchain, all our web2 problems are gone. Every piece of data is
-authenticated and checked for authorization. But the truth is that these
-problems aren&apos;t gone. They&apos;ve just shifted somewhere else.</p>
-<p>We humans cannot reproduce cryptographic verification in our brains.
-Sure, we can be extra careful and only trust green checkmarks and lock
-symbols in user interfaces. But can we recompute hashes of files or the
-validity of a digital signature? No.</p>
-<p>And so the rise of new attacks on web3 is inevitable. I for one am
-looking forward to learning from them.</p>
+<p>Let&#x2019;s take a closer look at these transactions.</p>
+<p><img src="/assets/images/etherscansleepminting.png" alt></p>
+<p>For the mint transaction, we can see that Etherscan displays two &#x201C;From&#x201D; fields:
+One for which <code>msg.sender</code> sent the transaction and another one to state the
+NFT&#x2019;s sender.</p>
+<p>For the transaction&#x2019;s from field, the <code>msg.sender</code>, it <em>cannot be manipulated</em>
+as it requires a valid signature from the sender&#x2019;s private key. The
+authorization of the &#x201C;From&#x201D; field for the NFT&#x2019;s sender is, however, subject to
+the smart contract&#x2019;s implementation and, hence, may not display authenticated
+information.</p>
+<p>Simply put, the NFT&#x2019;s sender field could display any data an attacker picks.</p>
+<p>Hence, to spot a sleepminted piece from an original, one has to check if both
+the mint transaction&#x2019;s sender and the NFT&#x2019;s sender match beeple&#x2019;s correct
+address.  If not, it&#x2019;s a fake.</p>
+<h2 id="Conclusion">Conclusion</h2>
+<p>I love this attack. It&#x2019;s similar to <a target="_blank" rel="noopener" href="https://rugpullindex.com">rug pulling</a> in
+that it also plays with the user&#x2019;s trust towards an online identity. We think,
+now that we use blockchain, all our web2 problems are gone. Every piece of data
+is authenticated and checked for authorization. But the truth is that these
+problems aren&#x2019;t gone. They&#x2019;ve just shifted somewhere else.</p>
+<p>We humans cannot reproduce cryptographic verification in our brains. Sure, we
+can be extra careful and only trust green checkmarks and lock symbols in user
+interfaces.  But can we recompute hashes of files or the validity of a digital
+signature?  No.</p>
+<p>And so the rise of new attacks on web3 is inevitable. I for one am looking
+forward to learning from them.</p>
 <hr>
-<h2 id="further-reading">Further reading</h2>
+<h2 id="Further-reading">Further reading</h2>
 <ul>
 <li><a href="/#writing">All posts</a></li>
-<li>2021-08-22: <a href="/2021/08/22/intellectual-property-will-become-irrelevant/">Intellectual
-Property Is Becoming Irrelevant</a></li>
-<li>2021-07-21: <a href="/2021/07/21/nfts-are-coming-for-instagram/">NFTs are coming for
-Instagram and other social media platforms</a></li>
-<li>2021-10-21: <a href="/2021/10/21/on-chain-the-emperor-wears-no-clothes/">On-chain, The
-Emperor Wears No Clothes</a></li>
+<li>2021-08-22: <a href="/2021/08/22/intellectual-property-will-become-irrelevant/">Intellectual Property Is Becoming Irrelevant</a></li>
+<li>2021-07-21: <a href="/2021/07/21/nfts-are-coming-for-instagram/">NFTs are coming for Instagram and other social media platforms</a></li>
+<li>2021-10-21: <a href="/2021/10/21/on-chain-the-emperor-wears-no-clothes/">On-chain, The Emperor Wears No Clothes</a></li>
 </ul>
 
   </div>
@@ -376,7 +367,7 @@ Emperor Wears No Clothes</a></li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#the-bait"><span class="toc-number">1.</span> <span class="toc-text">The Bait</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-basics"><span class="toc-number">2.</span> <span class="toc-text">The Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-attack"><span class="toc-number">3.</span> <span class="toc-text">The Attack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#the-specifics"><span class="toc-number">4.</span> <span class="toc-text">The Specifics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#further-reading"><span class="toc-number">6.</span> <span class="toc-text">Further reading</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Bait"><span class="toc-number">1.</span> <span class="toc-text">The Bait</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Basics"><span class="toc-number">2.</span> <span class="toc-text">The Basics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Attack"><span class="toc-number">3.</span> <span class="toc-text">The Attack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Specifics"><span class="toc-number">4.</span> <span class="toc-text">The Specifics</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Further-reading"><span class="toc-number">6.</span> <span class="toc-text">Further reading</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
