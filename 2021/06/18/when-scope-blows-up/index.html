@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="In software engineering, there&amp;#x2019;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;#x2019;re never safe from it. It can assault you at any">
+    <meta name="description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="When Scope Blows Up">
 <meta property="og:url" content="https://timdaub.github.io/2021/06/18/when-scope-blows-up/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In software engineering, there&amp;#x2019;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;#x2019;re never safe from it. It can assault you at any">
+<meta property="og:description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/shootingfromthehip.png">
@@ -24,10 +24,10 @@
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="essay">
 <meta property="article:tag" content="software engineering">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Process">
 <meta property="article:tag" content="scope creep">
 <meta property="article:tag" content="project management">
-<meta property="article:tag" content="Process">
-<meta property="article:tag" content="Principles">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
     
@@ -164,12 +164,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       5 minutes read
-      <meta name="description" content="In software engineering, there&amp;#x2019;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;#x2019;re never safe from it. It can assault you at any">
+      <meta name="description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="When Scope Blows Up">
 <meta property="og:url" content="https://timdaub.github.io/2021/06/18/when-scope-blows-up/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In software engineering, there&amp;#x2019;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;#x2019;re never safe from it. It can assault you at any">
+<meta property="og:description" content="In software engineering, there&amp;apos;s an infamous but reoccurring situation, I think is relatable for every developer and project manager. You&amp;apos;re never safe from it. It can assault you at any mom">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/shootingfromthehip.png">
@@ -180,10 +180,10 @@
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="essay">
 <meta property="article:tag" content="software engineering">
+<meta property="article:tag" content="Principles">
+<meta property="article:tag" content="Process">
 <meta property="article:tag" content="scope creep">
 <meta property="article:tag" content="project management">
-<meta property="article:tag" content="Process">
-<meta property="article:tag" content="Principles">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://timdaub.github.io/assets/images/shockedstoner.gif">
     </div>
@@ -191,102 +191,113 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>In software engineering, there&#x2019;s an infamous but reoccurring situation, I think
-is relatable for every developer and project manager. You&#x2019;re never safe from
-it. It can assault you at any moment: During a peaceful standup, when reading
-issues on GitHub, or during lunch with co-workers. It&#x2019;s when <strong>the scope blows
-up</strong> having crept into your project&#x2019;s issues and code - mercilessly expanding
-and driving everyone nuts: <strong>&quot;OMG, WE HAVE SCOPE CREEP!&quot;</strong></p>
-<p><img src="/assets/images/shockedstoner.gif" alt></p>
-<p>First, let&#x2019;s take a step back and define what is meant by scope creep.
-Intentionally, I&#x2019;ll focus on defining it from a manager&#x2019;s perspective because
-that&#x2019;s where I suspect it originates. So what is scope? I&#x2019;d say that scope is
-the sum of all things needed to deliver a software product given a specific set
-of expectations and a date.</p>
-<p>If we want to build an instant messenger app, its scope would likely encompass
-a feature that allows sending messages to others. Maybe it&#x2019;d include sending
-smilies. Or photos. But what about voice calls? Well, that&#x2019;s where thinking in
-terms of scope becomes useful. If we deem that voice calls aren&#x2019;t part of our
-product offerings, we&#x2019;d consider it <strong>&#x201C;out of scope.&#x201D;</strong> That&#x2019;s when we&#x2019;d say
-that &#x201C;we&#x2019;ve discovered scope creep&#x201D; or that &#x201C;scope is blowing up.&#x201D;</p>
-<p>It&#x2019;s curious to see that the English Wikipedia article for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Scope_(project_management)&amp;oldid=1016322255">Scope (project
-management)</a>
-is tiny, considering how fundamental the concept seems to be in software
-engineering these days. Given this lack of rigid facts, however, I feel happy
-to just reason from my experience in the extension of this article. Continuing,
-I&#x2019;ll just shoot from the hip.</p>
-<p><img src="/assets/images/shootingfromthehip.png" alt></p>
-<p>Here&#x2019;s a non-verified claim: Scope creep is subject to Murphy&#x2019;s law. So if
-scope can increase, it will increase. I&#x2019;m not sure why that is, and indeed some
-behavioral psychologists have one day have an excellent explanation; but for
-now, you&#x2019;ll have to take it for what I&#x2019;ve observed. I&#x2019;ve said - when scope
-creeps, it&#x2019;s when everyone loses their minds.</p>
-<p>But why? What is so bad about scope creep that people blame it for their
-company&#x2019;s failure, for leaving a job, or for burning out? It sure sounds like
-it encompasses incredible risk. And I think it does.</p>
-<p>For a project manager and their team that&#x2019;s bound to deliver a roadmap, scope
-creep can make them look like failures and potentially lead to them missing out
-on future funding. Scope creep can mean the end of a project.</p>
-<p>It&#x2019;s because for outsiders, given a lack of equal distribution of information
-about the project&#x2019;s challenges, scope creep can look like a team is failing or
-having lost focus. &#x201C;Why are they not able to deliver their roadmap?&#x201D;, &#x201C;This one
-feature, what does it have to do with the product&#x2019;s main value proposition?&#x201D;
-&#x201C;It looks like they&#x2019;re failing.&#x201D;</p>
-<p><img src="/assets/images/spongebobchaos.gif" alt></p>
-<p>While, of course, from the inside, things can look dramatically different.
-Scope creep is seldom god&#x2019;s irrational punishment for the team&#x2019;s sins (<em>lol
-dunno why I wrote that</em>). Indeed, scope creep may just be the difference
-between expectations and reality. It may just be a specific lack of
-information. It may be a few thousand missing in the budget or the lack of a
-specific team mate.</p>
-<p>I don&#x2019;t think, however, that scope creep is ever unjustified. Every scope
-creeper has a reason for creeping. It may be that their proposal is flawed and
-unnecessarily blown up. But ultimately, assuming that all contributors are
-good-natured towards the project, I&#x2019;ve made the experience that a scope creeper
-(a person that blows up scope) is looking at the problem from a unique point of
-view and is seeing something others aren&#x2019;t.</p>
-<p>I&#x2019;d argue that as software engineers, we should embrace blowing up scope more.
-And we should learn to work with it. I know it sounds crazy, but your software
-management process can adapt to extracting immense value from knowledge
-processes by appropriately managing creeping scope.</p>
-<p>I encourage you to think about scope creep like this: It&#x2019;s when you found a
-problem so vast and sinister that none of your team dares to face and slay it.
-It may be so huge; other teams may not dare to confront it either. Hell, it may
-be so colossal NOBODY HAS EVER dared.</p>
-<p>But in turn, what does this mean economically? It means that you&#x2019;re leaving
-value behind. See, today&#x2019;s internet is oversaturated with life hacks,
-workarounds, and quick fixes. It&#x2019;s good because it lets you focus on the task
-at hand. It&#x2019;s bad because it makes us believe that focusing on the short-term
-is appropriate for solving problems. We&#x2019;re leaving value behind, an example:</p>
-<p>Maybe you&#x2019;ve used a tool like docker before, and given its complexity, at one
-point, you discovered this annoying bug. You could solve it yourself - but you
-fear it&#x2019;d blow up your project&#x2019;s scope.</p>
-<p>Upon searching the web, you find a GitHub issue created two years ago. It now
-has 1000 comments, and you scroll down to find the most appropriate workaround
-that fits your project&#x2019;s needs.</p>
-<p>Now, considering that 1000 people each wasted one hour of their work time
-looking at this issue, I think it&#x2019;s easy to estimate the problem&#x2019;s weight.
-Hypothetically, would you solve it: It&#x2019;d mean you could cash-in on saving a
-thousand well-paid developers one hour. Undoubtedly that&#x2019;s a massive amount of
-money.</p>
-<p>The problem is: You cannot because it&#x2019;d mean to blow up your job&#x2019;s scope ten or
-a thousandfold. <em>And that&#x2019;s where I see an issue.</em></p>
-<p>Assuming you&#x2019;d be able to solve the issue on a technical and economic level,
-you&#x2019;d progress in your career. But it&#x2019;s not possible - as there&#x2019;s neither
-unlimited budget on your project nor enough time or talent to subsidize you.
-So, inevitably, you&#x2019;ll hence go for the short-term workaround.</p>
-<p>With all that in mind, I still think there&#x2019;s the chance to discover a
-deliberate practice to face scope creep more adventurously. Some scope creeps
-will inevitably make the project fail - even if handled carefully. Others -
-when solved correctly - may enrich your product and give you the right edge
-over the competition. What I believe should be avoided, though, is a compulsion
-and unjustified caution towards scope&#x2019;s increase.</p>
-<p>You can think of solving a problem like traversing a tree or diving into a
-reef. You can go breadth-first or depth-first. Your mind is capable of
-back-tracking too. And even having traveled deeply, reality often offers the
-opportunity to resurface and take a breather before going down again.</p>
+    <p>In software engineering, there&apos;s an infamous but reoccurring
+situation, I think is relatable for every developer and project manager.
+You&apos;re never safe from it. It can assault you at any moment: During a
+peaceful standup, when reading issues on GitHub, or during lunch with
+co-workers. It&apos;s when <strong>the scope blows up</strong> having crept
+into your project&apos;s issues and code - mercilessly expanding and driving
+everyone nuts: <strong>&quot;OMG, WE HAVE SCOPE CREEP!&quot;</strong></p>
+<p><img src="/assets/images/shockedstoner.gif"></p>
+<p>First, let&apos;s take a step back and define what is meant by scope
+creep. Intentionally, I&apos;ll focus on defining it from a manager&apos;s
+perspective because that&apos;s where I suspect it originates. So what is
+scope? I&apos;d say that scope is the sum of all things needed to deliver a
+software product given a specific set of expectations and a date.</p>
+<p>If we want to build an instant messenger app, its scope would likely
+encompass a feature that allows sending messages to others. Maybe it&apos;d
+include sending smilies. Or photos. But what about voice calls? Well,
+that&apos;s where thinking in terms of scope becomes useful. If we deem that
+voice calls aren&apos;t part of our product offerings, we&apos;d consider it
+<strong>&quot;out of scope.&quot;</strong> That&apos;s when we&apos;d say that &quot;we&apos;ve
+discovered scope creep&quot; or that &quot;scope is blowing up.&quot;</p>
+<p>It&apos;s curious to see that the English Wikipedia article for <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Scope_(project_management)&amp;oldid=1016322255">Scope
+(project management)</a> is tiny, considering how fundamental the
+concept seems to be in software engineering these days. Given this lack
+of rigid facts, however, I feel happy to just reason from my experience
+in the extension of this article. Continuing, I&apos;ll just shoot from the
+hip.</p>
+<p><img src="/assets/images/shootingfromthehip.png"></p>
+<p>Here&apos;s a non-verified claim: Scope creep is subject to Murphy&apos;s law.
+So if scope can increase, it will increase. I&apos;m not sure why that is,
+and indeed some behavioral psychologists have one day have an excellent
+explanation; but for now, you&apos;ll have to take it for what I&apos;ve observed.
+I&apos;ve said - when scope creeps, it&apos;s when everyone loses their minds.</p>
+<p>But why? What is so bad about scope creep that people blame it for
+their company&apos;s failure, for leaving a job, or for burning out? It sure
+sounds like it encompasses incredible risk. And I think it does.</p>
+<p>For a project manager and their team that&apos;s bound to deliver a
+roadmap, scope creep can make them look like failures and potentially
+lead to them missing out on future funding. Scope creep can mean the end
+of a project.</p>
+<p>It&apos;s because for outsiders, given a lack of equal distribution of
+information about the project&apos;s challenges, scope creep can look like a
+team is failing or having lost focus. &quot;Why are they not able to deliver
+their roadmap?&quot;, &quot;This one feature, what does it have to do with the
+product&apos;s main value proposition?&quot; &quot;It looks like they&apos;re failing.&quot;</p>
+<p><img src="/assets/images/spongebobchaos.gif"></p>
+<p>While, of course, from the inside, things can look dramatically
+different. Scope creep is seldom god&apos;s irrational punishment for the
+team&apos;s sins (<em>lol dunno why I wrote that</em>). Indeed, scope creep
+may just be the difference between expectations and reality. It may just
+be a specific lack of information. It may be a few thousand missing in
+the budget or the lack of a specific team mate.</p>
+<p>I don&apos;t think, however, that scope creep is ever unjustified. Every
+scope creeper has a reason for creeping. It may be that their proposal
+is flawed and unnecessarily blown up. But ultimately, assuming that all
+contributors are good-natured towards the project, I&apos;ve made the
+experience that a scope creeper (a person that blows up scope) is
+looking at the problem from a unique point of view and is seeing
+something others aren&apos;t.</p>
+<p>I&apos;d argue that as software engineers, we should embrace blowing up
+scope more. And we should learn to work with it. I know it sounds crazy,
+but your software management process can adapt to extracting immense
+value from knowledge processes by appropriately managing creeping
+scope.</p>
+<p>I encourage you to think about scope creep like this: It&apos;s when you
+found a problem so vast and sinister that none of your team dares to
+face and slay it. It may be so huge; other teams may not dare to
+confront it either. Hell, it may be so colossal NOBODY HAS EVER
+dared.</p>
+<p>But in turn, what does this mean economically? It means that you&apos;re
+leaving value behind. See, today&apos;s internet is oversaturated with life
+hacks, workarounds, and quick fixes. It&apos;s good because it lets you focus
+on the task at hand. It&apos;s bad because it makes us believe that focusing
+on the short-term is appropriate for solving problems. We&apos;re leaving
+value behind, an example:</p>
+<p>Maybe you&apos;ve used a tool like docker before, and given its
+complexity, at one point, you discovered this annoying bug. You could
+solve it yourself - but you fear it&apos;d blow up your project&apos;s scope.</p>
+<p>Upon searching the web, you find a GitHub issue created two years
+ago. It now has 1000 comments, and you scroll down to find the most
+appropriate workaround that fits your project&apos;s needs.</p>
+<p>Now, considering that 1000 people each wasted one hour of their work
+time looking at this issue, I think it&apos;s easy to estimate the problem&apos;s
+weight. Hypothetically, would you solve it: It&apos;d mean you could cash-in
+on saving a thousand well-paid developers one hour. Undoubtedly that&apos;s a
+massive amount of money.</p>
+<p>The problem is: You cannot because it&apos;d mean to blow up your job&apos;s
+scope ten or a thousandfold. <em>And that&apos;s where I see an
+issue.</em></p>
+<p>Assuming you&apos;d be able to solve the issue on a technical and economic
+level, you&apos;d progress in your career. But it&apos;s not possible - as there&apos;s
+neither unlimited budget on your project nor enough time or talent to
+subsidize you. So, inevitably, you&apos;ll hence go for the short-term
+workaround.</p>
+<p>With all that in mind, I still think there&apos;s the chance to discover a
+deliberate practice to face scope creep more adventurously. Some scope
+creeps will inevitably make the project fail - even if handled
+carefully. Others - when solved correctly - may enrich your product and
+give you the right edge over the competition. What I believe should be
+avoided, though, is a compulsion and unjustified caution towards scope&apos;s
+increase.</p>
+<p>You can think of solving a problem like traversing a tree or diving
+into a reef. You can go breadth-first or depth-first. Your mind is
+capable of back-tracking too. And even having traveled deeply, reality
+often offers the opportunity to resurface and take a breather before
+going down again.</p>
 <p>So go out there young padawan - blow up some scopes!</p>
-<p><img src="/assets/images/mindblown.gif" alt></p>
+<p><img src="/assets/images/mindblown.gif"></p>
 
   </div>
 </article>
