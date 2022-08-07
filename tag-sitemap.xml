@@ -395,14 +395,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/blockchain/</loc>
+        <loc>https://timdaub.github.io/tags/decentralized-finance/</loc>
         <lastmod>2022-01-26T14:28:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/decentralized-finance/</loc>
+        <loc>https://timdaub.github.io/tags/blockchain/</loc>
         <lastmod>2022-01-26T14:28:17.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -731,14 +731,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/project-management/</loc>
-        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
+        <loc>https://timdaub.github.io/tags/Principles/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -752,7 +745,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/Principles/</loc>
+        <loc>https://timdaub.github.io/tags/project-management/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
