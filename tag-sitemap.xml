@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/capital/</loc>
+        <lastmod>2022-08-23T08:44:51.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/equality/</loc>
+        <lastmod>2022-08-23T08:44:51.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/politics/</loc>
+        <lastmod>2022-08-23T08:44:51.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/economics/</loc>
+        <lastmod>2022-08-23T08:44:51.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/skyscrapers/</loc>
         <lastmod>2022-07-27T15:31:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -11,13 +39,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/startup/</loc>
-        <lastmod>2022-07-27T15:31:06.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/politics/</loc>
         <lastmod>2022-07-27T15:31:06.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -53,13 +74,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/essay/</loc>
-        <lastmod>2022-07-10T13:05:58.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/economics/</loc>
         <lastmod>2022-07-10T13:05:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -731,7 +745,14 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/Principles/</loc>
+        <loc>https://timdaub.github.io/tags/project-management/</loc>
+        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -745,14 +766,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/project-management/</loc>
-        <lastmod>2021-06-18T08:50:58.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/scope-creep/</loc>
+        <loc>https://timdaub.github.io/tags/Principles/</loc>
         <lastmod>2021-06-18T08:50:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
