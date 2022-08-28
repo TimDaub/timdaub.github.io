@@ -3,6 +3,27 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/software-engineering/</loc>
+        <lastmod>2022-08-28T12:49:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/standarization/</loc>
+        <lastmod>2022-08-28T12:49:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/essay/</loc>
+        <lastmod>2022-08-28T12:49:14.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/capital/</loc>
         <lastmod>2022-08-23T08:44:51.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -67,13 +88,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/social-networks/</loc>
-        <lastmod>2022-07-10T13:05:58.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/essay/</loc>
         <lastmod>2022-07-10T13:05:58.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -682,13 +696,6 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/software-engineering/</loc>
-        <lastmod>2021-09-06T16:44:54.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/coala-ip/</loc>
         <lastmod>2021-08-22T11:54:24.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -710,21 +717,21 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/social-media/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/digital-art/</loc>
-        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://timdaub.github.io/tags/Provenance/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/NFTs/</loc>
+        <lastmod>2021-07-21T09:59:38.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/social-media/</loc>
         <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -738,7 +745,7 @@
     </url>
 
     <url>
-        <loc>https://timdaub.github.io/tags/NFTs/</loc>
+        <loc>https://timdaub.github.io/tags/digital-art/</loc>
         <lastmod>2021-07-21T09:59:38.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
