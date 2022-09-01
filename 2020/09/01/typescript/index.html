@@ -8,12 +8,12 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+    <meta name="description" content="In recent months, I&amp;#x2019;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;#x2019;m looki">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TypeScript is weakening the JavaScript ecosystem">
 <meta property="og:url" content="https://timdaub.github.io/2020/09/01/typescript/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:description" content="In recent months, I&amp;#x2019;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;#x2019;m looki">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-01T16:47:38.000Z">
 <meta property="article:modified_time" content="2020-09-01T16:47:38.000Z">
@@ -116,7 +116,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -159,12 +159,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       2 minutes read
-      <meta name="description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+      <meta name="description" content="In recent months, I&amp;#x2019;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;#x2019;m looki">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TypeScript is weakening the JavaScript ecosystem">
 <meta property="og:url" content="https://timdaub.github.io/2020/09/01/typescript/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In recent months, I&amp;apos;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;apos;m looking f">
+<meta property="og:description" content="In recent months, I&amp;#x2019;ve noticed a dramatic increase in TypeScript packages on GitHub. I usually come across them when checking repositories of the people I follow like. Or, when I&amp;#x2019;m looki">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-01T16:47:38.000Z">
 <meta property="article:modified_time" content="2020-09-01T16:47:38.000Z">
@@ -181,60 +181,56 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>In recent months, I&apos;ve noticed a dramatic increase in TypeScript
-packages on GitHub. I usually come across them when checking
-repositories of the people I follow like. Or, when I&apos;m looking for
-dependencies to solve a problem in my projects. And the more TypeScript
-packages I&apos;m encountering, the more often I get reminded of this little
-annoyance towards the project.</p>
-<p>My context is that I&apos;ve not looked into TypeScript yet. That means I
-have no idea how it works. Unfortunately, this is now starting to become
-kind of a problem when searching for dependencies. It does, when I
-either willingly or accidentally include a TypeScript package into my
-projects. Mainly because my package-choosing criteria include:</p>
+    <p>In recent months, I&#x2019;ve noticed a dramatic increase in TypeScript packages
+on GitHub. I usually come across them when checking repositories of the
+people I follow like. Or, when I&#x2019;m looking for dependencies to solve a
+problem in my projects. And the more TypeScript packages I&#x2019;m encountering,
+the more often I get reminded of this little annoyance towards the project.</p>
+<p>My context is that I&#x2019;ve not looked into TypeScript yet. That means I have no
+idea how it works. Unfortunately, this is now starting to become kind of a
+problem when searching for dependencies.
+It does, when I either willingly or accidentally include a TypeScript package
+into my projects. Mainly because my package-choosing criteria include:</p>
 <ul>
-<li>picking packages that I potentially can contribute to (e.g., a
-lesser-known package that contains well-written code); or</li>
-<li>picking packages that are well-maintained by a large community but
-may include code that I&apos;d not be able to easily contribute to (e.g., a
-popular package using a C library internally)</li>
+<li>picking packages that I potentially can contribute to (e.g., a lesser-known
+package that contains well-written code); or</li>
+<li>picking packages that are well-maintained by a large community but may
+include code that I&#x2019;d not be able to easily contribute to (e.g., a popular
+package using a C library internally)</li>
 </ul>
-<p>I&apos;ve put these criteria in place willingly to achieve a certain
-quality standard when building applications. Either because I can fix
-bugs myself quickly, or because I&apos;m able to rely on a strong community
-to fix them. However, with TypeScript packages in npm, there&apos;s now this
-opaque problem of not knowing the language or quickly telling a
-package&apos;s language and its community size. Also, TypeScript could be
-just another CoffeeScript.</p>
-<p>So essentially, the problem is that TypeScript authors publish their
-packages on npm, the package manager for Node.js. And to me, that&apos;s what
-is weakening the JavaScript ecosystem. Since its inception, and
-throughout trends like Coffeescript, npm has mostly held the promise of
-only hosting JavaScript packages. However, this promise is
-<code>rejected()</code> (lol) by many authors publishing their
-TypeScript-to-JavaScript transpiled packages.</p>
-<p>Indeed, it makes sense considering that Microsoft markets TypeScript
-as a &quot;superset of JavaScript&quot; and since it &quot;compiles&quot; to JavaScript, why
-not publish packages to npm? But in terms of equality and identity,
-TypeScript is not JavaScript. After all, you&apos;d not consider C and
-Objective-C the same either, or would you? In both examples, the
-languages are subsets/supersets but were conceived with different goals
-in mind to solve other problems.</p>
-<p>Therefore, TypeScript authors should, in my opinion, do something
-along the following lines:</p>
+<p>I&#x2019;ve put these criteria in place willingly to achieve a certain quality
+standard when building applications. Either because I can fix bugs myself
+quickly, or because I&#x2019;m able to rely on a strong community to fix them.
+However, with TypeScript packages in npm, there&#x2019;s now this opaque problem of
+not knowing the language or quickly telling a package&#x2019;s language and its
+community size. Also, TypeScript could be just another CoffeeScript.</p>
+<p>So essentially, the problem is that TypeScript authors publish their packages
+on npm, the package manager for Node.js. And to me, that&#x2019;s what is weakening
+the JavaScript ecosystem.  Since its inception, and throughout trends like
+Coffeescript, npm has mostly held the promise of only hosting JavaScript
+packages. However, this promise is <code>rejected()</code> (lol) by many authors
+publishing their TypeScript-to-JavaScript transpiled packages.</p>
+<p>Indeed, it makes sense considering that Microsoft markets TypeScript as a
+&#x201C;superset of JavaScript&#x201D; and since it &#x201C;compiles&#x201D; to JavaScript, why not publish
+packages to npm? But in terms of equality and identity, TypeScript is not
+JavaScript. After all, you&#x2019;d not consider C and Objective-C the same either, or
+would you? In both examples, the languages are subsets/supersets but were
+conceived with different goals in mind to solve other problems.</p>
+<p>Therefore, TypeScript authors should, in my opinion, do something along the
+following lines:</p>
 <ul>
 <li>namespacing their TypeScript packages; or</li>
 <li>build and publish their packages to their package manager.</li>
 </ul>
-<p>However, continuing to publish TypeScript packages to npm is, in my
-opinion weakening the JavaScript ecosystem as it&apos;s splitting its
-community and polluting the npm namespace.</p>
-<h2 id="controversy">Controversy</h2>
+<p>However, continuing to publish TypeScript packages to npm is, in my opinion
+weakening the JavaScript ecosystem as it&#x2019;s splitting its community and
+polluting the npm namespace.</p>
+<h2 id="Controversy">Controversy</h2>
 <ul>
 <li>For a short time, there was an <a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=24344506">intense
-conversation</a> on Hacker News. But for unknown reasons, my post got
-marked as <code>[flagged]</code>. I&apos;ve written an email to the
-operators.</li>
+conversation</a> on Hacker News.
+But for unknown reasons, my post got marked as <code>[flagged]</code>. I&#x2019;ve written an
+email to the operators.</li>
 </ul>
 
   </div>
@@ -279,7 +275,7 @@ operators.</li>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Controversy"><span class="toc-number">1.</span> <span class="toc-text">Controversy</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
