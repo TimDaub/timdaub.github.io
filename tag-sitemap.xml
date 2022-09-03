@@ -3,6 +3,34 @@
 
 
     <url>
+        <loc>https://timdaub.github.io/tags/web-design/</loc>
+        <lastmod>2022-09-03T12:09:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/data-dignity/</loc>
+        <lastmod>2022-09-03T12:09:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/decentralization/</loc>
+        <lastmod>2022-09-03T12:09:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://timdaub.github.io/tags/usability/</loc>
+        <lastmod>2022-09-03T12:09:53.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/blogging/</loc>
         <lastmod>2022-09-01T10:09:12.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -171,6 +199,13 @@
     </url>
 
     <url>
+        <loc>https://timdaub.github.io/tags/web3/</loc>
+        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://timdaub.github.io/tags/soulbound-tokens/</loc>
         <lastmod>2022-05-30T14:12:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -193,13 +228,6 @@
 
     <url>
         <loc>https://timdaub.github.io/tags/account-bound-tokens/</loc>
-        <lastmod>2022-05-30T14:12:36.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/web3/</loc>
         <lastmod>2022-05-30T14:12:36.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
@@ -887,13 +915,6 @@
     <url>
         <loc>https://timdaub.github.io/tags/WASM/</loc>
         <lastmod>2021-02-25T10:18:30.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://timdaub.github.io/tags/usability/</loc>
-        <lastmod>2021-02-22T09:29:14.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

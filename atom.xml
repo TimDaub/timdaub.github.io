@@ -6,7 +6,7 @@
   <link href="https://timdaub.github.io/atom.xml" rel="self"/>
   
   <link href="https://timdaub.github.io/"/>
-  <updated>2022-09-01T10:09:12.000Z</updated>
+  <updated>2022-09-03T12:09:53.000Z</updated>
   <id>https://timdaub.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>The best website I use is an explorer, not an editor.</title>
+    <link href="https://timdaub.github.io/2022/09/03/the-best-website-i-use-is-an-explorer-not-an-editor/"/>
+    <id>https://timdaub.github.io/2022/09/03/the-best-website-i-use-is-an-explorer-not-an-editor/</id>
+    <published>2022-09-03T12:09:53.000Z</published>
+    <updated>2022-09-03T12:09:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Yes, and it&#x2019;s GitHub. GitHub is an explorer and a search engine for the gitprotocol, and so most of the data I submit to it or edit is replicated locally.I edit most of my work on my computer&#x2019;s command line - but GitHub is oftenuseful when navigating to bits of code &#x201C;far away&#x201D; from my command line&#x2019;scursor. It has a slightly nicer syntax highlighting, a fantastic internalsearch, and an integration with a search engine like Google.</p><p>Given that git isn&#x2019;t opinionated about the editor I use to write texts ormanipulate my Unix-based file system, I&#x2019;ve optimized my workflow by using a protool called vim - a special text editor. But I use a flurry of other Unix toolstoo, and they&#x2019;re all well-documented, free of charge, and non-proprietary.</p><p>Also, they don&#x2019;t track me. They&#x2019;re generally rather secure and aren&#x2019;t targetedfor cyber attacks as much as consumer apps are. Files are a beautiful andversatile abstraction and integrate well with git, my operating system, andGitHub.</p><p>Most importantly, by voluntarily opting into GitHub&#x2019;s features besides theirgit remote hosting, I can customize my user interfaces to a very high degree.See, having to work many hours a day with GitHub and git, I&#x2019;ve found that evenslight flaws or mismatches in the user interface I use for working cansignificantly impact my mental health. So having the freedom to customize,style, and use the tools I prefer to manipulate the fundamental data structureon GitHub is, in my opinion, the key to why people like me love to use it.</p><p>And I would like to generalize this further than GitHub and say that I also useother websites where this metaphor for interaction is executed, where thewebsite is merely a collection of &#x201C;immutable&#x201D; documents and is meant to exploreand not to edit.</p><p>It&#x2019;s because editing and manipulating on the web is so painful. Website statecan be lost, there are many rendering issues, and website structures sometimesget re-rendered under my cursor; login state is fragile, and I&#x2019;m being trackedand observed everywhere by giant global corporations stealing my data to enrichthemselves and their shareholders.</p><p>The best websites I use are explorers and not editors.</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Yes, and it&amp;#x2019;s GitHub. GitHub is an explorer and a search engine for the git
+protocol, and so most of the data I submit to it or ed</summary>
+      
+    
+    
+    
+    
+    <category term="usability" scheme="https://timdaub.github.io/tags/usability/"/>
+    
+    <category term="decentralization" scheme="https://timdaub.github.io/tags/decentralization/"/>
+    
+    <category term="data dignity" scheme="https://timdaub.github.io/tags/data-dignity/"/>
+    
+    <category term="web design" scheme="https://timdaub.github.io/tags/web-design/"/>
+    
+  </entry>
   
   <entry>
     <title>Effectively distributing texts online is very painful</title>
@@ -211,8 +240,6 @@ tokens&lt;/a&gt;?&amp;#x201D;&lt;/stro</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
     
     <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
@@ -220,6 +247,8 @@ tokens&lt;/a&gt;?&amp;#x201D;&lt;/stro</summary>
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
     <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
   </entry>
   
@@ -242,8 +271,6 @@ tokens&lt;/a&gt;?&amp;#x201D;&lt;/stro</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="account-bound tokens" scheme="https://timdaub.github.io/tags/account-bound-tokens/"/>
     
     <category term="harberger property" scheme="https://timdaub.github.io/tags/harberger-property/"/>
@@ -251,6 +278,8 @@ tokens&lt;/a&gt;?&amp;#x201D;&lt;/stro</summary>
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
     <category term="soulbound tokens" scheme="https://timdaub.github.io/tags/soulbound-tokens/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="verifiable credentials" scheme="https://timdaub.github.io/tags/verifiable-credentials/"/>
     
@@ -460,15 +489,15 @@ build ownership experiences residing in the commons</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
     
-    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="radical markets" scheme="https://timdaub.github.io/tags/radical-markets/"/>
     
     <category term="partial common ownership" scheme="https://timdaub.github.io/tags/partial-common-ownership/"/>
+    
+    <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
     <category term="harberger taxes" scheme="https://timdaub.github.io/tags/harberger-taxes/"/>
     
@@ -546,9 +575,9 @@ ETHDenver and all its satellite events. Today was my first day a</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="traveling" scheme="https://timdaub.github.io/tags/traveling/"/>
     
@@ -573,6 +602,8 @@ favor evaluating a subject&amp;#x2019;s positive sides rather than</summary>
     
     
     
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
+    
     <category term="optimism" scheme="https://timdaub.github.io/tags/optimism/"/>
     
     <category term="toxicity" scheme="https://timdaub.github.io/tags/toxicity/"/>
@@ -580,8 +611,6 @@ favor evaluating a subject&amp;#x2019;s positive sides rather than</summary>
     <category term="critique" scheme="https://timdaub.github.io/tags/critique/"/>
     
     <category term="crypto currencies" scheme="https://timdaub.github.io/tags/crypto-currencies/"/>
-    
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
   </entry>
   
@@ -604,9 +633,9 @@ favor evaluating a subject&amp;#x2019;s positive sides rather than</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
@@ -639,9 +668,9 @@ media than in 2021. As my diet now excludes Reddit an</summary>
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
-    
     <category term="layer 2" scheme="https://timdaub.github.io/tags/layer-2/"/>
+    
+    <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
     <category term="multi chain" scheme="https://timdaub.github.io/tags/multi-chain/"/>
     
@@ -735,9 +764,9 @@ roughly 24 months. I just counted; I managed t</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="rug pull index" scheme="https://timdaub.github.io/tags/rug-pull-index/"/>
     
@@ -801,11 +830,11 @@ all of us and say: &amp;#x201C;We&amp;#x2019;re exhausted!&amp;#x201D;</summary>
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
+    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
+    
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
     <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
-    
-    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
     <category term="bull market" scheme="https://timdaub.github.io/tags/bull-market/"/>
     
@@ -871,9 +900,9 @@ Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Air</summary>
     
     <category term="tokens" scheme="https://timdaub.github.io/tags/tokens/"/>
     
-    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
-    
     <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
+    
+    <category term="decentralized finance" scheme="https://timdaub.github.io/tags/decentralized-finance/"/>
     
     <category term="consensus" scheme="https://timdaub.github.io/tags/consensus/"/>
     
@@ -1007,11 +1036,11 @@ improperly. I&amp;#x2019;d argue that for most code I&amp;#x2</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="non-fungible token" scheme="https://timdaub.github.io/tags/non-fungible-token/"/>
     
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
@@ -1043,9 +1072,9 @@ improperly. I&amp;#x2019;d argue that for most code I&amp;#x2</summary>
     
     <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
-    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
-    
     <category term="social media" scheme="https://timdaub.github.io/tags/social-media/"/>
+    
+    <category term="Ethereum" scheme="https://timdaub.github.io/tags/Ethereum/"/>
     
     <category term="NFTs" scheme="https://timdaub.github.io/tags/NFTs/"/>
     
@@ -1274,9 +1303,9 @@ time I developed an app using it has been mor</summary>
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="smart contracts" scheme="https://timdaub.github.io/tags/smart-contracts/"/>
     
@@ -1449,9 +1478,9 @@ the &lt;code&gt;sameSite&lt;/code&gt; attribute when setting browser co</summary
     
     
     
-    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
-    
     <category term="ethereum" scheme="https://timdaub.github.io/tags/ethereum/"/>
+    
+    <category term="web3" scheme="https://timdaub.github.io/tags/web3/"/>
     
     <category term="blockchain" scheme="https://timdaub.github.io/tags/blockchain/"/>
     
