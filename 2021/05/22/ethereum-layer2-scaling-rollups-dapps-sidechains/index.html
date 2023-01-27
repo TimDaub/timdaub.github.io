@@ -7,13 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="If you read my blog regularly, you&amp;#x2019;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &amp;#x201C;shipping">
+    <meta name="description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Existential Challenges of Dapp Builders">
 <meta property="og:url" content="https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="If you read my blog regularly, you&amp;#x2019;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &amp;#x201C;shipping">
+<meta property="og:description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rpiscreenshotmay.png">
@@ -66,8 +67,12 @@
 </head>
 
 <body class="max-width mx-auto px3 ltr">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div style="width: 100%; font-size: 1.25rem; color: black; background-color: yellow;">
+    You're on the <b>old version</b> of my blog. Go to new site: <a target="_blank" rel="noopener" href="https://proofinprogress.com">proofinprogress.com</a>
+
+  </div>
     
-      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+      <div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -163,12 +168,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       6 minutes read
-      <meta name="description" content="If you read my blog regularly, you&amp;#x2019;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &amp;#x201C;shipping">
+      <meta name="description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Existential Challenges of Dapp Builders">
 <meta property="og:url" content="https://timdaub.github.io/2021/05/22/ethereum-layer2-scaling-rollups-dapps-sidechains/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="If you read my blog regularly, you&amp;#x2019;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &amp;#x201C;shipping">
+<meta property="og:description" content="If you read my blog regularly, you&amp;apos;ve probably noticed that I like to complain about the state of my favorite cryptocurrency: Ethereum. It started years ago when I claimed that &quot;shipping to">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/ethgasfees.png">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/rpiscreenshotmay.png">
@@ -189,133 +194,157 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>If you read my blog regularly, you&#x2019;ve probably noticed that I like to complain
-about the state of my favorite cryptocurrency: Ethereum. It started years ago
-when I claimed that &#x201C;<a href="https://timdaub.github.io/2019/02/28/poa/">shipping to a Proof of Authority network is a bad
-idea.</a>&#x201D; I followed it up with two
-posts rambling about <a href="https://timdaub.github.io/2020/09/08/web3/">how Ethereum&#x2019;s design makes it challenging to build
-excellent web applications</a> and how
-its <a href="https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/">finance-oriented market politics ruin dapps for most users as gas prices
-keep rising</a>.</p>
-<p>The context is that I&#x2019;m trying to build a decentralized app (short: dapp)
-myself (<a target="_blank" rel="noopener" href="https://rugpullindex.com/">rugpullindex.com</a>). In that process, I face
-challenges that I journal here. Today - big surprise - I&#x2019;m back with another
-one of these! With one that&#x2019;s focused on a pet peeve of mine: Trying to scale
-with insufficient technological sophistication.</p>
-<p>Here&#x2019;s what&#x2019;s happening right now in the Ethereum ecosystem: Though the Berlin
-hard fork and its subsequent block gas limit increase was a success, gas fees
-have continued to be insane. Tangible Layer 2 (short: L2) scaling solutions are
-<a target="_blank" rel="noopener" href="https://optimistic.etherscan.io/">visible on the horizon</a>, but my vision is
-blurred - there&#x2019;s lots of new information to take in and process. Having
-dedicated significant parts of my career towards finding scaling solutions for
-blockchains: I&#x2019;m trying to reassess where we are. I can&#x2019;t say for now. I&#x2019;ll
-need more time and dedicate more research.</p>
-<p><img src="/assets/images/ethgasfees.png" alt="Ethereum gas fees of 1000 gwei per gas from May 21,2021"></p>
-<p>But here&#x2019;s the more significant problem: Not being able to strategically assess
-what to build and where is a problem in execution. See, in November, <a href="https://timdaub.github.io/2020/12/11/rugpullindex/">I started
-a project that rates data sets by their market&#x2019;s
-quality</a>. I&#x2019;d say it&#x2019;s been
-going well so far for anything but the blockchain-related technical components.
-The project&#x2019;s eventual idea is to create an ERC20 token akin to an index fund&#x2019;s
-ETF that holds multiple assets in a specific quantity. Think of
-<a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> like an S&amp;P500 but for data sets
-instead of American companies.</p>
-<p><img src="/assets/images/rpiscreenshotmay.png" alt="A screenshot of my project&apos;s website in May 2021"></p>
-<p>I&#x2019;m burning to make it happen, but I&#x2019;m struggling to move forward on a
-technical level. There are no &#x201C;technical challenges&#x201D;, as I could build on the
-Ethereum mainnet. After all, I&#x2019;m familiar with the tech, and I&#x2019;d be able to code
-that.</p>
-<p><strong>However, the blocker at this point is of an existential matter: How&#x2019;s Ethereum
-going to look like in, e.g., three months, one year, five years?</strong> How am I
-supposed to make an informed decision about building on mainnet when I don&#x2019;t
-know where it&#x2019;s going to go?</p>
-<p>For now, the facts are these: Executing a single on-chain asset swap is in the
-range of 100k gas. At times, that can be 500 to 1000 USD in transaction fees.
-Multiply that by 10x, and you have the transaction fee for a single rebalancing
-of rugpullindex&#x2019;s fund assuming ten assets. Don&#x2019;t get me wrong, for sure, is
-there a way to rationalize that action by only executing it when it&#x2019;s
-economically sound for its users - e.g., when enough capital uses the index.</p>
-<p>However, the problem is that having my product directly dependent on the
-Ethereum mainnet&#x2019;s performance may impact its safety and quality.</p>
-<p>What if we need to rebalance the index, but the network&#x2019;s congestion continues
-to increase, making the product&#x2019;s position permanently economically unsound? An
-example: Assume we&#x2019;ve distributed the index token to, say, 20 users. It&#x2019;s
-financially sound for them to pay a transaction fee of 5$ / month to rebalance.
-But then gas prices increase, and now suddenly it costs them 50$ / month for the
-same service. Now, for many, it may not be a sound investment anymore. What
-about the index&#x2019;s functionality - does it still make sense in that environment?</p>
-<p>Of course, I thought deeply about solutions for this. But there weren&#x2019;t a lot
-of options that came to mind. Here are two tangible things that developers are
-doing these days to avoid the problem:</p>
-<ol>
+    <p>If you read my blog regularly, you&apos;ve probably noticed that I like to
+complain about the state of my favorite cryptocurrency: Ethereum. It
+started years ago when I claimed that &quot;<a href="https://timdaub.github.io/2019/02/28/poa/">shipping to a Proof of
+Authority network is a bad idea.</a>&quot; I followed it up with two posts
+rambling about <a href="https://timdaub.github.io/2020/09/08/web3/">how
+Ethereum&apos;s design makes it challenging to build excellent web
+applications</a> and how its <a href="https://timdaub.github.io/2021/02/22/ethereum-isnt-fun-anymore/">finance-oriented
+market politics ruin dapps for most users as gas prices keep
+rising</a>.</p>
+<p>The context is that I&apos;m trying to build a decentralized app (short:
+dapp) myself (<a target="_blank" rel="noopener" href="https://rugpullindex.com/">rugpullindex.com</a>).
+In that process, I face challenges that I journal here. Today - big
+surprise - I&apos;m back with another one of these! With one that&apos;s focused
+on a pet peeve of mine: Trying to scale with insufficient technological
+sophistication.</p>
+<p>Here&apos;s what&apos;s happening right now in the Ethereum ecosystem: Though
+the Berlin hard fork and its subsequent block gas limit increase was a
+success, gas fees have continued to be insane. Tangible Layer 2 (short:
+L2) scaling solutions are <a target="_blank" rel="noopener" href="https://optimistic.etherscan.io/">visible on the horizon</a>, but
+my vision is blurred - there&apos;s lots of new information to take in and
+process. Having dedicated significant parts of my career towards finding
+scaling solutions for blockchains: I&apos;m trying to reassess where we are.
+I can&apos;t say for now. I&apos;ll need more time and dedicate more research.</p>
+<figure>
+<img src="/assets/images/ethgasfees.png" alt="Ethereum gas fees of 1000 gwei per gas from May 21, 2021">
+<figcaption aria-hidden="true">Ethereum gas fees of 1000 gwei per gas
+from May 21, 2021</figcaption>
+</figure>
+<p>But here&apos;s the more significant problem: Not being able to
+strategically assess what to build and where is a problem in execution.
+See, in November, <a href="https://timdaub.github.io/2020/12/11/rugpullindex/">I started a
+project that rates data sets by their market&apos;s quality</a>. I&apos;d say it&apos;s
+been going well so far for anything but the blockchain-related technical
+components. The project&apos;s eventual idea is to create an ERC20 token akin
+to an index fund&apos;s ETF that holds multiple assets in a specific
+quantity. Think of <a target="_blank" rel="noopener" href="https://rugpullindex.com">rugpullindex.com</a> like an S&amp;P500
+but for data sets instead of American companies.</p>
+<figure>
+<img src="/assets/images/rpiscreenshotmay.png" alt="A screenshot of my project&apos;s website in May 2021">
+<figcaption aria-hidden="true">A screenshot of my project&apos;s website in
+May 2021</figcaption>
+</figure>
+<p>I&apos;m burning to make it happen, but I&apos;m struggling to move forward on
+a technical level. There are no &quot;technical challenges&quot;, as I could build
+on the Ethereum mainnet. After all, I&apos;m familiar with the tech, and I&apos;d
+be able to code that.</p>
+<p><strong>However, the blocker at this point is of an existential
+matter: How&apos;s Ethereum going to look like in, e.g., three months, one
+year, five years?</strong> How am I supposed to make an informed
+decision about building on mainnet when I don&apos;t know where it&apos;s going to
+go?</p>
+<p>For now, the facts are these: Executing a single on-chain asset swap
+is in the range of 100k gas. At times, that can be 500 to 1000 USD in
+transaction fees. Multiply that by 10x, and you have the transaction fee
+for a single rebalancing of rugpullindex&apos;s fund assuming ten assets.
+Don&apos;t get me wrong, for sure, is there a way to rationalize that action
+by only executing it when it&apos;s economically sound for its users - e.g.,
+when enough capital uses the index.</p>
+<p>However, the problem is that having my product directly dependent on
+the Ethereum mainnet&apos;s performance may impact its safety and
+quality.</p>
+<p>What if we need to rebalance the index, but the network&apos;s congestion
+continues to increase, making the product&apos;s position permanently
+economically unsound? An example: Assume we&apos;ve distributed the index
+token to, say, 20 users. It&apos;s financially sound for them to pay a
+transaction fee of 5$ / month to rebalance. But then gas prices
+increase, and now suddenly it costs them 50$ / month for the same
+service. Now, for many, it may not be a sound investment anymore. What
+about the index&apos;s functionality - does it still make sense in that
+environment?</p>
+<p>Of course, I thought deeply about solutions for this. But there
+weren&apos;t a lot of options that came to mind. Here are two tangible things
+that developers are doing these days to avoid the problem:</p>
+<ol type="1">
 <li>Ship to a side chain.</li>
 <li>Ship to a rollup.</li>
 </ol>
-<p><strong>About (2) shipping to a rollup</strong>: The problem is that they don&#x2019;t exist yet on the
-mainnet. I mean, they do exist, but primarily specialized to a use case.</p>
-<p>I could be building on the beta version of, e.g., Optimism&#x2019;s L2 rollup. That
-to me, however, is the equivalent of gambling with my time and focus on the
-hypothesis that Optimism will indeed ship a conceptually ideal platform for my
-decentralized app. Don&#x2019;t get me wrong; I don&#x2019;t doubt that their product will be
-great eventually. But there&#x2019;s an undeniable chance that they won&#x2019;t ship what I
-need. And there&#x2019;s even a chance that they won&#x2019;t ship at all. Also, I don&#x2019;t want
-to make bets when building software. I want to base decisions on facts.</p>
-<p><strong>Then, the answer must be in (1)</strong>, shipping to a side chain-like, e.g., Polygon.
-But there are even more significant problems. In fact, I find it incredibly
-short-sighted and inconsiderate of many projects in the space to &#x201C;just&#x201D; ship to
-side chains. It&#x2019;s like taking the easy way out when uploading your contracts to
-side chains like xDAI, Polygon, etc&#x2026;</p>
-<p><a href="https://timdaub.github.io/2019/02/28/poa/">In 2019, I argued that the context you in ship matters as it determines your
-assumptions when engineering the
-product</a>. I want to double down on
-that statement today: When you ship on a side chain, you get a side chain
-product and vice versa. That&#x2019;s not a new insight but just another facet of
-<a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Conway%27s_law&amp;oldid=1024184133">Conway&#x2019;s
+<p><strong>About (2) shipping to a rollup</strong>: The problem is that
+they don&apos;t exist yet on the mainnet. I mean, they do exist, but
+primarily specialized to a use case.</p>
+<p>I could be building on the beta version of, e.g., Optimism&apos;s L2
+rollup. That to me, however, is the equivalent of gambling with my time
+and focus on the hypothesis that Optimism will indeed ship a
+conceptually ideal platform for my decentralized app. Don&apos;t get me
+wrong; I don&apos;t doubt that their product will be great eventually. But
+there&apos;s an undeniable chance that they won&apos;t ship what I need. And
+there&apos;s even a chance that they won&apos;t ship at all. Also, I don&apos;t want to
+make bets when building software. I want to base decisions on facts.</p>
+<p><strong>Then, the answer must be in (1)</strong>, shipping to a side
+chain-like, e.g., Polygon. But there are even more significant problems.
+In fact, I find it incredibly short-sighted and inconsiderate of many
+projects in the space to &quot;just&quot; ship to side chains. It&apos;s like taking
+the easy way out when uploading your contracts to side chains like xDAI,
+Polygon, etc..</p>
+<p><a href="https://timdaub.github.io/2019/02/28/poa/">In 2019, I argued
+that the context you in ship matters as it determines your assumptions
+when engineering the product</a>. I want to double down on that
+statement today: When you ship on a side chain, you get a side chain
+product and vice versa. That&apos;s not a new insight but just another facet
+of <a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Conway%27s_law&amp;oldid=1024184133">Conway&apos;s
 law</a>.</p>
-<p><strong>I think most of us agree that the primary value of the Ethereum mainnet, so
-far, has come from the composability of its smart contracts, the possibility of
-projects to cross-pollinate, and its liquidity</strong>.</p>
-<p>And now I&#x2019;m supposed to solve high gas fees by shipping on a side chain? I
-think we&#x2019;re deliberately ruining all of the above positives to serve our user&#x2019;s
-apparent lust for convenience by shipping on sidechains. I consider such a
-problem-solving strategy a &#x201C;don&#x2019;t.&#x201D; That&#x2019;s development driven by instant
-gratification and short-term gain. Nothing more.</p>
-<p>So then, finally, given this existential execution crisis: how am I supposed to
-address the issue? My idea: with direct control and a principled approach.</p>
-<p>I know that value is concentrating on the most technically sophisticated
-network - that being Ethereum L1 mainnet right now. I know that L2 is superior
-from a safety perspective compared to side chains. Transitively, this means
-that more value will accrue on L2 than on side chains eventually. I also know
-that by either building on L1 or L2, I&#x2019;ll build my dapp &#x201C;the right way&#x201D; (from
-an assumptions perspective) - but also: that I&#x2019;ll remain in control over my
-application&#x2019;s execution environment when shipping towards the mainnet (either
-on L1 or L2).</p>
-<p><strong>Finally, it&#x2019;s essential to realize that I won&#x2019;t have to ship towards either
-option</strong>. I can invent a third option too. And in fact, that&#x2019;s what I&#x2019;ve
-started to do.</p>
-<p>If my problem is Ethereum mainnet&#x2019;s gas prices, then what can I do to decrease
-them? Recently, I gave suggestions that could cut transaction fees in half for
-automated market maker apps <a href="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/">by avoiding sending an on-chain <code>approve</code>
-transaction</a>.
-I started reaching out to L2 builders to learn more about rollups, too. And <a target="_blank" rel="noopener" href="https://github.com/rugpullindex/documents/tree/master/research">I
-spent a considerable amount of my time recently trying to learn more about
-rollups and layer
-2</a>.</p>
-<p><img src="/assets/images/rollupsresearch.png" alt="A drawing from my research on rollups"></p>
-<p>It&#x2019;s been an empowering journey of learning so far. I even have an idea of
-building a rollup-inspired dapp myself now. One that may not need complicated
-off-chain consensus. But generally, the idea has been trying to understand the
-technology better to improve my decision-making. I want to optimize the
-outcomes of my engineering by knowing and understanding the situation as best
-as I can.</p>
-<p><strong>I want to base decisions on facts, not bets, And that&#x2019;s where I am
-today. Fingers crossed!</strong></p>
+<p><strong>I think most of us agree that the primary value of the
+Ethereum mainnet, so far, has come from the composability of its smart
+contracts, the possibility of projects to cross-pollinate, and its
+liquidity</strong>.</p>
+<p>And now I&apos;m supposed to solve high gas fees by shipping on a side
+chain? I think we&apos;re deliberately ruining all of the above positives to
+serve our user&apos;s apparent lust for convenience by shipping on
+sidechains. I consider such a problem-solving strategy a &quot;don&apos;t.&quot; That&apos;s
+development driven by instant gratification and short-term gain. Nothing
+more.</p>
+<p>So then, finally, given this existential execution crisis: how am I
+supposed to address the issue? My idea: with direct control and a
+principled approach.</p>
+<p>I know that value is concentrating on the most technically
+sophisticated network - that being Ethereum L1 mainnet right now. I know
+that L2 is superior from a safety perspective compared to side chains.
+Transitively, this means that more value will accrue on L2 than on side
+chains eventually. I also know that by either building on L1 or L2, I&apos;ll
+build my dapp &quot;the right way&quot; (from an assumptions perspective) - but
+also: that I&apos;ll remain in control over my application&apos;s execution
+environment when shipping towards the mainnet (either on L1 or L2).</p>
+<p><strong>Finally, it&apos;s essential to realize that I won&apos;t have to ship
+towards either option</strong>. I can invent a third option too. And in
+fact, that&apos;s what I&apos;ve started to do.</p>
+<p>If my problem is Ethereum mainnet&apos;s gas prices, then what can I do to
+decrease them? Recently, I gave suggestions that could cut transaction
+fees in half for automated market maker apps <a href="https://timdaub.github.io/2021/04/19/ethereum-web3-saving-gas-mainnet/">by
+avoiding sending an on-chain <code>approve</code> transaction</a>. I
+started reaching out to L2 builders to learn more about rollups, too.
+And <a target="_blank" rel="noopener" href="https://github.com/rugpullindex/documents/tree/master/research">I
+spent a considerable amount of my time recently trying to learn more
+about rollups and layer 2</a>.</p>
+<figure>
+<img src="/assets/images/rollupsresearch.png" alt="A drawing from my research on rollups">
+<figcaption aria-hidden="true">A drawing from my research on
+rollups</figcaption>
+</figure>
+<p>It&apos;s been an empowering journey of learning so far. I even have an
+idea of building a rollup-inspired dapp myself now. One that may not
+need complicated off-chain consensus. But generally, the idea has been
+trying to understand the technology better to improve my
+decision-making. I want to optimize the outcomes of my engineering by
+knowing and understanding the situation as best as I can.</p>
+<p><strong>I want to base decisions on facts, not bets, And that&apos;s where
+I am today. Fingers crossed!</strong></p>
 <hr>
-<p>If you enjoyed reading this post and are interested in my Ethereum project
-called <a target="_blank" rel="noopener" href="http://rugpullindex.com">rugpullindex.com</a>, check out our website and feel free to sign up with
-the newsletter below.</p>
-<p>Best,
-Tim</p>
+<p>If you enjoyed reading this post and are interested in my Ethereum
+project called rugpullindex.com, check out our website and feel free to
+sign up with the newsletter below.</p>
+<p>Best, Tim</p>
 
   </div>
 </article>
@@ -392,7 +421,7 @@ Tim</p>
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Tim Daubenschütz
+    Copyright &copy; 2023 Tim Daubenschütz
   </div>
   <div class="footer-right">
     <nav>

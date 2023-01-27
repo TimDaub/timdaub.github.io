@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
     <meta name="description" content="Written by: pinkiebell and TimDaub. Composability is a quality of EVM-based smart contract singletons to expose an immutable and openly-accessible API. The property of composability in Ethereum-based">
 <meta property="og:type" content="article">
@@ -21,8 +22,8 @@
 <meta property="article:tag" content="ethereum">
 <meta property="article:tag" content="web3">
 <meta property="article:tag" content="smart contracts">
-<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="composability">
 <meta name="twitter:card" content="summary">
     
@@ -62,8 +63,12 @@
 </head>
 
 <body class="max-width mx-auto px3 ltr">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div style="width: 100%; font-size: 1.25rem; color: black; background-color: yellow;">
+    You're on the <b>old version</b> of my blog. Go to new site: <a target="_blank" rel="noopener" href="https://proofinprogress.com">proofinprogress.com</a>
+
+  </div>
     
-      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+      <div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -116,7 +121,11 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Composability-software%E2%80%99s-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability, software’s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DeFi-Ethereum%E2%80%99s-%E2%80%9CPoster-Child%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum’s “Poster Child”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-State-Will-Be-Expensive-Too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-We%E2%80%99re-Arguing-For-Breaking-Solidity-level-Composability"><span class="toc-number">5.</span> <span class="toc-text">Why We’re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#composability-softwares-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability,
+software&#39;s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defi-ethereums-poster-child"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum&#39;s &quot;Poster
+Child&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#future-state-will-be-expensive-too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be
+Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-were-arguing-for-breaking-solidity-level-composability"><span class="toc-number">5.</span> <span class="toc-text">Why
+We&#39;re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -172,8 +181,8 @@
 <meta property="article:tag" content="ethereum">
 <meta property="article:tag" content="web3">
 <meta property="article:tag" content="smart contracts">
-<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="blockchain">
 <meta property="article:tag" content="composability">
 <meta name="twitter:card" content="summary_large_image">
     </div>
@@ -181,149 +190,166 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and
-<a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
-<p>Composability is a quality of EVM-based smart contract singletons to expose an
-immutable and openly-accessible API. The property of composability in
-Ethereum-based smart contracts paired with the tokenization of assets made it
-possible to create Decentralized Finance (short: &#x201C;DeFi&#x201D;), crypto currencies&#x2019;
-greatest driver of innovation yet.</p>
-<p>If &#x201C;2022 is the year of the DAO&#x201D;, then all years prior were probably &#x201C;the years
-of financial composability&#x201D; as this unique property of smart contracts has
-given rise to the most innovative monetary applications developers have ever
-seen before.</p>
-<p>But <strong>is it time to move on from Solidity-level composability?</strong> Is it worth
-breaking it for the sake of scalability and utility of the overall Ethereum
-network? A discussion.</p>
-<h2 id="Composability-software&#x2019;s-greatest-property">Composability, software&#x2019;s greatest property?</h2>
-<p>First of all, the concept of composability isn&#x2019;t new, and EVM-based languages
-didn&#x2019;t invent it either.</p>
-<p>We argue that most readers will likely be intimately familiar with the last big
-composability paradigm shift in software engineering. It was all web developers
-agreeing on making their web APIs RESTful.</p>
-<p>By using JSON and being mindful of the shared state on the web, we managed to
-successfully scale the web into a broadly-useful network of services. It&#x2019;s why
-today, most programming languages ironically include the &#x201C;<strong>JavaScript</strong> Object
-Notation&#x201D; (short: &#x201C;JSON&#x201D;), as with the adoption of the REST composability
-paradigm, it has become the most popular serialization format.</p>
+    <p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and <a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
+<p>Composability is a quality of EVM-based smart contract singletons to
+expose an immutable and openly-accessible API. The property of
+composability in Ethereum-based smart contracts paired with the
+tokenization of assets made it possible to create Decentralized Finance
+(short: &quot;DeFi&quot;), crypto currencies&apos; greatest driver of innovation
+yet.</p>
+<p>If &quot;2022 is the year of the DAO&quot;, then all years prior were probably
+&quot;the years of financial composability&quot; as this unique property of smart
+contracts has given rise to the most innovative monetary applications
+developers have ever seen before.</p>
+<p>But <strong>is it time to move on from Solidity-level
+composability?</strong> Is it worth breaking it for the sake of
+scalability and utility of the overall Ethereum network? A
+discussion.</p>
+<h2 id="composability-softwares-greatest-property">Composability,
+software&apos;s greatest property?</h2>
+<p>First of all, the concept of composability isn&apos;t new, and EVM-based
+languages didn&apos;t invent it either.</p>
+<p>We argue that most readers will likely be intimately familiar with
+the last big composability paradigm shift in software engineering. It
+was all web developers agreeing on making their web APIs RESTful.</p>
+<p>By using JSON and being mindful of the shared state on the web, we
+managed to successfully scale the web into a broadly-useful network of
+services. It&apos;s why today, most programming languages ironically include
+the &quot;<strong>JavaScript</strong> Object Notation&quot; (short: &quot;JSON&quot;), as
+with the adoption of the REST composability paradigm, it has become the
+most popular serialization format.</p>
 <p>We, hence, define the term composability independently from EVM-based
-interfaces. We say that two distinct pieces of software are composable when
-their interfaces allow them to be used together.</p>
-<p>Given that definition, we argue that properly semantically-versioned open
-source software is &#x201C;composable,&#x201D; as are POSIX-compliant tools.</p>
-<p>Still, Solidity smart contract composability differs as it does not only allow
-programs to collaborate on managing information but money. Hence, Ethereum&#x2019;s
-composability property is innovative as it enables gluing together various
-financial applications.</p>
-<p>However, in the past month, we&#x2019;ve come to realize that today&#x2019;s composability of
-EVM-based contracts more of an obstacle than a beneficiary feature to all.</p>
-<h2 id="DeFi-Ethereum&#x2019;s-&#x201C;Poster-Child&#x201D;">DeFi, Ethereum&#x2019;s &#x201C;Poster Child&#x201D;</h2>
-<p>We probably don&#x2019;t have to convince anyone of the greatness of DeFi. But for any
-crypto hodlers awaking from cryostasis, YES, Ethereum&#x2019;s killer application has
-been found, and it&#x2019;s DeFi.</p>
-<p>DeFi is such a great killer application that it has started to impact the
-viability of other use cases on Ethereum. It&#x2019;s because it has made using
-Ethereum very expensive.</p>
-<p>See, the problem is in DeFi degen on-chain trading. Before the advent of
-automated market makers (short &#x201C;AMM&#x201D;), using Ethereum was fairly cheap, with
-transaction fees ranging from a few cents to maybe a dollar or two.</p>
-<p>Only with the &#x201C;recent&#x201D; influx of on-chain trading has it become widespread and
-rationally accepted that any transaction goes for as long as it&#x2019;s profitable.
-If you inspect the chain today, you&#x2019;ll find that some traders in the past took
-on massive costs to execute trades with only dubious profit. To draw an extreme
-picture, we argue that it may technically be rational to pay the equivalent of
-999 ETH in transaction cost just to make back 999.000000000000000001 ETH
-(difference: 1 WEI) of profit in the process.</p>
-<p>It&#x2019;s because traders can control Ethereum&#x2019;s transaction atomicity and
-profitability to a fair degree until the very moment of execution. In contrast
-to an intransparent order book of a centralized Wall Street exchange,
-Ethereum&#x2019;s transaction pool is entirely inspectable by any participants,
-allowing them to &#x201C;guarantee&#x201D; certain results.</p>
-<p>And beyond just that, much more is possible through specifying conditions in
-Solidity (and recently MEV):</p>
+interfaces. We say that two distinct pieces of software are composable
+when their interfaces allow them to be used together.</p>
+<p>Given that definition, we argue that properly semantically-versioned
+open source software is &quot;composable,&quot; as are POSIX-compliant tools.</p>
+<p>Still, Solidity smart contract composability differs as it does not
+only allow programs to collaborate on managing information but money.
+Hence, Ethereum&apos;s composability property is innovative as it enables
+gluing together various financial applications.</p>
+<p>However, in the past month, we&apos;ve come to realize that today&apos;s
+composability of EVM-based contracts more of an obstacle than a
+beneficiary feature to all.</p>
+<h2 id="defi-ethereums-poster-child">DeFi, Ethereum&apos;s &quot;Poster
+Child&quot;</h2>
+<p>We probably don&apos;t have to convince anyone of the greatness of DeFi.
+But for any crypto hodlers awaking from cryostasis, YES, Ethereum&apos;s
+killer application has been found, and it&apos;s DeFi.</p>
+<p>DeFi is such a great killer application that it has started to impact
+the viability of other use cases on Ethereum. It&apos;s because it has made
+using Ethereum very expensive.</p>
+<p>See, the problem is in DeFi degen on-chain trading. Before the advent
+of automated market makers (short &quot;AMM&quot;), using Ethereum was fairly
+cheap, with transaction fees ranging from a few cents to maybe a dollar
+or two.</p>
+<p>Only with the &quot;recent&quot; influx of on-chain trading has it become
+widespread and rationally accepted that any transaction goes for as long
+as it&apos;s profitable. If you inspect the chain today, you&apos;ll find that
+some traders in the past took on massive costs to execute trades with
+only dubious profit. To draw an extreme picture, we argue that it may
+technically be rational to pay the equivalent of 999 ETH in transaction
+cost just to make back 999.000000000000000001 ETH (difference: 1 WEI) of
+profit in the process.</p>
+<p>It&apos;s because traders can control Ethereum&apos;s transaction atomicity and
+profitability to a fair degree until the very moment of execution. In
+contrast to an intransparent order book of a centralized Wall Street
+exchange, Ethereum&apos;s transaction pool is entirely inspectable by any
+participants, allowing them to &quot;guarantee&quot; certain results.</p>
+<p>And beyond just that, much more is possible through specifying
+conditions in Solidity (and recently MEV):</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require(profit &gt; msg.value, &quot;non profitable trade&quot;)</span><br></pre></td></tr></table></figure>
-<h2 id="Gas-change-is-real">Gas-change is real!</h2>
+<h2 id="gas-change-is-real">Gas-change is real!</h2>
 <p>At this point, it should hence not surprise anyone when we claim that
-market-based pricing may not reflect the inclusion of external costs.</p>
-<p>On Ethereum, the egoistic behavior or running every DeFi trade possible as long
-as it&#x2019;s profitable comes with the external cost of forcing less viable projects
-to migrate to, e.g., other chains. Is that digital gentrification?</p>
-<p>For sure, though, it&#x2019;s a real problem that has led to shifting dynamics in the
-world of software development.</p>
-<p>While it may have formerly been acceptable to put the entirety of a dapp&#x2019;s
-transactions on-chain, today, it&#x2019;s a really bad idea. Heuristically, it has
-come to mean that if a decentralized application doesn&#x2019;t provide the equivalent
-value of, say, DeFi provides to traders, then this non-DeFi application is
-likely to have a hard time competing for viability - given its enormous gas
+market-based pricing may not reflect the inclusion of external
 costs.</p>
-<p>A striking example of this may have been the abandoning of Aragon and the
-simultaneous rise in popularity of <a target="_blank" rel="noopener" href="http://snapshot.org">snapshot.org</a> voting. While Aragon used to
-put all transactions on-chain to implement a mixture of token voting and
-multi-signature wallet, today&#x2019;s <a target="_blank" rel="noopener" href="http://snapshot.org">snapshot.org</a> off-chains the whole vote by
-default and leaves solving the multi-signature use case to others (e.g., Gnosis
-Safe).</p>
-<p>But by and large, the above-described dynamic visualizes the space&#x2019;s greatest
-problem well: It&#x2019;s that if your non-financial application isn&#x2019;t capable of
-providing similar viability to DeFi, then we&#x2019;re better off not building it on
-Ethereum.</p>
-<h2 id="Future-State-Will-Be-Expensive-Too">Future State Will Be Expensive Too</h2>
-<p>Those who understand the dilemma of scaling blockchains, as, e.g., Vitalik had
-laid it out in one of his blog posts [1], also must realize that state being
-competitively-priced isn&#x2019;t going to go away in the future.</p>
+<p>On Ethereum, the egoistic behavior or running every DeFi trade
+possible as long as it&apos;s profitable comes with the external cost of
+forcing less viable projects to migrate to, e.g., other chains. Is that
+digital gentrification?</p>
+<p>For sure, though, it&apos;s a real problem that has led to shifting
+dynamics in the world of software development.</p>
+<p>While it may have formerly been acceptable to put the entirety of a
+dapp&apos;s transactions on-chain, today, it&apos;s a really bad idea.
+Heuristically, it has come to mean that if a decentralized application
+doesn&apos;t provide the equivalent value of, say, DeFi provides to traders,
+then this non-DeFi application is likely to have a hard time competing
+for viability - given its enormous gas costs.</p>
+<p>A striking example of this may have been the abandoning of Aragon and
+the simultaneous rise in popularity of snapshot.org voting. While Aragon
+used to put all transactions on-chain to implement a mixture of token
+voting and multi-signature wallet, today&apos;s snapshot.org off-chains the
+whole vote by default and leaves solving the multi-signature use case to
+others (e.g., Gnosis Safe).</p>
+<p>But by and large, the above-described dynamic visualizes the space&apos;s
+greatest problem well: It&apos;s that if your non-financial application isn&apos;t
+capable of providing similar viability to DeFi, then we&apos;re better off
+not building it on Ethereum.</p>
+<h2 id="future-state-will-be-expensive-too">Future State Will Be
+Expensive Too</h2>
+<p>Those who understand the dilemma of scaling blockchains, as, e.g.,
+Vitalik had laid it out in one of his blog posts [1], also must realize
+that state being competitively-priced isn&apos;t going to go away in the
+future.</p>
 <p>Not to say that it may eventually get cheap when we all start owning
-super-fancy quantum computers. But until those unlikely inventions become
-realities, we&#x2019;d argue that state will remain expensive. It&#x2019;ll stay expensive on
-Ethereum, and the market will take care of equating prices between peripheral
-chains like Polygon.</p>
-<p>For those that don&#x2019;t understand or value the original concept of storing state
-on blockchains, it may continue to be cheap. After all, there&#x2019;s always a
-database or less secure chain to store it on.</p>
-<p>But for those that value the guarantees that Ethereum and other projects were
-built upon, state will continue to be competitively priced.</p>
-<h2 id="Why-We&#x2019;re-Arguing-For-Breaking-Solidity-level-Composability">Why We&#x2019;re Arguing For Breaking Solidity-level Composability</h2>
-<p>In the end, breaking composability with Ethereum smart contracts can mean many
-different things in practice. Rollups and L2 contracts exemplify composability
-paradigms being actively broken and &#x201C;moved upwards.&#x201D; Yes, calling &#x201C;through to
-L2&#x201D; will one day be a possibility; but other roll-up architects may want to
-consider more extreme variants to increase scalability.</p>
-<p>We, the authors, have experimented with breaking composability for the sake of
-reducing gas costs by selectively applying some principles used in roll-ups
-too. While roll-ups have come to define themselves as a combination of
-trustless bridges and on-chain data validation, through experimentation, we
-found that breaking composability can significantly reduce contracts&#x2019; gas costs
-by deliberately applying L2-scaling strategies to regular L1 contracts.</p>
-<p>In this article, we call for breaking the Solidity-level composability as,
-e.g., adding gas-optimizations to the Solidity compiler or using, e.g., sparse
-Merkle trees as alternative state storage may indeed save significant levels of
-gas for the user but can lead to incompatibilities with traditional contracts
-that rely on the composable Ethereum message call interface [2].</p>
-<p>If e.g., we&#x2019;d break the composability of ERC20 tokens and allow those contracts
-to batch validate transfers, we&#x2019;d make everyone in DeFi unhappy as we&#x2019;d now
-require everyone to submit their transactions through an off-chain sequencer
-rather than the standard (&amp; composable) Solidity call interface.</p>
-<p>Suddenly, calling a third-party contract&#x2019;s <code>transferFrom</code> would stop being
-straightforward. As composability was broken on the Solidity level, it&#x2019;d likely
-require us to set up a sequencing server as well.</p>
-<p>We want to argue that we believe that making deliberate breaking changes to the
-ecosystem&#x2019;s architecture would benefit it over the long term. We think the
-current stateful composability paradigm for L1 contracts blocks scaling, and
-new solutions will have to be discovered.</p>
-<p>Distributed systems have a high computational overhead in comparison to their
-centralized counterparts. Thus, using those systems only for the minimum viable
-enforcement is a requirement if we want them to be the &#x201C;World&#x2019;s Computer.&#x201D; As
-developers, we must agree and accept that on-chain state and its validation is
-a scarce resource and should be treated with economic care. Posting data to the
-blockchain is cheap; transforming and storing it is expensive.</p>
+super-fancy quantum computers. But until those unlikely inventions
+become realities, we&apos;d argue that state will remain expensive. It&apos;ll
+stay expensive on Ethereum, and the market will take care of equating
+prices between peripheral chains like Polygon.</p>
+<p>For those that don&apos;t understand or value the original concept of
+storing state on blockchains, it may continue to be cheap. After all,
+there&apos;s always a database or less secure chain to store it on.</p>
+<p>But for those that value the guarantees that Ethereum and other
+projects were built upon, state will continue to be competitively
+priced.</p>
+<h2 id="why-were-arguing-for-breaking-solidity-level-composability">Why
+We&apos;re Arguing For Breaking Solidity-level Composability</h2>
+<p>In the end, breaking composability with Ethereum smart contracts can
+mean many different things in practice. Rollups and L2 contracts
+exemplify composability paradigms being actively broken and &quot;moved
+upwards.&quot; Yes, calling &quot;through to L2&quot; will one day be a possibility;
+but other roll-up architects may want to consider more extreme variants
+to increase scalability.</p>
+<p>We, the authors, have experimented with breaking composability for
+the sake of reducing gas costs by selectively applying some principles
+used in roll-ups too. While roll-ups have come to define themselves as a
+combination of trustless bridges and on-chain data validation, through
+experimentation, we found that breaking composability can significantly
+reduce contracts&apos; gas costs by deliberately applying L2-scaling
+strategies to regular L1 contracts.</p>
+<p>In this article, we call for breaking the Solidity-level
+composability as, e.g., adding gas-optimizations to the Solidity
+compiler or using, e.g., sparse Merkle trees as alternative state
+storage may indeed save significant levels of gas for the user but can
+lead to incompatibilities with traditional contracts that rely on the
+composable Ethereum message call interface [2].</p>
+<p>If e.g., we&apos;d break the composability of ERC20 tokens and allow those
+contracts to batch validate transfers, we&apos;d make everyone in DeFi
+unhappy as we&apos;d now require everyone to submit their transactions
+through an off-chain sequencer rather than the standard (&amp;
+composable) Solidity call interface.</p>
+<p>Suddenly, calling a third-party contract&apos;s <code>transferFrom</code>
+would stop being straightforward. As composability was broken on the
+Solidity level, it&apos;d likely require us to set up a sequencing server as
+well.</p>
+<p>We want to argue that we believe that making deliberate breaking
+changes to the ecosystem&apos;s architecture would benefit it over the long
+term. We think the current stateful composability paradigm for L1
+contracts blocks scaling, and new solutions will have to be
+discovered.</p>
+<p>Distributed systems have a high computational overhead in comparison
+to their centralized counterparts. Thus, using those systems only for
+the minimum viable enforcement is a requirement if we want them to be
+the &quot;World&apos;s Computer.&quot; As developers, we must agree and accept that
+on-chain state and its validation is a scarce resource and should be
+treated with economic care. Posting data to the blockchain is cheap;
+transforming and storing it is expensive.</p>
 <p>Hence, we propose to move the composability to another layer without
 sacrificing security to receive better scaling results.</p>
-<p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and
-<a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
-<h2 id="References">References</h2>
+<p><strong>Written by: <a target="_blank" rel="noopener" href="https://github.com/pinkiebell">pinkiebell</a> and <a target="_blank" rel="noopener" href="https://twitter.com/timdaub">TimDaub</a>.</strong></p>
+<h2 id="references">References</h2>
 <ul>
-<li>1:
-<a target="_blank" rel="noopener" href="https://vitalik.ca/general/2021/05/23/scaling.html">https://vitalik.ca/general/2021/05/23/scaling.html</a></li>
-<li>2:
-<a target="_blank" rel="noopener" href="https://github.com/rugpullindex/indexed-sparse-merkle-tree">https://github.com/rugpullindex/indexed-sparse-merkle-tree</a></li>
+<li>1: <a target="_blank" rel="noopener" href="https://vitalik.ca/general/2021/05/23/scaling.html">https://vitalik.ca/general/2021/05/23/scaling.html</a></li>
+<li>2: <a target="_blank" rel="noopener" href="https://github.com/rugpullindex/indexed-sparse-merkle-tree">https://github.com/rugpullindex/indexed-sparse-merkle-tree</a></li>
 </ul>
 
   </div>
@@ -368,7 +394,11 @@ sacrificing security to receive better scaling results.</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Composability-software%E2%80%99s-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability, software’s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DeFi-Ethereum%E2%80%99s-%E2%80%9CPoster-Child%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum’s “Poster Child”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Future-State-Will-Be-Expensive-Too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Why-We%E2%80%99re-Arguing-For-Breaking-Solidity-level-Composability"><span class="toc-number">5.</span> <span class="toc-text">Why We’re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#composability-softwares-greatest-property"><span class="toc-number">1.</span> <span class="toc-text">Composability,
+software&#39;s greatest property?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#defi-ethereums-poster-child"><span class="toc-number">2.</span> <span class="toc-text">DeFi, Ethereum&#39;s &quot;Poster
+Child&quot;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gas-change-is-real"><span class="toc-number">3.</span> <span class="toc-text">Gas-change is real!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#future-state-will-be-expensive-too"><span class="toc-number">4.</span> <span class="toc-text">Future State Will Be
+Expensive Too</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#why-were-arguing-for-breaking-solidity-level-composability"><span class="toc-number">5.</span> <span class="toc-text">Why
+We&#39;re Arguing For Breaking Solidity-level Composability</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#references"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -401,7 +431,7 @@ sacrificing security to receive better scaling results.</p>
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Tim Daubenschütz
+    Copyright &copy; 2023 Tim Daubenschütz
   </div>
   <div class="footer-right">
     <nav>

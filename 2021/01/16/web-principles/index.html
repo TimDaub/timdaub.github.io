@@ -7,13 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="It&amp;#x2019;s now roughly seven or eight years that I&amp;#x2019;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;#x2019;ve seen it all. And since my p">
+    <meta name="description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How I Build JavaScript Apps In 2021">
 <meta property="og:url" content="https://timdaub.github.io/2021/01/16/web-principles/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="It&amp;#x2019;s now roughly seven or eight years that I&amp;#x2019;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;#x2019;ve seen it all. And since my p">
+<meta property="og:description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-01-16T17:13:14.000Z">
 <meta property="article:modified_time" content="2021-01-16T17:13:14.000Z">
@@ -60,8 +61,12 @@
 </head>
 
 <body class="max-width mx-auto px3 ltr">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div style="width: 100%; font-size: 1.25rem; color: black; background-color: yellow;">
+    You're on the <b>old version</b> of my blog. Go to new site: <a target="_blank" rel="noopener" href="https://proofinprogress.com">proofinprogress.com</a>
+
+  </div>
     
-      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+      <div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -114,7 +119,10 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-build-processes"><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-transpiling"><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-the-new-and-shiny"><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-test-EvErYtHiNg"><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-optimize-for-performance-and-quality"><span class="toc-number">5.</span> <span class="toc-text">I optimize for performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-use-open-source-to-my-advantage"><span class="toc-number">7.</span> <span class="toc-text">I use open source to my advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-build-processes."><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-transpiling."><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-the-new-and-shiny."><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and
+shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-test-everything."><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-optimize-for-performance-and-quality."><span class="toc-number">5.</span> <span class="toc-text">I optimize for
+performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-open-source-to-my-advantage."><span class="toc-number">7.</span> <span class="toc-text">I use open source to my
+advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -157,12 +165,12 @@
       |
       <i class="fas fa-stopwatch"></i>
       7 minutes read
-      <meta name="description" content="It&amp;#x2019;s now roughly seven or eight years that I&amp;#x2019;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;#x2019;ve seen it all. And since my p">
+      <meta name="description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How I Build JavaScript Apps In 2021">
 <meta property="og:url" content="https://timdaub.github.io/2021/01/16/web-principles/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="It&amp;#x2019;s now roughly seven or eight years that I&amp;#x2019;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;#x2019;ve seen it all. And since my p">
+<meta property="og:description" content="It&amp;apos;s now roughly seven or eight years that I&amp;apos;m building dynamic front ends for the web. From digital art wallets to games (1, 2) and synthesizers, I&amp;apos;ve seen it all. And since my process">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/web-principles-image.png">
 <meta property="article:published_time" content="2021-01-16T17:13:14.000Z">
@@ -179,134 +187,136 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>It&#x2019;s now roughly seven or eight years that I&#x2019;m building dynamic front ends for
-the web. From <a target="_blank" rel="noopener" href="https://www.ascribe.io/">digital art wallets</a> to games
-(<a target="_blank" rel="noopener" href="https://ipfs.leapdao.org/blog/Planet-A-ccc-ethberlin-recap/">1</a>,
-<a href="https://timdaub.github.io/videogame">2</a>) and
-<a href="https://timdaub.github.io/wasm-synth">synthesizers</a>, I&#x2019;ve seen it all. And
-since my process of creation has dramatically changed over the years, today,
-I&#x2019;d like to share how I&#x2019;m developing web apps in 2021.</p>
-<h2 id="I-avoid-build-processes">I avoid build processes.</h2>
-<p>I still remember the debates with colleagues about using
-<a target="_blank" rel="noopener" href="https://babeljs.io/">babel</a> a few years ago.  Within the front end development
-world, transpiling had just become a thing, so we ended up babelifying our
-builds to use ES6. Our argument back then was that one day, we would be able to
-push our application&#x2019;s directory structure on a web server and since all
-browsers would then support the augmented ES6 features, our app would just
-work! Without a build process. WOW!
-That must have been around 2015. When I look at the source code of these old
-applications now, our technical visions didn&#x2019;t end up becoming reality.</p>
-<p>Now, I try to keep my build process to a minimum. When I need to write a demo
-app, I particularly like using <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-standalone#script-tags"><code>&lt;script type=&quot;text/babel&quot;&gt;</code></a>.
-I love <a target="_blank" rel="noopener" href="https://preactjs.com/guide/v10/getting-started/#no-build-tools-route">preact&#x2019;s &#x201C;no build tools
-route.&#x201D;</a>
-too.  When I have to set up an actual app, I avoid
-<a target="_blank" rel="noopener" href="https://webpack.js.org/">webpack</a> and <a target="_blank" rel="noopener" href="https://rollupjs.org/">rollup</a>. I
-mainly get frustrated about the myriad ways of configuring them. Some minor
-thing always ends up being broken, which leads to hours of debugging foreign
-code. And that&#x2019;s frustrating. Using preact&#x2019;s no build route, finally something
-like the above is possible:</p>
+    <p>It&apos;s now roughly seven or eight years that I&apos;m building dynamic front
+ends for the web. From <a target="_blank" rel="noopener" href="https://www.ascribe.io/">digital art
+wallets</a> to games (<a target="_blank" rel="noopener" href="https://ipfs.leapdao.org/blog/Planet-A-ccc-ethberlin-recap/">1</a>,
+<a href="https://timdaub.github.io/videogame">2</a>) and <a href="https://timdaub.github.io/wasm-synth">synthesizers</a>, I&apos;ve seen
+it all. And since my process of creation has dramatically changed over
+the years, today, I&apos;d like to share how I&apos;m developing web apps in
+2021.</p>
+<h2 id="i-avoid-build-processes.">I avoid build processes.</h2>
+<p>I still remember the debates with colleagues about using <a target="_blank" rel="noopener" href="https://babeljs.io/">babel</a> a few years ago. Within the front
+end development world, transpiling had just become a thing, so we ended
+up babelifying our builds to use ES6. Our argument back then was that
+one day, we would be able to push our application&apos;s directory structure
+on a web server and since all browsers would then support the augmented
+ES6 features, our app would just work! Without a build process. WOW!
+That must have been around 2015. When I look at the source code of these
+old applications now, our technical visions didn&apos;t end up becoming
+reality.</p>
+<p>Now, I try to keep my build process to a minimum. When I need to
+write a demo app, I particularly like using <a target="_blank" rel="noopener" href="https://babeljs.io/docs/en/babel-standalone#script-tags"><code>&lt;script type=&quot;text/babel&quot;&gt;</code></a>.
+I love <a target="_blank" rel="noopener" href="https://preactjs.com/guide/v10/getting-started/#no-build-tools-route">preact&apos;s
+&quot;no build tools route.&quot;</a> too. When I have to set up an actual app, I
+avoid <a target="_blank" rel="noopener" href="https://webpack.js.org/">webpack</a> and <a target="_blank" rel="noopener" href="https://rollupjs.org/">rollup</a>. I mainly get frustrated about
+the myriad ways of configuring them. Some minor thing always ends up
+being broken, which leads to hours of debugging foreign code. And that&apos;s
+frustrating. Using preact&apos;s no build route, finally something like the
+above is possible:</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">&quot;module&quot;</span>&gt;</span><br><span class="line">  <span class="comment">// <span class="doctag">NOTE:</span> You literally don&apos;t need a build process with preact.</span></span><br><span class="line">  <span class="keyword">import</span> { h, <span class="title class_">Component</span>, render } <span class="keyword">from</span> <span class="string">&apos;https://unpkg.com/preact?module&apos;</span>;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="title function_">h</span>(<span class="string">&apos;h1&apos;</span>, <span class="literal">null</span>, <span class="string">&apos;Hello World!&apos;</span>);</span><br><span class="line">  <span class="title function_">render</span>(app, <span class="variable language_">document</span>.<span class="property">body</span>);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>When having to use a build tool, I gravitate towards
-<a target="_blank" rel="noopener" href="https://parceljs.org/">parcel</a> or
-<a target="_blank" rel="noopener" href="https://github.com/developit/microbundle">microbundle</a> as they come
-preconfigured. And in particular, parcel is excellent, as it&#x2019;s merely using an
-HTML file as its entry point. To me, that&#x2019;s promising as it assumes a proper
-directory structure and properly connected files such that maybe one day I can
-push my app to the web without that build step.</p>
-<h2 id="I-avoid-transpiling">I avoid transpiling.</h2>
-<p>For the same reasons as pointed out above, I also try to avoid transpiling.
-It&#x2019;s not because I don&#x2019;t like ESNext features, but more because I want to
-minimize the risk of getting stuck with the transpiler. Hence, I try to avoid
-using babel. <a href="https://timdaub.github.io/2020/09/01/typescript/">I also don&#x2019;t use
-Typescript</a>. To me,
-JavaScript is productive enough.  Additionally, for
-<a target="_blank" rel="noopener" href="https://reactjs.org/">react</a>-style projects, no transpilers mean I stopped
-using <a target="_blank" rel="noopener" href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>.  Instead, I found
-an excellent library called <a target="_blank" rel="noopener" href="https://github.com/developit/htm">htm</a> that uses
-JavaScript&#x2019;s template strings. It has a similar syntax to JSX, but it&#x2019;s not
-breaking ECMAScript standards and hence needs no transpliation.</p>
-<h2 id="I-avoid-the-new-and-shiny">I avoid the <em>new</em> and <em>shiny</em>.</h2>
-<p>I even avoid changing the way I work if I don&#x2019;t feel comfortable or inclined.
-For example, I never switched to <a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-intro.html">react
-hooks</a>. The <a target="_blank" rel="noopener" href="https://reactjs.org/docs/state-and-lifecycle.html">lifecycle
-methods</a> that I initially
-know from iOS Objective-C programming are - in my opinion - a beautiful
-metaphor for writing front end components. And neither did I have any issues
-with my sites&#x2019; performance. I would make the switch if I started to have
-problems. But I don&#x2019;t.  The same goes for up and coming frameworks. Angular V2?
-<a target="_blank" rel="noopener" href="https://svelte.dev/">Svelte</a>? Cool, but why relearn a framework when I&#x2019;m already
-productive with the one I use?</p>
-<h2 id="I-test-EvErYtHiNg">I test EvErYtHiNg.</h2>
-<p>When I started front-end development, testing was complicated. Only a few front
-end developer colleagues tested their apps properly. I ended up doing a lot of
-testing by hand. It was frustrating and unproductive.  But testing front ends
-has improved dramatically over the years. Not only have the tools been
-significantly enhanced.</p>
-<p>We, as front-end developers, have now also figured out how to correctly write
-front end tests.  Finally, we&#x2019;re able to distinguish between functional code
-and presentational code.  For functional code, we now write unit tests. For
-presentational code, we use snapshot-based testing and integration tests. I&#x2019;m
-pleased about tools like <a target="_blank" rel="noopener" href="https://www.cypress.io/">cypress</a> that is great for
-integration tests. I also like <a target="_blank" rel="noopener" href="https://github.com/avajs/ava/">ava</a> for unit
-tests.</p>
-<h2 id="I-optimize-for-performance-and-quality">I optimize for performance and quality.</h2>
-<p>I used to be eager about building extensively functional software: the more
-features, the better. I&#x2019;m not anymore. Instead, I try to develop software that
-works well for my users. I strive for quality. So I try to measure my build&#x2019;s
-size. I take proper care about delivering my application, meaning I turn on
-compression and
-<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">caching</a>. I care
-about optimizing my static assets like pictures. And I like to check my apps by
-using tools like <a target="_blank" rel="noopener" href="https://developers.google.com/speed/pagespeed/insights/?hl=de">PageSpeed
-Insights</a> or
-<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse">lighthouse</a>.</p>
-<h2 id="I-use-my-own-work">I use my own work</h2>
-<p>From experience, I learned that I hardly ever get stuck on a algorithmic
-problem. On the contrary, I get motivated to learn something new and excel in
-the process. However, I caught my self often spending many hours on debugging
-other people&#x2019;s code. Mainly when it&#x2019;s third-party libraries that I included via
-npm. Once, I thought that using npm packages was a JavaScript developer&#x2019;s
-superpower.  Now, I know that it can also be their curse.</p>
-<p>Instead of collecting heaps of third-party code, I now prefer following <a target="_blank" rel="noopener" href="http://hintjens.com/blog:96">Peter
-Hintjens&#x2019; principles for writing good code</a>.  I
-&#x201C;use my own work.&#x201D; Meaning, I dare to write seemingly complex code myself. I
-still won&#x2019;t roll my own crypto or write a date library, but I dare to implement
-parts of a protocol or build an algorithm. It&#x2019;s not to say that I ditch every
-npm package and go npm-keto-diet. No, instead, I take a more mindful approach
-towards dependencies and only include them when I truly need them.</p>
-<p>I try to do that by leaving my technical vision at the doorstep of my office,
-so that I can now focus on solving the problems at hand. I try to stop worrying
-about eventualities far in the future as I view that as speculation. In cases I
-have past experiences, I use it to form my decision. For unchartered teritory,
-I move carefully, step by step.</p>
-<h2 id="I-use-open-source-to-my-advantage">I use open source to my advantage.</h2>
-<p>I&#x2019;m building websites since I&#x2019;m a teenager. And had I open-sourced and
-maintained a few pieces of code that I need frequently, I&#x2019;d be more productive
-now.  Unfortunately, I was short-sighted. Surprisingly, I didn&#x2019;t think about
-still using JavaScript at 29 years of age &#x1F602;</p>
-<p>I stopped framing open source mainly around certain virtues like free speech,
-fairness or certain politics. They&#x2019;re still important virtues for me, but I
-learned that I could use open source also for building a personal toolset.</p>
-<p>Extracting a library from a codebase allows me to think about it from a user&#x2019;s
-perspective. It means I&#x2019;m able to think about a piece of code&#x2019;s interfaces
-emphatically. Additionally, there&#x2019;s positive peer pressure.
-I&#x2019;m not going to release shit to the world. When my project is public, it&#x2019;s
-going to have a proper README and some docs. And it&#x2019;s going to be tested. Since
-everybody can see it, I might as well create something I can be proud of.</p>
-<p>Hence, contributing to open source, for me, is about building high-quality
-software. Being anxious about not being able to monetize this particular piece
-of code has become less of a concern.
-<a target="_blank" rel="noopener" href="https://github.com/sindresorhus">sindresohrus</a> inspired me to treat open
-source packages like my personal toolbox.</p>
-<h2 id="Conclusion">Conclusion</h2>
-<p>And that&#x2019;s my incomplete list of principles. I&#x2019;m sure there&#x2019;s more than just
-these. Anyway, I still find some of these points quite controversial.  I&#x2019;m sure
-they won&#x2019;t work for everyone as all our contexts differ.  But working solo as a
-freelancer, I&#x2019;ve found that these principles contribute to me being content
-about what I&#x2019;m doing. Hence, I was eager to share them.</p>
-<p>I&#x2019;m curious to hear other&#x2019;s thoughts and see if they&#x2019;ve taken similar paths.
-Please reach out! Also, don&#x2019;t forget to subscribe to my newsletter!</p>
+<p>When having to use a build tool, I gravitate towards <a target="_blank" rel="noopener" href="https://parceljs.org/">parcel</a> or <a target="_blank" rel="noopener" href="https://github.com/developit/microbundle">microbundle</a> as they
+come preconfigured. And in particular, parcel is excellent, as it&apos;s
+merely using an HTML file as its entry point. To me, that&apos;s promising as
+it assumes a proper directory structure and properly connected files
+such that maybe one day I can push my app to the web without that build
+step.</p>
+<h2 id="i-avoid-transpiling.">I avoid transpiling.</h2>
+<p>For the same reasons as pointed out above, I also try to avoid
+transpiling. It&apos;s not because I don&apos;t like ESNext features, but more
+because I want to minimize the risk of getting stuck with the
+transpiler. Hence, I try to avoid using babel. <a href="https://timdaub.github.io/2020/09/01/typescript/">I also don&apos;t use
+Typescript</a>. To me, JavaScript is productive enough. Additionally,
+for <a target="_blank" rel="noopener" href="https://reactjs.org/">react</a>-style projects, no
+transpilers mean I stopped using <a target="_blank" rel="noopener" href="https://reactjs.org/docs/introducing-jsx.html">JSX</a>. Instead, I
+found an excellent library called <a target="_blank" rel="noopener" href="https://github.com/developit/htm">htm</a> that uses JavaScript&apos;s
+template strings. It has a similar syntax to JSX, but it&apos;s not breaking
+ECMAScript standards and hence needs no transpliation.</p>
+<h2 id="i-avoid-the-new-and-shiny.">I avoid the <em>new</em> and
+<em>shiny</em>.</h2>
+<p>I even avoid changing the way I work if I don&apos;t feel comfortable or
+inclined. For example, I never switched to <a target="_blank" rel="noopener" href="https://reactjs.org/docs/hooks-intro.html">react hooks</a>. The <a target="_blank" rel="noopener" href="https://reactjs.org/docs/state-and-lifecycle.html">lifecycle
+methods</a> that I initially know from iOS Objective-C programming are -
+in my opinion - a beautiful metaphor for writing front end components.
+And neither did I have any issues with my sites&apos; performance. I would
+make the switch if I started to have problems. But I don&apos;t. The same
+goes for up and coming frameworks. Angular V2? <a target="_blank" rel="noopener" href="https://svelte.dev/">Svelte</a>? Cool, but why relearn a framework
+when I&apos;m already productive with the one I use?</p>
+<h2 id="i-test-everything.">I test EvErYtHiNg.</h2>
+<p>When I started front-end development, testing was complicated. Only a
+few front end developer colleagues tested their apps properly. I ended
+up doing a lot of testing by hand. It was frustrating and unproductive.
+But testing front ends has improved dramatically over the years. Not
+only have the tools been significantly enhanced.</p>
+<p>We, as front-end developers, have now also figured out how to
+correctly write front end tests. Finally, we&apos;re able to distinguish
+between functional code and presentational code. For functional code, we
+now write unit tests. For presentational code, we use snapshot-based
+testing and integration tests. I&apos;m pleased about tools like <a target="_blank" rel="noopener" href="https://www.cypress.io/">cypress</a> that is great for integration
+tests. I also like <a target="_blank" rel="noopener" href="https://github.com/avajs/ava/">ava</a> for
+unit tests.</p>
+<h2 id="i-optimize-for-performance-and-quality.">I optimize for
+performance and quality.</h2>
+<p>I used to be eager about building extensively functional software:
+the more features, the better. I&apos;m not anymore. Instead, I try to
+develop software that works well for my users. I strive for quality. So
+I try to measure my build&apos;s size. I take proper care about delivering my
+application, meaning I turn on compression and <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Caching">caching</a>.
+I care about optimizing my static assets like pictures. And I like to
+check my apps by using tools like <a target="_blank" rel="noopener" href="https://developers.google.com/speed/pagespeed/insights/?hl=de">PageSpeed
+Insights</a> or <a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/lighthouse">lighthouse</a>.</p>
+<h2 id="i-use-my-own-work">I use my own work</h2>
+<p>From experience, I learned that I hardly ever get stuck on a
+algorithmic problem. On the contrary, I get motivated to learn something
+new and excel in the process. However, I caught my self often spending
+many hours on debugging other people&apos;s code. Mainly when it&apos;s
+third-party libraries that I included via npm. Once, I thought that
+using npm packages was a JavaScript developer&apos;s superpower. Now, I know
+that it can also be their curse.</p>
+<p>Instead of collecting heaps of third-party code, I now prefer
+following <a target="_blank" rel="noopener" href="http://hintjens.com/blog:96">Peter Hintjens&apos;
+principles for writing good code</a>. I &quot;use my own work.&quot; Meaning, I
+dare to write seemingly complex code myself. I still won&apos;t roll my own
+crypto or write a date library, but I dare to implement parts of a
+protocol or build an algorithm. It&apos;s not to say that I ditch every npm
+package and go npm-keto-diet. No, instead, I take a more mindful
+approach towards dependencies and only include them when I truly need
+them.</p>
+<p>I try to do that by leaving my technical vision at the doorstep of my
+office, so that I can now focus on solving the problems at hand. I try
+to stop worrying about eventualities far in the future as I view that as
+speculation. In cases I have past experiences, I use it to form my
+decision. For unchartered teritory, I move carefully, step by step.</p>
+<h2 id="i-use-open-source-to-my-advantage.">I use open source to my
+advantage.</h2>
+<p>I&apos;m building websites since I&apos;m a teenager. And had I open-sourced
+and maintained a few pieces of code that I need frequently, I&apos;d be more
+productive now. Unfortunately, I was short-sighted. Surprisingly, I
+didn&apos;t think about still using JavaScript at 29 years of age &#x1F602;</p>
+<p>I stopped framing open source mainly around certain virtues like free
+speech, fairness or certain politics. They&apos;re still important virtues
+for me, but I learned that I could use open source also for building a
+personal toolset.</p>
+<p>Extracting a library from a codebase allows me to think about it from
+a user&apos;s perspective. It means I&apos;m able to think about a piece of code&apos;s
+interfaces emphatically. Additionally, there&apos;s positive peer pressure.
+I&apos;m not going to release shit to the world. When my project is public,
+it&apos;s going to have a proper README and some docs. And it&apos;s going to be
+tested. Since everybody can see it, I might as well create something I
+can be proud of.</p>
+<p>Hence, contributing to open source, for me, is about building
+high-quality software. Being anxious about not being able to monetize
+this particular piece of code has become less of a concern. <a target="_blank" rel="noopener" href="https://github.com/sindresorhus">sindresohrus</a> inspired me to
+treat open source packages like my personal toolbox.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>And that&apos;s my incomplete list of principles. I&apos;m sure there&apos;s more
+than just these. Anyway, I still find some of these points quite
+controversial. I&apos;m sure they won&apos;t work for everyone as all our contexts
+differ. But working solo as a freelancer, I&apos;ve found that these
+principles contribute to me being content about what I&apos;m doing. Hence, I
+was eager to share them.</p>
+<p>I&apos;m curious to hear other&apos;s thoughts and see if they&apos;ve taken similar
+paths. Please reach out! Also, don&apos;t forget to subscribe to my
+newsletter!</p>
 
   </div>
 </article>
@@ -350,7 +360,10 @@ Please reach out! Also, don&#x2019;t forget to subscribe to my newsletter!</p>
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-build-processes"><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-transpiling"><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-avoid-the-new-and-shiny"><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-test-EvErYtHiNg"><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-optimize-for-performance-and-quality"><span class="toc-number">5.</span> <span class="toc-text">I optimize for performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#I-use-open-source-to-my-advantage"><span class="toc-number">7.</span> <span class="toc-text">I use open source to my advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-build-processes."><span class="toc-number">1.</span> <span class="toc-text">I avoid build processes.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-transpiling."><span class="toc-number">2.</span> <span class="toc-text">I avoid transpiling.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-avoid-the-new-and-shiny."><span class="toc-number">3.</span> <span class="toc-text">I avoid the new and
+shiny.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-test-everything."><span class="toc-number">4.</span> <span class="toc-text">I test EvErYtHiNg.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-optimize-for-performance-and-quality."><span class="toc-number">5.</span> <span class="toc-text">I optimize for
+performance and quality.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-my-own-work"><span class="toc-number">6.</span> <span class="toc-text">I use my own work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#i-use-open-source-to-my-advantage."><span class="toc-number">7.</span> <span class="toc-text">I use open source to my
+advantage.</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
@@ -383,7 +396,7 @@ Please reach out! Also, don&#x2019;t forget to subscribe to my newsletter!</p>
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Tim Daubenschütz
+    Copyright &copy; 2023 Tim Daubenschütz
   </div>
   <div class="footer-right">
     <nav>

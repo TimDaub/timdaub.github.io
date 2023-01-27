@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
     <meta name="description" content="My good friend and collaborator Alberto Granzotto recently started helping to get people vaccinated at home in the Italian Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already">
 <meta property="og:type" content="article">
@@ -63,8 +64,12 @@
 </head>
 
 <body class="max-width mx-auto px3 ltr">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div style="width: 100%; font-size: 1.25rem; color: black; background-color: yellow;">
+    You're on the <b>old version</b> of my blog. Go to new site: <a target="_blank" rel="noopener" href="https://proofinprogress.com">proofinprogress.com</a>
+
+  </div>
     
-      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+      <div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -182,89 +187,97 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>My good friend and collaborator <a target="_blank" rel="noopener" href="https://www.granzotto.net/">Alberto Granzotto</a>
-recently started helping to get people vaccinated at home in the Italian
-Regione del Veneto. He has helped deliver 16 shots, with 173 sleeves already
-being rolled up and ready for vaccination.</p>
-<p>Since my move to Berlin in 2015, Alberto and I have been collaborating on
-projects. But with <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">Serenissimo</a>, a
-Telegram bot that books COVID-19 vaccine appointments automatically, Alberto is
+    <p>My good friend and collaborator <a target="_blank" rel="noopener" href="https://www.granzotto.net/">Alberto Granzotto</a> recently started
+helping to get people vaccinated at home in the Italian Regione del
+Veneto. He has helped deliver 16 shots, with 173 sleeves already being
+rolled up and ready for vaccination.</p>
+<p>Since my move to Berlin in 2015, Alberto and I have been
+collaborating on projects. But with <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">Serenissimo</a>, a Telegram
+bot that books COVID-19 vaccine appointments automatically, Alberto is
 on a personal mission.</p>
-<p><strong>T: I&#x2019;ve heard you&#x2019;re helping get people vaccinated now. How come?</strong></p>
-<p>A: I wanted to get my mom vaccinated. She&#x2019;s 74 and had become frustrated with
-trying to book a vaccination appointment online. So I decided to help her.</p>
+<p><strong>T: I&apos;ve heard you&apos;re helping get people vaccinated now. How
+come?</strong></p>
+<p>A: I wanted to get my mom vaccinated. She&apos;s 74 and had become
+frustrated with trying to book a vaccination appointment online. So I
+decided to help her.</p>
 <p><strong>T: What was the problem?</strong></p>
-<p>A: To get vaccinated against COVID-19, she had to visit a website provided by
-the Regione del Veneto and book an appointment first. The process is as
-follows:</p>
-<ol>
-<li>She goes to the official website
-<a target="_blank" rel="noopener" href="https://vaccinicovid.regione.veneto.it">https://vaccinicovid.regione.veneto.it</a>
-to find the public health office where she&#x2019;s registered. Then;</li>
+<p>A: To get vaccinated against COVID-19, she had to visit a website
+provided by the Regione del Veneto and book an appointment first. The
+process is as follows:</p>
+<ol type="1">
+<li>She goes to the official website <a target="_blank" rel="noopener" href="https://vaccinicovid.regione.veneto.it">https://vaccinicovid.regione.veneto.it</a>
+to find the public health office where she&apos;s registered. Then;</li>
 <li>she enters her data.</li>
-<li>If there is an available spot, she can reserve it and get vaccinated.</li>
+<li>If there is an available spot, she can reserve it and get
+vaccinated.</li>
 <li>If there is none, she has to go back to step number one.</li>
 </ol>
-<p>To receive her vaccine, my mom started constantly checking the website but
-ended up getting frustrated by having to enter her information over and over
-again.</p>
-<img src="/assets/images/regionevenetoit.png" alt="A screenshot of Regione del Veneto&apos;s vaccination booking website.">
+<p>To receive her vaccine, my mom started constantly checking the
+website but ended up getting frustrated by having to enter her
+information over and over again.</p>
+<p><img src="/assets/images/regionevenetoit.png" alt="A screenshot of Regione del Veneto&apos;s vaccination booking website."></p>
 <p><strong>T: So what did you do?</strong></p>
-<p>A: I asked myself how I could help to improve the situation. I thought: Why not
-reverse the communication structure? Instead of constantly having to check the
-website, why not have a computer do the laborious work?</p>
-<p><strong>T: Great idea. So instead of asking everybody to poll the website repeatedly,
-your bot inform subscribers when a spot is available?</strong></p>
-<p>A: Correct. But do note that the vaccine situation in Veneto is complex.
-It&#x2019;s not &#x201C;first come, first served&#x201D;. There are different cohorts and right now
-only people over 80 or with pre-existing health conditions are eligible.</p>
-<p><strong>T: Is that why you ended up building a Telegram bot?</strong></p>
-<p>A. When I heard from friends that their elderly parents were struggling too, I
-saw a way to help. My idea is to smooth the UX to make booking appointments
-more accessible. I also released the bot&#x2019;s source code on
-<a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">GitHub</a> as a commitment towards
-transparency.</p>
-<p><strong>T: How&#x2019;s is going so far?</strong></p>
-<p>A: As of today, I&#x2019;ve managed to get 16 people vaccinated! Then there are 173
-eligible people signed up with Serenissimo who are waiting for a vaccine and
-1218 people who want a vaccination but are currently not eligible.</p>
+<p>A: I asked myself how I could help to improve the situation. I
+thought: Why not reverse the communication structure? Instead of
+constantly having to check the website, why not have a computer do the
+laborious work?</p>
+<p><strong>T: Great idea. So instead of asking everybody to poll the
+website repeatedly, your bot inform subscribers when a spot is
+available?</strong></p>
+<p>A: Correct. But do note that the vaccine situation in Veneto is
+complex. It&apos;s not &quot;first come, first served&quot;. There are different
+cohorts and right now only people over 80 or with pre-existing health
+conditions are eligible.</p>
+<p><strong>T: Is that why you ended up building a Telegram
+bot?</strong></p>
+<p>A. When I heard from friends that their elderly parents were
+struggling too, I saw a way to help. My idea is to smooth the UX to make
+booking appointments more accessible. I also released the bot&apos;s source
+code on <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">GitHub</a> as a
+commitment towards transparency.</p>
+<p><strong>T: How&apos;s is going so far?</strong></p>
+<p>A: As of today, I&apos;ve managed to get 16 people vaccinated! Then there
+are 173 eligible people signed up with Serenissimo who are waiting for a
+vaccine and 1218 people who want a vaccination but are currently not
+eligible.</p>
 <p><strong>T: Wow! And is your bot handling personal data?</strong></p>
-<p>A: Yes. To get an appointment on the official website, users must provide their
-&#x201C;<a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Italian_fiscal_code&amp;oldid=1006804529">codice
-fiscale</a>,&#x201D;
-the Italian tax code. Anyone can calculate that code using their first and last
-name, date of birth, and city of birth. The code ends up being a sequence of
-letters and numbers. It&#x2019;s personally identifiable information (short: &#x201C;PII&#x201D;),
-but not personal health information (short: &#x201C;PHI&#x201D;). I&#x2019;d say it&#x2019;s your unique ID
-for the Italian government. It&#x2019;s private, but not a secret.</p>
-<p><em>Note from the editor: You can find websites that let you calculate it
-yourself. See below.</em></p>
-<img src="/assets/images/codicefiscale.png" alt="A screenshot of Tim&apos;s hypothetical codice fiscale.">
-<p><strong>T: Interesting. I think we have something similar in Germany. It&#x2019;s called a
-&#x201C;Sozialversicherungsnummer.&#x201D; And in the US, I guess it&#x2019;s called the &#x201C;Social
-Security Number.&#x201D; You built your bot in Telegram; how do you make sure your
-users&#x2019; PII is protected?</strong></p>
-<p>A: I have a privacy policy. If a user removes themselves from the service, I
-make sure to delete their data. I&#x2019;ve looked into <a target="_blank" rel="noopener" href="https://telegram.org/privacy#10-deleting-data">Telegram&#x2019;s Privacy
-Policy</a>, and they, too, are
-deleting all data.</p>
+<p>A: Yes. To get an appointment on the official website, users must
+provide their &quot;<a target="_blank" rel="noopener" href="https://en.wikipedia.org/w/index.php?title=Italian_fiscal_code&amp;oldid=1006804529">codice
+fiscale</a>,&quot; the Italian tax code. Anyone can calculate that code using
+their first and last name, date of birth, and city of birth. The code
+ends up being a sequence of letters and numbers. It&apos;s personally
+identifiable information (short: &quot;PII&quot;), but not personal health
+information (short: &quot;PHI&quot;). I&apos;d say it&apos;s your unique ID for the Italian
+government. It&apos;s private, but not a secret.</p>
+<p><em>Note from the editor: You can find websites that let you
+calculate it yourself. See below.</em></p>
+<p><img src="/assets/images/codicefiscale.png" alt="A screenshot of Tim&apos;s hypothetical codice fiscale."></p>
+<p><strong>T: Interesting. I think we have something similar in Germany.
+It&apos;s called a &quot;Sozialversicherungsnummer.&quot; And in the US, I guess it&apos;s
+called the &quot;Social Security Number.&quot; You built your bot in Telegram; how
+do you make sure your users&apos; PII is protected?</strong></p>
+<p>A: I have a privacy policy. If a user removes themselves from the
+service, I make sure to delete their data. I&apos;ve looked into <a target="_blank" rel="noopener" href="https://telegram.org/privacy#10-deleting-data">Telegram&apos;s Privacy
+Policy</a>, and they, too, are deleting all data.</p>
 <p><strong>T: Could your bot also work by sending SMS?</strong></p>
-<p>A: Yes, I&#x2019;m currently refactoring it such that it&#x2019;s an option in the future.</p>
-<p><strong>T: What do you think is more important, protecting personally identifiable
-information or protecting a person&#x2019;s health?</strong></p>
-<p>A: That&#x2019;s a good question; I think it&#x2019;s a gradient. For example, the &#x201C;codice
-fiscale&#x201D; is personal, but you cannot do much with it alone. The important thing
-is to have a policy to delete the data once you don&#x2019;t need it anymore.</p>
-<p><strong>T: Fair! Where&#x2019;s the source code?</strong></p>
-<p>A: It&#x2019;s open-source on GitHub at
-<a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">vrde/serenissimo</a>.</p>
-<p><strong>T: Great! I&#x2019;ll take a look. Thanks for answering all my questions. I wish you
-the best of success in helping to get more people vaccinated!</strong></p>
-<p>A: You&#x2019;re welcome. If you&#x2019;re in Veneto and need an appointment for a COVID
-shot, check out <a target="_blank" rel="noopener" href="https://t.me/serenissimo_bot">t.me/serenissimo_bot</a>.</p>
+<p>A: Yes, I&apos;m currently refactoring it such that it&apos;s an option in the
+future.</p>
+<p><strong>T: What do you think is more important, protecting personally
+identifiable information or protecting a person&apos;s health?</strong></p>
+<p>A: That&apos;s a good question; I think it&apos;s a gradient. For example, the
+&quot;codice fiscale&quot; is personal, but you cannot do much with it alone. The
+important thing is to have a policy to delete the data once you don&apos;t
+need it anymore.</p>
+<p><strong>T: Fair! Where&apos;s the source code?</strong></p>
+<p>A: It&apos;s open-source on GitHub at <a target="_blank" rel="noopener" href="https://github.com/vrde/serenissimo">vrde/serenissimo</a>.</p>
+<p><strong>T: Great! I&apos;ll take a look. Thanks for answering all my
+questions. I wish you the best of success in helping to get more people
+vaccinated!</strong></p>
+<p>A: You&apos;re welcome. If you&apos;re in Veneto and need an appointment for a
+COVID shot, check out <a target="_blank" rel="noopener" href="https://t.me/serenissimo_bot">t.me/serenissimo_bot</a>.</p>
 <hr>
-<p>If you liked this interview, please consider subscribing to my newsletter
-below. It helps me big time. Thanks!</p>
+<p>If you liked this interview, please consider subscribing to my
+newsletter below. It helps me big time. Thanks!</p>
 
   </div>
 </article>
@@ -341,7 +354,7 @@ below. It helps me big time. Thanks!</p>
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Tim Daubenschütz
+    Copyright &copy; 2023 Tim Daubenschütz
   </div>
   <div class="footer-right">
     <nav>

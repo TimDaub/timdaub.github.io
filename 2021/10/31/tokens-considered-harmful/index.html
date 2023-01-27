@@ -7,22 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css">
     <script async defer data-domain="timdaub.github.io" src="https://plausible.io/js/plausible.js"></script>
-    <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;#x2019;s Consensus con">
+    <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tokens considered harmful">
 <meta property="og:url" content="https://timdaub.github.io/2021/10/31/tokens-considered-harmful/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;#x2019;s Consensus con">
+<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
 <meta property="article:published_time" content="2021-10-31T22:55:25.000Z">
 <meta property="article:modified_time" content="2021-10-31T22:55:25.000Z">
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="web3">
-<meta property="article:tag" content="tokens">
 <meta property="article:tag" content="Ethereum">
 <meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="tokens">
 <meta property="article:tag" content="consensus">
 <meta property="article:tag" content="ERC20">
 <meta name="twitter:card" content="summary">
@@ -64,8 +65,12 @@
 </head>
 
 <body class="max-width mx-auto px3 ltr">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div style="width: 100%; font-size: 1.25rem; color: black; background-color: yellow;">
+    You're on the <b>old version</b> of my blog. Go to new site: <a target="_blank" rel="noopener" href="https://proofinprogress.com">proofinprogress.com</a>
+
+  </div>
     
-      <!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="header-post">
+      <div id="header-post">
   <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
   <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
@@ -161,21 +166,21 @@
       |
       <i class="fas fa-stopwatch"></i>
       4 minutes read
-      <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;#x2019;s Consensus con">
+      <meta name="description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tokens considered harmful">
 <meta property="og:url" content="https://timdaub.github.io/2021/10/31/tokens-considered-harmful/index.html">
 <meta property="og:site_name" content="Tim&#39;s website">
-<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;#x2019;s Consensus con">
+<meta property="og:description" content="In 2017 I boarded a special plane. My second flight to New York City with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was just hours before that year&amp;apos;s Consensus confe">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://timdaub.github.io/assets/images/uasf.jpeg">
 <meta property="article:published_time" content="2021-10-31T22:55:25.000Z">
 <meta property="article:modified_time" content="2021-10-31T22:55:25.000Z">
 <meta property="article:author" content="Tim Daubenschütz">
 <meta property="article:tag" content="web3">
-<meta property="article:tag" content="tokens">
 <meta property="article:tag" content="Ethereum">
 <meta property="article:tag" content="decentralized finance">
+<meta property="article:tag" content="tokens">
 <meta property="article:tag" content="consensus">
 <meta property="article:tag" content="ERC20">
 <meta name="twitter:card" content="summary_large_image">
@@ -185,83 +190,99 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>In 2017 I boarded a special plane. My second flight to New York City with
-Lufthansa from Berlin Tegel Airport via Frankfurt to Newark Airport. It was
-just hours before that year&#x2019;s Consensus conference in Time Square&#x2019;s Marriott
-Marquis would take place and as the product manager of BigchainDB, I had no
-idea what I had gotten myself into.</p>
-<p>I landed real &#x201C;poor but sexy&#x201D; by boarding a direct bus shuttle to Manhattan
-from Newark. And then what followed were a few days of total craziness.</p>
-<p>Already at seven in the morning of the show&#x2019;s first day, our booth got drowned
-in visitors. &#x201C;They&#x2019;re crazy!&#x201D; was all my colleague had to contribute to the
-crowd&#x2019;s engagement.</p>
-<p>And soon a personal problem I couldn&#x2019;t have anticipated was the fragility of my
-voice becoming softer as it started fading from the constant screaming-level I
-had to retain by communicating on the Marriott&#x2019;s trade floor.</p>
-<p><img src="/assets/images/uasf.jpeg" alt="UASF (long: &quot;user activated soft fork&quot;)"></p>
-<p>I remember these days as specially weird. Particularly, finding myself in an
-elevator full of UASF-wearing Bitcoin maxis, or to be entangled in rather
-casual conversations with Bushwick&#x2019;s nouveau rich.</p>
-<p>Also, there&#x2019;s this party night on a skyscraper&#x2019;s rooftop. And some dialogues:</p>
-<p><strong>I asked him</strong> what he does for a living, and he answered that he worked for
-the people throwing the party.</p>
-<p>&#x201C;Ah, really? And what do you do?&#x201D;; I followed up.</p>
-<p>&#x201C;I work for EOS!&#x201D; he claimed.</p>
-<p>&#x201C;EOS?&#x201D;</p>
-<p>&#x201C;Yeah, EOS, the Ethereum killer.&#x201D;</p>
-<p>Another memory is later, when she pointed to a guy and said: &#x201C;That&#x2019;s him,
-that&#x2019;s the DAO hacker!&#x201D;</p>
+    <p>In 2017 I boarded a special plane. My second flight to New York City
+with Lufthansa from Berlin Tegel Airport via Frankfurt to Newark
+Airport. It was just hours before that year&apos;s Consensus conference in
+Time Square&apos;s Marriott Marquis would take place and as the product
+manager of BigchainDB, I had no idea what I had gotten myself into.</p>
+<p>I landed real &quot;poor but sexy&quot; by boarding a direct bus shuttle to
+Manhattan from Newark. And then what followed were a few days of total
+craziness.</p>
+<p>Already at seven in the morning of the show&apos;s first day, our booth
+got drowned in visitors. &quot;They&apos;re crazy!&quot; was all my colleague had to
+contribute to the crowd&apos;s engagement.</p>
+<p>And soon a personal problem I couldn&apos;t have anticipated was the
+fragility of my voice becoming softer as it started fading from the
+constant screaming-level I had to retain by communicating on the
+Marriott&apos;s trade floor.</p>
+<figure>
+<img src="/assets/images/uasf.jpeg" alt="UASF (long: &quot;user activated soft fork&quot;)">
+<figcaption aria-hidden="true">UASF (long: &quot;user activated soft
+fork&quot;)</figcaption>
+</figure>
+<p>I remember these days as specially weird. Particularly, finding
+myself in an elevator full of UASF-wearing Bitcoin maxis, or to be
+entangled in rather casual conversations with Bushwick&apos;s nouveau
+rich.</p>
+<p>Also, there&apos;s this party night on a skyscraper&apos;s rooftop. And some
+dialogues:</p>
+<p><strong>I asked him</strong> what he does for a living, and he
+answered that he worked for the people throwing the party.</p>
+<p>&quot;Ah, really? And what do you do?&quot;; I followed up.</p>
+<p>&quot;I work for EOS!&quot; he claimed.</p>
+<p>&quot;EOS?&quot;</p>
+<p>&quot;Yeah, EOS, the Ethereum killer.&quot;</p>
+<p>Another memory is later, when she pointed to a guy and said: &quot;That&apos;s
+him, that&apos;s the DAO hacker!&quot;</p>
 <p>Most of it, just blurry memories today.</p>
-<p>But what truly happened during those days was the discovery of the cryptosphere
-new favorite toy: <em>tokens</em>. All the summer, they had been the rage. They were
-confirmed through Bitcoin&#x2019;s steady climb and cemented in to history those days
-Ethereum&#x2019;s price simply started exploding.</p>
-<p>Tokens, they called them, and suddenly everything looked like a nail. It did to
-me too. And it was hard to get at first.</p>
-<p>&#x201C;What to make of them?&#x201D; I thought. &#x201C;Tokens? Coins? And for what?&#x201D; Those days,
-my mind got stuck finding parallels to Bitcoin. Those days it started
-wandering. &#x201C;So, if we want to have tokens for another project but Bitcoin:
-Wouldn&#x2019;t it mean that we&#x2019;d either have to repurpose the Proof of Work algorithm
-or invent another utility delivering algorithm?&#x201D;</p>
-<p>Months later, I found myself trying to model a utility token. It just seemed
-logical: I was an engineer, and here was a tool that could help me to engineer
-more.</p>
+<p>But what truly happened during those days was the discovery of the
+cryptosphere new favorite toy: <em>tokens</em>. All the summer, they had
+been the rage. They were confirmed through Bitcoin&apos;s steady climb and
+cemented in to history those days Ethereum&apos;s price simply started
+exploding.</p>
+<p>Tokens, they called them, and suddenly everything looked like a nail.
+It did to me too. And it was hard to get at first.</p>
+<p>&quot;What to make of them?&quot; I thought. &quot;Tokens? Coins? And for what?&quot;
+Those days, my mind got stuck finding parallels to Bitcoin. Those days
+it started wandering. &quot;So, if we want to have tokens for another project
+but Bitcoin: Wouldn&apos;t it mean that we&apos;d either have to repurpose the
+Proof of Work algorithm or invent another utility delivering
+algorithm?&quot;</p>
+<p>Months later, I found myself trying to model a utility token. It just
+seemed logical: I was an engineer, and here was a tool that could help
+me to engineer more.</p>
 <p>But it came different than I expected.</p>
-<p>Given how galvanized we were, we pivoted the company. But contrary to my
-expectations, we didn&#x2019;t start designing our software to encompass tokens. In
-fact, noone else did either.</p>
-<p>I started looking around, and all I saw were tokens. Tokens tokens tokens.
-Every investor wanted them; many tech people seemed cool with them too. So what
-could be wrong?</p>
-<p>But nobody really got what we were supposed to do with them. Sure, there were
-occasionally brilliant moments that led to interesting designs. Case in point,
-TCRs (long: &#x201C;token curated registries&#x201D;). But even after months, everything had
-remained how I had initially observed it.</p>
-<p>A token&#x2019;s first principle existence wasn&#x2019;t meant to exponentiate engineering.
-Instead, I and others found myself observing waves of VCs pushing for
-tokenization with seemingly no reason but to collect funds. Suddenly, what I
-thought of as an engineer&#x2019;s tool became a framework for flipping wealth from
-poor to rich overnight.</p>
-<p>&#x201C;Just launch a token; use our SAFT. 10 easy steps to ICO.&#x201D;</p>
-<p>I tried going along with it. After all, what could be so bad? But the dust
-stirred up those days didn&#x2019;t settle, and tokens didn&#x2019;t end up making sense. I
-mean, they did: But only in a very narrow engineering sense. Super tough
-engineering, designing utility machines. A concept business-types weren&#x2019;t
-interested in or capable of seeing at the time. Maybe not capable of seeing
-today.</p>
-<p>And so, when I saw that we put the token before the product: I quit.</p>
+<p>Given how galvanized we were, we pivoted the company. But contrary to
+my expectations, we didn&apos;t start designing our software to encompass
+tokens. In fact, noone else did either.</p>
+<p>I started looking around, and all I saw were tokens. Tokens tokens
+tokens. Every investor wanted them; many tech people seemed cool with
+them too. So what could be wrong?</p>
+<p>But nobody really got what we were supposed to do with them. Sure,
+there were occasionally brilliant moments that led to interesting
+designs. Case in point, TCRs (long: &quot;token curated registries&quot;). But
+even after months, everything had remained how I had initially observed
+it.</p>
+<p>A token&apos;s first principle existence wasn&apos;t meant to exponentiate
+engineering. Instead, I and others found myself observing waves of VCs
+pushing for tokenization with seemingly no reason but to collect funds.
+Suddenly, what I thought of as an engineer&apos;s tool became a framework for
+flipping wealth from poor to rich overnight.</p>
+<p>&quot;Just launch a token; use our SAFT. 10 easy steps to ICO.&quot;</p>
+<p>I tried going along with it. After all, what could be so bad? But the
+dust stirred up those days didn&apos;t settle, and tokens didn&apos;t end up
+making sense. I mean, they did: But only in a very narrow engineering
+sense. Super tough engineering, designing utility machines. A concept
+business-types weren&apos;t interested in or capable of seeing at the time.
+Maybe not capable of seeing today.</p>
+<p>And so, when I saw that we put the token before the product: I
+quit.</p>
 <hr>
-<p>In 2021, most tokens are still speculative nonsense. Most companies launch a
-token and then try to build a product - many fail to build a product. Many fail
-to incorporate their token in a meaningful way. Don&#x2019;t be those companies.</p>
-<p>Think rationally and resist forced tokenization. Take a critical stance.</p>
-<p>Think logically, remove your ego and most importantly: don&#x2019;t let your capital
-(desires) influence your engineering decisions. Code is speech and you are
-capable of more than just increasing your personal wealth.</p>
-<p>Also: Your token doesn&#x2019;t have utility just because you say so.</p>
-<p>You can be braver. Just build what needs building and ignore the bs.</p>
-<p>Do what&#x2019;s good and reasonable - for everyone. And not only for those that hold
-the token.</p>
+<p>In 2021, most tokens are still speculative nonsense. Most companies
+launch a token and then try to build a product - many fail to build a
+product. Many fail to incorporate their token in a meaningful way. Don&apos;t
+be those companies.</p>
+<p>Think rationally and resist forced tokenization. Take a critical
+stance.</p>
+<p>Think logically, remove your ego and most importantly: don&apos;t let your
+capital (desires) influence your engineering decisions. Code is speech
+and you are capable of more than just increasing your personal
+wealth.</p>
+<p>Also: Your token doesn&apos;t have utility just because you say so.</p>
+<p>You can be braver. Just build what needs building and ignore the
+bs.</p>
+<p>Do what&apos;s good and reasonable - for everyone. And not only for those
+that hold the token.</p>
 <p>Because tokens in software design considered harmful.</p>
 
   </div>
@@ -339,7 +360,7 @@ the token.</p>
         
         <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Tim Daubenschütz
+    Copyright &copy; 2023 Tim Daubenschütz
   </div>
   <div class="footer-right">
     <nav>
